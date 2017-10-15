@@ -3,6 +3,7 @@ var frameModule = require('ui/frame');
 var dialogsModule = require('ui/dialogs');
 
 var page;
+var defaultRole = '01';
 exports.loaded = function (args) {
     page = args.object;
 };
@@ -19,10 +20,25 @@ exports.register = function () {
           }).then(
               function (result) {
                 dialogsModule.alert({
-                  title: "User created",
-                  message: "userid: " + result.key,
+                  title: "Success!",
+                  message: "Now you are ready to go!",
                   okButtonText: "Nice!"
                 })
+                
+                firebase.push(
+                    '/users',
+                    {
+                      'id': result.key,
+                      'email_address': email,
+                      'role': defaultRole,
+                      'name': ""
+                    }
+                ).then(
+                    function (result) {
+                      console.log("created key: " + result.key);
+                    }
+                );
+
                 frameModule.topmost().navigate("tabs/tabs-page");
               },
               function (errorMessage) {
@@ -33,5 +49,12 @@ exports.register = function () {
                 })
               }
           );
+    }
+    else {
+        dialogsModule.alert({
+            title: "Passwords are not the same",
+            message: "The password do not match!",
+            okButtonText: "Ok, got it"
+        });
     }
 }
