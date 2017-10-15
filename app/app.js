@@ -1,6 +1,8 @@
 require("./bundle-config");
 const application = require("application");
 
+var firebase = require("nativescript-plugin-firebase");
+
 application.start({ moduleName: "./tabs/tabs-page" });
 
 /*
