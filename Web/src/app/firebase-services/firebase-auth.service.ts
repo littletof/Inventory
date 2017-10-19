@@ -9,12 +9,18 @@ import {DatabaseService} from "../backend-services/database.service";
 @Injectable()
 export class FirebaseAuthService implements AuthService {
   static logged_in_user: User;
+  id=0;
 
   constructor(public afAuth: AngularFireAuth, public DB: DatabaseService) { }
 
   isLoggedIn(): boolean {
     return this.afAuth.auth.currentUser != null;
   }
+
+    check(){
+        console.log(this.id);
+        this.id++;
+    }
 
   loginWithEmail(email, password, onLogin, onError) {
       this.afAuth.auth.signInWithEmailAndPassword(email, password)

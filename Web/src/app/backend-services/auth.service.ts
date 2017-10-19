@@ -6,4 +6,5 @@ export abstract class AuthService {
   abstract logOut(): void;
 
   abstract registerUser(email: string, password: string, user: User);
+  abstract check();
 }

@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 import {FirebaseAuthService} from "./firebase-services/firebase-auth.service";
 import {AuthService} from "./backend-services/auth.service";
 import {DatabaseService} from "./backend-services/database.service";
+import { LoginComponent } from './login/login.component';
 
 ;
 
@@ -35,7 +36,8 @@ import {DatabaseService} from "./backend-services/database.service";
     AppComponent,
     UsersComponent,
     DevicesComponent,
-    SignUpComponent
+    SignUpComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
