@@ -1,0 +1,24 @@
+<h1>Users</h1>
+<button mat-raised-button color="primary" (click)='addNew()'>Add</button>
+<mat-list>
+  <mat-list-item *ngFor="let user of users | async; let i = index">
+    <mat-icon matListIcon>account_box</mat-icon>
+    <h4 matLine>{{user.name}}</h4>
+    <p matLine class="demo-2"> {{user.email_address}} </p>
+    <span><!--<button mat-button color="warn" (click)="removeUser(user.id)">Remove</button>--></span>
+
+  </mat-list-item>
+</mat-list>
+
+
+<!--
+<mat-table #table [dataSource]="users">
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let user"> {{user.id}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let user; columns: displayedColumns;"></mat-row>
+</mat-table>
+-->
