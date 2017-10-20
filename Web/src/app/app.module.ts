@@ -27,6 +27,7 @@ import {FirebaseAuthService} from "./firebase-services/firebase-auth.service";
 import {AuthService} from "./backend-services/auth.service";
 import {DatabaseService} from "./backend-services/database.service";
 import { LoginComponent } from './login/login.component';
+import {AuthGuardService} from "./backend-services/auth-guard.service";
 
 ;
 
@@ -58,7 +59,7 @@ import { LoginComponent } from './login/login.component';
     MatInputModule,
     MatFormFieldModule
   ],
-  providers: [{provide: DatabaseService, useClass: FirebaseDatabaseService}, { provide: AuthService, useClass: FirebaseAuthService}],
+  providers: [{provide: DatabaseService, useClass: FirebaseDatabaseService}, { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
