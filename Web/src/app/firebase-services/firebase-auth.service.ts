@@ -55,13 +55,13 @@ export class FirebaseAuthService implements AuthService {
 
                 this.DB.addUserWithKey(user/*new User(this.name, this.email, this.role)*/, uid);
 
-        return authState;
-      })
-      .catch((error) => {
-        console.log(error);
-        throw error;
-      });
-
+                return authState;
+            })
+            .catch((error) => {
+                console.log(error);
+                throw error;
+            });
+    }
   /*
   isLoggedIn(): boolean {
       if(firebase.auth().currentUser != null) {
