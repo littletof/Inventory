@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../backend-services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -12,19 +13,23 @@ export class LoginComponent implements OnInit {
   password: string;
 
 
-  constructor(private auth: AuthService) {
+  constructor(private auth: AuthService, public router: Router) {
 
   }
 
   ngOnInit() {
   }
 
-  login(){
-    this.auth.loginWithEmail(this.email, this.password, value=>{console.log(value);}, value=>{console.log(value)});
+  onLogin(router){
+    router.navigate(['/home']);
   }
 
-  log(){
-    console.log('hy');
+  login(){
+    this.auth.loginWithEmail(this.email, this.password, (res)=>{this.onLogin(this.router)}, value=>{console.log(value)});
+  }
+
+  loginAnonym(){
+    this.auth.loginAnonym((res)=>{this.onLogin(this.router)});
   }
 
 }

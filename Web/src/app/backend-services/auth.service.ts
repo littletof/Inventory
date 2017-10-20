@@ -4,7 +4,8 @@ export abstract class AuthService {
   user: any;
 
   abstract loginWithEmail(email: string, password: string, onLogin, onError): void;
+  abstract loginAnonym(onLogin): void;
   abstract isLoggedIn(): boolean;
-  abstract logOut(): void;
+  abstract logOut(onLogout): void;
   abstract registerUser(email: string, password: string, user: User);
 }

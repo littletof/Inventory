@@ -28,6 +28,7 @@ import {AuthService} from "./backend-services/auth.service";
 import {DatabaseService} from "./backend-services/database.service";
 import { LoginComponent } from './login/login.component';
 import {AuthGuardService} from "./backend-services/auth-guard.service";
+import {RouterModule} from "@angular/router";
 
 ;
 
@@ -48,6 +49,7 @@ import {AuthGuardService} from "./backend-services/auth-guard.service";
 
     AppRoutingModule,
     FormsModule,
+    RouterModule,
 
     BrowserAnimationsModule,
     MatToolbarModule,

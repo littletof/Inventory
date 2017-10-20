@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import {User} from "../user";
 import { AuthService} from "../backend-services/auth.service";
 import {DatabaseService} from "../backend-services/database.service";
+import {Router, RouterModule} from "@angular/router";
 
 
 
@@ -18,7 +19,7 @@ export class SignUpComponent {
   hide = true;
 
 
-  constructor(public auth: AuthService, public db: DatabaseService) { }
+  constructor(public auth: AuthService, public db: DatabaseService, public router: Router) { }
 
   
   login() {
@@ -26,7 +27,11 @@ export class SignUpComponent {
   }
 
   logout() {
-    this.auth.logOut();
+    this.auth.logOut((res)=>{this.onLogout(this.router)});
+  }
+
+  onLogout(router){
+      router.navigate(['/']);
   }
 
   registerUser() {

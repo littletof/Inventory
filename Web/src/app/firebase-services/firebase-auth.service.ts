@@ -5,19 +5,20 @@ import { AuthService} from "../backend-services/auth.service";
 import {Observable} from "rxjs/Observable";
 import * as firebase from "firebase";
 import {DatabaseService} from "../backend-services/database.service";
-import {Router} from "@angular/router";
+
 
 @Injectable()
 export class FirebaseAuthService implements AuthService {
+
     user: Observable<firebase.User>;
     userDetails: firebase.User;
 
-  constructor(public afAuth: AngularFireAuth, public DB: DatabaseService, private router: Router) {
+  constructor(public afAuth: AngularFireAuth, public DB: DatabaseService) {
       this.user = afAuth.authState;
       this.user.subscribe((user)=>{
           if(user){
               this.userDetails = user;
-              console.log(this.userDetails);
+              //console.log(this.userDetails);
           }else{
               this.userDetails = null;
           }
@@ -34,16 +35,17 @@ export class FirebaseAuthService implements AuthService {
 
     loginWithEmail(email, password, onLogin, onError){
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
-          .then((res)=>{
-            this.router.navigate(['/home']);
-          });
+          .then((res)=>onLogin(res));
     }
 
-    logOut(){
+    loginAnonym(onLogin): void {
+        this.afAuth.auth.signInAnonymously()
+            .then((res)=>onLogin(res));
+    }
+
+    logOut(onLogout){
         this.afAuth.auth.signOut()
-            .then((res)=>{
-                this.router.navigate(['/']);
-            });
+            .then((res)=>onLogout(res));
     }
 
     registerUser(email: string, password: string, user: User): Promise<Observable<firebase.User | null>> {

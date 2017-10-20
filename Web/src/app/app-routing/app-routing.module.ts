@@ -14,11 +14,12 @@ const routes: Routes = [
 
 
   { path: 'users', component: UsersComponent, canActivate: [AGS] },
-  { path: 'devices', component: DevicesComponent, canActivate: [AGS] }
+  { path: 'devices', component: DevicesComponent, canActivate: [AGS] },
+  { path: 'home', component: DevicesComponent, canActivate: [AGS] }
 ];
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
