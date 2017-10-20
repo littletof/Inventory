@@ -1,21 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import {FirebaseDatabaseService} from "../firebase-services/firebase-database.service";
-import {FirebaseAuthService} from "../firebase-services/firebase-auth.service";
 import {Observable} from "rxjs/Observable";
+import {AuthService} from "../backend-services/auth.service";
+import {DatabaseService} from "../backend-services/database.service";
 
 @Component({
   selector: 'app-devices',
   templateUrl: './devices.component.html',
-  styleUrls: ['./devices.component.css'],
-  providers: [FirebaseDatabaseService, FirebaseAuthService]
+  styleUrls: ['./devices.component.css']
 })
 export class DevicesComponent implements OnInit {
   devices: Observable<any[]>;
 
-  constructor(private fireDB: FirebaseDatabaseService, private afAuth: FirebaseAuthService) { }
+  constructor(private DB: DatabaseService, private auth: AuthService) { }
 
   ngOnInit() {
-    this.devices = this.fireDB.getDevices();
+
+      if (this.auth.isLoggedIn()) {
+          this.devices = this.DB.getDevices();
+      }else {
+          console.log('Not logged in');
+      }
+
   }
 
 }

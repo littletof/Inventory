@@ -4,23 +4,22 @@ import {Observable} from "rxjs/Observable";
 
 import {FirebaseAuthService} from "../firebase-services/firebase-auth.service";
 import {AuthService} from "../backend-services/auth.service";
+import {DatabaseService} from "../backend-services/database.service";
 
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css'],
-
-  providers: [FirebaseDatabaseService, FirebaseAuthService]
+  styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
   users: Observable<any[]>;
 
-  constructor(private fireDB: FirebaseDatabaseService, private auth: FirebaseAuthService) {}
+  constructor(private DB: DatabaseService, private auth: AuthService) {}
 
   ngOnInit() {
     if (this.auth.isLoggedIn()) {
-      this.users = this.fireDB.getUsers();
+      this.users = this.DB.getUsers();
     }else {
       console.log('Not logged in');
     }
@@ -28,10 +27,10 @@ export class UsersComponent implements OnInit {
   }
 
   addNew(): void {
-    this.fireDB.addUser();
+    this.DB.addUser();
   }
   removeUser(key): void {
-    this.fireDB.removeUser(key);
+    this.DB.removeUser(key);
   }
 
 }

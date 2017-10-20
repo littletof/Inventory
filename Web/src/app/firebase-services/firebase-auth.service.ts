@@ -5,16 +5,80 @@ import { AuthService} from "../backend-services/auth.service";
 import {Observable} from "rxjs/Observable";
 import * as firebase from "firebase";
 import {DatabaseService} from "../backend-services/database.service";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class FirebaseAuthService implements AuthService {
-  static logged_in_user: User;
-  id=0;
+    user: Observable<firebase.User>;
+    userDetails: firebase.User;
 
-  constructor(public afAuth: AngularFireAuth, public DB: DatabaseService) { }
+  constructor(public afAuth: AngularFireAuth, public DB: DatabaseService, private router: Router) {
+      this.user = afAuth.authState;
+      this.user.subscribe((user)=>{
+          if(user){
+              this.userDetails = user;
+              console.log(this.userDetails);
+          }else{
+              this.userDetails = null;
+          }
+      });
+  }
 
+    isLoggedIn(): boolean {
+        if (this.userDetails == null ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    loginWithEmail(email, password, onLogin, onError){
+      this.afAuth.auth.signInWithEmailAndPassword(email, password)
+          .then((res)=>{
+            this.router.navigate(['/home']);
+          });
+    }
+
+    logOut(){
+        this.afAuth.auth.signOut()
+            .then((res)=>{
+                this.router.navigate(['/']);
+            });
+    }
+
+    registerUser(email: string, password: string, user: User): Promise<Observable<firebase.User | null>> {
+
+        return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+            .then((authState: Observable<firebase.User | null>) => {
+
+                const uid = this.afAuth.auth.currentUser.uid;
+
+                this.DB.addUserWithKey(user/*new User(this.name, this.email, this.role)*/, uid);
+
+        return authState;
+      })
+      .catch((error) => {
+        console.log(error);
+        throw error;
+      });
+
+  /*
   isLoggedIn(): boolean {
-    return this.afAuth.auth.currentUser != null;
+      if(firebase.auth().currentUser != null) {
+          firebase.auth().currentUser.reload()
+              .then(value => {
+                  console.log("reload", value);
+                  return true;
+              })
+              .catch(val => {
+                  console.log("err", val);
+                  return false;
+              });
+          if(firebase.auth().currentUser!=null){
+              return true;
+          }
+      }
+      return false;
   }
 
     check(){
@@ -43,9 +107,11 @@ export class FirebaseAuthService implements AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((authState: Observable<firebase.User | null>) => {
 
+
+
         const uid = this.afAuth.auth.currentUser.uid;
 
-        this.DB.addUserWithKey(user/*new User(this.name, this.email, this.role)*/, uid);
+        this.DB.addUserWithKey(user/*new User(this.name, this.email, this.role)//, uid);
 
         return authState;
       })
@@ -54,4 +120,13 @@ export class FirebaseAuthService implements AuthService {
         throw error;
       });
   }
+  */
+
+  /*loginWithEmail(email, password, onLogin, onError){
+      firebase.auth().signInWithEmailAndPassword(email, password)
+          .then(result => { console.log(result)});
+
+      firebase.auth().createUserWithEmailAndPassword(email, password)
+          .then(result => {console.log(result);});
+  }*/
 }

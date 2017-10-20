@@ -30,7 +30,7 @@ export class SignUpComponent {
   }
 
   registerUser() {
-    this.auth.registerUser(this.email, this.password, new User(name, this.email, this.role));
+    this.auth.registerUser(this.email, this.password, new User(this.name, this.email, this.role));
   }
 
   /*registerUser(): Promise<Observable<firebase.User | null>> {
