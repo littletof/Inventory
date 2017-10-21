@@ -9,8 +9,10 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   hide = true;
-  email: string;
-  password: string;
+  email: string = '';
+  password: string = '';
+
+  errorText:string;
 
 
   constructor(private auth: AuthService, public router: Router) {
@@ -32,7 +34,10 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    this.auth.loginWithEmail(this.email, this.password, (res)=>{this.onLogin(this.router)}, value=>{console.log(value)});
+    this.errorText=null;
+    this.auth.loginWithEmail(this.email, this.password,
+        (res)=>{this.onLogin(this.router)},
+        error=>{this.errorText = error.message;});
   }
 
   loginAnonym(){

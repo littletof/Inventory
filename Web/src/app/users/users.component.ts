@@ -26,11 +26,4 @@ export class UsersComponent implements OnInit {
 
   }
 
-  addNew(): void {
-    this.DB.addUser();
-  }
-  removeUser(key): void {
-    this.DB.removeUser(key);
-  }
-
 }

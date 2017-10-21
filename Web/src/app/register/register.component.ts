@@ -10,11 +10,13 @@ import {User} from "../user";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-    email: string;
-    password: string;
+    email: string = '';
+    password: string = '';
     name: string;
     role: number;
     hide = true;
+
+    errorText:string;
 
   constructor(public auth: AuthService, public db: DatabaseService, public router: Router) { }
 
@@ -22,8 +24,30 @@ export class RegisterComponent implements OnInit {
   }
 
   registerUser() {
-        this.auth.registerUser(this.email, this.password, new User(this.name, this.email, this.role),
-            ()=> {this.onRegister(this.router)});
+        this.errorText=null;
+        if(this.isFilled(true)) {
+            this.auth.registerUser(this.email, this.password, new User(this.name, this.email, this.role),
+                () => {
+                    this.onRegister(this.router)
+                },
+                (error) => {
+                    console.log(error);
+                    this.errorText = error.message;
+                });
+        }
+  }
+
+  isFilled(val): boolean{
+      if(this.name!=null || this.name!= ''){
+          if(this.role!=null){
+              return true;
+          }else{
+            if(val)this.errorText="You must set a role!";
+          }
+      }else{
+        if(val)this.errorText="A valid name is required!";
+      }
+      return false;
   }
 
   onRegister(router){
@@ -37,5 +61,10 @@ export class RegisterComponent implements OnInit {
       this.auth.redirectUrl=null;
       router.navigate([url]);
   }
+
+    loginAnonym(){
+        this.auth.loginAnonym((res)=>{this.onRegister(this.router)});
+    }
+
 
 }

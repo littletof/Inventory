@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private auth: AuthService, private router: Router){
+  constructor(public auth: AuthService, private router: Router){
     //this.auth.logOut((res)=> {});
   }
 

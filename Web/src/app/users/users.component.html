@@ -1,5 +1,5 @@
 <h1>Users</h1>
-<button mat-raised-button color="primary" (click)='addNew()'>Add</button>
+
 <mat-list>
   <mat-list-item *ngFor="let user of users | async; let i = index">
     <mat-icon matListIcon>account_box</mat-icon>
@@ -12,6 +12,9 @@
 
 
 <!--
+<button mat-raised-button color="primary" (click)='addNew()'>Add</button>
+
+
 <mat-table #table [dataSource]="users">
   <ng-container matColumnDef="id">
     <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>

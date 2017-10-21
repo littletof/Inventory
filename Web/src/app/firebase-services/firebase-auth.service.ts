@@ -42,7 +42,16 @@ export class FirebaseAuthService implements AuthService {
       //console.log(this.redirectUrl);
 
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
-          .then((res)=>onLogin(res));
+          .then((res)=>{
+            if(onLogin)onLogin(res);
+          })
+          .catch((error)=>{
+            if(onError){
+                onError(error);
+            }else{
+                throw error;
+            }
+          });
     }
 
     loginAnonym(onLogin): void {
@@ -55,7 +64,7 @@ export class FirebaseAuthService implements AuthService {
             .then((res)=>onLogout(res));
     }
 
-    registerUser(email: string, password: string, user: User, onRegister): Promise<Observable<firebase.User | null>> {
+    registerUser(email: string, password: string, user: User, onRegister, onError): Promise<Observable<firebase.User | null>> {
 
         return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
             .then((authState: Observable<firebase.User | null>) => {
@@ -65,10 +74,16 @@ export class FirebaseAuthService implements AuthService {
                 this.DB.addUserWithKey(user/*new User(this.name, this.email, this.role)*/, uid);
                 onRegister();
                 return authState;
+            },
+            reason => {
+                if(onError){
+                    onError(reason);
+                }else{
+                    console.log(reason);
+                }
             })
-            .catch((error) => {
-                console.log(error);
-                throw error;
+            .catch((val) => {
+                console.log('err', val);
             });
     }
   /*

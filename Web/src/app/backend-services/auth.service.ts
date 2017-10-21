@@ -8,5 +8,5 @@ export abstract class AuthService {
   abstract loginAnonym(onLogin): void;
   abstract isLoggedIn(): boolean;
   abstract logOut(onLogout): void;
-  abstract registerUser(email: string, password: string, user: User, onRegister);
+  abstract registerUser(email: string, password: string, user: User, onRegister, onError);
 }
