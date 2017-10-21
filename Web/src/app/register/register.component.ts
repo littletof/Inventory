@@ -27,7 +27,15 @@ export class RegisterComponent implements OnInit {
   }
 
   onRegister(router){
-    router.navigate(['/home']);
+
+      let url = null;
+      if(this.auth.redirectUrl=='/register' || this.auth.redirectUrl==undefined){
+          url = '/home';
+      }else{
+          url = this.auth.redirectUrl;
+      }
+      this.auth.redirectUrl=null;
+      router.navigate([url]);
   }
 
 }

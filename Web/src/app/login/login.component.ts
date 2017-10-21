@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     }else{
       url = this.auth.redirectUrl;
     }
+    this.auth.redirectUrl=null;
     router.navigate([url]);
   }
 
