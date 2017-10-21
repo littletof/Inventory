@@ -1,8 +1,8 @@
 <Page loaded="loaded">
     <StackLayout orientation="vertical">
-        <TextField id="email" hint="Email Address" keyboardType="email" autocorrect="false"
+        <TextField id="email" text="{{email}}" hint="Email Address" keyboardType="email" autocorrect="false"
         autocapitalizationType="none"/>
-        <TextField id="password" hint="Password" secure="true"/>
+        <TextField id="password" text="{{password}}" hint="Password" secure="true"/>
 
         <Button text="Login" tap="login"/>
         

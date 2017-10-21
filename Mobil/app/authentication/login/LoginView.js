@@ -1,49 +1,41 @@
-var firebase = require("nativescript-plugin-firebase");
 var frameModule = require('ui/frame');
 var dialogsModule = require('ui/dialogs');
+var UserViewModel = require("../../shared/user-view-model");
+
+var user = new UserViewModel();
+
 
 var page;
 exports.loaded = function (args) {
     page = args.object;
-    
-    firebase.init({
-        url: 'https://inventory-01.firebaseio.com/',
-        persist: true
-    }) 
+    page.bindingContext = user;
+    user.init();
 };
 
 exports.login = function () {
-    firebase.login({
-        type: firebase.LoginType.PASSWORD,
-        passwordOptions: {
-          email: page.getViewById("email").text,
-          password: page.getViewById("password").text
-        }
-      }).then(
-          function (result) {
-            JSON.stringify(result);
+    user.login()
+        .then(function() {
             frameModule.topmost().navigate("tabs/tabs-page");
-          },
-          function (errorMessage) {
-            console.log(errorMessage);
-          }
-      );
-}
-
-exports.continueAsAGuest = function () {
-    firebase.login({
-        type: firebase.LoginType.ANONYMOUS
-      }).then(
-          function (result) {
-            console.log(JSON.stringify(result));
-            frameModule.topmost().navigate("tabs/tabs-page");
-          },
-          function (errorMessage) {
-            console.log(errorMessage);
-          }
-      );
+        }).catch(function(error) {
+            dialogsModule.alert({
+                message: error+"baj van",
+                okButtonText: "OK"
+            });
+        });
 }
 
 exports.signUp = function () {
     frameModule.topmost().navigate("authentication/signup/SignUpView");
+}
+
+exports.continueAsAGuest = function () {
+    user.continueAsAGuest()
+        .then(function() {
+            frameModule.topmost().navigate("tabs/tabs-page");
+        }).catch(function(error) {
+            dialogsModule.alert({
+                message: error,
+                okButtonText: "OK"
+            });
+        });
 }
