@@ -21,7 +21,7 @@ export class SignUpComponent {
 
   constructor(public auth: AuthService, public db: DatabaseService, public router: Router) { }
 
-  
+
   login() {
     this.auth.loginWithEmail(this.email, this.password, value => {}, error => {});
   }
@@ -35,7 +35,7 @@ export class SignUpComponent {
   }
 
   registerUser() {
-    this.auth.registerUser(this.email, this.password, new User(this.name, this.email, this.role));
+    //this.auth.registerUser(this.email, this.password, new User(this.name, this.email, this.role));
   }
 
   /*registerUser(): Promise<Observable<firebase.User | null>> {

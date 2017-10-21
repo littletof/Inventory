@@ -10,6 +10,8 @@ import {DatabaseService} from "../backend-services/database.service";
 @Injectable()
 export class FirebaseAuthService implements AuthService {
 
+
+    redirectUrl: string;
     user: Observable<firebase.User>;
     userDetails: firebase.User;
 
@@ -33,7 +35,12 @@ export class FirebaseAuthService implements AuthService {
         }
     }
 
+
+
     loginWithEmail(email, password, onLogin, onError){
+
+      //console.log(this.redirectUrl);
+
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
           .then((res)=>onLogin(res));
     }
@@ -48,7 +55,7 @@ export class FirebaseAuthService implements AuthService {
             .then((res)=>onLogout(res));
     }
 
-    registerUser(email: string, password: string, user: User): Promise<Observable<firebase.User | null>> {
+    registerUser(email: string, password: string, user: User, onRegister): Promise<Observable<firebase.User | null>> {
 
         return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
             .then((authState: Observable<firebase.User | null>) => {
@@ -56,7 +63,7 @@ export class FirebaseAuthService implements AuthService {
                 const uid = this.afAuth.auth.currentUser.uid;
 
                 this.DB.addUserWithKey(user/*new User(this.name, this.email, this.role)*/, uid);
-
+                onRegister();
                 return authState;
             })
             .catch((error) => {

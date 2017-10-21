@@ -21,7 +21,13 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(router){
-    router.navigate(['/home']);
+    let url = null;
+    if(this.auth.redirectUrl=='/login' || this.auth.redirectUrl==undefined){
+      url = '/home';
+    }else{
+      url = this.auth.redirectUrl;
+    }
+    router.navigate([url]);
   }
 
   login(){

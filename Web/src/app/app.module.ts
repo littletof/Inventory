@@ -29,6 +29,7 @@ import {DatabaseService} from "./backend-services/database.service";
 import { LoginComponent } from './login/login.component';
 import {AuthGuardService} from "./backend-services/auth-guard.service";
 import {RouterModule} from "@angular/router";
+import { RegisterComponent } from './register/register.component';
 
 ;
 
@@ -39,7 +40,8 @@ import {RouterModule} from "@angular/router";
     UsersComponent,
     DevicesComponent,
     SignUpComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import {RouterModule} from "@angular/router";
     MatInputModule,
     MatFormFieldModule
   ],
-  providers: [{provide: DatabaseService, useClass: FirebaseDatabaseService}, { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService],
+  providers: [{provide: DatabaseService, useClass: FirebaseDatabaseService},
+      { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

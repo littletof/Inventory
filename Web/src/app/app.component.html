@@ -1,14 +1,16 @@
 <mat-toolbar color="primary">
   <span>Inventory</span>
+  <span class="spacer"></span>
+  <button *ngIf="this.auth.isLoggedIn()" mat-raised-button color="warn" (click)="logout()">Logout</button>
 </mat-toolbar>
 
 
 
 <nav>
-  <button mat-button color="primary" routerLink="/users">Users</button>
-  <button mat-button color="primary" routerLink="/devices">Devices</button>
-  <button mat-button color="primary" routerLink="/register">Sign up</button>
-  <button mat-button color="primary" routerLink="/login">Login</button>
+  <button mat-button color="primary" routerLink="/users"  routerLinkActive="mat-raised-button">Users</button>
+  <button mat-button color="primary" routerLink="/devices" routerLinkActive="mat-raised-button">Devices</button>
+  <button mat-button color="primary" routerLink="/register" routerLinkActive="mat-raised-button">Register</button>
+  <button mat-button color="primary" routerLink="/login"  routerLinkActive="mat-raised-button">Login</button>
 </nav>
 <mat-divider></mat-divider>
 <div style="padding-left: 3em; padding-right: 3em;">
