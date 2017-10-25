@@ -13,17 +13,33 @@ import {DatabaseService} from "../backend-services/database.service";
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  users: Observable<any[]>;
+  users: any[];
 
-  constructor(private DB: DatabaseService, private auth: AuthService) {}
+  constructor(private db: DatabaseService, private auth: AuthService) {}
 
   ngOnInit() {
     if (this.auth.isLoggedIn()) {
-      this.users = this.DB.getUsers();
+      this.users = this.db.getUsers();
     }else {
       console.log('Not logged in');
     }
 
   }
+
+  removeUser(user){
+    //this.getMethods(this.db.getMyUsers());
+    //this.db.getMyUsers().remove(user);
+
+  }
+
+    getMethods(obj): void{
+        var res = [];
+        for(var m in obj) {
+            if(typeof obj[m] == "function") {
+                res.push(m)
+            }
+        }
+        console.log(res);
+    }
 
 }

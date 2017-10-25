@@ -1,9 +1,9 @@
 <h1>Users</h1>
 
 <mat-list>
-  <mat-list-item *ngFor="let user of users | async; let i = index">
+  <mat-list-item *ngFor="let user of users; let i = index">
     <mat-icon matListIcon>account_box</mat-icon>
-    <h4 matLine>{{user.name}}</h4>
+    <h4 matLine>{{user.name}} {{user.key}}</h4>
     <p matLine class="demo-2"> {{user.email_address}} </p>
     <span><!--<button mat-button color="warn" (click)="removeUser(user.id)">Remove</button>--></span>
 

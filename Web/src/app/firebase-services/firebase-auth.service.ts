@@ -5,6 +5,7 @@ import { AuthService} from "../backend-services/auth.service";
 import {Observable} from "rxjs/Observable";
 import * as firebase from "firebase";
 import {DatabaseService} from "../backend-services/database.service";
+import {FirebaseListObservable, FirebaseObjectObservable} from "angularfire2/database-deprecated";
 
 
 @Injectable()
@@ -14,6 +15,8 @@ export class FirebaseAuthService implements AuthService {
     redirectUrl: string;
     user: Observable<firebase.User>;
     userDetails: firebase.User;
+
+    userData: FirebaseObjectObservable<User>;
 
   constructor(public afAuth: AngularFireAuth, public DB: DatabaseService) {
       this.user = afAuth.authState;
@@ -25,6 +28,12 @@ export class FirebaseAuthService implements AuthService {
               this.userDetails = null;
           }
       });
+
+
+
+
+
+
   }
 
     isLoggedIn(): boolean {

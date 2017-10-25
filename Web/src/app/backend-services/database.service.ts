@@ -6,8 +6,11 @@ export abstract class DatabaseService {
   abstract addUser();
   abstract addUserWithKey(user: User, key: string);
   abstract removeUser(user);
-  abstract getUsers(): Observable<any[]>;
 
+
+  abstract getUsers(): any[];
+  //abstract getMyUsers(): Observable<any[]>;
+  abstract getUser(key): any;
 
   abstract getDevices(): Observable<Device[]>;
 }
