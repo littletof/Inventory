@@ -1,60 +1,36 @@
 var firebase = require("nativescript-plugin-firebase");
 var frameModule = require('ui/frame');
 var dialogsModule = require('ui/dialogs');
+var UserViewModel = require("../../shared/user-view-model");
 
+var user = new UserViewModel();
 var page;
-var defaultRole = '01';
+
 exports.loaded = function (args) {
     page = args.object;
+    page.bindingContext = user;
 };
 
 exports.register = function () {
-    var email = page.getViewById("email").text;
-    var password = page.getViewById("password").text;
     var retypedpassword = page.getViewById("retypedPassword").text;
-
-    if (password == retypedpassword) {
-        firebase.createUser({
-            email: email,
-            password: password
-          }).then(
-              function (result) {
+    
+    if (user.get("password") == retypedpassword) {
+        user.register()
+            .then(function() {
+                dialogsModule
+                    .alert("Your account was successfully created.")
+                    .then(function() {
+                        frameModule.topmost().navigate("tabs/tabs-page");
+                    });
+            }).catch(function(error) {
                 dialogsModule.alert({
-                  title: "Success!",
-                  message: "Now you are ready to go!",
-                  okButtonText: "Nice!"
-                })
-                
-                firebase.push(
-                    '/users',
-                    {
-                      'id': result.key,
-                      'email_address': email,
-                      'role': defaultRole,
-                      'name': ""
-                    }
-                ).then(
-                    function (result) {
-                      console.log("created key: " + result.key);
-                    }
-                );
-
-                frameModule.topmost().navigate("tabs/tabs-page");
-              },
-              function (errorMessage) {
-                dialogsModule.alert({
-                  title: "No user created",
-                  message: errorMessage,
-                  okButtonText: "OK, got it"
-                })
-              }
-          );
+                    message: error,
+                    okButtonText: "OK"
+                });
+            });
     }
     else {
-        dialogsModule.alert({
-            title: "Passwords are not the same",
-            message: "The password do not match!",
-            okButtonText: "Ok, got it"
-        });
+        dialogsModule
+            .alert("The passwords do not match!");
     }
 }

@@ -1,3 +1,5 @@
+platforms/
+node_modules/
 /build/
 /dist/
 /benchpress-build/
