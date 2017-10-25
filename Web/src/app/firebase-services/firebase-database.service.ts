@@ -13,23 +13,32 @@ import {FirebaseListObservable, FirebaseObjectObservable} from "angularfire2/dat
 
 @Injectable()
 export class FirebaseDatabaseService implements DatabaseService{
-    users: any[] = [];
+
+  users: any[] = [];
   usersObs: Observable<any[]>;
+
+  devices: any[] = [];
+  devicesObs: Observable<any[]>;
+
 
 
   constructor(private db: AngularFireDatabase) {
-      this.getFireUsers().snapshotChanges().subscribe(actions => {
+      this.loadFireUsers();
+      this.loadFireDevices();
+  }
 
+
+
+
+// -- USERS --
+
+  loadFireUsers(){
+      this.getFireUsers().snapshotChanges().subscribe(actions => {
           actions.forEach(action => {
               // console.log(action.payload.val());
               this.usersObs = this.getFireUserByKey(action.key).valueChanges();
 
               this.usersObs.subscribe(res => {
-                  //console.log('res', res);
-                  /*res.forEach(element => {
-                      this.restaurants.push(element);
-                  });*/
-
                   const $key = action.key;
                   if(!this.inArray(this.users, $key)) {
                       this.users.push({key: $key, ...res});
@@ -38,19 +47,6 @@ export class FirebaseDatabaseService implements DatabaseService{
           });
       });
   }
-
-
-
-  getMethods(obj): void{
-      var res = [];
-      for(var m in obj) {
-          if(typeof obj[m] == "function") {
-              res.push(m)
-          }
-      }
-      console.log(res);
-  }
-
 
   getFireUsers(): AngularFireList<any[]>{
       return this.db.list('users');
@@ -62,6 +58,8 @@ export class FirebaseDatabaseService implements DatabaseService{
   getUsers(): any[] {
       return this.users;
   }
+
+  //-- ^^ works ^^
 
 
   addUser(): void {
@@ -76,18 +74,48 @@ export class FirebaseDatabaseService implements DatabaseService{
     this.db.list('/users').remove(user);
   }
 
-
-
-
-
   getUser(key): Observable<User>{
     //TODO
     return null;
   }
 
-  getDevices(): Observable<Device[]> {
-    return this.db.list('devices').valueChanges();
+
+  // -- USERS END --
+
+  // -- DEVICES --
+  loadFireDevices(){
+      this.getFireDevices().snapshotChanges().subscribe(actions => {
+          actions.forEach(action => {
+              // console.log(action.payload.val());
+              this.devicesObs = this.getFireDeviceByKey(action.key).valueChanges();
+              this.devicesObs.subscribe(res => {
+                  const $key = action.key;
+                  if(!this.inArray(this.devices, $key)) {
+                      this.devices.push({key: $key, ...res});
+                  }
+              });
+          });
+      });
   }
+
+  getFireDevices(): AngularFireList<any[]>{
+        return this.db.list('devices');
+  }
+
+  getFireDeviceByKey(key): AngularFireObject<any>{
+        return this.db.object('devices/' + key);
+  }
+
+  getDevices(): any[] {
+        return this.devices;
+  }
+
+
+  /*getDevices(): Observable<Device[]> {
+    return this.db.list('devices').valueChanges();
+  }*/
+
+  // -- DEVICES END --
 
 
   //Util
@@ -100,4 +128,14 @@ export class FirebaseDatabaseService implements DatabaseService{
     }
     return false;
   }
+
+    getMethods(obj): void{
+        var res = [];
+        for(var m in obj) {
+            if(typeof obj[m] == "function") {
+                res.push(m)
+            }
+        }
+        console.log(res);
+    }
 }

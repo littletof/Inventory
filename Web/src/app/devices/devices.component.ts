@@ -9,7 +9,7 @@ import {DatabaseService} from "../backend-services/database.service";
   styleUrls: ['./devices.component.css']
 })
 export class DevicesComponent implements OnInit {
-  devices: Observable<any[]>;
+  devices: any[];
 
   constructor(private DB: DatabaseService, private auth: AuthService) { }
 

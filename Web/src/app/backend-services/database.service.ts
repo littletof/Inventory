@@ -9,8 +9,7 @@ export abstract class DatabaseService {
 
 
   abstract getUsers(): any[];
-  //abstract getMyUsers(): Observable<any[]>;
   abstract getUser(key): any;
 
-  abstract getDevices(): Observable<Device[]>;
+  abstract getDevices(): any[];
 }

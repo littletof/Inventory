@@ -1,8 +1,8 @@
 <h1>Devices</h1>
 <mat-list>
-  <mat-list-item *ngFor="let device of devices | async;">
+  <mat-list-item *ngFor="let device of devices;">
     <mat-icon matListIcon>devices_other</mat-icon>
-    <h4 matLine>{{device.name}}</h4>
+    <h4 matLine>{{device.name}} {{device.key}}</h4>
     <p matLine class="demo-2"> {{device.description}} </p>
     <span>{{device.id}}</span>
   </mat-list-item>

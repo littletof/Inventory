@@ -16,8 +16,6 @@ export class FirebaseAuthService implements AuthService {
     user: Observable<firebase.User>;
     userDetails: firebase.User;
 
-    userData: FirebaseObjectObservable<User>;
-
   constructor(public afAuth: AngularFireAuth, public DB: DatabaseService) {
       this.user = afAuth.authState;
       this.user.subscribe((user)=>{
