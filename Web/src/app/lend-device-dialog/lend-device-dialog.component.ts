@@ -22,7 +22,7 @@ export class LendDeviceDialogComponent implements OnInit {
   minDate: Date;
 
   numberOfDevices: number = defNumOfDevices;
-  comment: string;
+  comment: string = "";
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendDeviceDialogComponent>, public auth: AuthService) {
@@ -45,7 +45,7 @@ export class LendDeviceDialogComponent implements OnInit {
       if(ret == true) {
           let retVal = {
               user_id: this.userID, device_id: this.deviceID,
-              start_date: this.startDate, end_date: this.endDate, dev_num: this.numberOfDevices, comment: this.comment
+              start_date: this.startDate, end_date: this.endDate, device_number: this.numberOfDevices, comment: this.comment
           };
           this.dialogRef.close(retVal);
       }else{

@@ -123,6 +123,33 @@ export class FirebaseDatabaseService implements DatabaseService{
       this.db.object('devices/' + key).remove();
   }
 
+  //-- LENDING
+
+  lendDevice(lendData){
+      let lendEntry = {
+          user_id: lendData.user_id,
+          device_id: lendData.device_id,
+          start_date: lendData.start_date.getTime(),
+          end_date: lendData.end_date.getTime(),
+          device_number: lendData.device_number,
+          comment: lendData.comment
+
+      };
+
+      this.db.list('lendings/present_lendings').push(lendEntry)
+          .then(value => {
+
+
+              //this.db.list('users/'+ lendData.user_id + '/present_lendings').push(value.key);
+
+              this.db.object('users/'+ lendData.user_id + '/present_lendings/'+value.key).set(true);
+
+
+          });
+  }
+
+
+
   // -- DEVICES END --
 
 

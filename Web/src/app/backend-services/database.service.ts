@@ -17,4 +17,10 @@ export abstract class DatabaseService {
 
   abstract removeDevice(key);
   abstract tryDev(any);
+
+
+
+  /**/
+  abstract lendDevice(lendData);
+
 }
