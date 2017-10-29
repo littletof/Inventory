@@ -6,11 +6,14 @@ import {LoginComponent} from "../login/login.component";
 import {AuthGuardService as AGS} from "../backend-services/auth-guard.service";
 import {RegisterComponent} from "../register/register.component";
 import {HomeComponent} from "../home/home.component";
+import {UserLendingsComponent} from "../user-lendings/user-lendings.component";
 
 const routes: Routes = [
     { path: 'home', component: HomeComponent, canActivate: [AGS] },
     { path: 'users', component: UsersComponent, canActivate: [AGS] },
     { path: 'devices', component: DevicesComponent, canActivate: [AGS] },
+    { path: 'lendings', component: UserLendingsComponent, canActivate: [AGS] },
+
     { path: '', redirectTo: '/login', pathMatch: 'full' },
 
   { path: 'register',  component: RegisterComponent},

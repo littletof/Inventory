@@ -9,6 +9,7 @@ import {User} from "../user";
 import {Device} from "../device";
 import {DatabaseService} from "../backend-services/database.service";
 import {FirebaseListObservable, FirebaseObjectObservable} from "angularfire2/database-deprecated";
+import {LendEntry} from "../lend-entry";
 
 
 @Injectable()
@@ -146,6 +147,22 @@ export class FirebaseDatabaseService implements DatabaseService{
 
 
           });
+  }
+
+  getLendingsOfUser(userkey): any{
+      let reff = this.db.list<LendEntry>("lendings/present_lendings/", ref => ref.orderByChild('user_id').equalTo(userkey));
+
+
+      /*reff.snapshotChanges().subscribe(actions => {
+          actions.forEach(action => {
+             console.log(action.key);
+          });
+      });*/
+      return reff.snapshotChanges();
+  }
+
+  getLending(lendkey){
+
   }
 
 

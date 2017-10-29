@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {AuthService} from "../backend-services/auth.service";
 import {DatabaseService} from "../backend-services/database.service";
-import {MatDialog} from "@angular/material";
+import {MatDialog, MatSnackBar} from "@angular/material";
 import {DeviceInfoComponent} from "../device-info/device-info.component";
 import {LendDeviceDialogComponent} from "../lend-device-dialog/lend-device-dialog.component";
 
@@ -14,7 +14,7 @@ import {LendDeviceDialogComponent} from "../lend-device-dialog/lend-device-dialo
 export class DevicesComponent implements OnInit {
   devices: any[];
 
-  constructor(private db: DatabaseService, private auth: AuthService,public dialog: MatDialog) {}
+  constructor(private db: DatabaseService, private auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {}
 
   ngOnInit() {
 
@@ -47,8 +47,17 @@ export class DevicesComponent implements OnInit {
         });
         dialogref.afterClosed().subscribe(value => {
             //console.log('Lending returned with: ', value);
+            if(value != null){
+                this.db.lendDevice(value);
+                this.openSnack(value);
+            }
+        });
+    }
 
-            this.db.lendDevice(value);
+    openSnack(value){
+        console.log(value);
+        this.snackBar.open("You successfully borrowed " +value.device_number + " x " + value.device_name , null, {
+            duration: 5000
         });
     }
 
