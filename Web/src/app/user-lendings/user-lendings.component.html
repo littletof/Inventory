@@ -1,0 +1,24 @@
+<h1 class="inline">Lendings</h1><span class="spacer"> </span>
+
+<mat-divider></mat-divider>
+
+
+
+<mat-list>
+  <mat-list-item *ngFor="let lend of lendi | async">
+    <h4 matLine>{{lend.key}}</h4>
+    <p matLine class="demo-2"> <b>Start date:</b> {{lend.start_date.toLocaleDateString()}}  <b>End date:</b> {{lend.end_date.toLocaleDateString()}} <b>Number of devices:</b> {{lend.device_number}}</p>
+    <button mat-raised-button color="accent" (click)="openLendDetailDialog(lend)">Details</button>
+    <button mat-raised-button color="accent" (click)="returnItem()">Return</button>
+  </mat-list-item>
+</mat-list>
+
+<!-- .toLocaleDateString()
+<mat-list>
+  <mat-list-item *ngFor="let user of users; let i = index">
+    <mat-icon matListIcon>account_box</mat-icon>
+    <h4 matLine>{{user.name}} {{user.key}}</h4>
+    <p matLine class="demo-2"> {{user.email_address}} {{user.present_lendings}}</p>
+
+  </mat-list-item>
+</mat-list>-->

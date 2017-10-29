@@ -16,7 +16,7 @@ import {AppRoutingModule} from "./app-routing/app-routing.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     MatToolbarModule, MatIconModule, MatTableModule, MatListModule, MatInputModule,
-    MatCardModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE
+    MatCardModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatSnackBarModule
 } from '@angular/material';
 import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule} from '@angular/material';
 
@@ -36,6 +36,8 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { DeviceInfoComponent } from './device-info/device-info.component';
 import { LendDeviceDialogComponent } from './lend-device-dialog/lend-device-dialog.component';
+import { UserLendingsComponent } from './user-lendings/user-lendings.component';
+import { LendDetailDialogComponent } from './lend-detail-dialog/lend-detail-dialog.component';
 
 ;
 
@@ -50,11 +52,14 @@ import { LendDeviceDialogComponent } from './lend-device-dialog/lend-device-dial
     RegisterComponent,
     HomeComponent,
     DeviceInfoComponent,
-    LendDeviceDialogComponent
+    LendDeviceDialogComponent,
+    UserLendingsComponent,
+    LendDetailDialogComponent
   ],
   entryComponents: [
     DeviceInfoComponent,
-      LendDeviceDialogComponent
+      LendDeviceDialogComponent,
+      LendDetailDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +85,8 @@ import { LendDeviceDialogComponent } from './lend-device-dialog/lend-device-dial
     MatFormFieldModule,
     MatDialogModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSnackBarModule
   ],
   providers: [{provide: DatabaseService, useClass: FirebaseDatabaseService},
       { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService,

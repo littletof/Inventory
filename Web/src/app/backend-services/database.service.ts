@@ -23,4 +23,7 @@ export abstract class DatabaseService {
   /**/
   abstract lendDevice(lendData);
 
+  abstract getLending(key);
+  abstract getLendingsOfUser(userkey): any;
+
 }
