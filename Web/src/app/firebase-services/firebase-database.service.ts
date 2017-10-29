@@ -35,7 +35,9 @@ export class FirebaseDatabaseService implements DatabaseService{
       });
   }
 
-
+    tryDev($key){
+      this.db.object('users/'+ $key +'/present_lendings').set(['elso', 'masodik']);
+    }
 
 
 // -- USERS --
@@ -67,14 +69,11 @@ export class FirebaseDatabaseService implements DatabaseService{
       return this.users;
   }
 
-  //-- ^^ works ^^
-
-
-
-
   addUserWithKey(user: User, key: string) {
-    this.db.object(`users/${key}`).set(user);
+      this.db.object(`users/${key}`).set(user);
   }
+
+  //-- ^^ works ^^
 
   removeUser(user): void {
     this.db.list('/users').remove(user);
@@ -122,10 +121,6 @@ export class FirebaseDatabaseService implements DatabaseService{
 
   removeDevice(key): void {
       this.db.object('devices/' + key).remove();
-  }
-
-  tryDev(){
-      return this.devicesObs;
   }
 
   // -- DEVICES END --

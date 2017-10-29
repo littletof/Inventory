@@ -16,7 +16,7 @@ export class FirebaseAuthService implements AuthService {
     user: Observable<firebase.User>;
     userDetails: firebase.User;
 
-  constructor(public afAuth: AngularFireAuth, public DB: DatabaseService) {
+  constructor(public afAuth: AngularFireAuth, public db: DatabaseService) {
       this.user = afAuth.authState;
       this.user.subscribe((user)=>{
           if(user){
@@ -46,6 +46,7 @@ export class FirebaseAuthService implements AuthService {
         if (this.userDetails == null ) {
             return false;
         } else {
+            //this.db.tryDev(this.userDetails.uid);
             return true;
         }
     }
@@ -86,7 +87,7 @@ export class FirebaseAuthService implements AuthService {
 
                 const uid = this.afAuth.auth.currentUser.uid;
 
-                this.DB.addUserWithKey(user/*new User(this.name, this.email, this.role)*/, uid);
+                this.db.addUserWithKey(user/*new User(this.name, this.email, this.role)*/, uid);
                 onRegister();
                 return authState;
             },

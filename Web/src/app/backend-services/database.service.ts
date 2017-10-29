@@ -16,5 +16,5 @@ export abstract class DatabaseService {
   abstract getDevices(): any;
 
   abstract removeDevice(key);
-  abstract tryDev();
+  abstract tryDev(any);
 }

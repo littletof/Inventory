@@ -6,7 +6,7 @@
   <mat-list-item *ngFor="let user of users; let i = index">
     <mat-icon matListIcon>account_box</mat-icon>
     <h4 matLine>{{user.name}} {{user.key}}</h4>
-    <p matLine class="demo-2"> {{user.email_address}} </p>
+    <p matLine class="demo-2"> {{user.email_address}} {{user.present_lendings}}</p>
     <span><!--<button mat-button color="warn" (click)="removeUser(user.id)">Remove</button>--></span>
 
   </mat-list-item>
