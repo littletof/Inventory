@@ -30,8 +30,7 @@ export class DevicesComponent implements OnInit {
     openDialog(data) {
         this.dialog.open(DeviceInfoComponent, {
             data,
-            width: '50%',
-            height: '500px'
+            width: '50%'
         });
     }
 
