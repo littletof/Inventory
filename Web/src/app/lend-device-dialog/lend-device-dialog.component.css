@@ -1,0 +1,6 @@
+.row{
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+    padding-bottom: 2em;
+}

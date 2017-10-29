@@ -16,7 +16,7 @@ import {AppRoutingModule} from "./app-routing/app-routing.module";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     MatToolbarModule, MatIconModule, MatTableModule, MatListModule, MatInputModule,
-     MatCardModule,    MatDialogModule
+    MatCardModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE
 } from '@angular/material';
 import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule} from '@angular/material';
 
@@ -67,6 +67,8 @@ import { LendDeviceDialogComponent } from './lend-device-dialog/lend-device-dial
     RouterModule,
 
     BrowserAnimationsModule,
+
+
     MatToolbarModule,
     MatIconModule,
     MatTableModule,
@@ -76,10 +78,13 @@ import { LendDeviceDialogComponent } from './lend-device-dialog/lend-device-dial
     MatInputModule,
     MatCardModule,
     MatFormFieldModule,
-    MatDialogModule
+    MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [{provide: DatabaseService, useClass: FirebaseDatabaseService},
-      { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService],
+      { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService,
+      {provide: MAT_DATE_LOCALE, useValue: 'hu-HU'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
