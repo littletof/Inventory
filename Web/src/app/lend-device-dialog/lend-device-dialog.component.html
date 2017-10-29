@@ -8,16 +8,27 @@
   <mat-dialog-content class="flex">
     <div>
 
-      <mat-form-field>
+      <mat-form-field style="width: 43%">
         <input matInput [matDatepicker]="startdate" placeholder="Start date" disabled [(ngModel)]="startDate">
-        <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
+        <!--<mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>-->
         <mat-datepicker #startdate></mat-datepicker>
       </mat-form-field>
 
-      <mat-form-field>
-        <input matInput [matDatepicker]="enddate" placeholder="Choose the end date" [(ngModel)]="endDate" [min]="minDate">
+      -
+
+      <mat-form-field style="width: 48%">
+        <input matInput [matDatepicker]="enddate" placeholder="Choose the end date" [(ngModel)]="endDate" [min]="minDate" required>
         <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
         <mat-datepicker #enddate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="number" placeholder="Number of devices" [(ngModel)]="numberOfDevices" required >
+      </mat-form-field>
+
+      <mat-form-field style="width: 100%">
+        <textarea matInput placeholder="Comment" [(ngModel)]="comment"></textarea>
+
       </mat-form-field>
 
 

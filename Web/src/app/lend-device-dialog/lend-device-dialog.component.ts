@@ -4,6 +4,7 @@ import {AuthService} from "../backend-services/auth.service";
 
 
 const defDayDiff = 1;
+const defNumOfDevices = 1;
 
 @Component({
   selector: 'app-lend-device-dialog',
@@ -20,7 +21,7 @@ export class LendDeviceDialogComponent implements OnInit {
 
   minDate: Date;
 
-  numberOfDevices: number;
+  numberOfDevices: number = defNumOfDevices;
   comment: string;
 
 
