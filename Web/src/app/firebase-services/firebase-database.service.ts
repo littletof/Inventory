@@ -25,6 +25,14 @@ export class FirebaseDatabaseService implements DatabaseService{
   constructor(private db: AngularFireDatabase) {
       this.loadFireUsers();
       this.loadFireDevices();
+
+      this.getFireDevices().stateChanges().subscribe(value => {
+          console.log(value.type);
+          if(value.type == "child_removed"){
+              console.log("remove");
+              this.loadFireDevices();
+          }
+      });
   }
 
 
@@ -90,8 +98,11 @@ export class FirebaseDatabaseService implements DatabaseService{
               this.devicesObs = this.getFireDeviceByKey(action.key).valueChanges();
               this.devicesObs.subscribe(res => {
                   const $key = action.key;
+
                   if(!this.inArray(this.devices, $key)) {
                       this.devices.push({key: $key, ...res});
+                  }else{
+                      console.log("already in");
                   }
               });
           });
@@ -106,14 +117,18 @@ export class FirebaseDatabaseService implements DatabaseService{
         return this.db.object('devices/' + key);
   }
 
-  getDevices(): any[] {
-        return this.devices;
+  getDevices(): any{
+      return this.devices;
+      //return this.getFireDevices();
   }
 
+  removeDevice(key): void {
+      this.db.object('devices/' + key).remove();
+  }
 
-  /*getDevices(): Observable<Device[]> {
-    return this.db.list('devices').valueChanges();
-  }*/
+  tryDev(){
+      return this.devicesObs;
+  }
 
   // -- DEVICES END --
 

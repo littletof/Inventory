@@ -14,7 +14,10 @@ import { DevicesComponent } from './devices/devices.component';
 import {AppRoutingModule} from "./app-routing/app-routing.module";
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatToolbarModule, MatIconModule, MatTableModule, MatListModule, MatInputModule} from '@angular/material';
+import {
+    MatToolbarModule, MatIconModule, MatTableModule, MatListModule, MatInputModule,
+     MatCardModule,    MatDialogModule
+} from '@angular/material';
 import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule} from '@angular/material';
 
 import {AngularFireDatabaseModule} from "angularfire2/database";
@@ -31,6 +34,7 @@ import {AuthGuardService} from "./backend-services/auth-guard.service";
 import {RouterModule} from "@angular/router";
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { DeviceInfoComponent } from './device-info/device-info.component';
 
 ;
 
@@ -43,7 +47,11 @@ import { HomeComponent } from './home/home.component';
     SignUpComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    DeviceInfoComponent
+  ],
+  entryComponents: [
+    DeviceInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +71,9 @@ import { HomeComponent } from './home/home.component';
     MatProgressSpinnerModule,
     MatButtonModule,
     MatInputModule,
-    MatFormFieldModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatDialogModule
   ],
   providers: [{provide: DatabaseService, useClass: FirebaseDatabaseService},
       { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService],

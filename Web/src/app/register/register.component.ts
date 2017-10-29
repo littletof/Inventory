@@ -13,7 +13,7 @@ export class RegisterComponent implements OnInit {
     email: string = '';
     password: string = '';
     name: string;
-    role: number;
+    role: number = 13;
     hide = true;
 
     errorText:string;

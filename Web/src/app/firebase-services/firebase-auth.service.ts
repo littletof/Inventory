@@ -34,6 +34,14 @@ export class FirebaseAuthService implements AuthService {
 
   }
 
+  check(){
+      console.log('check');
+      //this.afAuth.authState.
+      this.afAuth.authState.map(value => {
+          console.log(value.getIdToken(true));
+      });
+  }
+
     isLoggedIn(): boolean {
         if (this.userDetails == null ) {
             return false;

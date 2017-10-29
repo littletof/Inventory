@@ -10,6 +10,9 @@ import {Router} from "@angular/router";
 export class AppComponent {
   constructor(public auth: AuthService, private router: Router){
     //this.auth.logOut((res)=> {});
+      /*this.auth.check();
+      console.log('whole C ', this.isLoggedIn());*/
+
   }
 
   isLoggedIn():boolean{

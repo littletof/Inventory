@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../backend-services/auth.service";
 import {Router} from "@angular/router";
+import {AngularFireAuth} from "angularfire2/auth";
 
 @Component({
   selector: 'app-login',
@@ -14,13 +15,12 @@ export class LoginComponent implements OnInit {
 
   errorText:string;
 
+  static loggedIn = false;
 
-  constructor(private auth: AuthService, public router: Router) {
 
-  }
+  constructor(private auth: AuthService, public router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onLogin(router){
     let url = null;

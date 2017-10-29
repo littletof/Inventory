@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {AuthService} from "../backend-services/auth.service";
 import {DatabaseService} from "../backend-services/database.service";
+import {MatDialog} from "@angular/material";
+import {DeviceInfoComponent} from "../device-info/device-info.component";
 
 @Component({
   selector: 'app-devices',
@@ -11,16 +13,30 @@ import {DatabaseService} from "../backend-services/database.service";
 export class DevicesComponent implements OnInit {
   devices: any[];
 
-  constructor(private DB: DatabaseService, private auth: AuthService) { }
+  constructor(private db: DatabaseService, private auth: AuthService,public dialog: MatDialog) {}
 
   ngOnInit() {
 
       if (this.auth.isLoggedIn()) {
-          this.devices = this.DB.getDevices();
+          this.devices = this.db.getDevices();
       }else {
           console.log('Not logged in');
       }
 
+  }
+
+
+
+    openDialog(data) {
+        this.dialog.open(DeviceInfoComponent, {
+            data,
+            width: '50%',
+            height: '500px'
+        });
+    }
+
+  removeDevice(key){
+        this.db.removeDevice(key);
   }
 
 }
