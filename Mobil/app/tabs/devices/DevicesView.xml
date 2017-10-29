@@ -1,9 +1,5 @@
-<!--
-This is the component view that represents the 'Devices' tab.
-Feel free to customize layouts and components to change how the tab view looks.
--->
+<Page loaded="onLoaded" >
 <ScrollView>
-<StackLayout loaded="onLoaded" >
     <ListView id="deviceList" items="{{ deviceList }}" height="1000" separatorColor="lightskyblue">
             <ListView.itemTemplate>
                 <StackLayout orientation="horizontal">
@@ -16,6 +12,5 @@ Feel free to customize layouts and components to change how the tab view looks.
                 </StackLayout>
             </ListView.itemTemplate>
     </ListView>
-
-</StackLayout>
 </ScrollView>
+</Page>

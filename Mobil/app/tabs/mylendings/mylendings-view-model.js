@@ -1,106 +1,94 @@
 var firebase = require("nativescript-plugin-firebase");
 var ObservableArray = require("data/observable-array").ObservableArray;
-const imageSource = require("image-source");
-var fs = require("file-system");
 
 
-firebase.init({
-    url: 'https://inventory-01.firebaseio.com/',
-    persist: true
-})
 
 function MyLendingsViewModel(items) {
     var viewModel= new ObservableArray();
     
-        viewModel.load = function () {
+    viewModel.load = function() {
 
-            var currentUserId;
 
-            firebase.getCurrentUser().then(
-                function (result) {
-                  currentUserId=result.uid;
-                  console.log("aktív felhasználó azonosítója: "+currentUserId);
-                },
-                function (errorMessage) {
-                  console.log(errorMessage);
-                }
-              );
-          
-                /*var onQueryEvent = function(result) {
-                    if (!result.error) {
-                        
-                        //console.log("Value: " + JSON.stringify(result.value));
-                        var res=result.value;
+        var currentUserId;
+
+        firebase.getCurrentUser().then(
+            function (result) {
+              currentUserId=result.uid;
+              console.log("aktív felhasználó azonosítója: "+currentUserId);
+            },
+            function (errorMessage) {
+              console.log(errorMessage);
+            }
+          );
+        var onChildEvent = function(result) {
+            var matches = [];
+            //console.log("user adatai:"+JSON.stringify(result.value));
+            var item=result.value;
+            if (result.type === "ChildAdded") {
+                if(result.value.user_id==currentUserId){
+
+                    var findDeviceName = function(device) {
+                        for(let uid in device.value){
+                            if(device.value[uid].id==result.value.device_id){
+                      
+                        var a = new Date(item.start_date * 1000);
+                        var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                        //var year0 = a.getFullYear();
+                        var month0 = months[a.getMonth()];
+                        var date0 = a.getDate();
+                        var hour0 = a.getHours();
+                        var min0 = a.getMinutes();
     
-                        res.forEach(function (device) {
+                        var b = new Date(item.end_date * 1000);
+                        //var year1 = a.getFullYear();
+                        var month1 = months[a.getMonth()];
+                        var date1 = a.getDate();
+                        var hour1 = a.getHours();
+                        var min1 = a.getMinutes();
     
-                            
-                              var imgUrl;
-                             
-                              
-                              firebase.getDownloadUrl({
-                                bucket: 'gs://inventory-01.appspot.com/images/',
-                                remoteFullPath: device.id+'.png'
-                              }).then(
-                                  function (url) {
-                                    console.log("Remote URL: " + JSON.stringify(url));
-                                    
-                                    imgUrl="https://pbs.twimg.com/profile_images/856508346190381057/DaVvCgBo.jpg";
-                                    //console.log("imgUrl: " + imgUrl);
-                                  },
-                                  function (error) {
-                                    firebase.getDownloadUrl({
-                                        bucket: 'gs://inventory-01.appspot.com/images/',
-                                        remoteFullPath: 'placeholder.png'
-                                      }).then(
-                                          function (url) {
-                                            console.log("Remote URL: " + JSON.stringify(url));
-                                            imgUrl="https://pbs.twimg.com/profile_images/856508346190381057/DaVvCgBo.jpg";
-                                            //console.log("imgUrl: " + imgUrl);
-                                          },
-                                          function (error) {
-                                            console.log("Error: " + error);
-                                            
-                                          }
-                                      );
-                                  }
-                              );
     
-                            viewModel.push({
-                                description:device.description,
-                                id:device.id,
-                                name:device.name,
-                                img:imgUrl
-                            });
-                            
+    
+                        viewModel.push({
+                            deviceName:device.value[uid].name,
+                            interval:month0+"."+date0+" "+hour0+":"+min0+" - "+month1+"."+date1+" "+hour1+":"+min1,
+                            quantity:"quantity borrowed:"+item.device_number
                         });
-                        
                     }
-                };
+                    }
+                    }
+
+                    firebase.query(
+                        findDeviceName,
+                        "/devices",
+                        {
+                            singleEvent: true,
+                            orderBy: {
+                                type: firebase.QueryOrderByType.CHILD,
+                                value: 'name'
+                            }
+                    });
+
+                    
+                }
+            }
+            else if (result.type === "ChildRemoved") {
+                matches.push(result);
+                matches.forEach(function(match) {
+                    var index = viewModel.indexOf(match);
+                    viewModel.splice(index, 1);
+                });
+            }
             
-                firebase.query(
-                    onQueryEvent,
-                    "/users/"+currentUserId+"/lendings",
-                    {
-                        
-                        singleEvent: true,
-                       
-                        orderBy: {
-                            type: firebase.QueryOrderByType.CHILD,
-                            value: 'name' // mandatory when type is 'child'
-                        },
-                       
-                        ranges: 
-                          {
-                              
-                          },
-                        limit: {
-                           
-                        }
-                    }
-                );*/
-                return viewModel;
         }
+        return firebase.addChildEventListener(onChildEvent, "/lendings/present_lendings").then(
+            function() {
+                console.log("firebase.addChildEventListener added");
+            },
+            function(error) {
+                console.log("firebase.addChildEventListener error: " + error);
+            }
+        )
+    }
     
         viewModel.empty = function () {
             while (viewModel.length) {

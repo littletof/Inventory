@@ -1,23 +1,23 @@
-const DevicesViewModel = require("./devices-view-model");
-
+var DevicesViewModel = require("./devices-view-model");
+var observableModule = require("data/observable")
+var ObservableArray = require("data/observable-array").ObservableArray;
 
 var deviceList = new DevicesViewModel([]);
 
 
-var data ={
+var pageData = new observableModule.fromObject({
     deviceList:deviceList
-}
+});
 
 function onLoaded(args) {
     
 
-    const component = args.object;
-
+    var component = args.object;
+    component.bindingContext = pageData;
+    
 
     deviceList.empty();
     deviceList.load();
-    
-    component.bindingContext = data;
 }
 
 exports.onDetails=function(args){
@@ -25,7 +25,7 @@ exports.onDetails=function(args){
 }
 
 exports.onImageLoaded=function(args){
-    console.log(args.object.device+". kép betöltve");    
+    //console.log(args.object.device+". kép betöltve");    
 
 }
 

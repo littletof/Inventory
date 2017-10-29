@@ -1,19 +1,33 @@
 const MyLendingsViewModel = require("./mylendings-view-model");
+var observableModule = require("data/observable")
+var ObservableArray = require("data/observable-array").ObservableArray;
 
-var lendingsList = new MyLendingsViewModel([]);
+var lendingList = new MyLendingsViewModel([]);
 
 
-var data ={
-    lendingsList:lendingsList
-}
+var pageData = new observableModule.fromObject({
+    lendingList:lendingList
+});
 
 function onLoaded(args) {
+    
+
     const component = args.object;
+    component.bindingContext = pageData;
+    
 
-    lendingsList.empty();
-    lendingsList.load();
+    lendingList.empty();
+    lendingList.load();
+}
 
-    component.bindingContext = data;
+exports.onDetails=function(args){
+    console.log(args.object.device);
+}
+
+exports.onImageLoaded=function(args){
+    //console.log(args.object.device+". kép betöltve");    
+
 }
 
 exports.onLoaded = onLoaded;
+
