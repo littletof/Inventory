@@ -5,6 +5,8 @@ import {DatabaseService} from "../backend-services/database.service";
 import {MatDialog, MatSnackBar} from "@angular/material";
 import {DeviceInfoComponent} from "../device-info/device-info.component";
 import {LendDeviceDialogComponent} from "../lend-device-dialog/lend-device-dialog.component";
+import {AngularFireList} from "angularfire2/database";
+import {Device} from "../device";
 
 @Component({
   selector: 'app-devices',
@@ -12,19 +14,29 @@ import {LendDeviceDialogComponent} from "../lend-device-dialog/lend-device-dialo
   styleUrls: ['./devices.component.css']
 })
 export class DevicesComponent implements OnInit {
-  devices: any[];
+  //devices: any[];
 
-  constructor(private db: DatabaseService, private auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {}
+  devices: AngularFireList<Device>;
 
-  ngOnInit() {
+  constructor(private db: DatabaseService, private auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
       if (this.auth.isLoggedIn()) {
-          this.devices = this.db.getDevices();
+
+
+          this.devices = this.db.getDevices().map(changes => {
+              return changes.map(c => {
+                  return Device.fromJSON(c);
+              });
+          });
+
+
       }else {
           console.log('Not logged in');
       }
 
   }
+
+  ngOnInit() { }
 
 
 

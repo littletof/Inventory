@@ -15,12 +15,12 @@ import {AngularFireList} from "angularfire2/database";
 })
 export class UserLendingsComponent implements OnInit {
 
-  lendings: any[] = [];
-  lendi: AngularFireList<LendEntry>;
+
+  lendings: AngularFireList<LendEntry>;
 
   constructor(public db: DatabaseService, public auth: AuthService, public dialog: MatDialog) {
 
-    this.lendi = this.db.getLendingsOfUser(this.auth.userDetails.uid).map(changes => {
+    this.lendings = this.db.getLendingsOfUser(this.auth.userDetails.uid).map(changes => {
         return changes.map(c => {
             //console.log(LendEntry.fromJSON(c.payload.val()).getJSON());
             return LendEntry.fromtoJSON(c);

@@ -25,15 +25,6 @@ export class FirebaseDatabaseService implements DatabaseService{
 
   constructor(private db: AngularFireDatabase) {
       this.loadFireUsers();
-      this.loadFireDevices();
-
-      this.getFireDevices().stateChanges().subscribe(value => {
-          console.log(value.type);
-          if(value.type == "child_removed"){
-              console.log("remove");
-              this.loadFireDevices();
-          }
-      });
   }
 
     tryDev($key){
@@ -89,35 +80,10 @@ export class FirebaseDatabaseService implements DatabaseService{
   // -- USERS END --
 
   // -- DEVICES --
-  loadFireDevices(){
-      this.getFireDevices().snapshotChanges().subscribe(actions => {
-          actions.forEach(action => {
-              // console.log(action.payload.val());
-              this.devicesObs = this.getFireDeviceByKey(action.key).valueChanges();
-              this.devicesObs.subscribe(res => {
-                  const $key = action.key;
-
-                  if(!this.inArray(this.devices, $key)) {
-                      this.devices.push({key: $key, ...res});
-                  }else{
-                      console.log("already in");
-                  }
-              });
-          });
-      });
-  }
-
-  getFireDevices(): AngularFireList<any[]>{
-        return this.db.list('devices');
-  }
-
-  getFireDeviceByKey(key): AngularFireObject<any>{
-        return this.db.object('devices/' + key);
-  }
 
   getDevices(): any{
-      return this.devices;
-      //return this.getFireDevices();
+      return this.db.list<Device>('devices').snapshotChanges();
+      //return this.devices;
   }
 
   removeDevice(key): void {
@@ -152,12 +118,6 @@ export class FirebaseDatabaseService implements DatabaseService{
   getLendingsOfUser(userkey): any{
       let reff = this.db.list<LendEntry>("lendings/present_lendings/", ref => ref.orderByChild('user_id').equalTo(userkey));
 
-
-      /*reff.snapshotChanges().subscribe(actions => {
-          actions.forEach(action => {
-             console.log(action.key);
-          });
-      });*/
       return reff.snapshotChanges();
   }
 

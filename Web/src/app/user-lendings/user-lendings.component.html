@@ -5,7 +5,7 @@
 
 
 <mat-list>
-  <mat-list-item *ngFor="let lend of lendi | async">
+  <mat-list-item *ngFor="let lend of lendings | async">
     <h4 matLine>{{lend.key}}</h4>
     <p matLine class="demo-2"> <b>Start date:</b> {{lend.start_date.toLocaleDateString()}}  <b>End date:</b> {{lend.end_date.toLocaleDateString()}} <b>Number of devices:</b> {{lend.device_number}}</p>
     <button mat-raised-button color="accent" (click)="openLendDetailDialog(lend)">Details</button>
