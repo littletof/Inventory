@@ -2,6 +2,7 @@ import {User} from "../user";
 
 export abstract class AuthService {
   user: any;
+  userDetails: any;
   redirectUrl: string;
 
   abstract loginWithEmail(email: string, password: string, onLogin, onError): void;

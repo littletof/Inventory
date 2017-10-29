@@ -41,7 +41,6 @@ export class DevicesComponent implements OnInit {
     }
 
     openLendDeviceDialog(data){
-        console.log(data);
         let dialogref = this.dialog.open(LendDeviceDialogComponent, {
             data,
             width: '50%'
