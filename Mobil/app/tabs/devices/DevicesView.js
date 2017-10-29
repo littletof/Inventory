@@ -24,9 +24,5 @@ exports.onDetails=function(args){
     console.log(args.object.device);
 }
 
-exports.onImageLoaded=function(args){
-    //console.log(args.object.device+". kép betöltve");    
-
-}
 
 exports.onLoaded = onLoaded;
