@@ -38,9 +38,9 @@ export class LendEntry {
         return new LendEntry(js.user_id, js.device_id,new Date(js.start_date),  new Date(js.end_date), js.device_number, js.comment);
     }
 
-    static fromtoJSON(js){
-
-        return {key: js.payload.key, user_id: js.user_id, device_id: js.device_id, start_date: new Date(js.start_date),
+    static fromtoJSON(sn){
+        let js = sn.payload.val();
+        return {key: sn.payload.key, user_id: js.user_id, device_id: js.device_id, start_date: new Date(js.start_date),
             end_date: new Date(js.end_date), device_number: js.device_number, comment: js.comment};
     }
 
