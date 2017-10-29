@@ -4,10 +4,10 @@
 <mat-list>
   <mat-list-item *ngFor="let device of devices;">
     <mat-icon matListIcon>devices_other</mat-icon>
-    <h4 matLine><a color="accent" class="link" (click)="openDialog(device)">{{device.name}}</a></h4>
+    <h4 matLine><a color="accent" class="link" (click)="openDeviceInfoDialog(device)">{{device.name}}</a></h4>
     <!--<span><button mat-raised-button color="primary" (click)="openDialog(device)">Open</button></span>-->
 
-    <span><button mat-raised-button color="accent" >Rent</button></span>
+    <span><button mat-raised-button color="accent" (click)="openLendDeviceDialog(device)">Rent</button></span>
 
 
     <!--<span><button mat-button color="warn" (click)="removeDevice(device.key)" disabled>Remove</button></span>-->

@@ -4,6 +4,7 @@ import {AuthService} from "../backend-services/auth.service";
 import {DatabaseService} from "../backend-services/database.service";
 import {MatDialog} from "@angular/material";
 import {DeviceInfoComponent} from "../device-info/device-info.component";
+import {LendDeviceDialogComponent} from "../lend-device-dialog/lend-device-dialog.component";
 
 @Component({
   selector: 'app-devices',
@@ -27,10 +28,26 @@ export class DevicesComponent implements OnInit {
 
 
 
-    openDialog(data) {
-        this.dialog.open(DeviceInfoComponent, {
+    openDeviceInfoDialog(data) {
+        let dialogref = this.dialog.open(DeviceInfoComponent, {
             data,
             width: '50%'
+        });
+        dialogref.afterClosed().subscribe(value => {
+           // console.log(value);
+            if(value!=null)
+            this.openLendDeviceDialog(value);
+        });
+    }
+
+    openLendDeviceDialog(data){
+        console.log(data);
+        let dialogref = this.dialog.open(LendDeviceDialogComponent, {
+            data,
+            width: '50%'
+        });
+        dialogref.afterClosed().subscribe(value => {
+            console.log('Lending returned with: ', value);
         });
     }
 

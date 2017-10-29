@@ -35,6 +35,7 @@ import {RouterModule} from "@angular/router";
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { DeviceInfoComponent } from './device-info/device-info.component';
+import { LendDeviceDialogComponent } from './lend-device-dialog/lend-device-dialog.component';
 
 ;
 
@@ -48,10 +49,12 @@ import { DeviceInfoComponent } from './device-info/device-info.component';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    DeviceInfoComponent
+    DeviceInfoComponent,
+    LendDeviceDialogComponent
   ],
   entryComponents: [
-    DeviceInfoComponent
+    DeviceInfoComponent,
+      LendDeviceDialogComponent
   ],
   imports: [
     BrowserModule,
