@@ -10,7 +10,8 @@ function User(info) {
 
     var viewModel = new observableModule.fromObject({
         email: info.email || "",
-        password: info.password || ""
+        password: info.password || "",
+        name: info.name || ""
     });
 
     viewModel.init = function(){
@@ -61,7 +62,7 @@ function User(info) {
               function (result) {
                   firebase.setValue(
                     '/users/'+result.key, {
-                        name: "",                        
+                        name: viewModel.get("name"),                        
                         email: viewModel.get("email"),
                         role: DEFAULT_ROLE,
                         present_lendings: "",
