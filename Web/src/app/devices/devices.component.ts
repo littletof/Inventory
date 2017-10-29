@@ -46,7 +46,7 @@ export class DevicesComponent implements OnInit {
             width: '50%'
         });
         dialogref.afterClosed().subscribe(value => {
-            console.log('Lending returned with: ', value);
+            //console.log('Lending returned with: ', value);
 
             this.db.lendDevice(value);
         });

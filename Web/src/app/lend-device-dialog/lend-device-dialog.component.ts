@@ -41,7 +41,7 @@ export class LendDeviceDialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  closeDialog(ret){
+  closeDialog(ret = null){
       if(ret == true) {
           let retVal = {
               user_id: this.userID, device_id: this.deviceID,

@@ -12,7 +12,7 @@ export class DeviceInfoComponent implements OnInit {
   ngOnInit() {
   }
 
-  closeDialog(ret){
+  closeDialog(ret = null){
     this.dialogRef.close(ret);
   }
 
