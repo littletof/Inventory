@@ -63,7 +63,7 @@ function User(info) {
                   firebase.setValue(
                     '/users/'+result.key, {
                         name: viewModel.get("name"),                        
-                        email: viewModel.get("email"),
+                        email_address: viewModel.get("email"),
                         role: DEFAULT_ROLE,
                         present_lendings: "",
                         past_lendings: "",
