@@ -1,5 +1,6 @@
 <Page loaded="loaded">
     <StackLayout orientation="vertical">
+        <TextField id="name" text="{{name}}" hint="Name"/>
         <TextField id="email" text="{{email}}" hint="Email Address" keyboardType="email" autocorrect="false"
         autocapitalizationType="none"/>
         <TextField id="password" text="{{password}}" hint="Password" secure="true"/>

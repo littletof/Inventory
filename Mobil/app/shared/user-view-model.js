@@ -2,13 +2,16 @@ var config = require("../shared/config");
 var observableModule = require("data/observable");
 var firebase = require("nativescript-plugin-firebase");
 
+var DEFAULT_ROLE = 'user';
+
 
 function User(info) {
     info = info || {};
 
     var viewModel = new observableModule.fromObject({
         email: info.email || "",
-        password: info.password || ""
+        password: info.password || "",
+        name: info.name || ""
     });
 
     viewModel.init = function(){
@@ -56,9 +59,17 @@ function User(info) {
             email: viewModel.get("email"),
             password: viewModel.get("password")
           }).then(
-              function (response) {
-                  console.log(response);
-                  return response;
+              function (result) {
+                  firebase.setValue(
+                    '/users/'+result.key, {
+                        name: viewModel.get("name"),                        
+                        email_address: viewModel.get("email"),
+                        role: DEFAULT_ROLE,
+                        present_lendings: "",
+                        past_lendings: "",
+                    }
+                );
+                  return result;
               }
           );
     };
