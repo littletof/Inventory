@@ -1,9 +1,19 @@
-<h1>Devices</h1>
+<h1 class="inline">Devices</h1><span class="spacer"> </span>{{devices.length}}
+<mat-divider></mat-divider>
+
 <mat-list>
   <mat-list-item *ngFor="let device of devices;">
     <mat-icon matListIcon>devices_other</mat-icon>
-    <h4 matLine>{{device.name}} {{device.key}}</h4>
-    <p matLine class="demo-2"> {{device.description}} </p>
-    <span>{{device.id}}</span>
+    <h4 matLine><a color="accent" class="link" (click)="openDialog(device)">{{device.name}}</a></h4>
+    <!--<span><button mat-raised-button color="primary" (click)="openDialog(device)">Open</button></span>-->
+
+    <span><button mat-raised-button color="accent" >Rent</button></span>
+
+
+    <!--<span><button mat-button color="warn" (click)="removeDevice(device.key)" disabled>Remove</button></span>-->
+
   </mat-list-item>
 </mat-list>
+
+
+

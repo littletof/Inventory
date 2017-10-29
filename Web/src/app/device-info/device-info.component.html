@@ -1,0 +1,14 @@
+<h2 mat-card-title>{{data.name}}</h2>
+<mat-divider></mat-divider>
+<h4>Description:</h4>
+
+<mat-dialog-content>{{data.description}}</mat-dialog-content>
+
+
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+  <!-- Can optionally provide a result for the closing dialog. -->
+  <!--<button mat-button [mat-dialog-close]="true">Yes</button>-->
+  <button mat-raised-button color="accent">Rent</button>
+</mat-dialog-actions>

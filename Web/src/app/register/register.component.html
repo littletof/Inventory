@@ -15,9 +15,9 @@
     <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
   </mat-form-field>
 
-  <mat-form-field>
+  <!--<mat-form-field>
     <input matInput placeholder="Role" type="number" required [(ngModel)]="role">
-  </mat-form-field>
+  </mat-form-field>-->
 
   <span class="mat-error error-text" *ngIf="this.errorText">{{this.errorText}}</span>
 
@@ -28,4 +28,3 @@
   <h5 class="small-desc">Already have an account? <a routerLink="/login">Login</a>!</h5>
   <h5 class="small-desc"><a (click)="loginAnonym()">Continue as a Guest</a></h5>
 </div>
-
