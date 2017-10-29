@@ -1,8 +1,16 @@
-<!--
-This is the component view that represents the 'Devices' tab.
-Feel free to customize layouts and components to change how the tab view looks.
--->
-<GridLayout class="page-content" loaded="onLoaded">
-    <Label class="page-icon fa" text="&#xf1ea;"></Label>
-    <Label class="page-placeholder" text="<!-- Page content goes here -->"></Label>
-</GridLayout>
+<Page loaded="onLoaded" >
+<ScrollView>
+    <ListView id="deviceList" items="{{ deviceList }}" height="1000" separatorColor="lightskyblue">
+            <ListView.itemTemplate>
+                <StackLayout orientation="horizontal">
+                    <Image device="{{ id, id }}" class="listItem" src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png" verticalAlignment="stretch" width="100" loaded="onImageLoaded" />
+                    <GridLayout class="listItem" columns="*" rows="30,25,*">
+                        <Label class="deviceName" text="{{ name, name }}"  row="0" col="0" />
+                        <Label text="{{ description, description }}"  row="1" col="0" />
+                        <Button  text="Details" device="{{ id, id }}" tap="onDetails" row="2" col="0"/>
+                    </GridLayout>
+                </StackLayout>
+            </ListView.itemTemplate>
+    </ListView>
+</ScrollView>
+</Page>
