@@ -5,6 +5,8 @@ import {Observable} from "rxjs/Observable";
 import {FirebaseAuthService} from "../firebase-services/firebase-auth.service";
 import {AuthService} from "../backend-services/auth.service";
 import {DatabaseService} from "../backend-services/database.service";
+import {AngularFireList} from "angularfire2/database";
+import {User} from "../user";
 
 
 @Component({
@@ -13,13 +15,20 @@ import {DatabaseService} from "../backend-services/database.service";
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  users: any[];
+  users: AngularFireList<User>;
 
   constructor(private db: DatabaseService, private auth: AuthService) {}
 
   ngOnInit() {
     if (this.auth.isLoggedIn()) {
-      this.users = this.db.getUsers();
+
+
+        this.users = this.db.getUsers().map(changes => {
+            return changes.map(c => {
+               return User.fromJSON(c);
+            });
+        });
+
     }else {
       console.log('Not logged in');
     }

@@ -3,7 +3,7 @@
 <mat-divider></mat-divider>
 
 <mat-list>
-  <mat-list-item *ngFor="let user of users; let i = index">
+  <mat-list-item *ngFor="let user of users | async">
     <mat-icon matListIcon>account_box</mat-icon>
     <h4 matLine>{{user.name}}</h4>
     <p matLine class="demo-2"> {{user.email_address}}</p>

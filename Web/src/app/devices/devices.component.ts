@@ -21,15 +21,11 @@ export class DevicesComponent implements OnInit {
   constructor(private db: DatabaseService, private auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
       if (this.auth.isLoggedIn()) {
-
-
           this.devices = this.db.getDevices().map(changes => {
               return changes.map(c => {
                   return Device.fromJSON(c);
               });
           });
-
-
       }else {
           console.log('Not logged in');
       }

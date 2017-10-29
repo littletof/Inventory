@@ -8,7 +8,8 @@ export abstract class DatabaseService {
   abstract removeUser(user);
 
 
-  abstract getUsers(): any[];
+  abstract getUsers(): any;
+
   abstract getUser(key): any;
 
 

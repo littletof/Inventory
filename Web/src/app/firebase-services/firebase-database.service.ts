@@ -23,9 +23,7 @@ export class FirebaseDatabaseService implements DatabaseService{
 
 
 
-  constructor(private db: AngularFireDatabase) {
-      this.loadFireUsers();
-  }
+  constructor(private db: AngularFireDatabase) { }
 
     tryDev($key){
       this.db.object('users/'+ $key +'/present_lendings').set(['elso', 'masodik']);
@@ -34,31 +32,8 @@ export class FirebaseDatabaseService implements DatabaseService{
 
 // -- USERS --
 
-  loadFireUsers(){
-      this.getFireUsers().snapshotChanges().subscribe(actions => {
-          actions.forEach(action => {
-              // console.log(action.payload.val());
-              this.usersObs = this.getFireUserByKey(action.key).valueChanges();
-
-              this.usersObs.subscribe(res => {
-                  const $key = action.key;
-                  if(!this.inArray(this.users, $key)) {
-                      this.users.push({key: $key, ...res});
-                  }
-              });
-          });
-      });
-  }
-
-  getFireUsers(): AngularFireList<any[]>{
-      return this.db.list('users');
-  }
-  getFireUserByKey(key): AngularFireObject<any>{
-      return this.db.object('users/' + key);
-  }
-
-  getUsers(): any[] {
-      return this.users;
+  getUsers(): any {
+      return this.db.list('users').snapshotChanges();
   }
 
   addUserWithKey(user: User, key: string) {

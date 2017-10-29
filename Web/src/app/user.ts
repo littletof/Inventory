@@ -17,4 +17,9 @@ export class User {
     static fromJson({name, email_address, role, pres_lend, past_lend}): User {
         return new User(name, email_address, role, pres_lend, past_lend);
     }
+
+    static fromJSON(snap){
+      let js = snap.payload.val();
+      return {key: snap.payload.key, ...js};
+    }
 }
