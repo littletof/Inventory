@@ -70,9 +70,7 @@ export class FirebaseDatabaseService implements DatabaseService{
   //-- ^^ works ^^
 
 
-  addUser(): void {
-    this.db.list('users').push(new User("insertTest", "email",  13));
-  }
+
 
   addUserWithKey(user: User, key: string) {
     this.db.object(`users/${key}`).set(user);
