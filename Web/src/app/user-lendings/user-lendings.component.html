@@ -5,11 +5,11 @@
 
 
 <mat-list>
-  <mat-list-item *ngFor="let lend of lendings | async">
-    <h4 matLine>{{lend.key}}</h4>
-    <p matLine class="demo-2"> <b>Start date:</b> {{lend.start_date.toLocaleDateString()}}  <b>End date:</b> {{lend.end_date.toLocaleDateString()}} <b>Number of devices:</b> {{lend.device_number}}</p>
-    <button mat-raised-button color="accent" (click)="openLendDetailDialog(lend)">Details</button>
-    <button mat-raised-button color="accent" (click)="returnItem()">Return</button>
+  <mat-list-item *ngFor="let lending of lendings | async; let device of lending.device |async">
+    <h4 matLine>Device id: {{lending.lend.device_id}} {{lending.lend.key}}</h4>
+    <p matLine class="demo-2"> <b>Start date:</b> {{lending.lend.start_date.toLocaleDateString()}}  <b>End date:</b> {{lending.lend.end_date.toLocaleDateString()}} <b>Number of devices:</b> {{lending.lend.device_number}}</p>
+    <button mat-raised-button color="accent" (click)="openLendDetailDialog(lending.lend)">Details</button>
+    <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->
   </mat-list-item>
 </mat-list>
 
