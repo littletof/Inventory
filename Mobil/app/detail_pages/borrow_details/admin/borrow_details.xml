@@ -1,0 +1,23 @@
+<Page loaded="loaded">
+	<ActionBar title="Borrow Details">
+	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
+	</ActionBar>
+	<ScrollView>
+		<StackLayout orientation="vertical">
+			<StackLayout orientation="horizontal" verticalalignment="center">
+					<Image width="500px" height="500px" src="App_Resources\Android\drawable-xxxhdpi/icon.png"/>
+					<StackLayout orientation="vertical" verticalalignment="center" alignment="right">
+						<Label id="itemNameLabel" text="Name of Item"/>
+						<Label id="borrowStateLabel" text="State of Borrow"/>
+					</StackLayout>
+			</StackLayout>
+			<Label text="Date of Borrow:"/>
+			<Label id="startDateLabel" text="Date of Borrow"/>
+			<Label text="Deadline:"/>
+			<Label id="deadlineLabel" text="Deadline"/>
+			<Label text="Comment:"/>
+			<Label id="commentLabel" text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllllllllllllloooooooooooooooooooooooooooooooooooooonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnngggggggggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssssssssssssssssssssssssssssssssssss tttttttttttttttttttttttteeeeeeeeeeeeeeeeeexxxxxxxxxxxxxxxxxxxxxxxxxxtttttttttttttttttttttttttt"/>
+			<Button id="closeButton" width="500px" text="Close Borrow" tap="closeBorrow"/>
+		</StackLayout>
+	</ScrollView>
+</Page>

@@ -1,0 +1,21 @@
+<Page loaded="loaded">
+	<ActionBar title="Borrow Details">
+	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
+	</ActionBar>
+	<StackLayout orientation="vertical">
+		<StackLayout orientation="horizontal">
+			<Image width="500px" height="500px" src="App_Resources\Android\drawable-xxxhdpi/icon.png"/>
+			<StackLayout orientation="vertical">
+				<Label id="nameLabel" text="Name"/>
+				<StackLayout orientation="horizontal">
+					<Label text="Past Borrows:"/>
+					<Label id="pastBorrowCounter" text="1"/>
+					<Label text="Present Borrows"/>
+					<Label id="presentBorrowCounter" text="5"/>
+				</StackLayout>
+			</StackLayout>
+		</StackLayout>
+		<Label text="Email address"/>
+		<Label id="emailLabel" text="emailAddress"/>
+	</StackLayout>
+</Page>

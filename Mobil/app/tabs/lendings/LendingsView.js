@@ -1,6 +1,7 @@
 var dialogsModule = require("ui/dialogs");
 var observableModule = require("data/observable")
 var ObservableArray = require("data/observable-array").ObservableArray;
+var frameModule = require("ui/frame");
 
 var page;
 
@@ -21,5 +22,5 @@ exports.onLoaded = function onLoaded(args) {
 
 exports.onTap = function (args) {
     var index = args.index;
-    alert("Navigating to details is under construction :(");
+    frameModule.topmost().navigate("detail_pages/borrow_details/admin/borrow_details");
 };
