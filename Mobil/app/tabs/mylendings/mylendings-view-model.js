@@ -22,16 +22,16 @@ function MyLendingsViewModel(items) {
           );
         var onChildEvent = function(result) {
             var matches = [];
-            //console.log("user adatai:"+JSON.stringify(result.value));
+            console.log("user adatai:"+JSON.stringify(result.value));
             var item=result.value;
             if (result.type === "ChildAdded") {
                 if(result.value.user_id==currentUserId){
 
                     var findDeviceName = function(device) {
                         for(let uid in device.value){
-                            if(device.value[uid].id==result.value.device_id){
+                            if(uid == result.value.device_id){
                       
-                        var a = new Date(item.start_date * 1000);
+                        var a = new Date(item.start_date);
                         var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
                         //var year0 = a.getFullYear();
                         var month0 = months[a.getMonth()];
@@ -39,12 +39,12 @@ function MyLendingsViewModel(items) {
                         var hour0 = a.getHours();
                         var min0 = a.getMinutes();
     
-                        var b = new Date(item.end_date * 1000);
+                        var b = new Date(item.end_date);
                         //var year1 = a.getFullYear();
-                        var month1 = months[a.getMonth()];
-                        var date1 = a.getDate();
-                        var hour1 = a.getHours();
-                        var min1 = a.getMinutes();
+                        var month1 = months[b.getMonth()];
+                        var date1 = b.getDate();
+                        var hour1 = b.getHours();
+                        var min1 = b.getMinutes();
     
     
     
