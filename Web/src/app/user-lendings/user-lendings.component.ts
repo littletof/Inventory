@@ -6,7 +6,8 @@ import { MatDialog} from "@angular/material";
 import {LendDetailDialogComponent} from "../lend-detail-dialog/lend-detail-dialog.component";
 import {Observable} from "rxjs/Observable";
 import {FirebaseListObservable} from "angularfire2/database-deprecated";
-import {AngularFireList} from "angularfire2/database";
+import {AngularFireList, AngularFireObject} from "angularfire2/database";
+import {Device} from "../device";
 
 @Component({
   selector: 'app-user-lendings',
@@ -20,13 +21,24 @@ export class UserLendingsComponent implements OnInit {
 
   constructor(public db: DatabaseService, public auth: AuthService, public dialog: MatDialog) {
 
+
+
     this.lendings = this.db.getLendingsOfUser(this.auth.userDetails.uid).map(changes => {
         return changes.map(c => {
             //console.log(LendEntry.fromJSON(c.payload.val()).getJSON());
-            return LendEntry.fromtoJSON(c);
+            let device:AngularFireObject<Device> = this.db.getDevice(c.payload.val().device_id).map(chang => {
+                return chang.map(myc => {
+                    return Device.fromJSON(myc);
+                });
+            });
+
+
+            let ret = {lend: LendEntry.fromtoJSON(c), device: {...device}};
+            console.log(ret);
+            return ret;
         });
     });
-    ;
+
 
     /*
 

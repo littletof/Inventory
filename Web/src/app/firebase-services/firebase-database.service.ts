@@ -61,6 +61,10 @@ export class FirebaseDatabaseService implements DatabaseService{
       //return this.devices;
   }
 
+  getDevice(key): any{
+        return this.db.object('devices/' + key).snapshotChanges();
+  }
+
   removeDevice(key): void {
       this.db.object('devices/' + key).remove();
   }
