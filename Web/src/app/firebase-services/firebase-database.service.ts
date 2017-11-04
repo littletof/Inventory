@@ -21,9 +21,11 @@ export class FirebaseDatabaseService implements DatabaseService{
   devices: any[] = [];
   devicesObs: Observable<any[]>;
 
+    access_db = null;
 
-
-  constructor(private db: AngularFireDatabase) { }
+  constructor(private db: AngularFireDatabase) {
+      this.access_db = db;
+  }
 
     tryDev($key){
       this.db.object('users/'+ $key +'/present_lendings').set(['elso', 'masodik']);

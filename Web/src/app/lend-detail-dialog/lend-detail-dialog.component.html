@@ -1,14 +1,14 @@
 <h4 mat-card-title>Lend details</h4>
 <mat-dialog-content style="padding-bottom: 2em;">
   <h5>Devices:</h5>
-  <p class="indent"> {{data.device_number}} x {{data.device_id}}</p>
+  <p class="indent"> {{data.lend.device_number}} x {{data.device.name}}</p>
   <h5>Date:</h5>
   <div class="indent">
-    <h5 class="inline">Start date:</h5>  {{data.start_date.toLocaleDateString()}} <br>
-    <h5 class="inline">End date:</h5> {{data.end_date.toLocaleDateString()}}
+    <h5 class="inline">Start date:</h5>  {{data.lend.start_date.toLocaleDateString()}} <br>
+    <h5 class="inline">End date:</h5> {{data.lend.end_date.toLocaleDateString()}}
   </div>
   <h5>Comment:</h5>
-  <p class="indent">{{data.comment}}</p>
+  <p class="indent">{{data.lend.comment}}</p>
 
 
 </mat-dialog-content>

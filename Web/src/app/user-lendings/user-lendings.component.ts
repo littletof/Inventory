@@ -8,6 +8,7 @@ import {Observable} from "rxjs/Observable";
 import {FirebaseListObservable} from "angularfire2/database-deprecated";
 import {AngularFireList, AngularFireObject} from "angularfire2/database";
 import {Device} from "../device";
+import * as firebase from "firebase";
 
 @Component({
   selector: 'app-user-lendings',
@@ -23,32 +24,23 @@ export class UserLendingsComponent implements OnInit {
 
 
 
-    this.lendings = this.db.getLendingsOfUser(this.auth.userDetails.uid).map(changes => {
-        return changes.map(c => {
-            //console.log(LendEntry.fromJSON(c.payload.val()).getJSON());
-            let device:AngularFireObject<Device> = this.db.getDevice(c.payload.val().device_id).map(chang => {
-                return chang.map(myc => {
-                    return Device.fromJSON(myc);
+
+
+    this.lendings = this.db.getLendingsOfUser(this.auth.userDetails.uid)
+        .map(changes => {
+            return changes.map(c => {
+                let ret = {lend: LendEntry.fromtoJSON(c), device: {}};
+
+                //kölcsönzés eszközének keresése
+                this.db.getDevice(ret.lend.device_id).subscribe(devices => {
+                    ret.device = devices.payload.val();
                 });
+
+                // console.log(ret);
+                return ret;
             });
-
-
-            let ret = {lend: LendEntry.fromtoJSON(c), device: {...device}};
-            console.log(ret);
-            return ret;
-        });
-    });
-
-
-    /*
-
-    .map(value => {
-        value.forEach(lend => {
-            return new LendEntry("", "", new Date(0), new Date(0), 3, "me");
-        });
-    });
-
-     */
+        })
+    ;
 
   }
 
