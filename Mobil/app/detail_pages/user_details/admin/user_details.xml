@@ -1,0 +1,27 @@
+<Page loaded="loaded">
+    <Page.actionBar>
+         <ActionBar title="User Details">
+             <NavigationButton text="ios back" android.systemIcon = "ic_menu_back" tap="onNavBtnTap"/>
+             <ActionBar.actionItems>
+                <ActionItem ios.systemIcon="16" android.systemIcon = "ic_menu_delete" tap="onDelBtnTap"/>
+            </ActionBar.actionItems>
+         </ActionBar>
+    </Page.actionBar>	
+	<StackLayout orientation="vertical">
+		<StackLayout orientation="horizontal">
+			<Image width="500px" height="500px" src="App_Resources\Android\drawable-xxxhdpi/icon.png"/>
+			<StackLayout orientation="vertical">
+				<Label id="nameLabel" text="Name"/>
+				<StackLayout orientation="horizontal">
+					<Label text="Past Borrows:"/>
+					<Label id="pastBorrowCounter" text="1"/>
+					<Label text="Present Borrows"/>
+					<Label id="presentBorrowCounter" text="5"/>
+				</StackLayout>
+			</StackLayout>
+		</StackLayout>
+		<Label text="Email address"/>
+		<Label id="emailLabel" text="emailAddress"/>
+		<Button id="showBorrowsButton" width="500px" text="Show User's Borrows" tap="showBorrows"/>
+	</StackLayout>
+</Page>

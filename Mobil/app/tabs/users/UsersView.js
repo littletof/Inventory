@@ -1,6 +1,7 @@
 var dialogsModule = require("ui/dialogs");
 var observableModule = require("data/observable")
 var ObservableArray = require("data/observable-array").ObservableArray;
+var frameModule = require("ui/frame");
 
 var page;
 
@@ -20,5 +21,5 @@ exports.onLoaded = function(args) {
 };
 exports.onTap = function (args) {
     var index = args.index;
-    alert("Navigating to details is under construction :(");
+    frameModule.topmost().navigate("detail_pages/user_details/admin/user_details");
 };

@@ -1,0 +1,29 @@
+ActionBar {
+    background-color:  #3C5AFD;
+    color: white;
+}
+
+StackLayout{
+	padding-top: 5;
+	padding-bottom: 25;
+	padding-left: 5;
+}
+
+Label{
+	font-size: 10;
+	padding: 6;
+	white-space: normal;
+}
+
+#descriptionLabel{
+	font-size: 20;
+	padding-left: 100;
+}
+
+#deviceNameLabel{
+	font-size: 30;
+}
+
+
+
+

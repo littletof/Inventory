@@ -1,8 +1,17 @@
-<!--
-This is the component view that represents the 'Lendings' tab.
-Feel free to customize layouts and components to change how the tab view looks.
--->
-<GridLayout class="page-content" loaded="onLoaded">
-    <Label class="page-icon fa" text="&#xf015;"></Label>
-    <Label class="page-placeholder" text="<!-- Page content goes here -->"></Label>
-</GridLayout>
+<Page loaded="onLoaded">
+        <ListView items="{{ lendings }}" id="lendings" itemTap="onTap">
+            <ListView.itemTemplate>
+                <GridLayout columns="auto, *" rows="auto">
+                    <Image src="res://logo" stretch="none"  width="72" height="72"/>
+                    <StackLayout col="1">
+                        <Label text="{{ deviceName, deviceName }}" style.fontSize="20"/>
+                        <Label text="{{ interval, interval }}" style.fontSize="14"/>
+                        <Label text="{{ quantity, quantity }}" style.fontSize="14"/>                        
+                        </StackLayout>
+                </GridLayout>             
+            </ListView.itemTemplate>
+        </ListView>
+</Page>
+
+
+

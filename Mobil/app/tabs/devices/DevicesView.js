@@ -1,6 +1,7 @@
 var DevicesViewModel = require("./devices-view-model");
 var observableModule = require("data/observable")
 var ObservableArray = require("data/observable-array").ObservableArray;
+var frameModule = require("ui/frame");
 
 var deviceList = new DevicesViewModel([]);
 
@@ -22,6 +23,7 @@ function onLoaded(args) {
 
 exports.onDetails=function(args){
     console.log(args.object.device);
+    frameModule.topmost().navigate("detail_pages/device_details/admin/device_details");
 }
 
 

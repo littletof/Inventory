@@ -1,0 +1,18 @@
+<Page loaded="loaded">
+    <Page.actionBar>
+         <ActionBar title="Device Details">
+             <NavigationButton text="ios back" android.systemIcon = "ic_menu_back" tap="onNavBtnTap"/>
+         </ActionBar>
+    </Page.actionBar>
+	<ScrollView>
+		<StackLayout orientation="vertical">
+			<StackLayout orientation="horizontal">
+				<Image width="500px" height="500px" src="App_Resources\Android\drawable-xxxhdpi/icon.png"/>
+				<Label id="deviceNameLabel" text="Device Name"/>
+			</StackLayout>
+			<Label text="Description"/>
+			<Label id="descriptionLabel" text="Device Description"/>
+		</StackLayout>
+	</ScrollView>
+	
+</Page>

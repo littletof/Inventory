@@ -1,0 +1,20 @@
+<Page loaded="loaded">
+    <Page.actionBar>
+         <ActionBar title="Edit Device Details">
+             <ActionBar.actionItems>
+                <ActionItem ios.systemIcon="0" android.systemIcon = "ic_menu_done" tap="onDoneBtnTap"/>
+                <ActionItem ios.systemIcon="1" android.systemIcon = "ic_menu_cancel" tap="onCancelBtnTap"/>
+            </ActionBar.actionItems>
+         </ActionBar>
+    </Page.actionBar>
+	<ScrollView>
+		<StackLayout orientation="vertical">
+			<StackLayout orientation="horizontal">
+				<Image width="500px" height="500px" src="~/images/placeholder.png"/>
+				<TextField id="deviceNameTF" text="Device Name"/>
+			</StackLayout>
+			<Label text="Description"/>
+			<TextField id="descriptionTF" text="Device Description"/>
+		</StackLayout>
+	</ScrollView>
+</Page>
