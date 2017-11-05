@@ -35,9 +35,12 @@ export class DeviceEditDialogComponent implements OnInit {
         let value = event.value;
 
         // Add our tag
-        if ((value || '').trim()) {
-            this.tags.push({ name: value.trim() });
-        }
+        value.split(String.fromCharCode(SPACE)).forEach(val => {
+            if ((val || '').trim()) {
+                this.tags.push({ name: val.trim() });
+            }
+        });
+
 
         // Reset the input value
         if (input) {
