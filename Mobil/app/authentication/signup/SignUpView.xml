@@ -6,6 +6,6 @@
         <TextField id="password" text="{{password}}" hint="Password" secure="true"/>
         <TextField id="retypedPassword" hint="Re-type password" secure="true"/>
 
-        <Button text="Register" tap="register"/>
+        <Button text="Register" tap="register" />
     </StackLayout>
 </Page>

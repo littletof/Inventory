@@ -17,7 +17,7 @@
 			<Label id="deadlineLabel" text="Deadline"/>
 			<Label text="Comment:"/>
 			<Label id="commentLabel" text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllllllllllllloooooooooooooooooooooooooooooooooooooonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnngggggggggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssssssssssssssssssssssssssssssssssss tttttttttttttttttttttttteeeeeeeeeeeeeeeeeexxxxxxxxxxxxxxxxxxxxxxxxxxtttttttttttttttttttttttttt"/>
-			<Button id="cancelButton" width="500px" text="Cancel Reservation" tap="cancelReservation"/>
+			<Button id="cancelButton" width="500px" text="Cancel Reservation" tap="cancelReservation" />
 		</StackLayout>
 	</ScrollView>
 </Page>

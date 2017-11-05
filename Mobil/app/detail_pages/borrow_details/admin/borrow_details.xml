@@ -17,7 +17,7 @@
 			<Label id="deadlineLabel" text="Deadline"/>
 			<Label text="Comment:"/>
 			<Label id="commentLabel" text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllllllllllllloooooooooooooooooooooooooooooooooooooonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnngggggggggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssssssssssssssssssssssssssssssssssss tttttttttttttttttttttttteeeeeeeeeeeeeeeeeexxxxxxxxxxxxxxxxxxxxxxxxxxtttttttttttttttttttttttttt"/>
-			<Button id="closeButton" width="500px" text="Close Borrow" tap="closeBorrow"/>
+			<Button id="closeButton" width="500px" text="Close Borrow" tap="closeBorrow" />
 		</StackLayout>
 	</ScrollView>
 </Page>

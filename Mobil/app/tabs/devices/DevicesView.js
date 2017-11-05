@@ -26,5 +26,10 @@ exports.onDetails=function(args){
     frameModule.topmost().navigate("detail_pages/device_details/admin/device_details");
 }
 
+exports.onBorrow=function(args){
+    console.log(args.object.device);
+    
+}
+
 
 exports.onLoaded = onLoaded;

@@ -4,7 +4,7 @@
         autocapitalizationType="none"/>
         <TextField id="password" text="{{password}}" hint="Password" secure="true"/>
 
-        <Button text="Login" tap="login"/>
+        <Button text="Login" tap="login" />
         
         <Label class="link" text="Continue as a guest!" tap="continueAsAGuest"/>
 
