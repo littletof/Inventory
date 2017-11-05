@@ -4,7 +4,7 @@
                 <GridLayout columns="auto, *" rows="auto">
                     <Image src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png" stretch="none"  width="72" height="72"/>
                     <StackLayout col="1">
-                        <Label text="{{ deviceName, deviceName }}" class="name" style.fontSize="20"/>
+                        <Label text="{{ deviceName, deviceName }}" class="name" />
                         <Label text="{{ interval, interval }}" style.fontSize="14"/>
                         <Label text="{{ quantity, quantity }}" style.fontSize="14"/>                        
                         </StackLayout>

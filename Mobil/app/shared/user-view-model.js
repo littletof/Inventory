@@ -73,6 +73,7 @@ function User(info) {
               }
           );
     };
+
     
     return viewModel;
 }

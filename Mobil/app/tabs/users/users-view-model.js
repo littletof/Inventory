@@ -68,6 +68,8 @@ function Users(items) {
         }
     };
 
+    
+
     return viewModel;
 }
 

@@ -1,6 +1,8 @@
 <Page loaded="loaded">
 <Page.actionBar>
-      <ActionBar class="auth-actionbar" title="Inventory"/>
+      <ActionBar class="action-bar" >
+        <Label text="Sign Up" class="action-bar-title" />
+      </ActionBar>
   </Page.actionBar>
     <StackLayout orientation="vertical">
         <TextField id="name" text="{{name}}" hint="Name"/>
