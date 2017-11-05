@@ -1,5 +1,6 @@
 <Page loaded="loaded">
-	<ActionBar class="action-bar" title="Borrow Details" style>
+	<ActionBar class="action-bar">
+	  <Label text="Borrow Details" class="action-bar-title" />
 	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
 	</ActionBar>
 	<ScrollView>
