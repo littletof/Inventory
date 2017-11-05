@@ -1,10 +1,13 @@
 <Page loaded="loaded">
+<Page.actionBar>
+      <ActionBar class="auth-actionbar" title="Inventory"/>
+  </Page.actionBar>
     <StackLayout orientation="vertical">
         <TextField id="email" text="{{email}}" hint="Email Address" keyboardType="email" autocorrect="false"
         autocapitalizationType="none"/>
         <TextField id="password" text="{{password}}" hint="Password" secure="true"/>
 
-        <Button text="Login" tap="login"/>
+        <Button text="Login" tap="login" />
         
         <Label class="link" text="Continue as a guest!" tap="continueAsAGuest"/>
 

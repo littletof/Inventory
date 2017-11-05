@@ -1,5 +1,6 @@
 <Page loaded="loaded">
-	<ActionBar title="Borrow Details">
+	<ActionBar class="action-bar">
+		<Label text="Borrow Details" class="action-bar-title" />
 	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
 	</ActionBar>
 	<ScrollView>
@@ -17,7 +18,7 @@
 			<Label id="deadlineLabel" text="Deadline"/>
 			<Label text="Comment:"/>
 			<Label id="commentLabel" text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllllllllllllloooooooooooooooooooooooooooooooooooooonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnngggggggggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssssssssssssssssssssssssssssssssssss tttttttttttttttttttttttteeeeeeeeeeeeeeeeeexxxxxxxxxxxxxxxxxxxxxxxxxxtttttttttttttttttttttttttt"/>
-			<Button id="closeButton" width="500px" text="Close Borrow" tap="closeBorrow"/>
+			<Button id="closeButton" width="500px" text="Close Borrow" tap="closeBorrow" />
 		</StackLayout>
 	</ScrollView>
 </Page>

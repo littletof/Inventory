@@ -3,11 +3,14 @@
     <ListView id="deviceList" items="{{ deviceList }}"  separatorColor="lightskyblue">
             <ListView.itemTemplate>
                 <GridLayout columns="auto,*" rows="140">
-                    <Image device="{{ id, id }}" class="listItem" src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png" verticalAlignment="stretch" width="100" />
-                    <StackLayout class="listItem" col="1">
-                        <Label class="deviceName" text="{{ name, name }}" textWrap="true"  />
+                    <Image device="{{ id, id }}"  src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png" verticalAlignment="stretch" width="100" />
+                    <StackLayout  col="1">
+                        <Label class="name" text="{{ name, name }}" textWrap="true"  />
                         <Label text="{{ description, description }}"   />
-                        <Button  text="Details" device="{{ id, id }}" tap="onDetails" />
+                        <GridLayout columns="auto,*" rows="60">
+                            <Button  text="Details" device="{{ id, id }}" col="0" tap="onDetails" />
+                            <Button  text="Borrow" device="{{ id, id }}" col="1" tap="onBorrow" />
+                        </GridLayout>
                     </StackLayout>
                 </GridLayout>
             </ListView.itemTemplate>
