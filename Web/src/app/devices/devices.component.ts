@@ -3,7 +3,7 @@ import {Observable} from "rxjs/Observable";
 import {AuthService} from "../backend-services/auth.service";
 import {DatabaseService} from "../backend-services/database.service";
 import {MatDialog, MatSnackBar} from "@angular/material";
-import {DeviceInfoComponent} from "../device-info/device-info.component";
+import {DeviceInfoDialogComponent} from "../device-info-dialog/device-info-dialog.component";
 import {LendDeviceDialogComponent} from "../lend-device-dialog/lend-device-dialog.component";
 import {AngularFireList} from "angularfire2/database";
 import {Device} from "../device";
@@ -37,7 +37,7 @@ export class DevicesComponent implements OnInit {
 
 
     openDeviceInfoDialog(data) {
-        let dialogref = this.dialog.open(DeviceInfoComponent, {
+        let dialogref = this.dialog.open(DeviceInfoDialogComponent, {
             data,
             width: '50%'
         });

@@ -34,10 +34,11 @@ import {AuthGuardService} from "./backend-services/auth-guard.service";
 import {RouterModule} from "@angular/router";
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
-import { DeviceInfoComponent } from './device-info/device-info.component';
+import { DeviceInfoDialogComponent } from './device-info-dialog/device-info-dialog.component';
 import { LendDeviceDialogComponent } from './lend-device-dialog/lend-device-dialog.component';
 import { UserLendingsComponent } from './user-lendings/user-lendings.component';
 import { LendDetailDialogComponent } from './lend-detail-dialog/lend-detail-dialog.component';
+import { DeviceEditDialogComponent } from './device-edit-dialog/device-edit-dialog.component';
 
 ;
 
@@ -51,13 +52,13 @@ import { LendDetailDialogComponent } from './lend-detail-dialog/lend-detail-dial
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    DeviceInfoComponent,
+    DeviceInfoDialogComponent,
     LendDeviceDialogComponent,
     UserLendingsComponent,
     LendDetailDialogComponent
   ],
   entryComponents: [
-    DeviceInfoComponent,
+    DeviceInfoDialogComponent,
       LendDeviceDialogComponent,
       LendDetailDialogComponent
   ],
