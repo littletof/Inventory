@@ -7,6 +7,7 @@ import {DeviceInfoDialogComponent} from "../device-info-dialog/device-info-dialo
 import {LendDeviceDialogComponent} from "../lend-device-dialog/lend-device-dialog.component";
 import {AngularFireList} from "angularfire2/database";
 import {Device} from "../device";
+import {DeviceEditDialogComponent} from "../device-edit-dialog/device-edit-dialog.component";
 
 @Component({
   selector: 'app-devices',
@@ -34,6 +35,16 @@ export class DevicesComponent implements OnInit {
 
   ngOnInit() { }
 
+
+    openDeviceEditDialog(data = null){
+        let dialogref = this.dialog.open(DeviceEditDialogComponent, {
+            data,
+            width: '50%'
+        });
+        dialogref.afterClosed().subscribe(value => {
+
+        });
+    }
 
 
     openDeviceInfoDialog(data) {

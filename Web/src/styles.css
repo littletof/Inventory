@@ -26,3 +26,7 @@ body{
 .link {
   cursor: pointer;
 }
+
+.dialog-title{
+  margin-top: 0px;
+}

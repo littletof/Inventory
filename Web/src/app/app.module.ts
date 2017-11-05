@@ -59,7 +59,8 @@ import { DeviceEditDialogComponent } from './device-edit-dialog/device-edit-dial
     DeviceEditDialogComponent
   ],
   entryComponents: [
-    DeviceInfoDialogComponent,
+      DeviceInfoDialogComponent,
+      DeviceEditDialogComponent,
       LendDeviceDialogComponent,
       LendDetailDialogComponent
   ],
