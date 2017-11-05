@@ -1,0 +1,22 @@
+.input-label{
+    margin-bottom: 5px;
+}
+
+mat-dialog-content{
+    margin-top: 10px;
+}
+
+mat-form-field.devicename{
+    width: 300px;
+}
+
+mat-form-field.quantity{
+    width: 110px;
+}
+
+mat-form-field.tag-chip{
+    width: 400px;
+}
+mat-form-field.tag-chip input {
+    width: 100%;
+}

@@ -1,10 +1,44 @@
 <h2 mat-card-title class="dialog-title"><span *ngIf="data">Edit device</span><span *ngIf="!data">Add device</span></h2>
 <mat-divider></mat-divider>
-<h4>Description:</h4>
 
-<div class="row">
-  <mat-dialog-content class="flex">Desc...</mat-dialog-content>
-</div>
+
+
+<mat-dialog-content>
+    <mat-form-field class="devicename">
+        <input matInput type="text" required placeholder="Name">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="quantity">
+        <input matInput type="number" required placeholder="Quantity">
+        <span matSuffix>pcs.</span>
+    </mat-form-field>
+
+
+    <br>
+
+
+    <mat-form-field class="tag-chip">
+        <mat-chip-list #chipList>
+            <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                      [removable]="removable" (remove)="remove(tag)" color="accent">
+                {{tag.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="Tags"
+                   [matChipInputFor]="chipList"
+                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                   [matChipInputAddOnBlur]="addOnBlur"
+                   (matChipInputTokenEnd)="add($event)" />
+        </mat-chip-list>
+    </mat-form-field>
+
+
+
+
+
+</mat-dialog-content>
+
+
 
 
 <mat-dialog-actions>
