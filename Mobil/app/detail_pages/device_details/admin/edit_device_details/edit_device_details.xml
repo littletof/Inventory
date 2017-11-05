@@ -1,6 +1,6 @@
 <Page loaded="loaded">
     <Page.actionBar>
-         <ActionBar title="Edit Device Details">
+         <ActionBar title="Edit Device Details" class="action-bar">
              <ActionBar.actionItems>
                 <ActionItem ios.systemIcon="0" android.systemIcon = "ic_menu_done" tap="onDoneBtnTap"/>
                 <ActionItem ios.systemIcon="1" android.systemIcon = "ic_menu_cancel" tap="onCancelBtnTap"/>

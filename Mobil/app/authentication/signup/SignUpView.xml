@@ -1,4 +1,7 @@
 <Page loaded="loaded">
+<Page.actionBar>
+      <ActionBar class="auth-actionbar" title="Inventory"/>
+  </Page.actionBar>
     <StackLayout orientation="vertical">
         <TextField id="name" text="{{name}}" hint="Name"/>
         <TextField id="email" text="{{email}}" hint="Email Address" keyboardType="email" autocorrect="false"

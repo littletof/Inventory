@@ -1,6 +1,6 @@
 <Page loaded="loaded">
     <Page.actionBar>
-         <ActionBar title="Device Details">
+         <ActionBar title="Device Details" class="action-bar">
              <NavigationButton text="ios back" android.systemIcon = "ic_menu_back" tap="onNavBtnTap"/>
          </ActionBar>
     </Page.actionBar>

@@ -2,7 +2,7 @@
         <ListView items="{{ users }}" id="users" itemTap="onTap">
             <ListView.itemTemplate>
                 <GridLayout columns="auto, *" rows="auto">
-                    <Image src="res://logo" stretch="none"  width="72" height="72"/>
+                    <!--<Image src="res://logo" stretch="none"  width="72" height="72"/>-->
                     <StackLayout col="1">
                         <Label text="{{ name }}" class="name" style.fontSize="20"/>
                         <Label text="{{ email }}" style.fontSize="14"/>
