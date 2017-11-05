@@ -74,43 +74,6 @@ function User(info) {
           );
     };
 
-    /*viewModel.navigate = function(){
-        var currentUserId;
-
-        firebase.getCurrentUser().then(
-            function (result) {
-              currentUserId=result.uid;
-            },
-            function (errorMessage) {
-              console.log(errorMessage);
-            }
-          );
-
-        var getRole = function(user) {
-            for(let uid in user.value){
-                if(uid == currentUserId){
-                    
-                    if(user.value[currentUserId].role=="user"){
-                        return "user";                            
-                    } else{
-                        return "admin";                         
-                    }
-           
-                }
-            }
-        }
-
-        firebase.query(
-            getRole,
-            "/users",
-            {
-                singleEvent: true,
-                orderBy: {
-                    type: firebase.QueryOrderByType.CHILD,
-                    value: 'name'
-                }
-        });
-};*/
     
     return viewModel;
 }
