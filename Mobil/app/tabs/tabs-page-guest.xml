@@ -1,9 +1,7 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="page"
   xmlns:devices="/tabs/devices"
-  xmlns:mylendings="/tabs/mylendings"
-  xmlns:users="/tabs/users"
-  xmlns:lendings="/tabs/lendings"
-  xmlns:statistics="/tabs/statistics">
+  xmlns:mylendings="/tabs/mylendings">
+
     <Page.actionBar>
         <ActionBar class="action-bar">
           <Label text="{{ title }}" class="action-bar-title" />
@@ -35,35 +33,11 @@
         </TabViewItem>
         -->
 
-        <TabViewItem title="Devices">
+        <TabViewItem title="Devices" >
           <TabViewItem.view>
-             <devices:DevicesView />
+             <devices:DevicesView/>
           </TabViewItem.view>
         </TabViewItem> 
-
-        <TabViewItem title="My Lendings">
-          <TabViewItem.view>
-             <mylendings:MyLendingsView/>
-          </TabViewItem.view>
-        </TabViewItem>  
-
-        <TabViewItem title="Users">
-          <TabViewItem.view>
-             <users:UsersView/>
-          </TabViewItem.view>
-        </TabViewItem> 
-
-        <TabViewItem title="Lendings">
-          <TabViewItem.view>
-             <lendings:LendingsView/>
-          </TabViewItem.view>
-        </TabViewItem>   
-
-        <TabViewItem title="Statistics">
-          <TabViewItem.view>
-             <statistics:StatisticsView/>
-          </TabViewItem.view>
-        </TabViewItem>     
 
       </TabView.items>
     </TabView> 

@@ -1,6 +1,6 @@
 <Page loaded="onLoaded" >
 <ScrollView>
-    <ListView id="deviceList" items="{{ deviceList }}"  separatorColor="lightskyblue">
+    <ListView id="deviceList" items="{{ deviceList }}" >
             <ListView.itemTemplate>
                 <GridLayout columns="auto,*" rows="140">
                     <Image device="{{ id, id }}"  src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png" verticalAlignment="stretch" width="100" />

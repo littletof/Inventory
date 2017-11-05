@@ -20,7 +20,7 @@ exports.register = function () {
                 dialogsModule
                     .alert("Your account was successfully created.")
                     .then(function() {
-                        frameModule.topmost().navigate("tabs/tabs-page");
+                        frameModule.topmost().navigate("tabs/tabs-page-user");
                     });
             }).catch(function(error) {
                 dialogsModule.alert({
