@@ -10,3 +10,15 @@
   font-size: 0.7em;
   margin-right: 1em;
 }
+
+.top-bar{
+  /*position: fixed;*/
+  width: 100%;
+  z-index: 99;
+  background-color: white;
+}
+
+.content{
+  padding-left: 3em; padding-right: 3em;
+  margin-top: 0em;
+}
