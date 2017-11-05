@@ -8,6 +8,14 @@
 <mat-dialog-content class="flex">{{data.description}}</mat-dialog-content>
 </div>
 
+<div>
+  <mat-chip-list>
+    <mat-chip *ngFor="let tag of displayTags" selectable="false">{{tag}}</mat-chip>
+  </mat-chip-list>
+
+
+</div>
+
 
 <mat-dialog-actions>
   <button mat-button (click)="closeDialog()">Close</button>
