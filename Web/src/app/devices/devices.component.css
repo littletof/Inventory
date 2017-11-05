@@ -9,3 +9,9 @@
 .spacer {
     flex: 1 1 auto;
 }
+
+
+.new-device-btn{
+    float: right;
+    margin: 20px;
+}
