@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 
 
 
-import {AngularFireDatabase, AngularFireList, AngularFireObject, snapshotChanges} from "angularfire2/database";
+import {AngularFireDatabase} from "angularfire2/database";
 import { Observable } from 'rxjs/Observable';
-
 import {User} from "../user";
 import {Device} from "../device";
 import {DatabaseService} from "../backend-services/database.service";
-import {FirebaseListObservable, FirebaseObjectObservable} from "angularfire2/database-deprecated";
 import {LendEntry} from "../lend-entry";
+
+import * as _ from "lodash";
 
 
 @Injectable()
@@ -27,9 +27,7 @@ export class FirebaseDatabaseService implements DatabaseService{
       this.access_db = db;
   }
 
-    tryDev($key){
-      this.db.object('users/'+ $key +'/present_lendings').set(['elso', 'masodik']);
-    }
+  tryDev(){}
 
 
 // -- USERS --
@@ -61,6 +59,15 @@ export class FirebaseDatabaseService implements DatabaseService{
   getDevices(): any{
       return this.db.list<Device>('devices').snapshotChanges();
       //return this.devices;
+  }
+
+
+  addDevice(device): any{
+        this.db.list('devices').push(device);
+  }
+
+  editDevice(): any{
+
   }
 
   getDevice(key): any{

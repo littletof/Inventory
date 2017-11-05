@@ -41,6 +41,8 @@ import { UserLendingsComponent } from './user-lendings/user-lendings.component';
 import { LendDetailDialogComponent } from './lend-detail-dialog/lend-detail-dialog.component';
 import { DeviceEditDialogComponent } from './device-edit-dialog/device-edit-dialog.component';
 
+
+
 ;
 
 
@@ -96,6 +98,7 @@ import { DeviceEditDialogComponent } from './device-edit-dialog/device-edit-dial
   providers: [{provide: DatabaseService, useClass: FirebaseDatabaseService},
       { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService,
       {provide: MAT_DATE_LOCALE, useValue: 'hu-HU'}],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

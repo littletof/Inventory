@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatChipInputEvent, MatDialogRef} from "@angular/material";
 import { SPACE} from "@angular/cdk/keycodes";
+import {Device} from "../device";
+import {DatabaseService} from "../backend-services/database.service";
 
 @Component({
   selector: 'app-device-edit-dialog',
@@ -10,7 +12,13 @@ import { SPACE} from "@angular/cdk/keycodes";
 export class DeviceEditDialogComponent implements OnInit {
     tags = [];
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceEditDialogComponent>) {}
+    device_name: string;
+    device_quantity: number;
+    device_description: string;
+    device_tags = {};
+
+
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceEditDialogComponent>, public db: DatabaseService) {}
 
     ngOnInit() {
     }
@@ -19,6 +27,20 @@ export class DeviceEditDialogComponent implements OnInit {
         this.dialogRef.close(ret);
     }
 
+
+    addDevice(){
+        let device = this.prepareDevice();
+        //console.log(device);
+        this.db.addDevice(device);
+    }
+
+    prepareDevice() : Device {
+        this.device_tags = {};
+        this.tags.forEach(t => {
+            this.device_tags[t.name] = true;
+        });
+        return new Device(this.device_name, this.device_quantity, this.device_description, this.device_tags);
+    }
 
 
 
