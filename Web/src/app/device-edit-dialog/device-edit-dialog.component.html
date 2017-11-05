@@ -1,4 +1,4 @@
-<h2 mat-card-title class="dialog-title">Edit device</h2>
+<h2 mat-card-title class="dialog-title"><span *ngIf="data">Edit device</span><span *ngIf="!data">Add device</span></h2>
 <mat-divider></mat-divider>
 <h4>Description:</h4>
 
@@ -8,8 +8,8 @@
 
 
 <mat-dialog-actions>
-  <button mat-button (click)="closeDialog()">Close</button>
+  <button mat-button (click)="closeDialog()">Cancel</button>
   <!-- Can optionally provide a result for the closing dialog. -->
   <!--<button mat-button [mat-dialog-close]="true">Yes</button>-->
-  <button mat-raised-button (click)="closeDialog(data)" color="accent">Lend</button>
+  <button mat-raised-button (click)="closeDialog(data)" color="accent"><span *ngIf="data">Save</span><span *ngIf="!data">Add</span></button>
 </mat-dialog-actions>
