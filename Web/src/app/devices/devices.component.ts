@@ -32,7 +32,7 @@ export class DevicesComponent implements OnInit {
               });
           });
 
-          console.log(this.devices);
+          //console.log(this.devices);
       }else {
           console.log('Not logged in');
       }
@@ -105,7 +105,7 @@ export class DevicesComponent implements OnInit {
         value.split(String.fromCharCode(SPACE)).forEach(val => {
             if ((val || '').trim()) {
                 this.filter.push(val.trim());
-                console.log(this.filter);
+               // console.log(this.filter);
             }
         });
 

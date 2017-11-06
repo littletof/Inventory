@@ -24,7 +24,9 @@ export class DeviceTagsFilterPipe implements PipeTransform {
 
           for(let ftag in filter){
             //console.log(filter[ftag]);
-            if(tags.indexOf(filter[ftag]) === -1){
+            //console.log('check ', filter[ftag], ' in ', item.name, ' result:  ', item.name.indexOf(filter[ftag]));
+
+            if(tags.indexOf(filter[ftag]) === -1 && item.name.indexOf(filter[ftag])===-1){
               return false;
             }
           }
