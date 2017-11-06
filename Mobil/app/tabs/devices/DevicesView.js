@@ -2,6 +2,7 @@ var DevicesViewModel = require("./devices-view-model");
 var observableModule = require("data/observable")
 var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
+const topmost = frameModule.topmost;
 var firebase = require("nativescript-plugin-firebase");
 
 var deviceList = new DevicesViewModel([]);
@@ -34,12 +35,34 @@ function onLoaded(args) {
 }
 
 exports.onDetails=function(args){
-    console.log("details: "+args.object.device);
-    frameModule.topmost().navigate("detail_pages/device_details/admin/device_details");
+    console.log(args.object.device);
+    const tappedDevice = args.object.bindingContext;
+	topmost().navigate({
+		moduleName: "detail_pages/device_details/admin/device_details",
+		context: tappedDevice,
+		animated: true,
+		transition: {
+			name: "slide",
+			duration: 200,
+			curve: "ease"
+		}
+	});
 }
 
 exports.onBorrow=function(args){
-    console.log("borrow: "+args.object.device);    
+    console.log(args.object.device);
+    const bindingContext = args.object.bindingContext;
+    topmost().navigate({
+        moduleName: "detail_pages/new_borrow/new_borrow",
+        context: bindingContext,
+        animated: true,
+        transition: {
+            name: "slideTop",
+            duration: 200,
+            curve: "ease"
+        }
+    });
+    
 }
 
 

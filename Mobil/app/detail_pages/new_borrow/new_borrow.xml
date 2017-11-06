@@ -1,0 +1,22 @@
+<Page loaded="loaded">
+	<ActionBar title="Borrow">
+	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
+	</ActionBar>
+	<ScrollView>
+		<StackLayout orientation="vertical">
+			<StackLayout orientation="horizontal" verticalalignment="center">
+					<Image width="500px" height="500px" src="App_Resources\Android\drawable-xxxhdpi/icon.png"/>
+					<StackLayout orientation="vertical" verticalalignment="center" alignment="right">
+						<Label id="itemNameLabel" text="{{ device.name }}"/>
+					</StackLayout>
+			</StackLayout>
+			<Label text="Borrow until:"/>
+			<DatePicker loaded="onPickerLoaded($event)" dateChange="onDateChanged($event)" dayChange="onDayChanged($event)" monthChange="onMonthChanged($event)" yearChange="onYearChanged($event)" verticalAlignment="center"></DatePicker>			
+			<Label text="Comment:"/>
+			<TextView id="commentTV"/>
+			<Label text="Amount borrowed:"/>
+			<Slider value="1" minValue="0" maxValue="10"/>
+			<Button id="borrowButton" width="500px" text="Borrow!" tap="borrowButtonTapped"/>
+		</StackLayout>
+	</ScrollView>
+</Page>

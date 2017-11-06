@@ -5,18 +5,20 @@ var topmost = frameModule.topmost();
 var ObservableArray = require("data/observable-array").ObservableArray;
 var page;
 
+var sliderValue1;
 
 exports.onNavBtnTap = function(args){
 	topmost.goBack();
 }
 
-exports.onDoneBtnTap = function(){
-	/*function call*/
-	topmost.goBack();
+exports.borrowButtonTapped = function(){
+	var dialogs = require("ui/dialogs");
+	dialogs.alert("alert").then(function() {
+	});
 }
 
-exports.onCancelBtnTap = function(){
-	topmost.goBack();
+exports.sliderValueChange = function(newValue){
+	sliderValue1 = newValue;
 }
 
 exports.loaded = function(args) {
