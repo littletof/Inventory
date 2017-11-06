@@ -14,11 +14,12 @@ export class DeviceEditDialogComponent implements OnInit {
 
     device_name: string;
     device_quantity: number;
-    device_description: string;
+    device_description: string = "";
     device_tags = {};
 
 
-    constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceEditDialogComponent>, public db: DatabaseService) {}
+    constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceEditDialogComponent>, public db: DatabaseService) {
+    }
 
     ngOnInit() {
     }
@@ -32,6 +33,8 @@ export class DeviceEditDialogComponent implements OnInit {
         let device = this.prepareDevice();
         //console.log(device);
         this.db.addDevice(device);
+
+        this.closeDialog();
     }
 
     prepareDevice() : Device {
