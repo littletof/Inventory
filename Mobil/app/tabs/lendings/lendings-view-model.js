@@ -40,7 +40,7 @@ function Lendings(items) {
                                 viewModel.push({
                                     deviceName:device.value[uid].name,
                                     interval:month0+"."+date0+" - "+month1+"."+date1,
-                                    quantity:"quantity borrowed:"+borrowing.device_number
+                                    quantity:"quantity borrowed:"+borrowing.device_quantity
                                 });
                             }
                         }

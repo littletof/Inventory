@@ -1,6 +1,7 @@
 <Page class="page" navigatingTo="onNavigatingTo">
-    <Page.actionBar>
-         <ActionBar title="{{ user.name }}">
+    <Page.actionBar >
+         <ActionBar class="action-bar">
+		 	<Label text="{{ user.name }}" class="action-bar-title" />
              <NavigationButton text="ios back" android.systemIcon = "ic_menu_back" tap="onNavBtnTap"/>
              <ActionBar.actionItems>
                 <ActionItem ios.systemIcon="16" android.systemIcon = "ic_menu_delete" tap="onDelBtnTap"/>
