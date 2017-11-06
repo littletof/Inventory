@@ -5,17 +5,17 @@
 	<ScrollView>
 		<StackLayout orientation="vertical">
 			<StackLayout orientation="horizontal" verticalalignment="center">
-					<Image width="500px" height="500px" src="App_Resources\Android\drawable-xxxhdpi/icon.png"/>
+					<Image width="500px" height="500px" src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png"/>
 					<StackLayout orientation="vertical" verticalalignment="center" alignment="right">
-						<Label id="itemNameLabel" text="{{ device.name }}"/>
+						<Label id="itemNameLabel" text="{{ deviceName }}"/>
 					</StackLayout>
 			</StackLayout>
 			<Label text="Borrow until:"/>
-			<DatePicker loaded="onPickerLoaded($event)" dateChange="onDateChanged($event)" dayChange="onDayChanged($event)" monthChange="onMonthChanged($event)" yearChange="onYearChanged($event)" verticalAlignment="center"></DatePicker>			
+			<DatePicker year="{{ end_date_yy }}" month="{{ end_date_mm }}" day="{{ end_date_dd }}" minDate="{{ today }}"  verticalAlignment="center"></DatePicker>			
 			<Label text="Comment:"/>
-			<TextView id="commentTV"/>
+			<TextView id="commentTV" text="{{ comment }}"/>
 			<Label text="Amount borrowed:"/>
-			<Slider value="1" minValue="0" maxValue="10"/>
+			<Slider value="{{ device_quantity }}" minValue="0" maxValue="10"/>
 			<Button id="borrowButton" width="500px" text="Borrow!" tap="borrowButtonTapped"/>
 		</StackLayout>
 	</ScrollView>
