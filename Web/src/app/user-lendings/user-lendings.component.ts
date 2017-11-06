@@ -9,6 +9,8 @@ import {FirebaseListObservable} from "angularfire2/database-deprecated";
 import {AngularFireList, AngularFireObject} from "angularfire2/database";
 import {Device} from "../device";
 import * as firebase from "firebase";
+import {logging} from "selenium-webdriver";
+import getLevel = logging.getLevel;
 
 @Component({
   selector: 'app-user-lendings',
@@ -20,8 +22,10 @@ export class UserLendingsComponent implements OnInit {
 
   lendings: AngularFireList<LendEntry>;
 
-  constructor(public db: DatabaseService, public auth: AuthService, public dialog: MatDialog) {
+  today: Date;
 
+  constructor(public db: DatabaseService, public auth: AuthService, public dialog: MatDialog) {
+    this.today = new Date();
 
 
 
@@ -29,14 +33,17 @@ export class UserLendingsComponent implements OnInit {
     this.lendings = this.db.getLendingsOfUser(this.auth.userDetails.uid)
         .map(changes => {
             return changes.map(c => {
-                let ret = {lend: LendEntry.fromtoJSON(c), device: {}};
+                let ret = {lend: LendEntry.fromtoJSON(c), device: {}, state: {}};
 
                 //kölcsönzés eszközének keresése
                 this.db.getDevice(ret.lend.device_id).subscribe(devices => {
                     ret.device = devices.payload.val();
                 });
 
-                // console.log(ret);
+                ret.state = this.getLendState(this.today, ret.lend.end_date);
+
+
+                 console.log(ret);
                 return ret;
             });
         })
@@ -44,20 +51,37 @@ export class UserLendingsComponent implements OnInit {
 
   }
 
-  openLendDetailDialog(data){
+  openLendDetailDialog(data) {
       let dialogref = this.dialog.open(LendDetailDialogComponent, {
           data,
           width: '50%'
       });
       dialogref.afterClosed().subscribe(value => {
           //console.log('Lending returned with: ', value);
-          if(value != null){
+          if (value != null) {
 
           }
       });
+  }
+
+  private getLendState(today, enddate){
+      let dif = this.calculateDateDiff(today, enddate);
+      if(dif > 1) return 0;
+      if(dif <= 1 && dif >=0) return 1;
+      return 2;
+  }
+
+  private calculateDateDiff(date1, date2): number{
+
+      var timeDiff = date2.getTime() - date1.getTime();
+      var diffDays = timeDiff / (1000 * 3600 * 24);
+
+      return diffDays;
   }
 
   ngOnInit() {
   }
 
 }
+
+

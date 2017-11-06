@@ -86,7 +86,7 @@ export class FirebaseDatabaseService implements DatabaseService{
           device_id: lendData.device_id,
           start_date: lendData.start_date.getTime(),
           end_date: lendData.end_date.getTime(),
-          device_number: lendData.device_number,
+          device_quantity: lendData.device_quantity,
           comment: lendData.comment
 
       };

@@ -2,11 +2,28 @@
 
 <h2 mat-card-title class="dialog-title">{{data.name}}</h2>
 <mat-divider></mat-divider>
-<h4>Description:</h4>
 
-<div class="row">
-<mat-dialog-content class="flex">{{data.description}}</mat-dialog-content>
+
+<mat-dialog-content class="flex">
+<h4>Available quantity:</h4>
+<span class="indent">{{data.quantity_total}}/{{data.quantity_available}}</span>
+
+
+
+<h4>Description:</h4>
+  <div class="row indent">
+    {{data.description}}
+  </div>
+
+<div>
+  <mat-chip-list>
+    <mat-chip *ngFor="let tag of displayTags" selectable="false">{{tag}}</mat-chip>
+  </mat-chip-list>
+
+
 </div>
+
+</mat-dialog-content>
 
 
 <mat-dialog-actions>

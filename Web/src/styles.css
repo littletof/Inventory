@@ -30,3 +30,7 @@ body{
 .dialog-title{
   margin-top: 0px;
 }
+
+.indent{
+  padding-left: 1em;
+}

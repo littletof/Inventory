@@ -7,7 +7,17 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
   styleUrls: ['./device-info-dialog.component.css']
 })
 export class DeviceInfoDialogComponent implements OnInit {
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceInfoDialogComponent>) {}
+
+  displayTags: string[];
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceInfoDialogComponent>) {
+
+    this.displayTags = [];
+    for(let propName in data.tags){
+        this.displayTags.push(propName);
+    }
+
+  }
 
   ngOnInit() {
   }
