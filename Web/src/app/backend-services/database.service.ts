@@ -17,6 +17,8 @@ export abstract class DatabaseService {
 
 
   abstract getDevices(): any;
+  abstract getDevicesWithTag(tag): any;
+
   abstract getDevice(key): any;
 
   abstract addDevice(device):any;

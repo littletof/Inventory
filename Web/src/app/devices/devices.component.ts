@@ -19,14 +19,19 @@ export class DevicesComponent implements OnInit {
 
   devices: AngularFireList<Device>;
 
+  filter = ["android", "octa-core"];
+
   constructor(private db: DatabaseService, private auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
       if (this.auth.isLoggedIn()) {
+
           this.devices = this.db.getDevices().map(changes => {
               return changes.map(c => {
                   return Device.fromJSON(c);
               });
           });
+
+          console.log(this.devices);
       }else {
           console.log('Not logged in');
       }

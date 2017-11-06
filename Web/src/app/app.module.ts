@@ -40,6 +40,7 @@ import { LendDeviceDialogComponent } from './lend-device-dialog/lend-device-dial
 import { UserLendingsComponent } from './user-lendings/user-lendings.component';
 import { LendDetailDialogComponent } from './lend-detail-dialog/lend-detail-dialog.component';
 import { DeviceEditDialogComponent } from './device-edit-dialog/device-edit-dialog.component';
+import { DeviceTagsFilterPipe } from './device-tags-filter.pipe';
 
 
 
@@ -59,7 +60,8 @@ import { DeviceEditDialogComponent } from './device-edit-dialog/device-edit-dial
     LendDeviceDialogComponent,
     UserLendingsComponent,
     LendDetailDialogComponent,
-    DeviceEditDialogComponent
+    DeviceEditDialogComponent,
+    DeviceTagsFilterPipe
   ],
   entryComponents: [
       DeviceInfoDialogComponent,
