@@ -14,8 +14,11 @@
 			<DatePicker year="{{ end_date_yy }}" month="{{ end_date_mm }}" day="{{ end_date_dd }}" minDate="{{ today }}"  verticalAlignment="center"></DatePicker>			
 			<Label text="Comment:"/>
 			<TextView id="commentTV" text="{{ comment }}"/>
-			<Label text="Amount borrowed:"/>
-			<Slider value="{{ device_quantity }}" minValue="0" maxValue="10"/>
+			<StackLayout orientation="horizontal">
+				<Label text="Amount borrowed:"/>
+				<Label text="{{ device_quantity }}"/>
+			</StackLayout>
+			<Slider value="{{ device_quantity }}" minValue="1" maxValue="10"/>
 			<Button id="borrowButton" width="500px" text="Borrow!" tap="borrowButtonTapped"/>
 		</StackLayout>
 	</ScrollView>
