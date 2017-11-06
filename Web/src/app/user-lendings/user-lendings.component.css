@@ -1,0 +1,19 @@
+.state-icon{
+    position: absolute;
+    left: -20px;
+    display: block;
+}
+
+.list-item{
+    position: relative;
+}
+
+.device-name{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.lend-info{
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
