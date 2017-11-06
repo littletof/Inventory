@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 
 
-import {AngularFireDatabase} from "angularfire2/database";
+import {AngularFireDatabase, DatabaseReference} from "angularfire2/database";
 import { Observable } from 'rxjs/Observable';
 import {User} from "../user";
 import {Device} from "../device";
@@ -59,6 +59,12 @@ export class FirebaseDatabaseService implements DatabaseService{
   getDevices(): any{
       return this.db.list<Device>('devices').snapshotChanges();
       //return this.devices;
+  }
+
+  getDevicesWithTag(tag): any{
+      return this.db.list<Device>('devices', (query) => {
+          return query.orderByChild('tags').equalTo(tag);
+      }).snapshotChanges();
   }
 
 
