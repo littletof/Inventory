@@ -13,6 +13,7 @@ Run `ng build --prod` then `firebase deploy` to deploy to firebase host
 
 Run `ng serve --aot --i18nFile=src/locale/messages.hu.xlf --i18nFormat=xlf --locale=hu` for i18n serving
 
+Run `ng build --prod --aot --i18nFile=src/locale/messages.hu.xlf --i18nFormat=xlf --locale=hu` to build with translation
 
 
 
