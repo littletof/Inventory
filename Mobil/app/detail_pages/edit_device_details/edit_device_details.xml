@@ -1,0 +1,20 @@
+<Page class="page" navigatingTo="onNavigatingTo">
+    <Page.actionBar>
+         <ActionBar title="Edit Device Details">
+			<ActionBar.actionItems>
+                <ActionItem ios.systemIcon="1" android.systemIcon = "ic_menu_close_clear_cancel" tap="onCancelBtnTap"/>
+                <ActionItem ios.systemIcon="0" android.systemIcon = "ic_menu_save" tap="onDoneBtnTap"/>
+            </ActionBar.actionItems>
+         </ActionBar>
+    </Page.actionBar>
+	<ScrollView>
+		<StackLayout orientation="vertical">
+			<StackLayout orientation="horizontal">
+				<Image width="500px" height="500px" src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png"/>
+				<TextField id="deviceNameTF" text="{{ device.name }}"/>
+			</StackLayout>
+			<Label text="Description"/>
+			<TextView id="descriptionTF" text="{{ device.description }}"/>
+		</StackLayout>
+	</ScrollView>
+</Page>

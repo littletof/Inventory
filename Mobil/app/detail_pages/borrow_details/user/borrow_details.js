@@ -10,7 +10,7 @@ exports.onNavBtnTap = function(args){
 	topmost.goBack();
 }
 
-exports.cancelReservation = function(){
+exports.closeBorrow = function(){
 }
 
 exports.loaded = function(args) {

@@ -2,6 +2,7 @@ var dialogsModule = require("ui/dialogs");
 var observableModule = require("data/observable")
 var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
+const topmost = frameModule.topmost;
 
 var page;
 
@@ -19,7 +20,18 @@ exports.onLoaded = function(args) {
     users.empty();
     users.load();
 };
+
 exports.onTap = function (args) {
     var index = args.index;
-    frameModule.topmost().navigate("detail_pages/user_details/admin/user_details");
+    const tappedUser = args.view.bindingContext;
+	topmost().navigate({
+		moduleName: "detail_pages/user_details/admin/user_details",
+		context: tappedUser,
+		animated: true,
+		transition: {
+			name: "slide",
+			duration: 200,
+			curve: "ease"
+		}
+	});
 };

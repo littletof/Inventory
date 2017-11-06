@@ -1,8 +1,6 @@
-var dialogsModule = require("ui/dialogs");
-var observableModule = require("data/observable");
 var frameModule = require("ui/frame");
 var topmost = frameModule.topmost();
-var ObservableArray = require("data/observable-array").ObservableArray;
+const userDetailViewModel = require("./user_details-view-model");
 var page;
 
 
@@ -16,6 +14,8 @@ exports.onDelBtnTap = function(args){
 exports.showBorrows = function(){
 }
 
-exports.loaded = function(args) {
-    page = args.object;
+exports.onNavigatingTo = function(args) {
+	const page = args.object;
+
+    page.bindingContext = new userDetailViewModel(page.navigationContext);
 };
