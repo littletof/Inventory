@@ -45,7 +45,7 @@ export class LendDeviceDialogComponent implements OnInit {
       if(ret == true) {
           let retVal = {
               user_id: this.userID, device_id: this.deviceID,
-              start_date: this.startDate, end_date: this.endDate, device_number: this.numberOfDevices, comment: this.comment,
+              start_date: this.startDate, end_date: this.endDate, device_quantity: this.numberOfDevices, comment: this.comment,
 
               device_name: this.data.name
           };
