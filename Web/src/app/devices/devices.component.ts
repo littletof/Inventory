@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from "rxjs/Observable";
 import {AuthService} from "../backend-services/auth.service";
 import {DatabaseService} from "../backend-services/database.service";
-import {MatDialog, MatSnackBar} from "@angular/material";
+import {MatChipInputEvent, MatDialog, MatSnackBar} from "@angular/material";
 import {DeviceInfoDialogComponent} from "../device-info-dialog/device-info-dialog.component";
 import {LendDeviceDialogComponent} from "../lend-device-dialog/lend-device-dialog.component";
 import {AngularFireList} from "angularfire2/database";
 import {Device} from "../device";
 import {DeviceEditDialogComponent} from "../device-edit-dialog/device-edit-dialog.component";
+import {SPACE} from "@angular/cdk/keycodes";
 
 @Component({
   selector: 'app-devices',
@@ -19,7 +20,7 @@ export class DevicesComponent implements OnInit {
 
   devices: AngularFireList<Device>;
 
-  filter = ["android", "octa-core"];
+  filter = [];
 
   constructor(private db: DatabaseService, private auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
@@ -85,8 +86,42 @@ export class DevicesComponent implements OnInit {
         });
     }
 
-  removeDevice(key){
-        this.db.removeDevice(key);
-  }
+
+
+
+    visible: boolean = true;
+    selectable: boolean = false;
+    removable: boolean = true;
+    addOnBlur: boolean = true;
+
+    separatorKeysCodes = [SPACE];
+
+
+    add(event: MatChipInputEvent): void {
+        let input = event.input;
+        let value = event.value;
+
+        // Add our tag
+        value.split(String.fromCharCode(SPACE)).forEach(val => {
+            if ((val || '').trim()) {
+                this.filter.push(val.trim());
+                console.log(this.filter);
+            }
+        });
+
+
+        // Reset the input value
+        if (input) {
+            input.value = '';
+        }
+    }
+
+    remove(tag: any): void {
+        let index = this.filter.indexOf(tag);
+
+        if (index >= 0) {
+            this.filter.splice(index, 1);
+        }
+    }
 
 }

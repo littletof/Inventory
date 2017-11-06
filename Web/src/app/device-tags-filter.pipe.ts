@@ -1,7 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'deviceTagsFilter'
+  name: 'deviceTagsFilter',
+  pure: false
 })
 export class DeviceTagsFilterPipe implements PipeTransform {
 
@@ -13,6 +14,7 @@ export class DeviceTagsFilterPipe implements PipeTransform {
       //console.log('filter: ', filter);
       //return items.filter(item => item.title.indexOf(filter.title) !== -1);
       return items.filter(item => {
+          //console.log('check');
           let tags = [];
 
           for(let propName in item.tags){
