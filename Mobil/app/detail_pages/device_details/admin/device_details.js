@@ -2,17 +2,17 @@ const topmost = require("ui/frame").topmost;
 const deviceDetailViewModel = require("./device_details-view-model");
 
 var page;
+var device;
 
 exports.onBackButtonTap = function(args){
     topmost().goBack();
 }
 
 exports.onEditBtnTap = function(args){
-    const bindingContext = args.object.bindingContext;
-
+    const bindingContext = device;
     topmost().navigate({
         moduleName: "detail_pages/edit_device_details/edit_device_details",
-        context: bindingContext.device,
+        context: bindingContext,
         animated: true,
         transition: {
             name: "slideTop",
@@ -23,10 +23,9 @@ exports.onEditBtnTap = function(args){
 }
 
 
-
-
 exports.onDelBtnTap = function(){
-	
+	deviceDetailViewModel.deleteData(page.navigationContext.id);
+    topmost().goBack();
 }
 
 exports.onBorrowButtonTapped = function(args){
@@ -46,5 +45,7 @@ exports.onBorrowButtonTapped = function(args){
 exports.onNavigatingTo = function(args) {
 	page = args.object;
 
-    page.bindingContext = new deviceDetailViewModel(page.navigationContext);
+
+	device = deviceDetailViewModel.getData(page.navigationContext.id);
+	page.bindingContext = device;
 };

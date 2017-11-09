@@ -11,10 +11,18 @@
 		<StackLayout orientation="vertical">
 			<StackLayout orientation="horizontal">
 				<Image width="500px" height="500px" src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png"/>
-				<TextField id="deviceNameTF" text="{{ device.name }}"/>
+				<TextField id="deviceNameTF" text="{{ deviceName }}"/>
 			</StackLayout>
-			<Label text="Description"/>
-			<TextView id="descriptionTF" text="{{ device.description }}"/>
+			<Label text="Description:"/>
+			<TextView id="descriptionTF" text="{{ description }}"/>
+			<StackLayout orientation="horizontal">
+				<Label text="Total devices:"/>
+				<TextField id="totalDevicesTF" text="{{ quantity_total }}"/>
+			</StackLayout>
+			<StackLayout orientation="horizontal">
+				<Label text="Available devices:"/>
+				<TextField id="totalDevicesTF" text="{{ quantity_available }}"/>
+			</StackLayout>
 		</StackLayout>
 	</ScrollView>
 </Page>

@@ -2,6 +2,7 @@ var dialogsModule = require("ui/dialogs");
 var observableModule = require("data/observable")
 var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
+const topmost = frameModule.topmost;
 
 var page;
 
@@ -22,5 +23,15 @@ exports.onLoaded = function onLoaded(args) {
 
 exports.onTap = function (args) {
     var index = args.index;
-    frameModule.topmost().navigate("detail_pages/borrow_details/admin/borrow_details");
+    const tappedBorrow = args.view.bindingContext;
+	topmost().navigate({
+		moduleName: "detail_pages/borrow_details/admin/borrow_details",
+		context: tappedBorrow,
+		animated: true,
+		transition: {
+			name: "slide",
+			duration: 200,
+			curve: "ease"
+		}
+	});
 };
