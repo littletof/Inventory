@@ -1,0 +1,5 @@
+StackLayout{padding-top:5;padding-bottom:25;padding-left:5}TextField{width:85%;border-style:solid;border-width:medium;margin-top:2%;caret-color:#2E7D32}Label{font-size:20;padding:6;white-space:normal}#descriptionTV{font-size:15;margin-left:50;margin-right:50;white-space:normal}#deviceNameTF{margin:0;padding:0;font-size:20}
+#totalDevicesTF{
+	white-space: nowrap;
+	text-align: center;
+}

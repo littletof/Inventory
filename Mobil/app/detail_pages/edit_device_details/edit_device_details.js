@@ -9,8 +9,14 @@ var device;
 
 exports.onDoneBtnTap = function(){
 	
-	if(device.deviceName != "" && device.description != "" && device.quantity_total != "" && device.quantity_total != ""){
-		if(device.quantity_total<device.quantity_available){
+	if(device.deviceName != "" && device.description != "" && device.quantity_total != "" && device.quantity_available != ""){
+		if( isNaN(device.quantity_total) || isNaN(device.quantity_available) ){
+			alert({
+				title: "Data error",
+				message: "Quantities must be a numbers!",
+				okButtonText: "Understood!"
+			});			
+		}else if(device.quantity_total<device.quantity_available){
 			alert({
 				title: "Data error",
 				message: "Total quantity cannot be less than available quantity!",

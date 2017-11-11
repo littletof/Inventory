@@ -49,6 +49,27 @@ exports.onDetails=function(args){
 	});
 }
 
+exports.onFLTTap=function(args){
+    console.log(args.object.device);
+    topmost().navigate({
+        moduleName: "detail_pages/new_device/new_device",
+        animated: true,
+        transition: {
+            name: "slideTop",
+            duration: 200,
+            curve: "ease"
+        }
+    });
+	
+
+}
+
+exports.onFLTTouch=function(args){
+    console.log(args.object.device);
+	
+
+}
+
 exports.onBorrow=function(args){
     console.log(args.object.device);
     const bindingContext = args.object.bindingContext;

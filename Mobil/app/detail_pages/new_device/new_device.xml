@@ -1,6 +1,6 @@
 <Page class="page" navigatingTo="onNavigatingTo">
     <Page.actionBar>
-         <ActionBar title="Edit Device Details">
+         <ActionBar title="New Device">
 			<ActionBar.actionItems>
                 <ActionItem ios.systemIcon="1" android.systemIcon = "ic_menu_close_clear_cancel" tap="onCancelBtnTap"/>
                 <ActionItem ios.systemIcon="0" android.systemIcon = "ic_menu_save" tap="onDoneBtnTap"/>
@@ -18,10 +18,6 @@
 			<StackLayout orientation="horizontal">
 				<Label text="Total devices:"/>
 				<TextView id="totalDevicesTF" text="{{ quantity_total }}" width="150px"/>
-			</StackLayout>
-			<StackLayout orientation="horizontal">
-				<Label text="Available devices:"/>
-				<TextView id="availableDevicesTF" text="{{ quantity_available }}" width="150px"/>
 			</StackLayout>
 			<Image width="500px" height="500px" src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png"/>
 		</StackLayout>
