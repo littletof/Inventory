@@ -6,7 +6,10 @@
                     <StackLayout orientation="vertical" col="1" >
                         <Label class="name" text="{{ deviceName, deviceName }}"  />
                         <Label text="{{ interval, interval }}"  />
-                        <Label text="{{ quantity, quantity }}"  />
+                        <StackLayout orientation="horizontal">
+                            <Label text="{{L('Quantity')}}" marginRight="2%"/>
+                            <Label text="{{ quantity, quantity }}"  />
+                        </StackLayout>
                         <!--<Button  text="Details" device="{{ deviceID, deviceID }}" tap="onDetails" row="3" col="0" height="60"/>-->
                     </StackLayout>
                 </GridLayout>

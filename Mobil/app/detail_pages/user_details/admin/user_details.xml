@@ -13,13 +13,13 @@
 			<Image width="500px" height="500px" src="res://logo"/>
 			<StackLayout orientation="vertical">
 				<StackLayout orientation="horizontal" horizontal-alignment="center">
-					<Label text="Role:"/>
+					<Label text="{{L('Role')}}"/>
 					<Label id="userRoleLabel" text="{{ user.role }}"/>
 				</StackLayout>
 			</StackLayout>
 		</StackLayout>
-		<Label text="Email address"/>
+		<Label text="{{L('EmailAddress')}}"/>
 		<Label id="emailLabel" text="{{ user.email }}"/>
-		<Button id="showBorrowsButton" width="500px" text="Show User's Borrows" tap="showBorrows"/>
+		<Button id="showBorrowsButton" width="500px" text="{{L('ShowUsersBorrows')}}" tap="showBorrows"/>
 	</StackLayout>
 </Page>

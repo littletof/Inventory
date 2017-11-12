@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Inventory</string>
+	<string name="title_activity_kimera">Mobil</string>
+	<string name="Inventory">Eszköznyilvántartó</string>
+	<string name="Devices">Eszközök</string>
+	<string name="Users">Felhasználók</string>
+	<string name="MyLendings">Kölcsönzéseim</string>
+	<string name="Lendings">Kölcsönzések</string>
+	<string name="Statistics">Statisztikák</string>
+	<string name="Login">Bejelentkezés</string>
+	<string name="EmailAddress">Email cím</string>
+	<string name="Password">Jelszó</string>
+	<string name="ContinueAsAGuest">Lépj be vendégként!</string>
+	<string name="DontHaveAnAccountYet">Nincs még felhasználód?</string>
+	<string name="SignUp">Regisztrálj!</string>
+	<string name="Name">Név</string>
+	<string name="ReTypePassword">Jelszó újra</string>
+	<string name="Register">Regisztrálás</string>
+	<string name="Details">Részletek</string>
+	<string name="Borrow">Kikölcsönzöm</string>
+	<string name="BorrowDetails">Kölcsönzés részletei</string>
+	<string name="DateOfBorrow">Kölcsönzés dátuma</string>
+	<string name="Deadline">Határidő</string>
+	<string name="Comment">Megjegyzés</string>
+	<string name="CloseBorrow">Kölcsönzés lezárása</string>
+	<string name="EditDeviceDetails">Eszköz szerkesztése</string>
+	<string name="DeviceName">Eszköz neve</string>
+	<string name="Description">Leírás</string>
+	<string name="TotalDevices">Eszközök száma</string>
+	<string name="AvailableDevices">Kölcsönözhető eszközök száma</string>
+	<string name="Quantity">Mennyiség</string>
+	<string name="CancelReservation">Foglalás törlése</string>
+	<string name="QuantityAvailable">Kölcsönözhető eszközök száma</string>
+	<string name="TotalQuantity">Eszközök száma</string>
+	<string name="ShowUsersBorrows">Felhasználó kölcsönzései</string>
+	<string name="PresentBorrows">Aktív kölcsönzések</string>
+	<string name="PastBorrows">Lezárt kölcsönzések</string>	
+	<string name="Role">Szerep</string>
+	<string name="BorrowUntil">Kölcsönzés eddig</string>
+</resources>
