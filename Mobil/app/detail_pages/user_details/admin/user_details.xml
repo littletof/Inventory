@@ -1,6 +1,7 @@
 <Page class="page" navigatingTo="onNavigatingTo">
     <Page.actionBar >
          <ActionBar class="action-bar">
+		 	<Label text="{{ user.name }}" class="action-bar-title" />
              <NavigationButton text="ios back" android.systemIcon = "ic_menu_back" tap="onNavBtnTap"/>
              <ActionBar.actionItems>
                 <ActionItem ios.systemIcon="16" android.systemIcon = "ic_menu_delete" tap="onDelBtnTap"/>
@@ -12,7 +13,6 @@
 			<Image width="500px" height="500px" src="res://logo"/>
 			<StackLayout orientation="vertical">
 				<StackLayout orientation="horizontal" horizontal-alignment="center">
-<<<<<<< HEAD
 					<Label text="{{L('Role')}}"/>
 					<Label id="userRoleLabel" text="{{ user.role }}"/>
 				</StackLayout>
@@ -21,17 +21,5 @@
 		<Label text="{{L('EmailAddress')}}"/>
 		<Label id="emailLabel" text="{{ user.email }}"/>
 		<Button id="showBorrowsButton" width="500px" text="{{L('ShowUsersBorrows')}}" tap="showBorrows"/>
-=======
-					<Label text="Role:"/>
-					<Label id="userRoleLabel" text="{{ role }}"/>
-				</StackLayout>
-			</StackLayout>
-		</StackLayout>
-		<StackLayout orientation="horizontal">
-			<Label text="Email address"/>
-			<Label id="emailLabel" text="{{ emailAddress }}"/>
-		</StackLayout>
-		<Button id="showBorrowsButton" width="500px" text="Show User's Borrows" tap="showBorrows"/>
->>>>>>> 8ebe42f1a214ae26c36991217c02de9f7733e859
 	</StackLayout>
 </Page>

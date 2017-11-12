@@ -7,9 +7,6 @@
     <Page.actionBar>
         <ActionBar class="action-bar">
           <Label text="{{ title }}" class="action-bar-title" />
-             <ActionBar.actionItems>
-                <ActionItem ios.systemIcon="2" android.systemIcon = "ic_menu_add" tap="onAddBtnTap"/>
-            </ActionBar.actionItems>
         </ActionBar>
     </Page.actionBar>
 

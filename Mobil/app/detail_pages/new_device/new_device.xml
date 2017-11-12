@@ -1,7 +1,6 @@
 <Page class="page" navigatingTo="onNavigatingTo">
     <Page.actionBar>
-         <ActionBar class="action-bar">
-          <Label text="New Device" class="action-bar-title" />
+         <ActionBar title="New Device">
 			<ActionBar.actionItems>
                 <ActionItem ios.systemIcon="1" android.systemIcon = "ic_menu_close_clear_cancel" tap="onCancelBtnTap"/>
                 <ActionItem ios.systemIcon="0" android.systemIcon = "ic_menu_save" tap="onDoneBtnTap"/>
