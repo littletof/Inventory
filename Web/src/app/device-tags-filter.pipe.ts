@@ -19,14 +19,18 @@ export class DeviceTagsFilterPipe implements PipeTransform {
 
           for(let propName in item.tags){
               //console.log('filter ', propName);
-              tags.push(propName);
+              tags.push(propName.toUpperCase());
           }
 
           for(let ftag in filter){
             //console.log(filter[ftag]);
-            //console.log('check ', filter[ftag], ' in ', item.name, ' result:  ', item.name.indexOf(filter[ftag]));
+              let searchTag = filter[ftag].toUpperCase();
 
-            if(tags.indexOf(filter[ftag]) === -1 && item.name.indexOf(filter[ftag])===-1){
+              //console.log('check ', searchTag, ' in ', item.name, ' result:  ', item.name.indexOf(searchTag));
+
+
+
+            if(tags.indexOf(searchTag) === -1 && item.name.toUpperCase().indexOf(searchTag)===-1){
               return false;
             }
           }
