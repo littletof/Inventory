@@ -14,6 +14,8 @@ exports.loaded = function (args) {
     user.init();
 };
 
+
+
 exports.login = function () {
     user.login()
         .then(function() {

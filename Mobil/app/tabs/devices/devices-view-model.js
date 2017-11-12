@@ -1,6 +1,7 @@
 var firebase = require("nativescript-plugin-firebase");
 var ObservableArray = require("data/observable-array").ObservableArray;
 const imageSource = require("image-source");
+var fs = require("file-system");
 
 
 
@@ -13,14 +14,33 @@ function DevicesViewModel(items) {
             var device=result.value;
             var imgUrl;
             if (result.type === "ChildAdded") {
-                    viewModel.push({
-                        description:device.description,
-                        id:result.key,
-                        name:device.name,
-                        available:device.quantity_available,
-                        img:imgUrl
-                    });
-    
+
+                firebase.getDownloadUrl({
+                    bucket: 'gs://inventory-01.appspot.com/images',
+                    remoteFullPath: device.image+'.png'
+                  }).then(
+                      function (url) {
+                        console.log("Remote URL: " + url);
+                        imageSource.fromUrl(url).then(function(res){
+                        
+                            viewModel.push({
+                                description:device.description,
+                                id:result.key,
+                                name:device.name,
+                                image:res,
+                                available:device.quantity_available
+                            });
+                        }, function (error) {
+                            //console.log("Error loading image: " + error);
+                        });
+                    },
+                      function (error) {
+                        console.log("Error: " + error);
+                      }
+                  );
+                
+
+                    
             } else if (result.type === "ChildRemoved") {
                 matches.push(result);
                 matches.forEach(function(match) {
