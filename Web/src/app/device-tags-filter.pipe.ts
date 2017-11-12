@@ -11,10 +11,8 @@ export class DeviceTagsFilterPipe implements PipeTransform {
           return items;
       }
 
-      //console.log('filter: ', filter);
-      //return items.filter(item => item.title.indexOf(filter.title) !== -1);
       return items.filter(item => {
-          //console.log('check');
+
           let tags = [];
 
           for(let propName in item.tags){
@@ -23,7 +21,7 @@ export class DeviceTagsFilterPipe implements PipeTransform {
           }
 
           for(let ftag in filter){
-            //console.log(filter[ftag]);
+
               let searchTag = filter[ftag].toUpperCase();
 
               //console.log('check ', searchTag, ' in ', item.name, ' result:  ', item.name.indexOf(searchTag));
