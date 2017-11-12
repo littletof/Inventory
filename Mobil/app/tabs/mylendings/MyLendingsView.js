@@ -1,7 +1,7 @@
 const MyLendingsViewModel = require("./mylendings-view-model");
 var observableModule = require("data/observable")
 var ObservableArray = require("data/observable-array").ObservableArray;
-const topmost = require("ui/frame").topmost;
+var frameModule = require("ui/frame");
 
 var lendingList = new MyLendingsViewModel([]);
 
@@ -23,17 +23,7 @@ function onLoaded(args) {
 
 exports.onDetails=function(args){
     console.log(args.object.device);
-    const tappedBorrow = args.view.bindingContext;
-	topmost().navigate({
-		moduleName: "detail_pages/borrow_details/user/borrow_details",
-		context: tappedBorrow,
-		animated: true,
-		transition: {
-			name: "slide",
-			duration: 200,
-			curve: "ease"
-		}
-	});
+    frameModule.topmost().navigate("detail_pages/borrow_details/admin/borrow_details");
 }
 
 exports.onImageLoaded=function(args){

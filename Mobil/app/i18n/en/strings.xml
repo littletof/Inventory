@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Inventory</string>
+	<string name="title_activity_kimera">Mobil</string>
+	<string name="Inventory">Inventory</string>
+	<string name="Devices">Devices</string>
+	<string name="Users">Users</string>
+	<string name="MyLendings">My lendings</string>
+	<string name="Lendings">Lendings</string>
+	<string name="Statistics">Statistics</string>
+	<string name="EmailAddress">Email address</string>
+	<string name="Password">Password</string>
+	<string name="Login">Login</string>
+	<string name="ContinueAsAGuest">Continue as a guest!</string>
+	<string name="DontHaveAnAccountYet">Don\'t have an account yet?</string>
+	<string name="SignUp">Sign up!</string>
+	<string name="Name">Name</string>
+	<string name="ReTypePassword">Re-type password</string>
+	<string name="Register">Register</string>
+	<string name="Details">Details</string>
+	<string name="Borrow">Borrow</string>
+	<string name="BorrowDetails">Borrow details</string>
+	<string name="DateOfBorrow">Date of borrow</string>
+	<string name="Deadline">Deadline</string>
+	<string name="Comment">Comment</string>
+	<string name="CloseBorrow">Close borrow</string>
+	<string name="EditDeviceDetails">Edit device details</string>
+	<string name="DeviceName">Device name</string>
+	<string name="Description">Description</string>
+	<string name="TotalDevices">Total devices</string>
+	<string name="AvailableDevices">Available devices</string>
+	<string name="Quantity">Quantity</string>
+	<string name="CancelReservation">Cancel reservation</string>
+	<string name="QuantityAvailable">Quantity available</string>
+	<string name="TotalQuantity">Total quantity</string>
+	<string name="ShowUsersBorrows">Show user\'s borrows</string>
+	<string name="PresentBorrows">Present borrows</string>
+	<string name="PastBorrows">Past borrows</string>	
+	<string name="Role">Role</string>
+	<string name="BorrowUntil">Borrow until</string>
+</resources>

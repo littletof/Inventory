@@ -1,23 +1,22 @@
-<Page class="page" navigatingTo="onNavigatingTo">
-    <Page.actionBar >
-         <ActionBar class="action-bar">
-		 	<Label text="{{ userName }}" class="action-bar-title" />
-             <NavigationButton text="ios back" android.systemIcon = "ic_menu_back" tap="onNavBtnTap"/>
-         </ActionBar>
-    </Page.actionBar>	
+<Page loaded="loaded">
+	<ActionBar class="action-bar">
+	<Label text="User Details" class="action-bar-title" />
+	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
+	</ActionBar>
 	<StackLayout orientation="vertical">
 		<StackLayout orientation="horizontal">
-			<Image width="500px" height="500px" src="res://logo"/>
+			<Image width="500px" height="500px" src="App_Resources\Android\drawable-xxxhdpi/icon.png"/>
 			<StackLayout orientation="vertical">
-				<StackLayout orientation="horizontal" horizontal-alignment="center">
-					<Label text="Role:"/>
-					<Label id="userRoleLabel" text="{{ role }}"/>
+				<Label id="nameLabel" text="Name"/>
+				<StackLayout orientation="horizontal">
+					<Label text="{{L('PastBorrows)}}"/>
+					<Label id="pastBorrowCounter" text="1"/>
+					<Label text="{{L('PresentBorrows')}}"/>
+					<Label id="presentBorrowCounter" text="5"/>
 				</StackLayout>
 			</StackLayout>
 		</StackLayout>
-		<StackLayout orientation="horizontal">
-			<Label text="Email address:"/>
-			<Label id="emailLabel" text="{{ emailAddress }}"/>
-		</StackLayout>
+		<Label text="{{L('EmailAddress')}}"/>
+		<Label id="emailLabel" text="emailAddress"/>
 	</StackLayout>
 </Page>

@@ -14,6 +14,7 @@ function DevicesViewModel(items) {
             var device=result.value;
             var imgUrl;
             if (result.type === "ChildAdded") {
+<<<<<<< HEAD
 
                 firebase.getDownloadUrl({
                     bucket: 'gs://inventory-01.appspot.com/images',
@@ -41,6 +42,15 @@ function DevicesViewModel(items) {
                 
 
                     
+=======
+                    viewModel.push({
+                        description:device.description,
+                        id:result.key,
+                        name:device.name,
+                        img:imgUrl
+                    });
+    
+>>>>>>> 92792072b36336762516b4cd1bcc1b8da5fc12f1
             } else if (result.type === "ChildRemoved") {
                 matches.push(result);
                 matches.forEach(function(match) {
