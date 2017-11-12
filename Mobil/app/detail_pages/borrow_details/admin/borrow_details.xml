@@ -1,4 +1,4 @@
-<Page loaded="loaded">
+<Page class="page" navigatingTo="onNavigatingTo">
 	<ActionBar class="action-bar">
 		<Label text="Borrow Details" class="action-bar-title" />
 	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
@@ -6,18 +6,21 @@
 	<ScrollView>
 		<StackLayout orientation="vertical">
 			<StackLayout orientation="horizontal" verticalalignment="center">
-					<Image width="500px" height="500px" src="App_Resources\Android\drawable-xxxhdpi/icon.png"/>
-					<StackLayout orientation="vertical" verticalalignment="center" alignment="right">
-						<Label id="itemNameLabel" text="Name of Item"/>
-						<Label id="borrowStateLabel" text="State of Borrow"/>
+					<StackLayout orientation="vertical" verticalalignment="center">
+						<StackLayout orientation="horizontal">
+							<Label id="itemNameLabel" text="{{ device_name }}"/>
+							<Label id="deviceQuantityLabel" text="{{ '( x' + device_quantity + ' )' }}" verticalAlignment="bottom"/>
+						</StackLayout>
+						<Label id="userNameLabel" text="{{ user_name }}"/>
+						<Label id="overdueStateLabel" text="{{ overdue }}"/>
 					</StackLayout>
 			</StackLayout>
 			<Label text="Date of Borrow:"/>
-			<Label id="startDateLabel" text="Date of Borrow"/>
+			<Label id="startDateLabel" text="{{ start_date }}"/>
 			<Label text="Deadline:"/>
-			<Label id="deadlineLabel" text="Deadline"/>
+			<Label id="deadlineLabel" text="{{ end_date }}"/>
 			<Label text="Comment:"/>
-			<Label id="commentLabel" text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaalllllllllllllllllllllllllllllllllllllllllllloooooooooooooooooooooooooooooooooooooonnnnnnnnnnnnnnnnnnnnnnnnnnnnnnngggggggggggggggggggggggggggggaaaaaaaaaaaaaaaaaaaaaaaaaasssssssssssssssssssssssssssssssssssssssssssssssssssssss tttttttttttttttttttttttteeeeeeeeeeeeeeeeeexxxxxxxxxxxxxxxxxxxxxxxxxxtttttttttttttttttttttttttt"/>
+			<Label id="commentLabel" text="{{ comment }}"/>
 			<Button id="closeButton" width="500px" text="Close Borrow" tap="closeBorrow" />
 		</StackLayout>
 	</ScrollView>
