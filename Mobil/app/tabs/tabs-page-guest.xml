@@ -3,7 +3,7 @@
 
     <Page.actionBar>
         <ActionBar class="action-bar">
-          <Label text="Devices" class="action-bar-title" />
+          <Label text="{{L('Devices')}}" class="action-bar-title" />
         </ActionBar>
     </Page.actionBar>
 
@@ -32,6 +32,6 @@
         -->
 
        
-             <devices:DevicesView/>
+             <devices:DevicesView_guest/>
          
 </Page>

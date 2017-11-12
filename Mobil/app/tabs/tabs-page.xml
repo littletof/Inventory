@@ -35,31 +35,31 @@
         </TabViewItem>
         -->
 
-        <TabViewItem title="Devices">
+        <TabViewItem title="{{L('Devices')}}">
           <TabViewItem.view>
              <devices:DevicesView />
           </TabViewItem.view>
         </TabViewItem> 
 
-        <TabViewItem title="My Lendings">
+        <TabViewItem title="{{L('MyLendings')}}">
           <TabViewItem.view>
              <mylendings:MyLendingsView/>
           </TabViewItem.view>
         </TabViewItem>  
 
-        <TabViewItem title="Users">
+        <TabViewItem title="{{L('Users')}}">
           <TabViewItem.view>
              <users:UsersView/>
           </TabViewItem.view>
         </TabViewItem> 
 
-        <TabViewItem title="Lendings">
+        <TabViewItem title="{{L('Lendings')}}">
           <TabViewItem.view>
              <lendings:LendingsView/>
           </TabViewItem.view>
         </TabViewItem>   
 
-        <TabViewItem title="Statistics">
+        <TabViewItem title="{{L('Statistics')}}">
           <TabViewItem.view>
              <statistics:StatisticsView/>
           </TabViewItem.view>

@@ -9,14 +9,14 @@
 			<StackLayout orientation="vertical">
 				<Label id="nameLabel" text="Name"/>
 				<StackLayout orientation="horizontal">
-					<Label text="Past Borrows:"/>
+					<Label text="{{L('PastBorrows)}}"/>
 					<Label id="pastBorrowCounter" text="1"/>
-					<Label text="Present Borrows"/>
+					<Label text="{{L('PresentBorrows')}}"/>
 					<Label id="presentBorrowCounter" text="5"/>
 				</StackLayout>
 			</StackLayout>
 		</StackLayout>
-		<Label text="Email address"/>
+		<Label text="{{L('EmailAddress')}}"/>
 		<Label id="emailLabel" text="emailAddress"/>
 	</StackLayout>
 </Page>

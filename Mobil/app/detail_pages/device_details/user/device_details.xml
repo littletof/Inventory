@@ -1,16 +1,22 @@
 <Page class="page" navigatingTo="onNavigatingTo">
     <Page.actionBar>
          <ActionBar class="action-bar">
-		 <Label text="{{ device.name }}" class="action-bar-title" />
+		 <Label text="{{ deviceName }}" class="action-bar-title" />
              <NavigationButton text="ios back" android.systemIcon = "ic_menu_back" tap="onBackButtonTap"/>
          </ActionBar>
     </Page.actionBar>
 	<ScrollView>
 		<StackLayout orientation="vertical">
 				<Image width="500px" height="500px" src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png" horizontalAlignment="center"/>
-			<Label text="Description"/>
-			<Label id="descriptionLabel" text="{{ device.description }}"/>
-			<Button id="borrowButton" text="Borrow this item" width="500px" tap="onBorrowButtonTapped" />
+			<Label text="{{L('Description')}}"/>
+			<Label id="descriptionLabel" text="{{ description }}"/>
+			<StackLayout>
+				<Label text="{{L('QuantityAvailable')}}"/>
+				<Label id="quantityAvailableLabel" text="{{ quantity_available }}"/>
+				<Label text="{{L('TotalQuantity')}}"/>
+				<Label id="totalQuantityLabel" text="{{ quantity_total }}"/>
+			</StackLayout>
+			<Button id="borrowButton" text="{{L('Borrow')}}" width="500px" tap="onBorrowButtonTapped" />
 		</StackLayout>
 	</ScrollView>
 	

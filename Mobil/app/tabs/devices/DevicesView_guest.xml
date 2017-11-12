@@ -1,0 +1,18 @@
+<Page loaded="onLoaded" >
+	<AbsoluteLayout>
+		<ScrollView width="100%" height="100%">
+			<ListView id="deviceList" items="{{ deviceList }}" >
+					<ListView.itemTemplate>
+
+						<GridLayout columns="auto,*" rows="120" onTap="onDetails">
+							<Image col="0" src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png" verticalAlignment="stretch" width="100" />
+							<StackLayout  col="1">
+								<Label class="name" height="50" text="{{ name, name }}"   />
+								<Label text="  {{ description, description }}" textWrap="true"  />								
+							</StackLayout>
+						</GridLayout>
+					</ListView.itemTemplate>
+			</ListView>
+		</ScrollView>
+	</AbsoluteLayout>
+</Page>
