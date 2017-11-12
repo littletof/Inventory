@@ -32,6 +32,6 @@
         -->
 
        
-             <devices:DevicesView/>
+             <devices:DevicesView_guest/>
          
 </Page>
