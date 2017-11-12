@@ -22,9 +22,9 @@ function Lendings(items) {
         var onChildEvent = function(result) {
             var matches = [];
             var borrowing =result.value;
-            
+            let borrowID = result.key;
             if (result.type === "ChildAdded") {
-                if(borrowing.UID == config.uid) {        
+                if(borrowing.UID == config.uid) {
                     var findDeviceName = function(device) {
                         for(let uid in device.value) {  
                             if(uid == borrowing.device_id) {
@@ -38,6 +38,7 @@ function Lendings(items) {
                                 var date1 = b.getDate();
                     
                                 viewModel.push({
+									id: borrowID,
                                     deviceName:device.value[uid].name,
                                     interval:month0+"."+date0+" - "+month1+"."+date1,
                                     quantity:borrowing.device_quantity

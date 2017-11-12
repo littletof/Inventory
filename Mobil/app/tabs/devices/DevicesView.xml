@@ -7,7 +7,8 @@
 						<GridLayout columns="auto,*" rows="140">
 							<Image device="{{ id, id }}"  src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png" verticalAlignment="stretch" width="100" />
 							<StackLayout  col="1">
-								<Label class="name" text="{{ name, name }}" textWrap="true"  />
+								<Label class="name" height="35" text="{{ name, name }}" textWrap="true"  />
+								<Label style="color:black" text="{{ 'available:'+ available }}" height="20"  />
 								<Label text="{{ description, description }}"   />
 								<GridLayout columns="auto,*" rows="60">
 									<Button  text="{{L('Details')}}" device="{{ id, id }}" col="0" tap="onDetails" />

@@ -1,12 +1,7 @@
-<Page loaded="loaded">
-	<ActionBar class="action-bar">
-	<Label text="User Details" class="action-bar-title" />
-	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
-	</ActionBar>
 	<StackLayout orientation="vertical">
 		<StackLayout orientation="horizontal">
-			<Image width="500px" height="500px" src="App_Resources\Android\drawable-xxxhdpi/icon.png"/>
 			<StackLayout orientation="vertical">
+<<<<<<< HEAD
 				<Label id="nameLabel" text="Name"/>
 				<StackLayout orientation="horizontal">
 					<Label text="{{L('PastBorrows)}}"/>
@@ -18,5 +13,17 @@
 		</StackLayout>
 		<Label text="{{L('EmailAddress')}}"/>
 		<Label id="emailLabel" text="emailAddress"/>
+=======
+				<StackLayout orientation="horizontal" horizontal-alignment="center">
+					<Label text="Role:"/>
+					<Label id="userRoleLabel" text="{{ role }}"/>
+				</StackLayout>
+			</StackLayout>
+		</StackLayout>
+		<StackLayout orientation="horizontal">
+			<Label text="Email address:"/>
+			<Label id="emailLabel" text="{{ emailAddress }}"/>
+		</StackLayout>
+>>>>>>> 8ebe42f1a214ae26c36991217c02de9f7733e859
 	</StackLayout>
 </Page>

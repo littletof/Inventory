@@ -1,4 +1,5 @@
 const TabsViewModel = require("./tabs-view-model");
+const topmost = require("ui/frame").topmost;
 
 /* ***********************************************************
 * Use the "onNavigatingTo" handler to initialize data for the whole tab
@@ -16,6 +17,18 @@ function onNavigatingTo(args) {
 
     const page = args.object;
     page.bindingContext = new TabsViewModel();
+}
+
+exports.onAddBtnTap = function(){
+    topmost().navigate({
+        moduleName: "detail_pages/new_device/new_device",
+        animated: true,
+        transition: {
+            name: "slideTop",
+            duration: 200,
+            curve: "ease"
+        }
+    });	
 }
 
 /* ***********************************************************

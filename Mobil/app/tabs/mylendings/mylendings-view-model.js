@@ -24,6 +24,7 @@ function MyLendingsViewModel(items) {
             var matches = [];
             console.log("user adatai:"+JSON.stringify(result.value));
             var item=result.value;
+			var itemID=result.key;
             if (result.type === "ChildAdded") {
                 if(result.value.user_id==currentUserId){
 
@@ -49,6 +50,7 @@ function MyLendingsViewModel(items) {
     
     
                         viewModel.push({
+							id: itemID,
                             deviceName:device.value[uid].name,
                             interval:month0+"."+date0+" "+hour0+":"+min0+" - "+month1+"."+date1+" "+hour1+":"+min1,
                             quantity:item.device_quantity

@@ -17,6 +17,7 @@ function DevicesViewModel(items) {
                         description:device.description,
                         id:result.key,
                         name:device.name,
+                        available:device.quantity_available,
                         img:imgUrl
                     });
     

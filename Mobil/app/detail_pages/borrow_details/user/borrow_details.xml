@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <Page class="page" loaded="loaded">
 	<ActionBar class="action-bar">
 		<Label text="{{L('BorrowDetails')}}" class="action-bar-title" />
