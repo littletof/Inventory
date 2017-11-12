@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {AuthService} from "../backend-services/auth.service";
+import {NgForm} from "@angular/forms";
 
 
 const defDayDiff = 1;
@@ -55,4 +56,21 @@ export class LendDeviceDialogComponent implements OnInit {
       }
 
   }
+
+    onSubmit(f: NgForm) {
+        //console.log(f.value);  // { first: '', last: '' }
+        //console.log(f.valid);  // false
+        if(f.valid && this.isValid()){
+            this.closeDialog(true);
+        }
+    }
+
+    private isValid(): boolean{
+      //console.log(this.endDate.getTime()-this.startDate.getTime());
+      if(this.endDate.getTime()-this.startDate.getTime() > 0 && this.numberOfDevices >=1 && this.numberOfDevices <= this.data.quantity_available){
+          return true;
+      }
+
+      return false;
+    }
 }
