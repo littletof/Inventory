@@ -71,10 +71,6 @@ export class FirebaseDatabaseService implements DatabaseService{
         this.db.list('devices').push(device);
   }
 
-  editDevice(): any{
-
-  }
-
   getDevice(key): any{
         return this.db.object('devices/' + key).snapshotChanges();
   }
@@ -118,27 +114,13 @@ export class FirebaseDatabaseService implements DatabaseService{
 
             }
         });
-
-
-
-
-
-
-      /*console.log("now", data.payload.val());
-      if(data.payload.val() >0) {
-
-          this.db.object('devices/' + lendEntry.device_id + "/quantity_available").set(data.payload.val() - 1);
-
-      }*/
-
-/*
-
-          */
   }
 
-  refreshQuantity(id, value){
+  returnLendDevice(lendData){
+      console.log(lendData);
 
   }
+
 
   getLendingsOfUser(userkey): any{
       let reff = this.db.list<LendEntry>("lendings/present_lendings/", ref => ref.orderByChild('user_id').equalTo(userkey));

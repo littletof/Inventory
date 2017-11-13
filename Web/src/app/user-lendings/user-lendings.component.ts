@@ -63,8 +63,8 @@ export class UserLendingsComponent implements OnInit {
       });
   }
 
-  returnDevice(lending){
-      console.log("return ", lending);
+  returnDevice(lendData){
+      this.db.returnLendDevice(lendData);
   }
 
   private getLendState(today, enddate){
