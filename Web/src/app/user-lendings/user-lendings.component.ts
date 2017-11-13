@@ -56,10 +56,9 @@ export class UserLendingsComponent implements OnInit {
           data,
           width: '50%'
       });
-      dialogref.afterClosed().subscribe(value => {
-          //console.log('Lending returned with: ', value);
-          if (value != null) {
-
+      dialogref.afterClosed().subscribe(returnLend => {
+          if (returnLend != null) {
+                this.returnDevice(returnLend);
           }
       });
   }

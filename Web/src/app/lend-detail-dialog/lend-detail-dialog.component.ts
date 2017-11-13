@@ -16,7 +16,7 @@ export class LendDetailDialogComponent implements OnInit {
 
 
   closeDialog(ret = null){
-      this.dialogRef.close();
+      this.dialogRef.close(ret);
   }
 
 }
