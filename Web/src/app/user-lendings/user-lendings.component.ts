@@ -43,7 +43,7 @@ export class UserLendingsComponent implements OnInit {
                 ret.state = this.getLendState(this.today, ret.lend.end_date);
 
 
-                 console.log(ret);
+                 //console.log(ret);
                 return ret;
             });
         })
@@ -62,6 +62,10 @@ export class UserLendingsComponent implements OnInit {
 
           }
       });
+  }
+
+  returnDevice(lending){
+      console.log("return ", lending);
   }
 
   private getLendState(today, enddate){
