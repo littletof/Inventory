@@ -9,6 +9,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 export class DeviceInfoDialogComponent implements OnInit {
 
   displayTags: string[];
+  img: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceInfoDialogComponent>) {
 
@@ -16,6 +17,8 @@ export class DeviceInfoDialogComponent implements OnInit {
     for(let propName in data.tags){
         this.displayTags.push(propName);
     }
+
+    this.img = data.key;
 
   }
 

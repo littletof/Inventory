@@ -42,9 +42,9 @@ import { LendDetailDialogComponent } from './lend-detail-dialog/lend-detail-dial
 import { DeviceEditDialogComponent } from './device-edit-dialog/device-edit-dialog.component';
 import { DeviceTagsFilterPipe } from './device-tags-filter.pipe';
 
+import { QRCodeModule } from 'angular2-qrcode';
 
 
-;
 
 
 @NgModule({
@@ -95,7 +95,9 @@ import { DeviceTagsFilterPipe } from './device-tags-filter.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule,
+
+    QRCodeModule
   ],
   providers: [{provide: DatabaseService, useClass: FirebaseDatabaseService},
       { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService,

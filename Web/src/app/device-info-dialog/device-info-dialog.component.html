@@ -1,13 +1,13 @@
 
 
-<h2 mat-card-title class="dialog-title">{{data.name}}</h2>
+<h2 mat-card-title class="dialog-title">{{data.name}} </h2>
 <mat-divider></mat-divider>
 
 
 <mat-dialog-content class="flex">
 <h4>Available quantity:</h4>
 <span class="indent">{{data.quantity_total}}/{{data.quantity_available}}</span>
-
+<span><qr-code [value]=img [size]="80" ></qr-code></span>
 
 
 <h4>Description:</h4>
