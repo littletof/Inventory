@@ -1,6 +1,8 @@
 require("./bundle-config");
+
 require('globals');
 require('nativescript-i18n');
+
 const application = require("application");
 
 var imageCache = require("nativescript-web-image-cache");

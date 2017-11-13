@@ -1,16 +1,16 @@
 <Page loaded="loaded">
 <Page.actionBar>
       <ActionBar class="action-bar" >
-        <Label text="Sign Up" class="action-bar-title" />
+        <Label text="{{L('SignUp')}}" class="action-bar-title" />
       </ActionBar>
   </Page.actionBar>
     <StackLayout orientation="vertical">
-        <TextField id="name" text="{{name}}" hint="Name"/>
-        <TextField id="email" text="{{email}}" hint="Email Address" keyboardType="email" autocorrect="false"
+        <TextField id="name" text="{{name}}" hint="{{L('Name')}}"/>
+        <TextField id="email" text="{{email}}" hint="{{L('EmailAddress')}}" keyboardType="email" autocorrect="false"
         autocapitalizationType="none"/>
-        <TextField id="password" text="{{password}}" hint="Password" secure="true"/>
-        <TextField id="retypedPassword" hint="Re-type password" secure="true"/>
+        <TextField id="password" text="{{password}}" hint="{{L('Password')}}" secure="true"/>
+        <TextField id="retypedPassword" hint="{{L('ReTypePassword')}}" secure="true"/>
 
-        <Button text="Register" tap="register" />
+        <Button text="{{L('Register')}}" tap="register" />
     </StackLayout>
 </Page>

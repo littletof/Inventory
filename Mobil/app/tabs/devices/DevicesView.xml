@@ -7,12 +7,15 @@
 						<GridLayout columns="auto,*" rows="150">
 							<Image src="{{ image,image }}" height="100" width="100" />
 							<StackLayout  col="1">
-								<Label class="name" height="30" text="{{ name, name }}" textWrap="true"  />
-								<Label style="color:black" text="{{ 'available:'+ available }}" height="20"  />
+								<Label class="name" height="35" text="{{ name, name }}" textWrap="true"  />
+								<StackLayout orientation="horizontal">
+									<Label text="{{L('QuantityAvailable')}}" marginRight="2%"/>
+									<Label style="color:black" text="{{ available }}" height="20"  />									
+								</StackLayout>
 								<Label text="{{ description, description }}"   />
 								<GridLayout columns="auto,*" rows="60">
-									<Button  text="Details" device="{{ id, id }}" col="0" tap="onDetails" />
-									<Button  text="Borrow" device="{{ id, id }}" col="1" tap="onBorrow" />
+									<Button  text="{{L('Details')}}" device="{{ id, id }}" col="0" tap="onDetails" />
+									<Button  text="{{L('Borrow')}}" device="{{ id, id }}" col="1" tap="onBorrow" />
 								</GridLayout>
 							</StackLayout>
 						</GridLayout>

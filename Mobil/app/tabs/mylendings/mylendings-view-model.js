@@ -53,7 +53,7 @@ function MyLendingsViewModel(items) {
 							id: itemID,
                             deviceName:device.value[uid].name,
                             interval:month0+"."+date0+" "+hour0+":"+min0+" - "+month1+"."+date1+" "+hour1+":"+min1,
-                            quantity:"quantity borrowed:"+item.device_quantity
+                            quantity:item.device_quantity
                         });
                     }
                     }

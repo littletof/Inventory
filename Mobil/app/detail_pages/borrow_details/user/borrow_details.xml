@@ -1,6 +1,6 @@
 <Page class="page" navigatingTo="onNavigatingTo">
 	<ActionBar class="action-bar">
-		<Label text="Borrow Details" class="action-bar-title" />
+		<Label text="{{L('BorrowDetails')}}" class="action-bar-title" />
 	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
 	</ActionBar>
 	<ScrollView>
@@ -15,11 +15,11 @@
 						<Label id="overdueStateLabel" text="{{ overdue }}"/>
 					</StackLayout>
 			</StackLayout>
-			<Label text="Date of Borrow:"/>
+			<Label text="{{L('DateOfBorrow')}}"/>
 			<Label id="startDateLabel" text="{{ start_date }}"/>
-			<Label text="Deadline:"/>
+			<Label text="{{L('Deadline')}}"/>
 			<Label id="deadlineLabel" text="{{ end_date }}"/>
-			<Label text="Comment:"/>
+			<Label text="{{L('Comment')}}"/>
 			<Label id="commentLabel" text="{{ comment }}"/>
 		</StackLayout>
 	</ScrollView>
