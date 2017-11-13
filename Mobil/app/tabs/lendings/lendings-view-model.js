@@ -41,7 +41,7 @@ function Lendings(items) {
 									id: borrowID,
                                     deviceName:device.value[uid].name,
                                     interval:month0+"."+date0+" - "+month1+"."+date1,
-                                    quantity:"quantity borrowed:"+borrowing.device_quantity
+                                    quantity:borrowing.device_quantity
                                 });
                             }
                         }
