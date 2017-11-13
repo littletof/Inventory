@@ -1,14 +1,6 @@
 <Page class="page" navigatingTo="onNavigatingTo">
-    <Page.actionBar>
-         <ActionBar title="{{L('EditDeviceDetails')}}">
-			<ActionBar.actionItems>
-                <ActionItem ios.systemIcon="1" android.systemIcon = "ic_menu_close_clear_cancel" tap="onCancelBtnTap"/>
-                <ActionItem ios.systemIcon="0" android.systemIcon = "ic_menu_save" tap="onDoneBtnTap"/>
-            </ActionBar.actionItems>
-         </ActionBar>
-    </Page.actionBar>
 	<ActionBar class="action-bar">
-		<Label text="Edit Device Details" class="action-bar-title" />
+		<Label text="{{L('EditDeviceDetails')}}" class="action-bar-title" />
 		<ActionBar.actionItems>
 			<ActionItem ios.systemIcon="1" android.systemIcon = "ic_menu_close_clear_cancel" tap="onCancelBtnTap"/>
 			<ActionItem ios.systemIcon="0" android.systemIcon = "ic_menu_save" tap="onDoneBtnTap"/>

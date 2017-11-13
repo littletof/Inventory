@@ -1,5 +1,7 @@
 const observableModule = require("data/observable");
 var firebase = require("nativescript-plugin-firebase");
+var frameModule = require("ui/frame");
+const topmost = frameModule.topmost;
 var alert = require("ui/dialogs").alert;
 
 var device = new observableModule.fromObject({
@@ -43,9 +45,11 @@ exports.getData = function(deviceID){
         errorMessage => {
           alert({
             title: "Query error",
-            message: errorMessage,
+            message: "No Such Device!",
             okButtonText: "OK, pity!"
           });
+		topmost().goBack();
+		  
         }
     );
 	return device;

@@ -1,21 +1,27 @@
 var frameModule = require("ui/frame");
 var topmost = frameModule.topmost();
 const userDetailViewModel = require("./user_details-view-model");
-var page;
 
+
+var page;
+var user;
 
 exports.onNavBtnTap = function(args){
 	topmost.goBack();
 }
 
 exports.onDelBtnTap = function(args){
+	userDetailViewModel.deleteData(user.userID);
 }
 
 exports.showBorrows = function(){
 }
 
 exports.onNavigatingTo = function(args) {
-	const page = args.object;
+	page = args.object;
 
-    page.bindingContext = new userDetailViewModel(page.navigationContext);
+	
+	user = userDetailViewModel.getData(page.navigationContext.id);
+	
+    page.bindingContext = user;
 };

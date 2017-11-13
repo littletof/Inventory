@@ -8,7 +8,7 @@
                         <Label text="{{ interval, interval }}"  />
                         <StackLayout orientation="horizontal">
                             <Label text="{{L('Quantity')}}" marginRight="2%"/>
-                            <Label text="{{ quantity, quantity }}"  />
+                            <Label text="{{ quantity, quantity }}"/>                                                
                         </StackLayout>
                         <!--<Button  text="Details" device="{{ deviceID, deviceID }}" tap="onDetails" row="3" col="0" height="60"/>-->
                     </StackLayout>

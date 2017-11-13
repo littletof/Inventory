@@ -80,7 +80,8 @@ export class DevicesComponent implements OnInit {
     }
 
     openSnack(value){
-        this.snackBar.open("You successfully borrowed " +value.device_quantity + " x " + value.device_name , null, {
+        console.log(value);
+        this.snackBar.open("You successfully borrowed " +value.device_number + " x " + value.device_name , null, {
             duration: 5000
         });
     }

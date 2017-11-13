@@ -11,7 +11,6 @@ import {LendEntry} from "../lend-entry";
 
 
 
-
 @Injectable()
 export class FirebaseDatabaseService implements DatabaseService{
 
@@ -150,7 +149,6 @@ export class FirebaseDatabaseService implements DatabaseService{
 
       });
   }
-
 
   getLendingsOfUser(userkey): any{
       let reff = this.db.list<LendEntry>("lendings/present_lendings/", ref => ref.orderByChild('user_id').equalTo(userkey));

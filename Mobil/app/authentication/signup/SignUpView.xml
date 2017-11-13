@@ -10,6 +10,7 @@
         autocapitalizationType="none"/>
         <TextField id="password" text="{{password}}" hint="{{L('Password')}}" secure="true"/>
         <TextField id="retypedPassword" hint="{{L('ReTypePassword')}}" secure="true"/>
+
         <Button text="{{L('Register')}}" tap="register" />
     </StackLayout>
 </Page>

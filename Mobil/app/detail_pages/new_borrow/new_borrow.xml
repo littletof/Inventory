@@ -16,7 +16,7 @@
 			<Label text="{{L('Comment')}}"/>
 			<TextView id="commentTV" text="{{ comment }}"/>
 			<StackLayout orientation="horizontal">
-				<Label text="{{L('Quantity')}}"/>
+				<Label text="{{L('AmountBorrowed')}}"/>
 				<Label text="{{ quantity_borrowed }}"/>
 			</StackLayout>
 			<Slider value="{{ quantity_borrowed }}" minValue="0" maxValue="{{ quantity_available }}" style="caret-color:#2E7D32"/>

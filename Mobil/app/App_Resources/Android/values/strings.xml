@@ -38,4 +38,5 @@
 	<string name="PastBorrows">Past borrows</string>	
 	<string name="Role">Role</string>
 	<string name="BorrowUntil">Borrow until</string>
+	<string name="NewDevice">New device</string>
 </resources>

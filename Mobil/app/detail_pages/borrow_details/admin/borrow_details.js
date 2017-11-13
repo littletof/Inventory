@@ -1,18 +1,21 @@
-var dialogsModule = require("ui/dialogs");
-var observableModule = require("data/observable");
-var frameModule = require("ui/frame");
-var topmost = frameModule.topmost();
-var ObservableArray = require("data/observable-array").ObservableArray;
-var page;
+const topmost = require("ui/frame").topmost;
+const borrowDetailsViewModel = require("./borrow_details-view-model");
 
+var page;
+var borrow;
 
 exports.onNavBtnTap = function(args){
-	topmost.goBack();
+    topmost().goBack();
 }
 
 exports.closeBorrow = function(){
+	borrowDetailsViewModel.closeBorrow();
+	topmost().goBack();
 }
 
-exports.loaded = function(args) {
+exports.onNavigatingTo = function(args) {
     page = args.object;
+	
+	borrow = borrowDetailsViewModel.getData(page.navigationContext.id);
+	page.bindingContext = borrow;
 };
