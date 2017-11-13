@@ -6,10 +6,10 @@
 
 						<GridLayout columns="auto,*" rows="120" onTap="onDetails">
 							<Image src="{{ image,image }}" width="100" height="100" /> 
-							<StackLayout  col="1">
-								<Label class="name" height="35" text="{{ name, name }}"   />
+							<StackLayout  col="1" >
+								<Label class="name" height="35" text="{{ name, name }}" width="100%"   />
 								<Label style="color:black" text="{{ 'available:'+ available }}" height="20"  />
-								<Label text="{{ description, description }}" textWrap="true"  />								
+								<Label text="{{ description, description }}" textWrap="true" width="100%" marginBottom="3%" />								
 							</StackLayout>
 						</GridLayout>
 					</ListView.itemTemplate>
