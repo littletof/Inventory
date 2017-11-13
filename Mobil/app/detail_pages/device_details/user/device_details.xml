@@ -8,15 +8,15 @@
 	<ScrollView>
 		<StackLayout orientation="vertical">
 				<Image width="500px" height="500px" src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png" horizontalAlignment="center"/>
-			<Label text="{{L('Description')}}"/>
+			<Label text="Description"/>
 			<Label id="descriptionLabel" text="{{ description }}"/>
 			<StackLayout>
-				<Label text="{{L('QuantityAvailable')}}"/>
+				<Label text="Quantity available:"/>
 				<Label id="quantityAvailableLabel" text="{{ quantity_available }}"/>
-				<Label text="{{L('TotalQuantity')}}"/>
+				<Label text="Total Quantity:"/>
 				<Label id="totalQuantityLabel" text="{{ quantity_total }}"/>
 			</StackLayout>
-			<Button id="borrowButton" text="{{L('Borrow')}}" width="500px" tap="onBorrowButtonTapped" />
+			<Button id="borrowButton" text="Borrow this item" width="500px" tap="onBorrowButtonTapped" />
 		</StackLayout>
 	</ScrollView>
 	

@@ -4,8 +4,15 @@ var ObservableArray = require("data/observable-array").ObservableArray;
 var frameModule = require("ui/frame");
 const topmost = frameModule.topmost;
 var firebase = require("nativescript-plugin-firebase");
+var BarcodeScanner = require("nativescript-barcodescanner").BarcodeScanner;
 
 var deviceList = new DevicesViewModel([]);
+
+
+var barcodeScanner = new BarcodeScanner();
+var scannedDevice = new observableModule.fromObject({
+	'id': ""
+});
 
 
 var pageData = new observableModule.fromObject({
@@ -49,10 +56,11 @@ exports.onDetails=function(args){
 	});
 }
 
-exports.onFLTTap=function(args){
-    console.log(args.object.device);
+
+function afterScan(){
     topmost().navigate({
-        moduleName: "detail_pages/new_device/new_device",
+        moduleName: "detail_pages/device_details/user/device_details",
+        context: scannedDevice,
         animated: true,
         transition: {
             name: "slideTop",
@@ -60,15 +68,28 @@ exports.onFLTTap=function(args){
             curve: "ease"
         }
     });
-	
+}
+
+exports.onFLTTap=function(args){
+    barcodeScanner.scan({
+        formats: "QR_CODE, EAN_13",
+        showFlipCameraButton: true,   
+        preferFrontCamera: false,     
+        showTorchButton: true,        
+        beepOnScan: true,             
+        torchOn: false,               
+        resultDisplayDuration: 500,
+        openSettingsIfPermissionWasPreviouslyDenied: true //ios only 
+    }).then((result) => {
+		scannedDevice.set("id", result.text);
+		afterScan();
+        }, (errorMessage) => {
+            console.log("Error when scanning " + errorMessage);
+        }
+    );
 
 }
 
-exports.onFLTTouch=function(args){
-    console.log(args.object.device);
-	
-
-}
 
 exports.onBorrow=function(args){
     console.log(args.object.device);

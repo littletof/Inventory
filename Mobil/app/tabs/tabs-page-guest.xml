@@ -3,7 +3,7 @@
 
     <Page.actionBar>
         <ActionBar class="action-bar">
-          <Label text="{{L('Devices')}}" class="action-bar-title" />
+          <Label text="Devices" class="action-bar-title" />
         </ActionBar>
     </Page.actionBar>
 

@@ -6,10 +6,10 @@
 
 <div class="row">
   <mat-dialog-content class="flex">
-    <form #lendForm="ngForm">
+    <div>
 
       <mat-form-field style="width: 43%">
-        <input matInput [matDatepicker]="startdate" placeholder="Start date" disabled [(ngModel)]="startDate" name="startDate">
+        <input matInput [matDatepicker]="startdate" placeholder="Start date" disabled [(ngModel)]="startDate">
         <!--<mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>-->
         <mat-datepicker #startdate></mat-datepicker>
       </mat-form-field>
@@ -17,29 +17,30 @@
       -
 
       <mat-form-field style="width: 48%">
-        <input matInput [matDatepicker]="enddate" placeholder="Choose the end date" [(ngModel)]="endDate" name="endDate" [min]="minDate" required>
+        <input matInput [matDatepicker]="enddate" placeholder="Choose the end date" [(ngModel)]="endDate" [min]="minDate" required>
         <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
         <mat-datepicker #enddate></mat-datepicker>
       </mat-form-field>
 
 
       <mat-form-field>
-        <input matInput type="number" placeholder="Number of devices" [(ngModel)]="numberOfDevices" name="numberOfDevices" required  max="{{data.quantity_total}}" min="1">
+        <input matInput type="number" placeholder="Number of devices" [(ngModel)]="numberOfDevices" required >
       </mat-form-field>
 
       <mat-form-field style="width: 100%">
-        <textarea matInput placeholder="Comment" [(ngModel)]="comment" name="comment" rows="5"></textarea>
+        <textarea matInput placeholder="Comment" [(ngModel)]="comment" rows="5"></textarea>
 
       </mat-form-field>
 
-    </form>
+
+    </div>
   </mat-dialog-content>
 </div>
 
 
 <mat-dialog-actions>
-  <button mat-raised-button (click)="closeDialog()" color="warn" >Cancel</button>
+  <button mat-raised-button (click)="closeDialog()" color="warn">Cancel</button>
   <!-- Can optionally provide a result for the closing dialog. -->
   <!--<button mat-button [mat-dialog-close]="true">Yes</button>-->
-  <button mat-raised-button (click)="onSubmit(lendForm)" color="accent">Lend</button>
+  <button mat-raised-button (click)="closeDialog(true)" color="accent">Lend</button>
 </mat-dialog-actions>

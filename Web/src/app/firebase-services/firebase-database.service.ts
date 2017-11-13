@@ -2,23 +2,24 @@ import { Injectable } from '@angular/core';
 
 
 
-import {AngularFireDatabase} from "angularfire2/database";
-import { Observable } from 'rxjs/Rx';
+import {AngularFireDatabase, DatabaseReference} from "angularfire2/database";
+import { Observable } from 'rxjs/Observable';
 import {User} from "../user";
 import {Device} from "../device";
 import {DatabaseService} from "../backend-services/database.service";
 import {LendEntry} from "../lend-entry";
 
+import * as _ from "lodash";
 
 
 @Injectable()
 export class FirebaseDatabaseService implements DatabaseService{
 
   users: any[] = [];
-
+  usersObs: Observable<any[]>;
 
   devices: any[] = [];
-
+  devicesObs: Observable<any[]>;
 
     access_db = null;
 
@@ -96,48 +97,16 @@ export class FirebaseDatabaseService implements DatabaseService{
 
       };
 
-        let devref =this.db.database.ref('devices/'+lendEntry.device_id);
-
-        devref.transaction(data => {
-            /*Available quantity decreasing*/
-            if(data.quantity_available - lendEntry.device_quantity >= 0) {
-                devref.update({quantity_available: data.quantity_available - lendEntry.device_quantity});
+      this.db.list('lendings/present_lendings').push(lendEntry)
+          .then(value => {
 
 
-                /*add new lend entry*/
-                this.db.list('lendings/present_lendings').push(lendEntry)
-                    .then(value => {
-                        //this.db.list('users/'+ lendData.user_id + '/present_lendings').push(value.key);
+              //this.db.list('users/'+ lendData.user_id + '/present_lendings').push(value.key);
 
-                        /*add lend to user*/
-                        this.db.object('users/'+ lendData.user_id + '/present_lendings/'+value.key).set(true);
+              this.db.object('users/'+ lendData.user_id + '/present_lendings/'+value.key).set(true);
 
 
-                    });
-
-
-            }
-        });
-
-
-
-
-
-
-      /*console.log("now", data.payload.val());
-      if(data.payload.val() >0) {
-
-          this.db.object('devices/' + lendEntry.device_id + "/quantity_available").set(data.payload.val() - 1);
-
-      }*/
-
-/*
-
-          */
-  }
-
-  refreshQuantity(id, value){
-
+          });
   }
 
   getLendingsOfUser(userkey): any{

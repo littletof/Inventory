@@ -33,13 +33,13 @@
         </TabViewItem>
         -->
 
-        <TabViewItem title="{{L('Devices')}}" >
+        <TabViewItem title="Devices" >
           <TabViewItem.view>
              <devices:DevicesView/>
           </TabViewItem.view>
         </TabViewItem> 
 
-        <TabViewItem title="{{L('MyLendings')}}">
+        <TabViewItem title="My Lendings">
           <TabViewItem.view>
              <mylendings:MyLendingsView/>
           </TabViewItem.view>

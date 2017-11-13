@@ -6,10 +6,7 @@
                     <StackLayout col="1">
                         <Label text="{{ deviceName, deviceName }}" class="name" />
                         <Label text="{{ interval, interval }}" style.fontSize="14"/>
-                        <StackLayout orientatio="horizontal">
-                            <Label text="{{L('Quantity')}}" marginRight="2%"/>
-                            <Label text="{{ quantity, quantity }}" style.fontSize="14"/>                                                    
-                        </StackLayout>
+                        <Label text="{{ quantity, quantity }}" style.fontSize="14"/>                        
                         </StackLayout>
                 </GridLayout>             
             </ListView.itemTemplate>
