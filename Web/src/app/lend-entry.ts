@@ -44,14 +44,14 @@ export class LendEntry {
             end_date: new Date(js.end_date), device_quantity: js.device_quantity, comment: js.comment};
     }
 
-    getJSON(): any{
+    static getJSON(from): any{
         let lendEntry = {
-            user_id: this.user_id,
-            device_id: this.device_id,
-            start_date: this.start_date.getTime(),
-            end_date: this.end_date.getTime(),
-            device_quantity: this.device_quantity,
-            comment: this.comment
+            user_id: from.user_id,
+            device_id: from.device_id,
+            start_date: from.start_date.getTime(),
+            end_date: from.end_date.getTime(),
+            device_quantity: from.device_quantity,
+            comment: from.comment
 
         };
 

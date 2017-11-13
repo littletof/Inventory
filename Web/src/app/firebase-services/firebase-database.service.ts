@@ -11,6 +11,7 @@ import {LendEntry} from "../lend-entry";
 
 
 
+
 @Injectable()
 export class FirebaseDatabaseService implements DatabaseService{
 
@@ -117,8 +118,37 @@ export class FirebaseDatabaseService implements DatabaseService{
   }
 
   returnLendDevice(lendData){
-      console.log(lendData);
+      let lendKey = lendData.lend.key;
+      let shouldSave = LendEntry.getJSON(lendData.lend);
+      delete shouldSave.key;
 
+      let lendingRef = this.db.database.ref('lendings');
+      let userRef = this.db.database.ref('users').child(lendData.lend.user_id);
+      let deviceRef = this.db.database.ref('devices').child(lendData.lend.device_id);
+
+      //lendingRef.child('present_lendings').child(lendData.lend.key)
+
+
+
+      lendingRef.transaction(data => {
+          //Remove from present
+          lendingRef.child('present_lendings').child(lendKey).set({});
+          userRef.child('present_lendings').child(lendKey).set({});
+
+          //Move to past
+          lendingRef.child('past_lendings').child(lendKey).set(shouldSave);
+          userRef.child('past_lendings').child(lendKey).set(true);
+
+          //Increase number
+          deviceRef.transaction(data => {
+             let newValue = Math.min(data.quantity_available+shouldSave.device_quantity, data.quantity_total);
+             console.log("min value of ", data.quantity_available+shouldSave.device_quantity," ",data.quantity_total);
+
+             deviceRef.child('quantity_available').set(newValue);
+          });
+
+
+      });
   }
 
 
