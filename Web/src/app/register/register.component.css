@@ -19,6 +19,7 @@
 .center-all > * {
     margin-left: auto;
     margin-right: auto;
+    display: block;
 }
 
 .title {
