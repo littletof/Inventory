@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatChipInputEvent, MatDialogRef} from "@angular/materia
 import { SPACE} from "@angular/cdk/keycodes";
 import {Device} from "../device";
 import {DatabaseService} from "../backend-services/database.service";
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-device-edit-dialog',
@@ -17,8 +18,10 @@ export class DeviceEditDialogComponent implements OnInit {
     device_description: string = "";
     device_tags = {};
 
+    default_device_quantity = 1;
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceEditDialogComponent>, public db: DatabaseService) {
+        this.device_quantity = this.default_device_quantity;
     }
 
     ngOnInit() {
@@ -28,13 +31,22 @@ export class DeviceEditDialogComponent implements OnInit {
         this.dialogRef.close(ret);
     }
 
+    isValid(): boolean{
+        if(this.device_quantity>0 && this.device_name.trim() != ""){
+            return true;
+        }
+        return false;
+    }
 
-    addDevice(){
-        let device = this.prepareDevice();
-        //console.log(device);
-        this.db.addDevice(device);
+    addDevice(f: NgForm){
+        if(f.valid && this.isValid()) {
 
-        this.closeDialog();
+            let device = this.prepareDevice();
+            //console.log(device);
+            this.db.addDevice(device);
+
+            this.closeDialog();
+        }
     }
 
     prepareDevice() : Device {
