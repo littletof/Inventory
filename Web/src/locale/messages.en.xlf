@@ -2,6 +2,15 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="navLogout" datatype="html">
+        <source>Logout <x id="START_TAG_MAT-ICON" ctype="x-mat-icon"/>exit_to_app<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app\app.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">Logout btn</note>
+        <note priority="1" from="meaning">logout btn</note>
+      </trans-unit>
       <trans-unit id="navLoginButton" datatype="html">
         <source>Login</source>
         <context-group purpose="location">

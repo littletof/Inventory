@@ -2,8 +2,16 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="en" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="navLogout" datatype="html">
+        <target>Kijelentkezés <x id="START_TAG_MAT-ICON" ctype="x-mat-icon"/>exit_to_app<x id="CLOSE_TAG_MAT-ICON" ctype="x-mat-icon"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app\app.component.ts</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description">Logout btn</note>
+        <note priority="1" from="meaning">logout btn</note>
+      </trans-unit>
       <trans-unit id="navLoginButton" datatype="html">
-        <source>Login</source>
         <target>Bejelentkezés</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app\app.component.ts</context>
@@ -13,7 +21,6 @@
         <note priority="1" from="meaning">nav login button</note>
       </trans-unit>
       <trans-unit id="navRegisterButton" datatype="html">
-        <source>Register</source>
         <target>Regisztráció</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app\app.component.ts</context>
@@ -23,8 +30,7 @@
         <note priority="1" from="meaning">nav register button</note>
       </trans-unit>
       <trans-unit id="navHomeButton" datatype="html">
-        <source>Home</source>
-        <target>Home</target>
+        <target>Főoldal</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app\app.component.ts</context>
           <context context-type="linenumber">24</context>
@@ -33,7 +39,6 @@
         <note priority="1" from="meaning">nav home button</note>
       </trans-unit>
       <trans-unit id="navLendingsButton" datatype="html">
-        <source>Lendings</source>
         <target>Kölcsönzések</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app\app.component.ts</context>
@@ -43,7 +48,6 @@
         <note priority="1" from="meaning">nav lendings button</note>
       </trans-unit>
       <trans-unit id="navUsersButton" datatype="html">
-        <source>Users</source>
         <target>Felhasználók</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app\app.component.ts</context>
@@ -53,7 +57,6 @@
         <note priority="1" from="meaning">nav users button</note>
       </trans-unit>
       <trans-unit id="navDevicesButton" datatype="html">
-        <source>Devices</source>
         <target>Eszközök</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app\app.component.ts</context>
