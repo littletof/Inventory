@@ -22,7 +22,6 @@ import {
 import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule} from '@angular/material';
 
 import {AngularFireDatabaseModule} from "angularfire2/database";
-import { SignUpComponent } from './sign-up/sign-up.component';
 import {AngularFireAuthModule} from "angularfire2/auth";
 
 import { FormsModule } from '@angular/forms';
@@ -52,7 +51,6 @@ import { QRCodeModule } from 'angular2-qrcode';
     AppComponent,
     UsersComponent,
     DevicesComponent,
-    SignUpComponent,
     LoginComponent,
     RegisterComponent,
     HomeComponent,
