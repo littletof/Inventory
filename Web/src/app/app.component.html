@@ -5,7 +5,7 @@
     <span *ngIf="this.auth.isLoggedIn()">
 
       <span  class="email">{{
-        this.auth.userDetails.isAnonymous? 'Anonymus':this.auth.userDetails.email
+        anonym ? 'Anonymus' : getEmail()
       }}</span>
 
       <button mat-raised-button color="warn" (click)="logout()" i18n="logout btn|Logout btn@@navLogout">Logout <mat-icon>exit_to_app</mat-icon></button>

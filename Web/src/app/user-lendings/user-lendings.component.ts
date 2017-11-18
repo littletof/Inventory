@@ -30,7 +30,7 @@ export class UserLendingsComponent implements OnInit {
 
 
 
-    this.lendings = this.db.getLendingsOfUser(this.auth.userDetails.uid)
+    this.lendings = this.db.getLendingsOfUser(localStorage.getItem("user"))
         .map(changes => {
             return changes.map(c => {
                 let ret = {lend: LendEntry.fromtoJSON(c), device: {}, state: {}};
@@ -46,8 +46,8 @@ export class UserLendingsComponent implements OnInit {
                  //console.log(ret);
                 return ret;
             });
-        })
-    ;
+        }
+    );
 
   }
 

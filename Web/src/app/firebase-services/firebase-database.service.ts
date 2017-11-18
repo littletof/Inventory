@@ -45,10 +45,10 @@ export class FirebaseDatabaseService implements DatabaseService{
     this.db.list('/users').remove(user);
   }
 
-  getUser(key): Observable<User>{
-    //TODO
-    return null;
-  }
+    getUser(uid: string):any {
+
+        return null;
+    }
 
 
   // -- USERS END --

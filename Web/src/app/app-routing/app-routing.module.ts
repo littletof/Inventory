@@ -14,10 +14,11 @@ const routes: Routes = [
     { path: 'devices', component: DevicesComponent, canActivate: [AGS] },
     { path: 'lendings', component: UserLendingsComponent, canActivate: [AGS] },
 
-    { path: '', redirectTo: '/login', pathMatch: 'full' },
+
 
   { path: 'register',  component: RegisterComponent},
-  { path: 'login',  component: LoginComponent}
+  { path: 'login',  component: LoginComponent},
+    { path: '', redirectTo: '/login', pathMatch: 'full' }
 
 
 
