@@ -24,20 +24,9 @@ function onLoaded(args) {
 
     var component = args.object;
     component.bindingContext = pageData;
-    
 
     deviceList.empty();
     deviceList.load();
-
-        firebase.getCurrentUser().then(
-            function (result) {
-                console.log("anonymous:"+result.anonymous);
-
-            },
-            function (errorMessage) {
-              console.log(errorMessage);
-            }
-          );
 
 }
 

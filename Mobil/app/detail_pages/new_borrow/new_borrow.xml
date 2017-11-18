@@ -1,4 +1,4 @@
-<Page class="page" navigatingTo="onNavigatingTo">
+<Page class="page" navigatingTo="onNavigatingTo" xmlns:nativescript-fresco="nativescript-fresco">
 	<ActionBar class="action-bar">
 	  <Label class="action-bar-title" />
 	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onBackButtonTap"/>
@@ -6,7 +6,7 @@
 	<ScrollView>
 		<StackLayout orientation="vertical">
 			<StackLayout orientation="horizontal" verticalalignment="center">
-					<Image width="300px" height="300px" src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png"/>
+					<nativescript-fresco:FrescoDrawee width="300px" height="300px" imageUri="{{ image }}"/>
 					<StackLayout orientation="vertical" verticalalignment="center" alignment="right">
 						<Label id="itemNameLabel" class="name" text="{{ deviceName }}"/>
 					</StackLayout>

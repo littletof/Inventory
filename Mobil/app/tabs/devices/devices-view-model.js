@@ -17,7 +17,7 @@ function DevicesViewModel(items) {
                     remoteFullPath: device.image+'.png'
                   }).then(
                       function (url) {
-                        console.log("Remote URL: " + url);
+                        //console.log("Remote URL: " + url);
                         
                         viewModel.push({
                             description:device.description,

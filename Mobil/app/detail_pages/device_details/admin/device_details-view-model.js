@@ -7,7 +7,8 @@ var device = new observableModule.fromObject({
 	'deviceName': "<deviceName>",
 	'description': "<deviceDescription>",
 	'quantity_available': "1",
-	'quantity_total': "1"
+  'quantity_total': "1",
+  'image' :""
 });
 
 exports.getData = function(deviceID){
@@ -25,7 +26,20 @@ exports.getData = function(deviceID){
 		  device.set("deviceName", result.value.name);
 		  device.set("description", result.value.description);
 		  device.set("quantity_available", result.value.quantity_available);
-		  device.set("quantity_total", result.value.quantity_total);
+      device.set("quantity_total", result.value.quantity_total);
+
+      firebase.getDownloadUrl({
+        bucket: 'gs://inventory-01.appspot.com/images',
+        remoteFullPath: result.value.image+'.png'
+      }).then(
+          function (url) {
+            console.log("imageid="+url);
+            device.set("image", url);
+          },
+          function (error) {
+            console.log("Error: " + error);
+          }
+      );
       }
     };
     firebase.query(

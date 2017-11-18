@@ -89,6 +89,7 @@ function Lendings(items) {
                 console.log("firebase.addChildEventListener error: " + error);
             }
         )
+        return;
     };
     
     viewModel.empty = function() {

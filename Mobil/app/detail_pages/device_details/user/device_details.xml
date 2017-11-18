@@ -1,4 +1,4 @@
-<Page class="page" navigatingTo="onNavigatingTo">
+<Page class="page" navigatingTo="onNavigatingTo" xmlns:nativescript-fresco="nativescript-fresco">
     <Page.actionBar>
          <ActionBar class="action-bar">
 		 <Label text="{{ deviceName }}" class="action-bar-title" />
@@ -7,7 +7,7 @@
     </Page.actionBar>
 	<ScrollView>
 		<StackLayout orientation="vertical">
-				<Image width="500px" height="500px" src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png" horizontalAlignment="center"/>
+				<nativescript-fresco:FrescoDrawee width="500px" height="500px" imageUri="{{ image }}" horizontalAlignment="center"/>
 			<Label text="{{L('Description')}}"/>
 			<Label id="descriptionLabel" text="{{ description }}"/>
 			<StackLayout>

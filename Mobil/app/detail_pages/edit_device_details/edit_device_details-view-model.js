@@ -27,7 +27,19 @@ exports.getData = function(deviceID){
 		  device.set("description", result.value.description);
 		  device.set("quantity_available", result.value.quantity_available);
 		  device.set("quantity_total", result.value.quantity_total);
-		  device.set("tags", result.value.tags);
+      device.set("tags", result.value.tags);
+      firebase.getDownloadUrl({
+        bucket: 'gs://inventory-01.appspot.com/images',
+        remoteFullPath: result.value.image+'.png'
+      }).then(
+          function (url) {
+            console.log("imageid="+url);
+            device.set("image", url);
+          },
+          function (error) {
+            console.log("Error: " + error);
+          }
+      );
       }
     };
     firebase.query(
