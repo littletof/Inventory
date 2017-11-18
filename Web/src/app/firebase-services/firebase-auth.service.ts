@@ -25,6 +25,7 @@ export class FirebaseAuthService implements AuthService {
           if(user){
               this.userDetails = user;
               localStorage.setItem("user", user.uid);
+
               if(user.isAnonymous) {
                   localStorage.setItem("anonym", "true");
               }else{
@@ -33,7 +34,7 @@ export class FirebaseAuthService implements AuthService {
           }else{
               this.userDetails = null;
               localStorage.removeItem("user");
-              localStorage.removeItem("anonym")
+              localStorage.removeItem("anonym");
           }
       });
 
