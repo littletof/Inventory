@@ -1,8 +1,8 @@
-<Page loaded="onLoaded">
+<Page loaded="onLoaded" xmlns:nativescript-fresco="nativescript-fresco">
         <ListView items="{{ lendings }}" id="lendings" itemTap="onTap">
             <ListView.itemTemplate>
                 <GridLayout columns="auto, *" rows="auto">
-                    <Image src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png" stretch="none"  width="72" height="72"/>
+                    <nativescript-fresco:FrescoDrawee imageUri="{{ image }}" stretch="none"  width="72" height="72"/>
                     <StackLayout col="1">
                         <Label text="{{ deviceName, deviceName }}" class="name" />
                         <Label text="{{ interval, interval }}" style.fontSize="14"/>
