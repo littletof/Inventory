@@ -4,8 +4,13 @@ var ObservableArray = require("data/observable-array").ObservableArray;
 
 function DevicesViewModel(items) {
     var viewModel= new ObservableArray(items);
+	
+	
+    viewModel.load = function(tagStr) {
 
-    viewModel.load = function() {
+		tagStr = tagStr.toLowerCase();
+		let tags = tagStr.split(" ");
+		
         var onChildEvent = function(result) {
             var matches = [];
             var device=result.value;
@@ -17,15 +22,33 @@ function DevicesViewModel(items) {
                     remoteFullPath: device.image+'.png'
                   }).then(
                       function (url) {
-                        //console.log("Remote URL: " + url);
+                        console.log("Remote URL: " + url);
                         
-                        viewModel.push({
-                            description:device.description,
-                            id:result.key,
-                            name:device.name,
-                            image:url,
-                            available:device.quantity_available
-                        });
+						if(tagStr == ""){
+							viewModel.push({
+								description:device.description,
+								id:result.key,
+								name:device.name,
+								image:url,
+								available:device.quantity_available
+							});
+						}else{
+							let found = true;
+							var objTags = Object.keys(device.tags);
+							for(var i = 0; i<tags.length; i++){
+								if(objTags.indexOf(tags[i]) > -1 || device.name.toLowerCase().indexOf(tags[i]) > -1){}else{found = false;}
+							}
+							if(found == true){
+								viewModel.push({
+									description:device.description,
+									id:result.key,
+									name:device.name,
+									image:url,
+									available:device.quantity_available
+								});
+							}
+							
+						}
                     },
                       function (error) {
                         console.log("Error: " + error);

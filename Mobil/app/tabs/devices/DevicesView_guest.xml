@@ -1,6 +1,11 @@
 <Page loaded="onLoaded" xmlns:nativescript-fresco="nativescript-fresco">
 <AbsoluteLayout>
 		<ScrollView width="100%" height="100%">
+			<StackLayout orientation="vertical" width="100%" height="100%">
+				<StackLayout orientation="horizontal">
+					<TextView  id="searchTV" text="{{ tagsStr }}" width="75%"/>
+					<Button  id="searchBtn" text="{{L('Search')}}" tap="onSearch" />
+				</StackLayout>
 			<ListView id="deviceList" items="{{ deviceList }}" >
 					<ListView.itemTemplate>
 
@@ -17,6 +22,7 @@
 						</GridLayout>
 					</ListView.itemTemplate>
 			</ListView>
+		</StackLayout>
 		</ScrollView>
 	</AbsoluteLayout>
 </Page>
