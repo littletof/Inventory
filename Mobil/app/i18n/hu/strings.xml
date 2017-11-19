@@ -39,4 +39,5 @@
 	<string name="Role">Szerep</string>
 	<string name="BorrowUntil">Kölcsönzés eddig</string>
 	<string name="NewDevice">Új eszköz</string>
+	<string name="Search">Keresés</string>
 </resources>
