@@ -26,10 +26,10 @@ export class LoginComponent implements OnInit {
       url = this.auth.redirectUrl;
     }
 
-    console.log('OnLogin', "url: " + url, "redirectUrl: " + this.auth.redirectUrl);
+
 
     this.auth.redirectUrl=null;
-      console.log('OnLogin', "url: " + url, "redirectUrl: " + this.auth.redirectUrl);
+
     router.navigate([url]);
       //this.auth.redirectIfLoggedIn();
   }

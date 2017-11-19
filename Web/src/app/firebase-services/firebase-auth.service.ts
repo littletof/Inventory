@@ -16,12 +16,13 @@ export class FirebaseAuthService implements AuthService {
 
     redirectUrl: string;
     user: Observable<firebase.User>;
+    usersub: any;
 
 
   constructor(public afAuth: AngularFireAuth, public db: DatabaseService, public router: Router) {
       this.user = afAuth.authState;
 
-      this.user.subscribe((user)=>{
+      this.usersub = this.user.subscribe((user)=>{
 
           if(user){
               localStorage.setItem("user", this.getUserInfoLocal(user));
@@ -33,7 +34,7 @@ export class FirebaseAuthService implements AuthService {
               localStorage.removeItem("user");
               localStorage.removeItem("userData");
           }
-      });
+      },(err) => {console.log(err);});
 
 
 
@@ -84,7 +85,20 @@ export class FirebaseAuthService implements AuthService {
     }
 
     hasRole(roles: any[]): boolean{
-      return roles.indexOf(this.getUserData().role) != -1;
+      if(this.getUserData()) {
+          return roles.indexOf(this.getUserData().role) != -1;
+      }else{
+          return false;
+      }
+    }
+
+    accessFeature(canAccess: any[]):boolean{
+      if(!this.isLoggedIn()) return false;
+
+      if(this.isAnonym()) return canAccess.indexOf("anonym") != -1;
+
+      return this.hasRole(canAccess);
+
     }
 
 
@@ -114,6 +128,7 @@ export class FirebaseAuthService implements AuthService {
     }
 
     logOut(onLogout){
+
         localStorage.removeItem("user");
         localStorage.removeItem("userData");
         this.afAuth.auth.signOut().then((res)=>onLogout(res));

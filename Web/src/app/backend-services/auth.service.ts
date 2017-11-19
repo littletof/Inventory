@@ -15,4 +15,5 @@ export abstract class AuthService {
 
   abstract getUserData();
   abstract hasRole(roles):boolean;
+  abstract accessFeature(canAccess):boolean
 }

@@ -12,18 +12,12 @@ export class AppComponent {
 
   }
 
-  getEmail(): string{
-    if(this.auth.getUserData()){
-      return this.auth.getUserData().email;
-    }
-    return "";
+  getName(): string{
+      if(this.auth.getUserData()){
+          return this.auth.getUserData().name;
+      }
+      return "Anonymus";
   }
-    getName(): string{
-        if(this.auth.getUserData()){
-            return this.auth.getUserData().name;
-        }
-        return "Anonymus";
-    }
 
   isLoggedIn():boolean{
     return this.auth.isLoggedIn();
