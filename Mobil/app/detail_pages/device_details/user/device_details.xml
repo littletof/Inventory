@@ -6,18 +6,18 @@
          </ActionBar>
     </Page.actionBar>
 	<ScrollView>
-		<StackLayout orientation="vertical">
-				<nativescript-fresco:FrescoDrawee width="500px" height="500px" imageUri="{{ image }}" horizontalAlignment="center"/>
-			<Label text="{{L('Description')}}"/>
-			<Label id="descriptionLabel" text="{{ description }}"/>
-			<StackLayout>
-				<Label text="{{L('QuantityAvailable')}}"/>
-				<Label id="quantityAvailableLabel" text="{{ quantity_available }}"/>
-				<Label text="{{L('TotalQuantity')}}"/>
-				<Label id="totalQuantityLabel" text="{{ quantity_total }}"/>
+		<GridLayout columns="*" rows="auto,auto,auto,auto,auto">
+			<nativescript-fresco:FrescoDrawee class="image" col="0" row="0" imageUri="{{ image }}"/>
+			
+			<Label class="property" col="0" row="1" text="{{L('Description')}}"/>
+			<Label class="longText" col="0" row="2" id="descriptionLabel" text="{{ description }}"/>
+
+			<StackLayout col="0" row="3" orientation="horizontal">
+				<Label class="property" text="{{L('QuantityAvailable')}}"/>
+				<Label class="shortProperty" id="quantityAvailableLabel" text="{{ quantity_available }}"/>				
 			</StackLayout>
-			<Button id="borrowButton" text="{{L('Borrow')}}" width="500px" tap="onBorrowButtonTapped" />
-		</StackLayout>
+
+			<Button col="0" row="4" id="borrowButton" text="{{L('Borrow')}}" tap="onBorrowButtonTapped" />
+    	</GridLayout>
 	</ScrollView>
-	
 </Page>
