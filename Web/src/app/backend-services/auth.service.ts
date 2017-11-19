@@ -4,6 +4,11 @@ export abstract class AuthService {
   user: any;
   redirectUrl: string;
 
+
+  anyone = ['admin', 'user', 'anonym'];
+  authed = ['admin', 'user'];
+  admini = ['admin'];
+
   abstract loginWithEmail(email: string, password: string, onLogin, onError): void;
   abstract loginAnonym(onLogin): void;
   abstract isLoggedIn(): boolean;

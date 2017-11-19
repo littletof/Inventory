@@ -30,5 +30,5 @@
   <button mat-button (click)="closeDialog()">Close</button>
   <!-- Can optionally provide a result for the closing dialog. -->
   <!--<button mat-button [mat-dialog-close]="true">Yes</button>-->
-  <button mat-raised-button (click)="closeDialog(data)" color="accent" [disabled]="data.quantity_available<=0">Lend</button>
+  <button mat-raised-button (click)="closeDialog(data)" color="accent" [disabled]="data.quantity_available<=0" *ngIf="this.auth.accessFeature(this.auth.authed)">Lend</button>
 </mat-dialog-actions>

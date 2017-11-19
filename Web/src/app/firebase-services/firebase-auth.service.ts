@@ -14,10 +14,17 @@ import {Router} from "@angular/router";
 export class FirebaseAuthService implements AuthService {
 
 
+
+
+
     redirectUrl: string;
     user: Observable<firebase.User>;
     usersub: any;
 
+
+    anyone = ['admin', 'user', 'anonym'];
+    authed = ['admin', 'user'];
+    admini = ['admin'];
 
   constructor(public afAuth: AngularFireAuth, public db: DatabaseService, public router: Router) {
       this.user = afAuth.authState;
@@ -30,7 +37,7 @@ export class FirebaseAuthService implements AuthService {
                   this.saveUserData(user.uid);
               }
           }else{
-              console.log('remove');
+              //console.log('remove');
               localStorage.removeItem("user");
               localStorage.removeItem("userData");
           }
@@ -100,6 +107,8 @@ export class FirebaseAuthService implements AuthService {
       return this.hasRole(canAccess);
 
     }
+
+
 
 
     loginWithEmail(email, password, onLogin, onError){

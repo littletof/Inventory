@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {AuthService} from "../backend-services/auth.service";
 
 @Component({
   selector: 'app-device-info',
@@ -11,7 +12,7 @@ export class DeviceInfoDialogComponent implements OnInit {
   displayTags: string[];
   img: any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceInfoDialogComponent>) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceInfoDialogComponent>, public auth: AuthService) {
 
     this.displayTags = [];
     for(let propName in data.tags){
