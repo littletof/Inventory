@@ -1,4 +1,4 @@
-<Page class="page" navigatingTo="onNavigatingTo">
+<Page class="page" navigatingTo="onNavigatingTo" xmlns:nativescript-fresco="nativescript-fresco">
 	<ActionBar class="action-bar">
 		<Label text="{{L('EditDeviceDetails')}}" class="action-bar-title" />
 		<ActionBar.actionItems>
@@ -22,7 +22,7 @@
 				<Label text="{{L('AvailableDevices')}}"/>
 				<TextView id="availableDevicesTF" text="{{ quantity_available }}" width="150px"/>
 			</StackLayout>
-			<Image width="500px" height="500px" src="https://cdn3.iconfinder.com/data/icons/design-n-code/100/272127c4-8d19-4bd3-bd22-2b75ce94ccb4-128.png"/>
+			<nativescript-fresco:FrescoDrawee width="500px" height="500px" imageUri="{{ image }}"/>
 		</StackLayout>
 	</ScrollView>
 </Page>

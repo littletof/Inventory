@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "nativescript-barcodescanner": "^2.7.1",
+    "nativescript-fresco": "^3.0.6",
     "nativescript-i18n": "^0.2.4",
+    "nativescript-imagepicker": "^4.0.1",
     "nativescript-plugin-firebase": "^4.1.2",
     "nativescript-theme-core": "1.0.4",
     "tns-core-modules": "3.2.0"

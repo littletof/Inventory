@@ -37,12 +37,25 @@ function Lendings(items) {
                                 var month1 = months[b.getMonth()];
                                 var date1 = b.getDate();
                     
-                                viewModel.push({
-									id: borrowID,
-                                    deviceName:device.value[uid].name,
-                                    interval:month0+"."+date0+" - "+month1+"."+date1,
-                                    quantity:borrowing.device_quantity
-                                });
+                                firebase.getDownloadUrl({
+                                    bucket: 'gs://inventory-01.appspot.com/images',
+                                    remoteFullPath: device.value[uid].image+'.png'
+                                  }).then(
+                                      function (url) {
+                                        viewModel.push({
+                                            id: borrowID,
+                                            deviceName:device.value[uid].name,
+                                            interval:month0+"."+date0+" - "+month1+"."+date1,
+                                            quantity:borrowing.device_quantity,
+                                            image:url
+                                        });
+                                    },
+                                      function (error) {
+                                        console.log("Error: " + error);
+                                      }
+                                  );
+
+                               
                             }
                         }
                     }
@@ -76,6 +89,7 @@ function Lendings(items) {
                 console.log("firebase.addChildEventListener error: " + error);
             }
         )
+        return;
     };
     
     viewModel.empty = function() {

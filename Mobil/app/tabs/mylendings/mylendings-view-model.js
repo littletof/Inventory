@@ -47,14 +47,24 @@ function MyLendingsViewModel(items) {
                         var hour1 = b.getHours();
                         var min1 = b.getMinutes();
     
+                        firebase.getDownloadUrl({
+                            bucket: 'gs://inventory-01.appspot.com/images',
+                            remoteFullPath: device.value[uid].image+'.png'
+                          }).then(
+                              function (url) {
     
-    
-                        viewModel.push({
-							id: itemID,
-                            deviceName:device.value[uid].name,
-                            interval:month0+"."+date0+" "+hour0+":"+min0+" - "+month1+"."+date1+" "+hour1+":"+min1,
-                            quantity:item.device_quantity
-                        });
+                                viewModel.push({
+							        id: itemID,
+                                    deviceName:device.value[uid].name,
+                                    interval:month0+"."+date0+" "+hour0+":"+min0+" - "+month1+"."+date1+" "+hour1+":"+min1,
+                                    quantity:item.device_quantity,
+                                    image:url
+                                });
+                            },
+                            function (error) {
+                                console.log("Error: " + error);
+                            }
+                        );
                     }
                     }
                     }

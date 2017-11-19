@@ -33,6 +33,18 @@ exports.getData = function(deviceID){
         borrow.set("deviceName", result.value.name);
         borrow.set("deviceID", result.key);
         borrow.set("quantity_available", result.value.quantity_available);
+        firebase.getDownloadUrl({
+          bucket: 'gs://inventory-01.appspot.com/images',
+          remoteFullPath: result.value.image+'.png'
+        }).then(
+            function (url) {
+              console.log("imageid="+url);
+              borrow.set("image", url);
+            },
+            function (error) {
+              console.log("Error: " + error);
+            }
+        );
       }
     };
     firebase.query(

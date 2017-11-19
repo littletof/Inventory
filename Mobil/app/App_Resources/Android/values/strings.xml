@@ -39,4 +39,5 @@
 	<string name="Role">Role</string>
 	<string name="BorrowUntil">Borrow until</string>
 	<string name="NewDevice">New device</string>
+	<string name="Search">Search</string>
 </resources>

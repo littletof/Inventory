@@ -4,24 +4,30 @@
 	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
 	</ActionBar>
 	<ScrollView>
-		<StackLayout orientation="vertical">
-			<StackLayout orientation="horizontal" verticalalignment="center">
-					<StackLayout orientation="vertical" verticalalignment="center">
-						<StackLayout orientation="horizontal">
-							<Label id="itemNameLabel" text="{{ device_name }}"/>
-							<Label id="deviceQuantityLabel" text="{{ '( x' + device_quantity + ' )' }}" verticalAlignment="bottom"/>
-						</StackLayout>
-						<Label id="userNameLabel" text="{{ user_name }}"/>
-						<Label id="overdueStateLabel" text="{{ overdue }}"/>
-					</StackLayout>
+		<GridLayout columns="*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto,auto,auto">
+			<!--nativescript-fresco:FrescoDrawee class="image" col="0" row="0" imageUri="{{ image }}"/-->
+			<Label id="itemNameLabel" class="imageText" col="0" row="1" text="{{device_name}}"/>
+			
+			<StackLayout col="0" row="2" orientation="horizontal">
+				<Label class="property" text="{{L('User')}}"/>
+				<Label class="shortProperty" text="{{ user_name }}"/>
 			</StackLayout>
-			<Label text="{{L('DateOfBorrow')}}"/>
-			<Label id="startDateLabel" text="{{ start_date }}"/>
-			<Label text="{{L('Deadline')}}"/>
-			<Label id="deadlineLabel" text="{{ end_date }}"/>
-			<Label text="{{L('Comment')}}"/>
-			<Label id="commentLabel" text="{{ comment }}"/>
-			<Button id="closeButton" width="500px" text="{{L('CloseBorrow')}}" tap="closeBorrow" />
-		</StackLayout>
+
+			<StackLayout col="0" row="3" orientation="horizontal">
+				<Label class="property" text="{{L('Quantity')}}"/>
+				<Label id="deviceQuantityLabel" class="shortProperty" text="{{ device_quantity }}"/>
+			</StackLayout>
+
+			<Label col="0" row="4" class="property" text="{{L('DateOfBorrow')}}"/>
+			<Label col="0" row="5" class="longText" id="startDateLabel" text="{{ start_date }}"/>	
+
+			<Label col="0" row="6" class="property" text="{{L('Deadline')}}"/>
+			<Label col="0" row="7" class="longText" id="deadlineLabel" text="{{ end_date }}"/>
+
+			<Label class="property" col="0" row="8" text="{{L('Comment')}}"/>
+			<Label id="commentLabel" class="longText" col="0" row="9" text="{{ comment }}"/>
+
+			<Button id="closeButton" col="0" row="10" id="closeButton" text="{{L('CloseBorrow')}}" tap="closeBorrow"/>
+    	</GridLayout>
 	</ScrollView>
 </Page>

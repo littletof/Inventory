@@ -5,7 +5,13 @@ require('nativescript-i18n');
 
 const application = require("application");
 
+var fresco = require("nativescript-fresco");
 
+if (application.android) {
+    application.on("launch", function () {
+        fresco.initialize();
+    });
+}
 
 var firebase = require("nativescript-plugin-firebase");
 

@@ -6,21 +6,25 @@ const topmost = frameModule.topmost;
 var firebase = require("nativescript-plugin-firebase");
 
 var deviceList = new DevicesViewModel([]);
-
+var component;
 
 var pageData = new observableModule.fromObject({
     deviceList:deviceList
 });
 
+exports.onSearch = function(args){
+	deviceList.empty();
+    deviceList.load(component.getViewById("searchTV").text);
+}
+
 function onLoaded(args) {
     
 
-    var component = args.object;
+    component = args.object;
     component.bindingContext = pageData;
-    
-
+	component.getViewById("searchTV").text = "";
     deviceList.empty();
-    deviceList.load();
+    deviceList.load("");
 
 }
 

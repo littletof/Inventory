@@ -8,7 +8,7 @@ var BarcodeScanner = require("nativescript-barcodescanner").BarcodeScanner;
 
 var deviceList = new DevicesViewModel([]);
 
-
+var component;
 var barcodeScanner = new BarcodeScanner();
 var scannedDevice = new observableModule.fromObject({
 	'id': ""
@@ -19,26 +19,21 @@ var pageData = new observableModule.fromObject({
     deviceList:deviceList
 });
 
+exports.onSearch = function(args){
+	deviceList.empty();
+    deviceList.load(component.getViewById("searchTV").text);
+}
+
+function loadData(){
+	
+}
+
 function onLoaded(args) {
-    
-
-    var component = args.object;
+    component = args.object;
     component.bindingContext = pageData;
-    
-
+	component.getViewById("searchTV").text = "";
     deviceList.empty();
-    deviceList.load();
-
-        firebase.getCurrentUser().then(
-            function (result) {
-                console.log("anonymous:"+result.anonymous);
-
-            },
-            function (errorMessage) {
-              console.log(errorMessage);
-            }
-          );
-
+    deviceList.load("");
 }
 
 exports.onDetails=function(args){
