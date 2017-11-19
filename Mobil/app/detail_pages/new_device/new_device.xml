@@ -20,7 +20,7 @@
 				<Label text="{{L('TotalDevices')}}"/>
 				<TextView id="totalDevicesTF" text="{{ quantity_total }}" width="150px"/>
 			</StackLayout>
-			<Button text="tallózás" onTap="onPickImage"/>
+			<Button text="{{L('PickImage')}}" onTap="onPickImage"/>
 			<Image width="500px" height="500px" src="{{ image }}"/>
 		</StackLayout>
 	</ScrollView>
