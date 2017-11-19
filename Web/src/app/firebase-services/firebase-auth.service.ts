@@ -16,25 +16,21 @@ export class FirebaseAuthService implements AuthService {
 
     redirectUrl: string;
     user: Observable<firebase.User>;
-    userDetails: firebase.User;
-    userData: {};
+
 
   constructor(public afAuth: AngularFireAuth, public db: DatabaseService, public router: Router) {
       this.user = afAuth.authState;
-      this.user.subscribe((user)=>{
-          if(user){
-              this.userDetails = user;
-              localStorage.setItem("user", user.uid);
 
-              if(user.isAnonymous) {
-                  localStorage.setItem("anonym", "true");
-              }else{
-                  localStorage.removeItem("anonym");
+      this.user.subscribe((user)=>{
+
+          if(user){
+              localStorage.setItem("user", this.getUserInfoLocal(user));
+              if(!user.isAnonymous){
+                  this.saveUserData(user.uid);
               }
           }else{
-              this.userDetails = null;
               localStorage.removeItem("user");
-              localStorage.removeItem("anonym");
+              localStorage.removeItem("userData");
           }
       });
 
@@ -44,10 +40,24 @@ export class FirebaseAuthService implements AuthService {
 
   }
 
-  getUser(uid: string):any {
-      this.db.access_db.database.ref('users/' + uid).transaction(data => {
-          console.log(data);
-      })
+  getUserInfoLocal(user): any{
+      let userInfo = {isAnonymus: user.isAnonymous, uid: user.uid};
+
+      return JSON.stringify(userInfo);
+  }
+
+  saveUserData(uid: string){
+      this.db.getUser(uid).valueChanges().forEach(data =>{
+          let userData = {uid: uid, emial: data.email_address, name: data.name, role: data.role};
+
+
+          localStorage.setItem("userData", JSON.stringify(userData));
+
+      });
+  }
+
+  getUserData(){
+      return JSON.parse(localStorage.getItem("userData"));
   }
 
   check(){
@@ -59,12 +69,15 @@ export class FirebaseAuthService implements AuthService {
   }
 
     isLoggedIn(): boolean {
-
         if (localStorage.getItem("user") == null ) {
             return false;
         } else {
             return true;
         }
+    }
+
+    isAnonym(): boolean{
+        return JSON.parse(localStorage.getItem("user")).isAnonymus;
     }
 
 
@@ -93,7 +106,7 @@ export class FirebaseAuthService implements AuthService {
 
     logOut(onLogout){
         localStorage.removeItem("user");
-        localStorage.removeItem("anonym");
+        localStorage.removeItem("userData");
         this.afAuth.auth.signOut().then((res)=>onLogout(res));
     }
 

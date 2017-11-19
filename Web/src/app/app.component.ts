@@ -8,25 +8,22 @@ import {Router} from "@angular/router";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  anonym: any;
-  email: string;
   constructor(public auth: AuthService, private router: Router){
-    //this.auth.logOut((res)=> {});
-      /*this.auth.check();
-      console.log('whole C ', this.isLoggedIn());*/
-      if(localStorage.getItem("anonym") == null){
-          this.anonym = false;
-      }else{
-          this.anonym = true;
-      }
+
   }
 
   getEmail(): string{
-    if(this.auth.userDetails){
-      return this.auth.userDetails.email;
+    if(this.auth.getUserData()){
+      return this.auth.getUserData().email;
     }
     return "";
   }
+    getName(): string{
+        if(this.auth.getUserData()){
+            return this.auth.getUserData().name;
+        }
+        return "Anonymus";
+    }
 
   isLoggedIn():boolean{
     return this.auth.isLoggedIn();

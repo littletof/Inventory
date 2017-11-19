@@ -46,8 +46,7 @@ export class FirebaseDatabaseService implements DatabaseService{
   }
 
     getUser(uid: string):any {
-
-        return null;
+        return this.db.object('users/' + uid);
     }
 
 
