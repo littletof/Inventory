@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from "../backend-services/auth.service";
 import {Router} from "@angular/router";
-import {AngularFireAuth} from "angularfire2/auth";
 
 @Component({
   selector: 'app-login',
@@ -15,10 +14,7 @@ export class LoginComponent implements OnInit {
 
   errorText:string;
 
-  static loggedIn = false;
-
-
-  constructor(private auth: AuthService, public router: Router) {}
+  constructor(private auth: AuthService, public router: Router) { }
 
   ngOnInit() {}
 
@@ -29,8 +25,13 @@ export class LoginComponent implements OnInit {
     }else{
       url = this.auth.redirectUrl;
     }
+
+    console.log('OnLogin', "url: " + url, "redirectUrl: " + this.auth.redirectUrl);
+
     this.auth.redirectUrl=null;
+      console.log('OnLogin', "url: " + url, "redirectUrl: " + this.auth.redirectUrl);
     router.navigate([url]);
+      //this.auth.redirectIfLoggedIn();
   }
 
   login(){

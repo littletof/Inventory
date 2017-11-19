@@ -29,6 +29,7 @@ export class FirebaseAuthService implements AuthService {
                   this.saveUserData(user.uid);
               }
           }else{
+              console.log('remove');
               localStorage.removeItem("user");
               localStorage.removeItem("userData");
           }
@@ -46,13 +47,14 @@ export class FirebaseAuthService implements AuthService {
       return JSON.stringify(userInfo);
   }
 
-  saveUserData(uid: string){
+  saveUserData(uid: string, callback = null){
       this.db.getUser(uid).valueChanges().forEach(data =>{
-          let userData = {uid: uid, emial: data.email_address, name: data.name, role: data.role};
+          let userData = {uid: uid, email: data.email_address, name: data.name, role: data.role};
 
 
           localStorage.setItem("userData", JSON.stringify(userData));
 
+          if(callback) callback();
       });
   }
 
@@ -68,6 +70,7 @@ export class FirebaseAuthService implements AuthService {
       });
   }
 
+
     isLoggedIn(): boolean {
         if (localStorage.getItem("user") == null ) {
             return false;
@@ -80,6 +83,9 @@ export class FirebaseAuthService implements AuthService {
         return JSON.parse(localStorage.getItem("user")).isAnonymus;
     }
 
+    hasRole(roles: any[]): boolean{
+      return roles.indexOf(this.getUserData().role) != -1;
+    }
 
 
     loginWithEmail(email, password, onLogin, onError){
@@ -88,7 +94,10 @@ export class FirebaseAuthService implements AuthService {
 
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
           .then((res)=>{
-            if(onLogin)onLogin(res);
+
+
+              this.saveUserData(this.afAuth.auth.currentUser.uid, () => {if(onLogin)onLogin(res);});
+
           })
           .catch((error)=>{
             if(onError){
@@ -116,9 +125,13 @@ export class FirebaseAuthService implements AuthService {
             .then((authState: Observable<firebase.User | null>) => {
 
                 const uid = this.afAuth.auth.currentUser.uid;
+                    this.db.addUserWithKey(user, uid, () => {
+                        this.saveUserData(this.afAuth.auth.currentUser.uid, () => {
+                        onRegister();
+                    });
 
-                this.db.addUserWithKey(user, uid);
-                onRegister();
+                });
+
                 return authState;
             },
             reason => {

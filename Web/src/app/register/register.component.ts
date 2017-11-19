@@ -18,15 +18,19 @@ export class RegisterComponent implements OnInit {
 
     errorText:string;
 
-  constructor(public auth: AuthService, public db: DatabaseService, public router: Router) { }
+  constructor(public auth: AuthService, public db: DatabaseService, public router: Router) {
+      //this.auth.redirectIfLoggedIn()
+  }
 
   ngOnInit() {
   }
 
+
+
   registerUser() {
         this.errorText=null;
         if(this.isFilled(true)) {
-            this.auth.registerUser(this.email, this.password, new User(this.name, this.email, this.role),
+            this.auth.registerUser(this.email, this.password, new User(this.name, this.email, "user"),
                 () => {
                     this.onRegister(this.router)
                 },
@@ -60,6 +64,7 @@ export class RegisterComponent implements OnInit {
       }
       this.auth.redirectUrl=null;
       router.navigate([url]);
+      //this.auth.redirectIfLoggedIn();
   }
 
     loginAnonym(){

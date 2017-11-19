@@ -35,8 +35,8 @@ export class FirebaseDatabaseService implements DatabaseService{
       return this.db.list('users').snapshotChanges();
   }
 
-  addUserWithKey(user: User, key: string) {
-      this.db.object(`users/${key}`).set(user);
+  addUserWithKey(user: User, key: string, callback = null) {
+      this.db.object(`users/${key}`).set(user).then(callback);
   }
 
   //-- ^^ works ^^

@@ -14,4 +14,5 @@ export abstract class AuthService {
   abstract check();
 
   abstract getUserData();
+  abstract hasRole(roles):boolean;
 }

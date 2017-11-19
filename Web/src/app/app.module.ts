@@ -42,6 +42,7 @@ import { DeviceEditDialogComponent } from './device-edit-dialog/device-edit-dial
 import { DeviceTagsFilterPipe } from './device-tags-filter.pipe';
 
 import { QRCodeModule } from 'angular2-qrcode';
+import {AccessGuardService} from "./backend-services/access-guard.service";
 
 
 
@@ -98,7 +99,7 @@ import { QRCodeModule } from 'angular2-qrcode';
     QRCodeModule
   ],
   providers: [{provide: DatabaseService, useClass: FirebaseDatabaseService},
-      { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService,
+      { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService, AccessGuardService,
       {provide: MAT_DATE_LOCALE, useValue: 'hu-HU'}],
 
   bootstrap: [AppComponent]
