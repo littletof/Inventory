@@ -13,6 +13,7 @@ var device;
 var imgPath="";
 var imgName="";
 
+
 exports.onDoneBtnTap = function(){
 	
 	if(device.deviceName != "" && device.description != "" && device.quantity_total != ""){
@@ -64,6 +65,7 @@ exports.onNavigatingTo = function(args) {
 
 	device = newDeviceViewModel.createEmptyDevice();
 	page.bindingContext = device;
+
 };
 
 exports.onPickImage = function(){
@@ -78,7 +80,6 @@ exports.onPickImage = function(){
 				console.log("selected image uri:"+selected.fileUri);
 				imgPath= selected.fileUri;
 				device.set("image",src);
-				
 			})
 			
         });
@@ -87,3 +88,4 @@ exports.onPickImage = function(){
         // process error
     });
 }
+
