@@ -10,18 +10,18 @@
     </Page.actionBar>
 	<ScrollView>
 		<StackLayout orientation="vertical">
-			<StackLayout orientation="horizontal">
-				<Label text="{{L('DeviceName')}}"/>
+			<StackLayout orientation="horizontal" marginTop="20">
+				<Label class="property" text="{{L('DeviceName')}}"/>
 				<TextField id="deviceNameTF" text="{{ deviceName }}"/>
 			</StackLayout>
-			<Label text="{{L('Description')}}"/>
+			<Label class="property" text="{{L('Description')}}"/>
 			<TextView id="descriptionTF" text="{{ description }}"/>
 			<StackLayout orientation="horizontal">
-				<Label text="{{L('TotalDevices')}}"/>
-				<TextView id="totalDevicesTF" text="{{ quantity_total }}" width="150px"/>
+				<Label class="property" text="{{L('TotalDevices')}}"/>
+				<TextView keyboardType="number" id="totalDevicesTF" text="{{ quantity_total }}"/>
 			</StackLayout>
 			<Button text="{{L('PickImage')}}" onTap="onPickImage"/>
-			<Image width="500px" height="500px" src="{{ image }}"/>
+			<Image class="image" src="{{ image }}"/>
 		</StackLayout>
 	</ScrollView>
 </Page>
