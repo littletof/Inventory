@@ -12,10 +12,22 @@
 
 
 
-<h4 class="inline">Available quantity:</h4>
+<h4 class="inline">Device quantity:</h4>
   <img class="device-img"[src]=img_src>
  <!-- <span><qr-code class="indent" [value]=qrCode [size]="80" ></qr-code></span>-->
-  <span class="indent filler">{{data.quantity_total}}/{{data.quantity_available}}</span>
+  <span class="indent filler">
+    <table>
+      <tr>
+        <td><b>Total</b>: </td>
+        <td>{{data.quantity_total}} pcs.</td>
+      </tr>
+      <tr>
+        <td><b>Available</b>: </td>
+        <td>{{data.quantity_available}} pcs.</td>
+      </tr>
+    </table>
+
+  </span>
 
 
 
