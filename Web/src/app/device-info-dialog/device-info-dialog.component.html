@@ -1,14 +1,22 @@
 
 
-<h2 mat-card-title class="dialog-title">{{data.name}} </h2>
+<span class="header-block">
+  <h2 mat-card-title class="dialog-title inline" >{{data.name}} </h2>
+  <qr-code [value]=qrCode [size]="50" ></qr-code>
+</span>
+
 <mat-divider></mat-divider>
 
 
 <mat-dialog-content class="flex">
-<h4>Available quantity:</h4>
-  <span><qr-code [value]=qrCode [size]="80" ></qr-code></span>
-  <span class="indent">{{data.quantity_total}}/{{data.quantity_available}}</span>
-  <img [src]=img_src>
+
+
+
+<h4 class="inline">Available quantity:</h4>
+  <img class="device-img"[src]=img_src>
+ <!-- <span><qr-code class="indent" [value]=qrCode [size]="80" ></qr-code></span>-->
+  <span class="indent filler">{{data.quantity_total}}/{{data.quantity_available}}</span>
+
 
 
 
