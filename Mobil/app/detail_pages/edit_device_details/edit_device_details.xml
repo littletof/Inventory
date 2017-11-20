@@ -9,20 +9,20 @@
 	<ScrollView>
 		<StackLayout orientation="vertical">
 			<StackLayout orientation="horizontal">
-				<Label text="{{L('DeviceName')}}"/>
+				<Label class="property" text="{{L('DeviceName')}}"/>
 				<TextField id="deviceNameTF" text="{{ deviceName }}"/>
 			</StackLayout>
-			<Label text="{{L('Description')}}"/>
+			<Label class="property" text="{{L('Description')}}"/>
 			<TextView id="descriptionTF" text="{{ description }}"/>
 			<StackLayout orientation="horizontal">
-				<Label text="{{L('TotalDevices')}}"/>
-				<TextView id="totalDevicesTF" text="{{ quantity_total }}" width="150px"/>
+				<Label class="property" text="{{L('TotalDevices')}}"/>
+				<TextView class="editNumber" keyboardType="number" id="totalDevicesTF" text="{{ quantity_total }}"/>
 			</StackLayout>
 			<StackLayout orientation="horizontal">
-				<Label text="{{L('AvailableDevices')}}"/>
-				<TextView id="availableDevicesTF" text="{{ quantity_available }}" width="150px"/>
+				<Label class="property" text="{{L('AvailableDevices')}}"/>
+				<TextView class="editNumber" id="availableDevicesTF" text="{{ quantity_available }}"/>
 			</StackLayout>
-			<nativescript-fresco:FrescoDrawee width="500px" height="500px" imageUri="{{ image }}"/>
+			<nativescript-fresco:FrescoDrawee class="image" imageUri="{{ image }}"/>
 		</StackLayout>
 	</ScrollView>
 </Page>
