@@ -40,4 +40,6 @@
 	<string name="BorrowUntil">Borrow until</string>
 	<string name="NewDevice">New device</string>
 	<string name="Search">Search</string>
+	<string name="PickImage">Pick an Image</string>
+	<string name="User">User</string>
 </resources>

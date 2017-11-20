@@ -4,23 +4,25 @@
 	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onBackButtonTap"/>
 	</ActionBar>
 	<ScrollView>
-		<StackLayout orientation="vertical">
-			<StackLayout orientation="horizontal" verticalalignment="center">
-					<nativescript-fresco:FrescoDrawee width="300px" height="300px" imageUri="{{ image }}"/>
-					<StackLayout orientation="vertical" verticalalignment="center" alignment="right">
-						<Label id="itemNameLabel" class="name" text="{{ deviceName }}"/>
-					</StackLayout>
+		<GridLayout columns="*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto">
+			<nativescript-fresco:FrescoDrawee class="image" col="0" row="0" imageUri="{{ image }}"/>
+			<Label id="itemNameLabel" class="imageText" col="0" row="1" text="{{deviceName}}"/>
+			
+			<Label class="property" col="0" row="2" text="{{L('BorrowUntil')}}"/>			
+
+			<DatePicker col="0" row="3" year="{{ endDate_yyyy }}" month="{{ endDate_mm }}" day="{{ endDate_dd }}" minDate="{{ startDate }}"></DatePicker>
+
+			<StackLayout col="0" row="4" orientation="horizontal">
+				<Label class="property" text="{{L('Quantity')}}"/>
+				<Label class="shortProperty" text="{{ quantity_borrowed }}"/>
 			</StackLayout>
-			<Label text="{{L('BorrowUntil')}}"/>
-			<DatePicker year="{{ endDate_yyyy }}" month="{{ endDate_mm }}" day="{{ endDate_dd }}" minDate="{{ startDate }}"  verticalAlignment="center"></DatePicker>			
-			<Label text="{{L('Comment')}}"/>
-			<TextView id="commentTV" text="{{ comment }}"/>
-			<StackLayout orientation="horizontal">
-				<Label text="{{L('AmountBorrowed')}}"/>
-				<Label text="{{ quantity_borrowed }}"/>
-			</StackLayout>
-			<Slider value="{{ quantity_borrowed }}" minValue="0" maxValue="{{ quantity_available }}" style="caret-color:#2E7D32"/>
-			<Button id="borrowButton" width="500px" text="{{L('Borrow')}}" tap="borrowButtonTapped"/>
-		</StackLayout>
+
+			<Slider col="0" row="5" value="{{ quantity_borrowed }}" minValue="0" maxValue="{{ quantity_available }}" style="caret-color:#2E7D32"/>
+
+			<Label class="property" col="0" row="6" text="{{L('Comment')}}"/>
+			<TextView id="commentTV" class="longText" col="0" row="7" text="{{ comment }}"/>
+
+			<Button col="0" row="8" id="borrowButton" text="{{L('Borrow')}}" tap="borrowButtonTapped"/>
+    	</GridLayout>
 	</ScrollView>
 </Page>
