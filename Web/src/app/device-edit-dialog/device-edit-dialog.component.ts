@@ -19,10 +19,14 @@ export class DeviceEditDialogComponent implements OnInit {
     device_description: string = "";
     device_tags = {};
 
+    device_image: string;
+
     default_device_quantity = 1;
 
     device_key = null;
     editing = false;
+
+    borrowed_Q: number = 0;
 
     upload;
 
@@ -47,7 +51,9 @@ export class DeviceEditDialogComponent implements OnInit {
         this.device_description = device.description;
         //this.tags = device.tags;
         this.device_key = device.key;
+        this.device_image = device.image;
 
+        this.borrowed_Q = device.quantity_total-device.quantity_available;
 
         for(let t in device.tags){
             this.tags.push({ name: t.trim() });
@@ -67,7 +73,6 @@ export class DeviceEditDialogComponent implements OnInit {
     }
 
     addDevice(f: NgForm){
-        this.upload.uploadSingle();
 
         if(f.valid && this.isValid()) {
 
@@ -75,6 +80,8 @@ export class DeviceEditDialogComponent implements OnInit {
 
 
             if(this.editing){
+                device.quantity_available = device.quantity_total-this.borrowed_Q;
+
                 this.db.updateDevice(this.device_key, device);
             }else {
                 this.db.addDevice(device);
@@ -89,7 +96,7 @@ export class DeviceEditDialogComponent implements OnInit {
         this.tags.forEach(t => {
             this.device_tags[t.name] = true;
         });
-        return new Device(this.device_name, this.device_quantity, this.device_description, this.device_tags);
+        return new Device(this.device_name, this.device_quantity, this.device_description, this.device_tags, this.device_image);
     }
 
 
