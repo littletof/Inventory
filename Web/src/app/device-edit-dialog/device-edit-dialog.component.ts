@@ -4,6 +4,7 @@ import { SPACE} from "@angular/cdk/keycodes";
 import {Device} from "../device";
 import {DatabaseService} from "../backend-services/database.service";
 import {NgForm} from "@angular/forms";
+import {UploadFormComponent} from "../image_upload/upload-form/upload-form.component";
 
 @Component({
   selector: 'app-device-edit-dialog',
@@ -22,6 +23,8 @@ export class DeviceEditDialogComponent implements OnInit {
 
     device_key = null;
     editing = false;
+
+    upload;
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceEditDialogComponent>, public db: DatabaseService) {
 
@@ -64,6 +67,8 @@ export class DeviceEditDialogComponent implements OnInit {
     }
 
     addDevice(f: NgForm){
+        this.upload.uploadSingle();
+
         if(f.valid && this.isValid()) {
 
             let device = this.prepareDevice();

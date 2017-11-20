@@ -43,6 +43,8 @@ import { DeviceTagsFilterPipe } from './device-tags-filter.pipe';
 
 import { QRCodeModule } from 'angular2-qrcode';
 import {AccessGuardService} from "./backend-services/access-guard.service";
+import { UploadFormComponent } from './image_upload/upload-form/upload-form.component';
+import {UploadService} from "./image_upload/shared/upload.service";
 
 
 
@@ -60,7 +62,8 @@ import {AccessGuardService} from "./backend-services/access-guard.service";
     UserLendingsComponent,
     LendDetailDialogComponent,
     DeviceEditDialogComponent,
-    DeviceTagsFilterPipe
+    DeviceTagsFilterPipe,
+    UploadFormComponent
   ],
   entryComponents: [
       DeviceInfoDialogComponent,
@@ -99,7 +102,7 @@ import {AccessGuardService} from "./backend-services/access-guard.service";
     QRCodeModule
   ],
   providers: [{provide: DatabaseService, useClass: FirebaseDatabaseService},
-      { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService, AccessGuardService,
+      { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService, AccessGuardService, UploadService,
       {provide: MAT_DATE_LOCALE, useValue: 'hu-HU'}],
 
   bootstrap: [AppComponent]
