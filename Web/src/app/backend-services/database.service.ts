@@ -22,7 +22,7 @@ export abstract class DatabaseService {
   abstract getDevice(key): any;
 
   abstract addDevice(device):any;
-
+  abstract updateDevice(uid, device): any;
 
   abstract removeDevice(key);
   abstract tryDev(any);

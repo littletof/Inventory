@@ -20,11 +20,36 @@ export class DeviceEditDialogComponent implements OnInit {
 
     default_device_quantity = 1;
 
+    device_key = null;
+    editing = false;
+
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceEditDialogComponent>, public db: DatabaseService) {
-        this.device_quantity = this.default_device_quantity;
+
+        if(data){
+            this.loadDevice(data);
+            this.editing = true;
+        }else {
+            this.device_quantity = this.default_device_quantity;
+        }
+
+
     }
 
     ngOnInit() {
+    }
+
+    loadDevice(device){
+        this.device_name = device.name;
+        this.device_quantity = device.quantity_total;
+        this.device_description = device.description;
+        //this.tags = device.tags;
+        this.device_key = device.key;
+
+
+        for(let t in device.tags){
+            this.tags.push({ name: t.trim() });
+        }
+
     }
 
     closeDialog(ret = null){
@@ -42,8 +67,13 @@ export class DeviceEditDialogComponent implements OnInit {
         if(f.valid && this.isValid()) {
 
             let device = this.prepareDevice();
-            //console.log(device);
-            this.db.addDevice(device);
+
+
+            if(this.editing){
+                this.db.updateDevice(this.device_key, device);
+            }else {
+                this.db.addDevice(device);
+            }
 
             this.closeDialog();
         }

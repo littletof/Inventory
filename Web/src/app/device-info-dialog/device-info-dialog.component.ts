@@ -26,6 +26,10 @@ export class DeviceInfoDialogComponent implements OnInit {
   ngOnInit() {
   }
 
+  editDevice(device){
+    this.dialogRef.close({device: device, edit:true});
+  }
+
   closeDialog(ret = null){
     this.dialogRef.close(ret);
   }

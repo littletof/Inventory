@@ -69,6 +69,10 @@ export class FirebaseDatabaseService implements DatabaseService{
   addDevice(device): any{
         this.db.list('devices').push(device);
   }
+  updateDevice(uid, device): any{
+
+      this.db.object('devices/'+ uid).set(device);
+  }
 
   getDevice(key): any{
         return this.db.object('devices/' + key).snapshotChanges();

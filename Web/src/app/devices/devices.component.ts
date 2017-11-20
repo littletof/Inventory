@@ -60,8 +60,14 @@ export class DevicesComponent implements OnInit {
         });
         dialogref.afterClosed().subscribe(value => {
            // console.log(value);
-            if(value!=null)
-            this.openLendDeviceDialog(value);
+            if(value!=null) {
+                if (value.edit) {
+                    this.openDeviceEditDialog(value.device);
+                }else{
+                    this.openLendDeviceDialog(value);
+                }
+            }
+
         });
     }
 
