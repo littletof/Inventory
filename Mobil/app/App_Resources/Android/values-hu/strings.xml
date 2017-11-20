@@ -28,7 +28,7 @@
 	<string name="DeviceName">Eszköz neve</string>
 	<string name="Description">Leírás</string>
 	<string name="TotalDevices">Eszközök száma</string>
-	<string name="AvailableDevices">Kölcsönözhető eszközök száma</string>
+	<string name="AvailableDevices">Kölcsönözhetőek száma</string>
 	<string name="Quantity">Mennyiség</string>
 	<string name="CancelReservation">Foglalás törlése</string>
 	<string name="QuantityAvailable">Kölcsönözhetőek száma</string>

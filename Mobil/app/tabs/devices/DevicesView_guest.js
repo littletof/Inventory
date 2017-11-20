@@ -6,6 +6,7 @@ const topmost = frameModule.topmost;
 var firebase = require("nativescript-plugin-firebase");
 
 var deviceList = new DevicesViewModel([]);
+
 var component;
 
 var pageData = new observableModule.fromObject({
@@ -17,22 +18,23 @@ exports.onSearch = function(args){
     deviceList.load(component.getViewById("searchTV").text);
 }
 
-function onLoaded(args) {
-    
+function loadData(){
+	
+}
 
+function onLoaded(args) {
     component = args.object;
     component.bindingContext = pageData;
 	component.getViewById("searchTV").text = "";
     deviceList.empty();
     deviceList.load("");
-
 }
 
 exports.onDetails=function(args){
     console.log(args.object.device);
     const tappedDevice = args.object.bindingContext;
 	topmost().navigate({
-		moduleName: "detail_pages/device_details/admin/device_details",
+		moduleName: "detail_pages/device_details/guest/device_details",
 		context: tappedDevice,
 		animated: true,
 		transition: {
@@ -42,8 +44,5 @@ exports.onDetails=function(args){
 		}
 	});
 }
-
-
-
 
 exports.onLoaded = onLoaded;

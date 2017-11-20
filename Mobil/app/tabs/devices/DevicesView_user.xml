@@ -1,5 +1,5 @@
-<Page loaded="onLoaded" xmlns:nativescript-fresco="nativescript-fresco">
-<AbsoluteLayout>
+<Page loaded="onLoaded" xmlns:nativescript-fresco="nativescript-fresco" >
+	<AbsoluteLayout>
 		<ScrollView width="100%" height="100%">
 			<StackLayout orientation="vertical" width="100%" height="100%">
 				<StackLayout orientation="horizontal">
@@ -20,6 +20,7 @@
 								<Label text="{{ description, description }}" width="100%"  />
 								<GridLayout columns="auto,*" rows="60">
 									<Button  text="{{L('Details')}}" device="{{ id, id }}" col="0" tap="onDetails" />
+									<Button  text="{{L('Borrow')}}" device="{{ id, id }}" col="1" tap="onBorrow" />
 								</GridLayout>
 							</StackLayout>
 						</GridLayout>
@@ -27,5 +28,10 @@
 			</ListView>
 		</StackLayout>
 		</ScrollView>
+		<StackLayout id="flt-btn-cnt">
+			<StackLayout id="flt-btn" touch="onFLTTouch" tap="onFLTTap">
+				<Image id="flt-btn-icon" src="res://qr_code_icon" verticalAlignment="stretch" horizontalAlignment="stretch"/>
+			</StackLayout>
+		</StackLayout>
 	</AbsoluteLayout>
 </Page>
