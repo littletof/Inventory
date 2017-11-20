@@ -17,7 +17,7 @@
 				<Label class="shortProperty" text="{{ quantity_borrowed }}"/>
 			</StackLayout>
 
-			<Slider col="0" row="5" value="{{ quantity_borrowed }}" minValue="0" maxValue="{{ quantity_available }}" style="caret-color:#2E7D32"/>
+			<Slider class="slider" col="0" row="5" value="{{ quantity_borrowed }}" minValue="0" maxValue="{{ quantity_available }}"/>
 
 			<Label class="property" col="0" row="6" text="{{L('Comment')}}"/>
 			<TextView id="commentTV" class="longText" col="0" row="7" text="{{ comment }}"/>
