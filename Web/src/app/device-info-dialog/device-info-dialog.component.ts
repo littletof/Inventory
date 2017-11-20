@@ -10,7 +10,7 @@ import {AuthService} from "../backend-services/auth.service";
 export class DeviceInfoDialogComponent implements OnInit {
 
   displayTags: string[];
-  img: any;
+  qrCode: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceInfoDialogComponent>, public auth: AuthService) {
 
@@ -19,7 +19,7 @@ export class DeviceInfoDialogComponent implements OnInit {
         this.displayTags.push(propName);
     }
 
-    this.img = data.key;
+    this.qrCode = data.key;
 
   }
 

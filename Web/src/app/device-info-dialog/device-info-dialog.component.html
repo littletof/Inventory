@@ -6,8 +6,9 @@
 
 <mat-dialog-content class="flex">
 <h4>Available quantity:</h4>
-<span class="indent">{{data.quantity_total}}/{{data.quantity_available}}</span>
-<span><qr-code [value]=img [size]="80" ></qr-code></span>
+  <span><qr-code [value]=qrCode [size]="80" ></qr-code></span>
+  <span class="indent">{{data.quantity_total}}/{{data.quantity_available}}</span>
+
 
 
 <h4>Description:</h4>
