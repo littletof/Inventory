@@ -22,7 +22,7 @@ export class DevicesComponent implements OnInit {
 
   filter = [];
 
-  constructor(private db: DatabaseService, private auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
+  constructor(private db: DatabaseService, public auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
       if (this.auth.isLoggedIn()) {
 
