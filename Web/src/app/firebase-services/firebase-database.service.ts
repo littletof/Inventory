@@ -8,6 +8,7 @@ import {User} from "../user";
 import {Device} from "../device";
 import {DatabaseService} from "../backend-services/database.service";
 import {LendEntry} from "../lend-entry";
+import * as firebase from "firebase";
 
 
 
@@ -35,8 +36,8 @@ export class FirebaseDatabaseService implements DatabaseService{
       return this.db.list('users').snapshotChanges();
   }
 
-  addUserWithKey(user: User, key: string) {
-      this.db.object(`users/${key}`).set(user);
+  addUserWithKey(user: User, key: string, callback = null) {
+      this.db.object(`users/${key}`).set(user).then(callback);
   }
 
   //-- ^^ works ^^
@@ -45,10 +46,9 @@ export class FirebaseDatabaseService implements DatabaseService{
     this.db.list('/users').remove(user);
   }
 
-  getUser(key): Observable<User>{
-    //TODO
-    return null;
-  }
+    getUser(uid: string):any {
+        return this.db.object('users/' + uid);
+    }
 
 
   // -- USERS END --
@@ -69,6 +69,10 @@ export class FirebaseDatabaseService implements DatabaseService{
 
   addDevice(device): any{
         this.db.list('devices').push(device);
+  }
+  updateDevice(uid, device): any{
+
+      this.db.object('devices/'+ uid).set(device);
   }
 
   getDevice(key): any{
@@ -163,6 +167,13 @@ export class FirebaseDatabaseService implements DatabaseService{
 
 
   // -- DEVICES END --
+
+
+  getImage(img, callback): any{
+      firebase.storage().ref('images/'+img + '.png').getDownloadURL().then((val)=> {
+          callback(val);
+      });
+  }
 
 
   //Util

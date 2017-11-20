@@ -22,7 +22,6 @@ import {
 import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule} from '@angular/material';
 
 import {AngularFireDatabaseModule} from "angularfire2/database";
-import { SignUpComponent } from './sign-up/sign-up.component';
 import {AngularFireAuthModule} from "angularfire2/auth";
 
 import { FormsModule } from '@angular/forms';
@@ -43,6 +42,9 @@ import { DeviceEditDialogComponent } from './device-edit-dialog/device-edit-dial
 import { DeviceTagsFilterPipe } from './device-tags-filter.pipe';
 
 import { QRCodeModule } from 'angular2-qrcode';
+import {AccessGuardService} from "./backend-services/access-guard.service";
+import { UploadFormComponent } from './image_upload/upload-form/upload-form.component';
+import {UploadService} from "./image_upload/shared/upload.service";
 
 
 
@@ -52,7 +54,6 @@ import { QRCodeModule } from 'angular2-qrcode';
     AppComponent,
     UsersComponent,
     DevicesComponent,
-    SignUpComponent,
     LoginComponent,
     RegisterComponent,
     HomeComponent,
@@ -61,7 +62,8 @@ import { QRCodeModule } from 'angular2-qrcode';
     UserLendingsComponent,
     LendDetailDialogComponent,
     DeviceEditDialogComponent,
-    DeviceTagsFilterPipe
+    DeviceTagsFilterPipe,
+    UploadFormComponent
   ],
   entryComponents: [
       DeviceInfoDialogComponent,
@@ -100,7 +102,7 @@ import { QRCodeModule } from 'angular2-qrcode';
     QRCodeModule
   ],
   providers: [{provide: DatabaseService, useClass: FirebaseDatabaseService},
-      { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService,
+      { provide: AuthService, useClass: FirebaseAuthService}, AuthGuardService, AccessGuardService, UploadService,
       {provide: MAT_DATE_LOCALE, useValue: 'hu-HU'}],
 
   bootstrap: [AppComponent]

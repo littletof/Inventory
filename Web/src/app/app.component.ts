@@ -9,10 +9,14 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
   constructor(public auth: AuthService, private router: Router){
-    //this.auth.logOut((res)=> {});
-      /*this.auth.check();
-      console.log('whole C ', this.isLoggedIn());*/
 
+  }
+
+  getName(): string{
+      if(this.auth.getUserData()){
+          return this.auth.getUserData().name;
+      }
+      return "Anonymus";
   }
 
   isLoggedIn():boolean{

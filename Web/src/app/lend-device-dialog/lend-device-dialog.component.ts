@@ -27,7 +27,7 @@ export class LendDeviceDialogComponent implements OnInit {
 
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendDeviceDialogComponent>, public auth: AuthService) {
-    this.userID = this.auth.userDetails.uid;
+    this.userID = this.auth.getUserData().uid;
     this.deviceID = this.data.key;
 
 

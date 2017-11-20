@@ -5,33 +5,69 @@ import { AuthService} from "../backend-services/auth.service";
 import {Observable} from "rxjs/Observable";
 import * as firebase from "firebase";
 import {DatabaseService} from "../backend-services/database.service";
-import {FirebaseListObservable, FirebaseObjectObservable} from "angularfire2/database-deprecated";
+import {Router} from "@angular/router";
+
+
 
 
 @Injectable()
 export class FirebaseAuthService implements AuthService {
 
 
+
+
+
     redirectUrl: string;
     user: Observable<firebase.User>;
-    userDetails: firebase.User;
+    usersub: any;
 
-  constructor(public afAuth: AngularFireAuth, public db: DatabaseService) {
+
+    anyone = ['admin', 'user', 'anonym'];
+    authed = ['admin', 'user'];
+    admini = ['admin'];
+
+  constructor(public afAuth: AngularFireAuth, public db: DatabaseService, public router: Router) {
       this.user = afAuth.authState;
-      this.user.subscribe((user)=>{
+
+      this.usersub = this.user.subscribe((user)=>{
+
           if(user){
-              this.userDetails = user;
-              //console.log(this.userDetails);
+              localStorage.setItem("user", this.getUserInfoLocal(user));
+              if(!user.isAnonymous){
+                  this.saveUserData(user.uid);
+              }
           }else{
-              this.userDetails = null;
+              //console.log('remove');
+              localStorage.removeItem("user");
+              localStorage.removeItem("userData");
           }
+      },(err) => {console.log(err);});
+
+
+
+
+
+  }
+
+  getUserInfoLocal(user): any{
+      let userInfo = {isAnonymus: user.isAnonymous, uid: user.uid};
+
+      return JSON.stringify(userInfo);
+  }
+
+  saveUserData(uid: string, callback = null){
+      this.db.getUser(uid).valueChanges().forEach(data =>{
+          let userData = {uid: uid, email: data.email_address, name: data.name, role: data.role};
+
+
+          localStorage.setItem("userData", JSON.stringify(userData));
+
+          if(callback) callback();
       });
+  }
 
-
-
-
-
-
+  getUserData(){
+      return JSON.parse(localStorage.getItem("userData"));
   }
 
   check(){
@@ -42,14 +78,36 @@ export class FirebaseAuthService implements AuthService {
       });
   }
 
+
     isLoggedIn(): boolean {
-        if (this.userDetails == null ) {
+        if (localStorage.getItem("user") == null ) {
             return false;
         } else {
-            //this.db.tryDev(this.userDetails.uid);
             return true;
         }
     }
+
+    isAnonym(): boolean{
+        return JSON.parse(localStorage.getItem("user")).isAnonymus;
+    }
+
+    hasRole(roles: any[]): boolean{
+      if(this.getUserData()) {
+          return roles.indexOf(this.getUserData().role) != -1;
+      }else{
+          return false;
+      }
+    }
+
+    accessFeature(canAccess: any[]):boolean{
+      if(!this.isLoggedIn()) return false;
+
+      if(this.isAnonym()) return canAccess.indexOf("anonym") != -1;
+
+      return this.hasRole(canAccess);
+
+    }
+
 
 
 
@@ -59,7 +117,10 @@ export class FirebaseAuthService implements AuthService {
 
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
           .then((res)=>{
-            if(onLogin)onLogin(res);
+
+
+              this.saveUserData(this.afAuth.auth.currentUser.uid, () => {if(onLogin)onLogin(res);});
+
           })
           .catch((error)=>{
             if(onError){
@@ -76,8 +137,10 @@ export class FirebaseAuthService implements AuthService {
     }
 
     logOut(onLogout){
-        this.afAuth.auth.signOut()
-            .then((res)=>onLogout(res));
+
+        localStorage.removeItem("user");
+        localStorage.removeItem("userData");
+        this.afAuth.auth.signOut().then((res)=>onLogout(res));
     }
 
     registerUser(email: string, password: string, user: User, onRegister, onError): Promise<Observable<firebase.User | null>> {
@@ -86,9 +149,13 @@ export class FirebaseAuthService implements AuthService {
             .then((authState: Observable<firebase.User | null>) => {
 
                 const uid = this.afAuth.auth.currentUser.uid;
+                    this.db.addUserWithKey(user, uid, () => {
+                        this.saveUserData(this.afAuth.auth.currentUser.uid, () => {
+                        onRegister();
+                    });
 
-                this.db.addUserWithKey(user/*new User(this.name, this.email, this.role)*/, uid);
-                onRegister();
+                });
+
                 return authState;
             },
             reason => {
@@ -102,71 +169,4 @@ export class FirebaseAuthService implements AuthService {
                 console.log('err', val);
             });
     }
-  /*
-  isLoggedIn(): boolean {
-      if(firebase.auth().currentUser != null) {
-          firebase.auth().currentUser.reload()
-              .then(value => {
-                  console.log("reload", value);
-                  return true;
-              })
-              .catch(val => {
-                  console.log("err", val);
-                  return false;
-              });
-          if(firebase.auth().currentUser!=null){
-              return true;
-          }
-      }
-      return false;
-  }
-
-    check(){
-        console.log(this.id);
-        this.id++;
-    }
-
-  loginWithEmail(email, password, onLogin, onError) {
-      this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then(value => {
-        onLogin(value);
-      })
-      .catch(reason => {
-        onError(reason);
-      });
-  }
-
-  logOut(): void {
-    this.afAuth.auth.signOut();
-  }
-
-
-
-  registerUser(email: string, password: string, user: User): Promise<Observable<firebase.User | null>> { //
-
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
-      .then((authState: Observable<firebase.User | null>) => {
-
-
-
-        const uid = this.afAuth.auth.currentUser.uid;
-
-        this.DB.addUserWithKey(user/*new User(this.name, this.email, this.role)//, uid);
-
-        return authState;
-      })
-      .catch((error) => {
-        console.log(error);
-        throw error;
-      });
-  }
-  */
-
-  /*loginWithEmail(email, password, onLogin, onError){
-      firebase.auth().signInWithEmailAndPassword(email, password)
-          .then(result => { console.log(result)});
-
-      firebase.auth().createUserWithEmailAndPassword(email, password)
-          .then(result => {console.log(result);});
-  }*/
 }

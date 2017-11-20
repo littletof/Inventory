@@ -3,6 +3,8 @@ import {MAT_DIALOG_DATA, MatChipInputEvent, MatDialogRef} from "@angular/materia
 import { SPACE} from "@angular/cdk/keycodes";
 import {Device} from "../device";
 import {DatabaseService} from "../backend-services/database.service";
+import {NgForm} from "@angular/forms";
+import {UploadFormComponent} from "../image_upload/upload-form/upload-form.component";
 
 @Component({
   selector: 'app-device-edit-dialog',
@@ -17,24 +19,76 @@ export class DeviceEditDialogComponent implements OnInit {
     device_description: string = "";
     device_tags = {};
 
+    device_image: string;
+
+    default_device_quantity = 1;
+
+    device_key = null;
+    editing = false;
+
+    borrowed_Q: number = 0;
+
+    upload;
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceEditDialogComponent>, public db: DatabaseService) {
+
+        if(data){
+            this.loadDevice(data);
+            this.editing = true;
+        }else {
+            this.device_quantity = this.default_device_quantity;
+        }
+
+
     }
 
     ngOnInit() {
+    }
+
+    loadDevice(device){
+        this.device_name = device.name;
+        this.device_quantity = device.quantity_total;
+        this.device_description = device.description;
+        //this.tags = device.tags;
+        this.device_key = device.key;
+        this.device_image = device.image;
+
+        this.borrowed_Q = device.quantity_total-device.quantity_available;
+
+        for(let t in device.tags){
+            this.tags.push({ name: t.trim() });
+        }
+
     }
 
     closeDialog(ret = null){
         this.dialogRef.close(ret);
     }
 
+    isValid(): boolean{
+        if(this.device_quantity>0 && this.device_name.trim() != ""){
+            return true;
+        }
+        return false;
+    }
 
-    addDevice(){
-        let device = this.prepareDevice();
-        //console.log(device);
-        this.db.addDevice(device);
+    addDevice(f: NgForm){
 
-        this.closeDialog();
+        if(f.valid && this.isValid()) {
+
+            let device = this.prepareDevice();
+
+
+            if(this.editing){
+                device.quantity_available = device.quantity_total-this.borrowed_Q;
+
+                this.db.updateDevice(this.device_key, device);
+            }else {
+                this.db.addDevice(device);
+            }
+
+            this.closeDialog();
+        }
     }
 
     prepareDevice() : Device {
@@ -42,7 +96,7 @@ export class DeviceEditDialogComponent implements OnInit {
         this.tags.forEach(t => {
             this.device_tags[t.name] = true;
         });
-        return new Device(this.device_name, this.device_quantity, this.device_description, this.device_tags);
+        return new Device(this.device_name, this.device_quantity, this.device_description, this.device_tags, this.device_image);
     }
 
 

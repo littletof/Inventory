@@ -19,11 +19,9 @@
 .center-all > * {
     margin-left: auto;
     margin-right: auto;
-}
-
-.loginbtn {
     display: block;
 }
+
 
 .title {
     margin-top: 1em;

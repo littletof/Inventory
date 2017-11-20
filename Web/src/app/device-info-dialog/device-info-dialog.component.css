@@ -15,9 +15,30 @@
     flex-direction: column;
     height: 60%;
     padding-bottom: 2em;
+
+    padding-right: 1em;
+}
+
+.filler{
+    display: block;
+    height: 90px;
+}
+
+.header-block{
+    display: block;
+    position: relative;
 }
 
 qr-code{
-
     display: inline-block;
+    right:0em;
+    top: -0.6em;
+    position: absolute;
+}
+
+.device-img{
+    float:right;
+    margin: 20px;
+    margin-right: 40px;
+    max-height: 170px;
 }

@@ -6,7 +6,7 @@ import {AngularFireList, AngularFireObject} from "angularfire2/database";
 export abstract class DatabaseService {
   access_db;
 
-  abstract addUserWithKey(user: User, key: string);
+  abstract addUserWithKey(user: User, key: string, callback);
   abstract removeUser(user);
 
 
@@ -22,7 +22,7 @@ export abstract class DatabaseService {
   abstract getDevice(key): any;
 
   abstract addDevice(device):any;
-
+  abstract updateDevice(uid, device): any;
 
   abstract removeDevice(key);
   abstract tryDev(any);
@@ -35,5 +35,7 @@ export abstract class DatabaseService {
 
   abstract getLending(key);
   abstract getLendingsOfUser(userkey): any;
+
+    abstract getImage(img, callback):string;
 
 }

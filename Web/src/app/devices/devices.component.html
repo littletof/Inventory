@@ -20,7 +20,7 @@
 
 
 <span class="new-device-btn">
-  <button mat-raised-button color="accent" (click)="openDeviceEditDialog()"><mat-icon>add_circle</mat-icon> Add device</button>
+  <button mat-raised-button color="accent" (click)="openDeviceEditDialog()" *ngIf="this.auth.accessFeature(this.auth.admini)"><mat-icon>add_circle</mat-icon> Add device</button>
 </span>
 <mat-divider></mat-divider>
 
@@ -30,7 +30,7 @@
     <h4 matLine><a color="accent" class="link" (click)="openDeviceInfoDialog(device)">{{device.name}}</a></h4>
     <!--<span><button mat-raised-button color="primary" (click)="openDialog(device)">Open</button></span>-->
 
-    <span><button mat-raised-button color="accent" (click)="openLendDeviceDialog(device)" [disabled]="device.quantity_available<=0">Lend</button></span>
+    <span><button mat-raised-button color="accent" (click)="openLendDeviceDialog(device)" [disabled]="device.quantity_available<=0" *ngIf="this.auth.accessFeature(this.auth.authed)">Lend</button></span>
 
 
     <!--<span><button mat-button color="warn" (click)="removeDevice(device.key)" disabled>Remove</button></span>-->

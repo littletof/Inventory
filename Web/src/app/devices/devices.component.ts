@@ -22,7 +22,7 @@ export class DevicesComponent implements OnInit {
 
   filter = [];
 
-  constructor(private db: DatabaseService, private auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
+  constructor(private db: DatabaseService, public auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
       if (this.auth.isLoggedIn()) {
 
@@ -60,8 +60,14 @@ export class DevicesComponent implements OnInit {
         });
         dialogref.afterClosed().subscribe(value => {
            // console.log(value);
-            if(value!=null)
-            this.openLendDeviceDialog(value);
+            if(value!=null) {
+                if (value.edit) {
+                    this.openDeviceEditDialog(value.device);
+                }else{
+                    this.openLendDeviceDialog(value);
+                }
+            }
+
         });
     }
 

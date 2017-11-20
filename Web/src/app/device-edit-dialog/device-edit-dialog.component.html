@@ -4,12 +4,15 @@
 
 
 <mat-dialog-content>
+    <form #addDeviceForm="ngForm">
     <mat-form-field class="devicename">
-        <input matInput type="text" required placeholder="Name" [(ngModel)]="device_name">
+        <input matInput type="text" required placeholder="Name" [(ngModel)]="device_name" name="device_name">
     </mat-form-field>
+
+       <!-- <upload-form #upload></upload-form>-->
     <br>
     <mat-form-field class="quantity">
-        <input matInput type="number" required placeholder="Quantity" [(ngModel)]="device_quantity">
+        <input matInput type="number" required placeholder="Quantity" [(ngModel)]="device_quantity" name="device_quantity" min="1">
         <span matSuffix>pcs.</span>
     </mat-form-field>
 
@@ -17,7 +20,7 @@
     <br>
 
     <mat-form-field style="width: 100%">
-        <textarea matInput placeholder="Description" rows="5" [(ngModel)]="device_description"></textarea>
+        <textarea matInput placeholder="Description" rows="5" [(ngModel)]="device_description" name="description"></textarea>
 
     </mat-form-field>
 
@@ -35,11 +38,12 @@
                    [matChipInputFor]="chipList"
                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
                    [matChipInputAddOnBlur]="addOnBlur"
-                   (matChipInputTokenEnd)="add($event)" />
+                   (matChipInputTokenEnd)="add($event)"
+                    name="tags"/>
         </mat-chip-list>
     </mat-form-field>
 
-
+    </form>
 
 
 
@@ -52,5 +56,5 @@
   <button mat-button (click)="closeDialog()">Cancel</button>
   <!-- Can optionally provide a result for the closing dialog. -->
   <!--<button mat-button [mat-dialog-close]="true">Yes</button>-->
-  <button mat-raised-button (click)="addDevice()" color="accent"><span *ngIf="data">Save</span><span *ngIf="!data">Add</span></button>
+  <button mat-raised-button (click)="addDevice(addDeviceForm)" color="accent"><span *ngIf="data">Save</span><span *ngIf="!data">Add</span></button>
 </mat-dialog-actions>

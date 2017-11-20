@@ -3,7 +3,7 @@ export class User {
   constructor(
       public name: string,
       public email_address: string,
-      public role: number,
+      public role: string,
       public present_lendings: string[] = [],
       public past_lendings: string[] = []) {}
 
