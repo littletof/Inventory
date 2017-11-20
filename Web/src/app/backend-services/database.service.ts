@@ -36,4 +36,6 @@ export abstract class DatabaseService {
   abstract getLending(key);
   abstract getLendingsOfUser(userkey): any;
 
+    abstract getImage(img, callback):string;
+
 }

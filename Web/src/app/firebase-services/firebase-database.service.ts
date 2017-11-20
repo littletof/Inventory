@@ -8,6 +8,7 @@ import {User} from "../user";
 import {Device} from "../device";
 import {DatabaseService} from "../backend-services/database.service";
 import {LendEntry} from "../lend-entry";
+import * as firebase from "firebase";
 
 
 
@@ -166,6 +167,13 @@ export class FirebaseDatabaseService implements DatabaseService{
 
 
   // -- DEVICES END --
+
+
+  getImage(img, callback): any{
+      firebase.storage().ref('images/'+img + '.png').getDownloadURL().then((val)=> {
+          callback(val);
+      });
+  }
 
 
   //Util

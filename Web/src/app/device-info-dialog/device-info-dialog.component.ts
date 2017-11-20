@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {AuthService} from "../backend-services/auth.service";
+import {DatabaseService} from "../backend-services/database.service";
 
 @Component({
   selector: 'app-device-info',
@@ -11,8 +12,9 @@ export class DeviceInfoDialogComponent implements OnInit {
 
   displayTags: string[];
   qrCode: any;
+  img_src:string ="";
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceInfoDialogComponent>, public auth: AuthService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceInfoDialogComponent>, public auth: AuthService, public db: DatabaseService) {
 
     this.displayTags = [];
     for(let propName in data.tags){
@@ -20,6 +22,10 @@ export class DeviceInfoDialogComponent implements OnInit {
     }
 
     this.qrCode = data.key;
+
+    this.db.getImage(data.image, (val) =>{
+      this.img_src = val;
+    });
 
   }
 
