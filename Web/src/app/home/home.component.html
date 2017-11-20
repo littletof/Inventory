@@ -1,2 +1,4 @@
-<app-users></app-users>
-<app-devices></app-devices>
+<app-user-lendings *ngIf="this.auth.accessFeature(this.auth.authed)"></app-user-lendings>
+<app-users *ngIf="this.auth.accessFeature(this.auth.admini)"></app-users>
+<app-devices *ngIf="this.auth.accessFeature(this.auth.anyone)"></app-devices>
+

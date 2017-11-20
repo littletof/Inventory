@@ -4,13 +4,8 @@ import {DatabaseService} from "../backend-services/database.service";
 import {AuthService} from "../backend-services/auth.service";
 import { MatDialog} from "@angular/material";
 import {LendDetailDialogComponent} from "../lend-detail-dialog/lend-detail-dialog.component";
-import {Observable} from "rxjs/Observable";
-import {FirebaseListObservable} from "angularfire2/database-deprecated";
-import {AngularFireList, AngularFireObject} from "angularfire2/database";
-import {Device} from "../device";
-import * as firebase from "firebase";
-import {logging} from "selenium-webdriver";
-import getLevel = logging.getLevel;
+import {AngularFireList} from "angularfire2/database";
+
 
 @Component({
   selector: 'app-user-lendings',
