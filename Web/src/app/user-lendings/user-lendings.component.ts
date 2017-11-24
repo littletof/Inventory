@@ -73,7 +73,7 @@ export class UserLendingsComponent implements OnInit {
 
   returnDevice(lendData){
 
-      //this.db.returnLendDevice(lendData);
+      this.db.returnLendDevice(lendData);
 
 
   }
