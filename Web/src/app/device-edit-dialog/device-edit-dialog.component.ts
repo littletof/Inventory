@@ -101,6 +101,8 @@ export class DeviceEditDialogComponent implements OnInit {
 
 
 
+    //ChipList-------
+
     visible: boolean = true;
     selectable: boolean = false;
     removable: boolean = true;

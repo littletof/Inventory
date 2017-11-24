@@ -9,7 +9,7 @@
     <h4 matLine>{{lending.device.name}}</h4>
     <p matLine class="demo-2"> <b>Start date:</b> {{lending.lend.start_date.toLocaleDateString()}}  <b>End date:</b> {{lending.lend.end_date.toLocaleDateString()}} <b>Number of devices:</b> {{lending.lend.device_quantity}}</p>
     <button mat-raised-button color="accent" (click)="openLendDetailDialog(lending)">Details</button>
-    <button mat-raised-button color="accent" (click)="returnDevice(lending)">Return</button>
+    <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)">Return</button>
     <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->
 
 

@@ -5,6 +5,7 @@ import {AuthService} from "../backend-services/auth.service";
 import { MatDialog} from "@angular/material";
 import {LendDetailDialogComponent} from "../lend-detail-dialog/lend-detail-dialog.component";
 import {AngularFireList} from "angularfire2/database";
+import {LendReturnDialogComponent} from "../lend-return-dialog/lend-return-dialog.component";
 
 
 @Component({
@@ -53,13 +54,28 @@ export class UserLendingsComponent implements OnInit {
       });
       dialogref.afterClosed().subscribe(returnLend => {
           if (returnLend != null) {
-                this.returnDevice(returnLend);
+                this.openLendReturnDialog(returnLend);
           }
       });
   }
 
+    openLendReturnDialog(data) {
+        let dialogref = this.dialog.open(LendReturnDialogComponent, {
+            data,
+            width: '50%'
+        });
+        dialogref.afterClosed().subscribe(returnLend => {
+            if (returnLend != null) {
+                this.returnDevice(returnLend);
+            }
+        });
+    }
+
   returnDevice(lendData){
-      this.db.returnLendDevice(lendData);
+
+      //this.db.returnLendDevice(lendData);
+
+
   }
 
   private getLendState(today, enddate){

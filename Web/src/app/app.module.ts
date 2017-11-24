@@ -45,6 +45,7 @@ import { QRCodeModule } from 'angular2-qrcode';
 import {AccessGuardService} from "./backend-services/access-guard.service";
 import { UploadFormComponent } from './image_upload/upload-form/upload-form.component';
 import {UploadService} from "./image_upload/shared/upload.service";
+import { LendReturnDialogComponent } from './lend-return-dialog/lend-return-dialog.component';
 
 
 
@@ -63,13 +64,15 @@ import {UploadService} from "./image_upload/shared/upload.service";
     LendDetailDialogComponent,
     DeviceEditDialogComponent,
     DeviceTagsFilterPipe,
-    UploadFormComponent
+    UploadFormComponent,
+    LendReturnDialogComponent
   ],
   entryComponents: [
       DeviceInfoDialogComponent,
       DeviceEditDialogComponent,
       LendDeviceDialogComponent,
-      LendDetailDialogComponent
+      LendDetailDialogComponent,
+      LendReturnDialogComponent
   ],
   imports: [
     BrowserModule,
