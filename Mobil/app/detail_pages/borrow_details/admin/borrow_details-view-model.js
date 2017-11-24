@@ -141,7 +141,19 @@ function getDeviceDetails(device_id){
       } else {
 		  borrow.set("device_name", result.value.name);
 		  borrow.set("device_quantity_available", result.value.quantity_available);
-		  borrow.set("device_quantity_total", result.value.quantity_total);
+      borrow.set("device_quantity_total", result.value.quantity_total);
+      
+      firebase.getDownloadUrl({
+        bucket: 'gs://inventory-01.appspot.com/images',
+        remoteFullPath: result.value.image+'.png'
+      }).then(
+          function (url) {
+            borrow.set("image",url);            
+        },
+          function (error) {
+            console.log("Error: " + error);
+          }
+      );
       }
     };
     firebase.query(

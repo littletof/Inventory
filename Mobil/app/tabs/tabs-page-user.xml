@@ -35,7 +35,7 @@
 
         <TabViewItem title="{{L('Devices')}}" >
           <TabViewItem.view>
-             <devices:DevicesView/>
+             <devices:DevicesView_user/>
           </TabViewItem.view>
         </TabViewItem> 
 

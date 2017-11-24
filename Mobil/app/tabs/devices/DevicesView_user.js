@@ -40,7 +40,7 @@ exports.onDetails=function(args){
     console.log(args.object.device);
     const tappedDevice = args.object.bindingContext;
 	topmost().navigate({
-		moduleName: "detail_pages/device_details/admin/device_details",
+		moduleName: "detail_pages/device_details/user/device_details",
 		context: tappedDevice,
 		animated: true,
 		transition: {
@@ -54,7 +54,7 @@ exports.onDetails=function(args){
 
 function afterScan(){
     topmost().navigate({
-        moduleName: "detail_pages/device_details/admin/device_details",
+        moduleName: "detail_pages/device_details/user/device_details",
         context: scannedDevice,
         animated: true,
         transition: {

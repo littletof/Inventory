@@ -1,11 +1,11 @@
-<Page class="page" navigatingTo="onNavigatingTo">
+<Page class="page" navigatingTo="onNavigatingTo" xmlns:nativescript-fresco="nativescript-fresco">
 	<ActionBar class="action-bar">
 		<Label text="{{L('BorrowDetails')}}" class="action-bar-title" />
 	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
 	</ActionBar>
 	<ScrollView>
 		<GridLayout columns="*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto">
-			<!--nativescript-fresco:FrescoDrawee class="image" col="0" row="0" imageUri="{{ image }}"/-->
+			<nativescript-fresco:FrescoDrawee class="image" col="0" row="0" imageUri="{{ image }}"/>
 			<Label id="itemNameLabel" class="imageText" col="0" row="1" text="{{device_name}}"/>
 
 			<StackLayout col="0" row="2" orientation="horizontal">
