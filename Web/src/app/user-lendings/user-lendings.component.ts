@@ -72,10 +72,7 @@ export class UserLendingsComponent implements OnInit {
     }
 
   returnDevice(lendData){
-
       this.db.returnLendDevice(lendData);
-
-
   }
 
   private getLendState(today, enddate){

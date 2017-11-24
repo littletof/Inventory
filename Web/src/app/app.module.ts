@@ -17,14 +17,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     MatToolbarModule, MatIconModule, MatTableModule, MatListModule, MatInputModule,
     MatCardModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule, MatAutocompleteModule
 } from '@angular/material';
 import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule} from '@angular/material';
 
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireAuthModule} from "angularfire2/auth";
 
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {FirebaseAuthService} from "./firebase-services/firebase-auth.service";
 import {AuthService} from "./backend-services/auth.service";
@@ -83,7 +83,7 @@ import { LendReturnDialogComponent } from './lend-return-dialog/lend-return-dial
     AppRoutingModule,
     FormsModule,
     RouterModule,
-
+    ReactiveFormsModule,
     BrowserAnimationsModule,
 
 
@@ -101,6 +101,7 @@ import { LendReturnDialogComponent } from './lend-return-dialog/lend-return-dial
     MatNativeDateModule,
     MatSnackBarModule,
     MatChipsModule,
+    MatAutocompleteModule,
 
     QRCodeModule
   ],

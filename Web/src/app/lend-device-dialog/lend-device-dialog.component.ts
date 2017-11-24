@@ -1,8 +1,13 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {AuthService} from "../backend-services/auth.service";
-import {NgForm} from "@angular/forms";
+import {FormControl, NgForm} from "@angular/forms";
+import {Observable} from "rxjs/Observable";
+import {DatabaseService} from "../backend-services/database.service";
 
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/first';
+import 'rxjs/add/operator/startWith';
 
 const defDayDiff = 1;
 const defNumOfDevices = 1;
@@ -25,9 +30,16 @@ export class LendDeviceDialogComponent implements OnInit {
   numberOfDevices: number = defNumOfDevices;
   comment: string = "";
 
+  borrower: any = {};
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendDeviceDialogComponent>, public auth: AuthService) {
-    this.userID = this.auth.getUserData().uid;
+    options =[];
+
+    filteredOptions: Observable<any[]>;
+
+    myControl: FormControl = new FormControl();
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendDeviceDialogComponent>, public auth: AuthService, public db: DatabaseService) {
+    this.userID = this.auth.getUserData().uid;//LENDER change to Borrower.uid
     this.deviceID = this.data.key;
 
 
@@ -37,10 +49,57 @@ export class LendDeviceDialogComponent implements OnInit {
 
     this.minDate = new Date(this.startDate);
     this.minDate.setDate(this.minDate.getDate()+1);
+
+
+    this.loadUsers();
   }
 
-  ngOnInit() {
-  }
+  /*
+
+   const sub = this.userCollection.snapshotChanges().map(actions =>{
+      return actions.map(a => {
+        const data = a.payload.doc.data() as User;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    }).take(1).subscribe((users) => {
+      this.users = users
+    });
+   */
+
+
+
+
+    ngOnInit() {
+        this.filteredOptions = this.myControl.valueChanges
+            .startWith('')
+            .map(user => user && typeof user === 'object' ? user.name : user)
+            .map(name => name ? this.filter(name) : this.options.slice());
+    }
+
+
+    //NamePicker filter
+    filter(name: string): any[] {
+        return this.options.filter(option =>
+            option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    }
+
+    displayFn(user: any): string {
+        return user ? user.name : user;
+    }
+
+
+    loadUsers(){
+        this.db.getUsers().map(users => {
+            return users.map(user => {
+                return {name: user.payload.val().name, uid: user.key};
+            });
+        }).first().subscribe(users => {
+            this.options = users;
+        });
+        //import 'rxjs/add/operator/map';
+        //import 'rxjs/add/operator/first';
+    }
 
   closeDialog(ret = null){
       if(ret == true) {
@@ -68,6 +127,7 @@ export class LendDeviceDialogComponent implements OnInit {
     private isValid(): boolean{
       //console.log(this.endDate.getTime()-this.startDate.getTime());
       if(this.endDate.getTime()-this.startDate.getTime() > 0 && this.numberOfDevices >=1 && this.numberOfDevices <= this.data.quantity_available){
+          //console.log(this.borrower);
           return true;
       }
 
