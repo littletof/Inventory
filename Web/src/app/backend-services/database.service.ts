@@ -33,6 +33,8 @@ export abstract class DatabaseService {
   abstract lendDevice(lendData);
   abstract returnLendDevice(lendData);
 
+  abstract requestDevice(requestData): any;
+
   abstract getLending(key);
   abstract getLendingsOfUser(userkey): any;
 

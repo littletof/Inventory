@@ -9,6 +9,7 @@ import {Device} from "../device";
 import {DatabaseService} from "../backend-services/database.service";
 import {LendEntry} from "../lend-entry";
 import * as firebase from "firebase";
+import {RequestEntry} from "../request-entry";
 
 
 
@@ -158,6 +159,25 @@ export class FirebaseDatabaseService implements DatabaseService{
       let reff = this.db.list<LendEntry>("lendings/present_lendings/", ref => ref.orderByChild('user_id').equalTo(userkey));
 
       return reff.snapshotChanges();
+  }
+
+
+  requestDevice(requestData: RequestEntry): any{
+      let devref =this.db.database.ref('devices/'+requestData.device_uid);
+
+      return devref.transaction(data => {
+
+          if(data.quantity_available - requestData.device_quantity >= 0) {
+              devref.update({quantity_available: data.quantity_available - requestData.device_quantity});
+
+
+              this.db.list("requests").push(requestData.toDBJSON());
+
+          }else{
+              throw new Error('Trying to request more than available');
+          }
+
+      });
   }
 
   getLending(lendkey){

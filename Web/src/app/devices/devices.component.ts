@@ -23,7 +23,7 @@ export class DevicesComponent implements OnInit {
 
   filter = [];
 
-  constructor(private db: DatabaseService, public auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
+  constructor(public db: DatabaseService, public auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
       if (this.auth.isLoggedIn()) {
 
@@ -44,8 +44,15 @@ export class DevicesComponent implements OnInit {
 
 
   requestDevice(data){
-      DeviceRequestDialogComponent.open(this.dialog, data, console.log);
+      DeviceRequestDialogComponent.open(this.dialog, data, data => this.onRequest(data));
   }
+
+  onRequest(data){
+        this.db.requestDevice(data).then(() => {
+            this.openSnack(this.requestString(data));
+        });
+  }
+
 
     openDeviceEditDialog(data = null){
         let dialogref = this.dialog.open(DeviceEditDialogComponent, {
@@ -84,15 +91,22 @@ export class DevicesComponent implements OnInit {
             //console.log('Lending returned with: ', value);
             if(value != null){
                 this.db.lendDevice(value);
-                this.openSnack(value);
+                this.openSnack(this.lendString(value));
             }
         });
     }
 
     openSnack(value){
-        this.snackBar.open("You successfully borrowed " +value.device_quantity + " x " + value.device_name , null, {
+        this.snackBar.open(value , null, {
             duration: 5000
         });
+    }
+
+    lendString(value): string{
+        return "You successfully borrowed " +value.device_quantity + " x " + value.device_name;
+    }
+    requestString(value): string{
+        return "You successfully requested " +value.device_quantity +  " devices";
     }
 
 
