@@ -8,17 +8,7 @@ export class User {
       public past_lendings: string[] = []) {}
 
 
-
-    static fromJsonList(array): User[] {
-        return array.map(User.fromJson);
-    }
-
-//add more parameters depending on your database entries and Hero constructor
-    static fromJson({name, email_address, role, pres_lend, past_lend}): User {
-        return new User(name, email_address, role, pres_lend, past_lend);
-    }
-
-    static fromJSON(snap){
+    static fromDB_Snapshot(snap){
       let js = snap.payload.val();
       return {key: snap.payload.key, ...js};
     }

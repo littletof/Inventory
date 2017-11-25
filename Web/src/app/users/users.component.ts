@@ -25,7 +25,7 @@ export class UsersComponent implements OnInit {
 
         this.users = this.db.getUsers().map(changes => {
             return changes.map(c => {
-               return User.fromJSON(c);
+               return User.fromDB_Snapshot(c);
             });
         });
 
@@ -34,21 +34,4 @@ export class UsersComponent implements OnInit {
     }
 
   }
-
-  removeUser(user){
-    //this.getMethods(this.db.getMyUsers());
-    //this.db.getMyUsers().remove(user);
-
-  }
-
-    getMethods(obj): void{
-        var res = [];
-        for(var m in obj) {
-            if(typeof obj[m] == "function") {
-                res.push(m)
-            }
-        }
-        console.log(res);
-    }
-
 }

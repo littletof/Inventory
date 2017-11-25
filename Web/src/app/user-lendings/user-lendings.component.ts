@@ -29,7 +29,7 @@ export class UserLendingsComponent implements OnInit {
     this.lendings = this.db.getLendingsOfUser(this.auth.getUserData().uid)
         .map(changes => {
             return changes.map(c => {
-                let ret = {lend: LendEntry.fromtoJSON(c), device: {}, state: {}};
+                let ret = {lend: LendEntry.fromDB_Snapshot(c), device: {}, state: {}};
 
                 //kölcsönzés eszközének keresése
                 this.db.getDevice(ret.lend.device_id).subscribe(devices => {
