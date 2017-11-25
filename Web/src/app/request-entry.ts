@@ -1,6 +1,6 @@
 export class RequestEntry {
 
-    constructor(public user_uid: string, public device_uid: string, public device_quantity: number, public request_date: Date){}
+    constructor(public user_uid: string, public device_uid: string, public device_quantity: number, public comment: string, public request_date: Date){}
 
     toDBJSON(){
         return {...JSON.parse(JSON.stringify(this)), request_date: this.request_date.getTime()};

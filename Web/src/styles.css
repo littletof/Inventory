@@ -34,3 +34,7 @@ body{
 .indent{
   padding-left: 1em;
 }
+
+.dedent{
+  padding-right: 1em;
+}
