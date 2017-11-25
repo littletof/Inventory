@@ -9,6 +9,7 @@ import {AngularFireList} from "angularfire2/database";
 import {Device} from "../device";
 import {DeviceEditDialogComponent} from "../device-edit-dialog/device-edit-dialog.component";
 import {SPACE} from "@angular/cdk/keycodes";
+import {DeviceRequestDialogComponent} from "../device-request-dialog/device-request-dialog.component";
 
 @Component({
   selector: 'app-devices',
@@ -42,6 +43,10 @@ export class DevicesComponent implements OnInit {
   ngOnInit() { }
 
 
+  requestDevice(data){
+      DeviceRequestDialogComponent.open(this.dialog, data, console.log);
+  }
+
     openDeviceEditDialog(data = null){
         let dialogref = this.dialog.open(DeviceEditDialogComponent, {
             data,
@@ -59,7 +64,6 @@ export class DevicesComponent implements OnInit {
             width: '50%'
         });
         dialogref.afterClosed().subscribe(value => {
-           // console.log(value);
             if(value!=null) {
                 if (value.edit) {
                     this.openDeviceEditDialog(value.device);

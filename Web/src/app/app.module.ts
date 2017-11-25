@@ -46,6 +46,7 @@ import {AccessGuardService} from "./backend-services/access-guard.service";
 import { UploadFormComponent } from './image_upload/upload-form/upload-form.component';
 import {UploadService} from "./image_upload/shared/upload.service";
 import { LendReturnDialogComponent } from './lend-return-dialog/lend-return-dialog.component';
+import { DeviceRequestDialogComponent } from './device-request-dialog/device-request-dialog.component';
 
 
 
@@ -65,14 +66,16 @@ import { LendReturnDialogComponent } from './lend-return-dialog/lend-return-dial
     DeviceEditDialogComponent,
     DeviceTagsFilterPipe,
     UploadFormComponent,
-    LendReturnDialogComponent
+    LendReturnDialogComponent,
+    DeviceRequestDialogComponent
   ],
   entryComponents: [
       DeviceInfoDialogComponent,
       DeviceEditDialogComponent,
       LendDeviceDialogComponent,
       LendDetailDialogComponent,
-      LendReturnDialogComponent
+      LendReturnDialogComponent,
+      DeviceRequestDialogComponent
   ],
   imports: [
     BrowserModule,

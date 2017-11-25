@@ -87,7 +87,7 @@ export class DeviceEditDialogComponent implements OnInit {
                 this.db.addDevice(device);
             }
 
-            this.closeDialog();
+            this.closeDialog(device);
         }
     }
 
