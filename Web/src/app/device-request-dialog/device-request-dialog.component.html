@@ -11,7 +11,7 @@
       <span class="indent"> <b>Available: </b>{{data.quantity_available}}</span> <br><br>
       <mat-form-field class="indent">
         <input matInput type="number" placeholder="Number of devices" [(ngModel)]="numberOfDevices" name="numberInput" required  max="{{data.quantity_available}}" min="1" [formControl]="myControl">
-        <mat-error *ngIf="myControl.hasError('tooMany')">Too many devices</mat-error>
+        <mat-error *ngIf="myControl.hasError('tooMany')">Number must be at least 1 and maximum {{data.quantity_available}}</mat-error>
       </mat-form-field>
 
       <br>
