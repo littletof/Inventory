@@ -22,9 +22,11 @@ export class FirebaseAuthService implements AuthService {
     usersub: any;
 
 
+    quests  = ['anonym'];
     anyone = ['admin', 'user', 'anonym'];
     authed = ['admin', 'user'];
     admini = ['admin'];
+
 
   constructor(public afAuth: AngularFireAuth, public db: DatabaseService, public router: Router) {
       this.user = afAuth.authState;

@@ -47,6 +47,7 @@ import { UploadFormComponent } from './image_upload/upload-form/upload-form.comp
 import {UploadService} from "./image_upload/shared/upload.service";
 import { LendReturnDialogComponent } from './lend-return-dialog/lend-return-dialog.component';
 import { DeviceRequestDialogComponent } from './device-request-dialog/device-request-dialog.component';
+import { RequestsComponent } from './requests/requests.component';
 
 
 
@@ -67,7 +68,8 @@ import { DeviceRequestDialogComponent } from './device-request-dialog/device-req
     DeviceTagsFilterPipe,
     UploadFormComponent,
     LendReturnDialogComponent,
-    DeviceRequestDialogComponent
+    DeviceRequestDialogComponent,
+    RequestsComponent
   ],
   entryComponents: [
       DeviceInfoDialogComponent,

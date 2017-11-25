@@ -9,6 +9,7 @@ import { AccessGuardService as ACC } from "../backend-services/access-guard.serv
 import {RegisterComponent} from "../register/register.component";
 import {HomeComponent} from "../home/home.component";
 import {UserLendingsComponent} from "../user-lendings/user-lendings.component";
+import {RequestsComponent} from "../requests/requests.component";
 
 const routes: Routes = [
 
@@ -23,6 +24,9 @@ const routes: Routes = [
         data:{canAccess: ['admin', 'user'], anonym: true} },
 
     { path: 'lendings', component: UserLendingsComponent, canActivate: [AGS, ACC],
+        data:{canAccess: ['admin', 'user']}},
+
+    { path: 'requests', component: RequestsComponent, canActivate: [AGS, ACC],
         data:{canAccess: ['admin', 'user']}},
 
 

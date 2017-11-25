@@ -8,6 +8,7 @@ export abstract class AuthService {
   anyone = ['admin', 'user', 'anonym'];
   authed = ['admin', 'user'];
   admini = ['admin'];
+  quests  = ['anonym'];
 
   abstract loginWithEmail(email: string, password: string, onLogin, onError): void;
   abstract loginAnonym(onLogin): void;
