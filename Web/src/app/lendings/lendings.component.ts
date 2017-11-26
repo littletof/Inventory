@@ -9,9 +9,9 @@ import {LendReturnDialogComponent} from "../lend-return-dialog/lend-return-dialo
 
 
 @Component({
-  selector: 'app-user-lendings',
-  templateUrl: './user-lendings.component.html',
-  styleUrls: ['./user-lendings.component.css']
+  selector: 'app-lendings',
+  templateUrl: './lendings.component.html',
+  styleUrls: ['./lendings.component.css']
 })
 export class UserLendingsComponent implements OnInit {
 

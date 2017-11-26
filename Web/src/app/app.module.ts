@@ -19,7 +19,7 @@ import {
     MatCardModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatSnackBarModule,
     MatChipsModule, MatAutocompleteModule
 } from '@angular/material';
-import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatExpansionModule} from '@angular/material';
+import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatExpansionModule, MatTabsModule} from '@angular/material';
 
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireAuthModule} from "angularfire2/auth";
@@ -36,7 +36,7 @@ import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { DeviceInfoDialogComponent } from './device-info-dialog/device-info-dialog.component';
 import { LendDeviceDialogComponent } from './lend-device-dialog/lend-device-dialog.component';
-import { UserLendingsComponent } from './user-lendings/user-lendings.component';
+import { UserLendingsComponent } from './lendings/lendings.component';
 import { LendDetailDialogComponent } from './lend-detail-dialog/lend-detail-dialog.component';
 import { DeviceEditDialogComponent } from './device-edit-dialog/device-edit-dialog.component';
 import { DeviceTagsFilterPipe } from './device-tags-filter.pipe';
@@ -110,6 +110,7 @@ import { LendingSearchPipe } from './request-search.pipe';
     MatChipsModule,
     MatAutocompleteModule,
     MatExpansionModule,
+    MatTabsModule,
 
     QRCodeModule
   ],
