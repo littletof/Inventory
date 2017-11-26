@@ -20,9 +20,7 @@ export class DevicesComponent implements OnInit {
 
   devices: AngularFireList<Device>;
 
-  filterChips = [];
-//  filter:string[] = [""];
-  search:string;
+  filter: any[];
 
   constructor(public db: DatabaseService, public auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
@@ -42,6 +40,11 @@ export class DevicesComponent implements OnInit {
   }
 
   ngOnInit() { }
+
+
+  setSearch(tags){
+      this.filter = tags;
+  }
 
 
   requestDevice(data){
@@ -114,43 +117,5 @@ export class DevicesComponent implements OnInit {
         return "You successfully requested " +value.device_quantity +  " devices";
     }
 
-
-
-
-    visible: boolean = true;
-    selectable: boolean = false;
-    removable: boolean = true;
-    addOnBlur: boolean = true;
-
-    separatorKeysCodes = [SPACE];
-
-
-    add(event: MatChipInputEvent): void {
-        let input = event.input;
-        let value = event.value;
-
-        // Add our tag
-        value.split(String.fromCharCode(SPACE)).forEach(val => {
-            if ((val || '').trim()) {
-                this.filterChips.push(val.trim());
-               // console.log(this.filter);
-            }
-        });
-
-
-        // Reset the input value
-        if (input) {
-            input.value = '';
-            this.search = "";
-        }
-    }
-
-    remove(tag: any): void {
-        let index = this.filterChips.indexOf(tag);
-
-        if (index >= 0) {
-            this.filterChips.splice(index, 1);
-        }
-    }
 
 }

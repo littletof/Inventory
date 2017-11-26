@@ -51,6 +51,7 @@ import { RequestsComponent } from './requests/requests.component';
 import { LendingSearchPipe } from './request-search.pipe';
 import { LendOrderPipe } from './lend-order.pipe';
 import { DeviceRequestInfoDialogComponent } from './device-request-info-dialog/device-request-info-dialog.component';
+import { ChipSearchInputComponent } from './chip-search-input/chip-search-input.component';
 
 
 
@@ -75,7 +76,8 @@ import { DeviceRequestInfoDialogComponent } from './device-request-info-dialog/d
     RequestsComponent,
     LendingSearchPipe,
     LendOrderPipe,
-    DeviceRequestInfoDialogComponent
+    DeviceRequestInfoDialogComponent,
+    ChipSearchInputComponent
   ],
   entryComponents: [
       DeviceInfoDialogComponent,

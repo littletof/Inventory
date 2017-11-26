@@ -7,12 +7,12 @@ import {Device} from "./device";
 })
 export class DeviceTagsFilterPipe implements PipeTransform {
 
-  transform(items: any[], chips: string[], search: string): any {
+  transform(items: any[], chips: string[]): any {
 
 
       let filter:string[] = [];
-      chips.forEach(chip=> filter.push(chip));
-      filter.push(search);
+      chips&& chips.forEach(chip=> filter.push(chip));
+
 
       //console.log(filter);
 
