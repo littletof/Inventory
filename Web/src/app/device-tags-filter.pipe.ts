@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import {Device} from "./device";
 
 @Pipe({
   name: 'deviceTagsFilter',
@@ -6,7 +7,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DeviceTagsFilterPipe implements PipeTransform {
 
-  transform(items: any[], filter: Object): any {
+  transform(items: any[], chips: string[], search: string): any {
+
+
+      let filter:string[] = [];
+      chips.forEach(chip=> filter.push(chip));
+      filter.push(search);
+
+      //console.log(filter);
+
       if (!items || !filter) {
           return items;
       }
@@ -22,14 +31,16 @@ export class DeviceTagsFilterPipe implements PipeTransform {
 
           for(let ftag in filter){
 
-              let searchTag = filter[ftag].toUpperCase();
+            if(filter[ftag]) {
+                let searchTag = filter[ftag].toUpperCase();
 
-              //console.log('check ', searchTag, ' in ', item.name, ' result:  ', item.name.indexOf(searchTag));
+                //console.log('check ', searchTag, ' in ', item.name, ' result:  ', item.name.indexOf(searchTag));
 
-
-
-            if(tags.indexOf(searchTag) === -1 && item.name.toUpperCase().indexOf(searchTag)===-1){
-              return false;
+                /*tags.indexOf(searchTag) != -1*/
+                if (Device.stringInTags(item.tags, searchTag) || item.name.toUpperCase().indexOf(searchTag) != -1) {}
+                else{
+                    return false;
+                }
             }
           }
 

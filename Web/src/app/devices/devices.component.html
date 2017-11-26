@@ -3,20 +3,21 @@
 
 <mat-form-field class="tag-chip">
   <mat-chip-list #chipList>
-    <mat-chip *ngFor="let tag of filter" [selectable]="selectable"
+    <mat-chip *ngFor="let tag of filterChips" [selectable]="selectable"
               [removable]="removable" (remove)="remove(tag)" color="accent">
       {{tag}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
-    <input placeholder=""
+    <input  #searchInput="searchInput"
+            placeholder=""
            [matChipInputFor]="chipList"
            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
            [matChipInputAddOnBlur]="addOnBlur"
-           (matChipInputTokenEnd)="add($event)" />
+           (matChipInputTokenEnd)="add($event)"
+            [(ngModel)]="search"/>
   </mat-chip-list>
   <span matSuffix><mat-icon>search</mat-icon></span>
 </mat-form-field>
-
 
 
 <span class="new-device-btn">
@@ -25,7 +26,7 @@
 <mat-divider></mat-divider>
 
 <mat-list class="matList">
-  <mat-list-item *ngFor="let device of devices | async | deviceTagsFilter:filter" class="list-item" (click)="openDeviceInfoDialog(device)">
+  <mat-list-item *ngFor="let device of devices | async | deviceTagsFilter:filterChips:search" class="list-item" (click)="openDeviceInfoDialog(device)">
     <mat-icon matListIcon>devices_other</mat-icon>
     <h4 matLine><a color="accent" class="link" (click)="openDeviceInfoDialog(device)">{{device.name}}</a></h4>
     <!--<span><button mat-raised-button color="primary" (click)="openDialog(device)">Open</button></span>-->

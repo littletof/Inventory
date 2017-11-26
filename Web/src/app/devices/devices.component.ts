@@ -20,7 +20,9 @@ export class DevicesComponent implements OnInit {
 
   devices: AngularFireList<Device>;
 
-  filter = [];
+  filterChips = [];
+//  filter:string[] = [""];
+  search:string;
 
   constructor(public db: DatabaseService, public auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
@@ -130,7 +132,7 @@ export class DevicesComponent implements OnInit {
         // Add our tag
         value.split(String.fromCharCode(SPACE)).forEach(val => {
             if ((val || '').trim()) {
-                this.filter.push(val.trim());
+                this.filterChips.push(val.trim());
                // console.log(this.filter);
             }
         });
@@ -139,14 +141,16 @@ export class DevicesComponent implements OnInit {
         // Reset the input value
         if (input) {
             input.value = '';
+            this.search = "";
         }
     }
 
     remove(tag: any): void {
-        let index = this.filter.indexOf(tag);
+
+        let index = this.filterChips.indexOf(tag);
 
         if (index >= 0) {
-            this.filter.splice(index, 1);
+            this.filterChips.splice(index, 1);
         }
     }
 
