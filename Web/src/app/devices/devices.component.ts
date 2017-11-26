@@ -48,9 +48,11 @@ export class DevicesComponent implements OnInit {
   }
 
   onRequest(data){
-        this.db.requestDevice(data).then(() => {
-            this.openSnack(this.requestString(data));
-        });
+      if(data!=null) {
+          this.db.requestDevice(data).then(() => {
+              this.openSnack(this.requestString(data));
+          });
+      }
   }
 
 
@@ -74,8 +76,10 @@ export class DevicesComponent implements OnInit {
             if(value!=null) {
                 if (value.edit) {
                     this.openDeviceEditDialog(value.device);
-                }else{
+                }else if(value.lend){
                     this.openLendDeviceDialog(value);
+                }else if(value.request){
+                    this.requestDevice(data);
                 }
             }
 

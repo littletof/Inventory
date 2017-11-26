@@ -25,7 +25,7 @@
 <mat-divider></mat-divider>
 
 <mat-list>
-  <mat-list-item *ngFor="let device of devices | async | deviceTagsFilter:filter">
+  <mat-list-item *ngFor="let device of devices | async | deviceTagsFilter:filter" class="list-item" (click)="openDeviceInfoDialog(device)">
     <mat-icon matListIcon>devices_other</mat-icon>
     <h4 matLine><a color="accent" class="link" (click)="openDeviceInfoDialog(device)">{{device.name}}</a></h4>
     <!--<span><button mat-raised-button color="primary" (click)="openDialog(device)">Open</button></span>-->

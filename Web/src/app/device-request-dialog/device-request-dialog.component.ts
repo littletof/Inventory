@@ -37,11 +37,6 @@ export class DeviceRequestDialogComponent implements OnInit {
 
 
     onSubmit(f: NgForm) {
-        if(this.data.quantity_available < this.numberOfDevices || this.numberOfDevices < 1){
-            this.myControl.setErrors({'tooMany': true});
-        }
-
-
         if(f.valid && this.isValid()){
             this.closeDialog(this.getRequestData());
         }
@@ -60,11 +55,11 @@ export class DeviceRequestDialogComponent implements OnInit {
           if(this.numberOfDevices <= this.data.quantity_available){
               return true;
           }else{
-
+              this.myControl.setErrors({'tooMany': true});
           }
 
         }else{
-
+            this.myControl.setErrors({'tooMany': true});
         }
 
         return false;

@@ -43,6 +43,20 @@ body{
   padding-right: 1em;
 }
 
+
+
+
+
+.state-icon{
+  position: absolute;
+  left: -25px;
+  display: block;
+}
+
+.list-item{
+  position: relative;
+}
+
 .list-item:hover{
   background: #eee;
 }

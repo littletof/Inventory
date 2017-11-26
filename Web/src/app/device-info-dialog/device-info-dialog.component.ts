@@ -38,6 +38,13 @@ export class DeviceInfoDialogComponent implements OnInit {
     this.dialogRef.close({device: device, edit:true});
   }
 
+  lendDevice(device){
+    this.dialogRef.close({device: device, lend:true});
+  }
+  requestDevice(device){
+      this.dialogRef.close({device: device, request:true});
+  }
+
   closeDialog(ret = null){
     this.dialogRef.close(ret);
   }
