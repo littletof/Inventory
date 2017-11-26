@@ -28,20 +28,9 @@ export class UploadService {
             (error) => {
                 // upload failed
                 console.log(error)
-            },
-            () => {
-                // upload success
-                upload.url = uploadTask.snapshot.downloadURL
-                //upload.name = upload.file.name
-                this.saveFileData(upload)
             }
         );
     }
-    // Writes the file details to the realtime db
-    private saveFileData(upload: Upload) {
-        this.db.list(`${this.basePath}/`).push(upload);
-    }
-
 
     deleteUpload(upload: Upload) {
         this.deleteFileData(upload.$key)
