@@ -106,20 +106,21 @@ export class LendDeviceDialogComponent implements OnInit {
         //import 'rxjs/add/operator/first';
     }
 
-  closeDialog(ret = null){
-      if(ret == true) {
-          let retVal = {
-              user_id: this.userID, device_id: this.deviceID,
-              start_date: this.startDate, end_date: this.endDate, device_quantity: this.numberOfDevices, comment: this.comment,
 
-              device_name: this.data.name
-          };
-          this.dialogRef.close(retVal);
-      }else{
-          this.dialogRef.close();
-      }
+    static openDialog(dialog, data, callback){
+        let cdata ={...data, cb: callback};
 
-  }
+        dialog.open(LendDeviceDialogComponent, {
+            data: cdata,
+            width: '50%'
+        });
+    }
+
+    closeDialog(ret = null){
+        ret && this.data.cb && this.data.cb(ret);
+        this.dialogRef.close();
+    }
+
 
     onSubmit(f: NgForm) {
        if(f.valid && this.isValid()){
@@ -127,7 +128,15 @@ export class LendDeviceDialogComponent implements OnInit {
 
            this.userID = this.borrower.uid;
 
-            this.closeDialog(true);
+           let retVal = {
+               user_id: this.userID, device_id: this.deviceID,
+               start_date: this.startDate, end_date: this.endDate, device_quantity: this.numberOfDevices, comment: this.comment,
+
+               device_name: this.data.name
+           };
+
+
+           this.closeDialog(retVal);
        }
     }
 

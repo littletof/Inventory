@@ -47,7 +47,7 @@ export class DevicesComponent implements OnInit {
   }
 
 
-  requestDevice(data){
+  openRequestDeviceDialog(data){
       DeviceRequestDialogComponent.openDialog(this.dialog, data, (reqdata)=>this.onRequest(reqdata));
   }
   onRequest(data){
@@ -77,7 +77,7 @@ export class DevicesComponent implements OnInit {
                 }else if(value.lend){
                     this.openLendDeviceDialog(value);
                 }else if(value.request){
-                    this.requestDevice(data);
+                    this.openRequestDeviceDialog(data);
                 }
             }
 
@@ -85,17 +85,11 @@ export class DevicesComponent implements OnInit {
     }
 
     openLendDeviceDialog(data){
-        let dialogref = this.dialog.open(LendDeviceDialogComponent, {
-            data,
-            width: '50%'
-        });
-        dialogref.afterClosed().subscribe(value => {
-            //console.log('Lending returned with: ', value);
-            if(value != null){
-                this.db.lendDevice(value);
-                this.openSnack(this.lendString(value));
-            }
-        });
+        LendDeviceDialogComponent.openDialog(this.dialog, data, (lendData)=>this.lendDevice(lendData));
+    }
+    lendDevice(lendData){
+        this.db.lendDevice(lendData);
+        this.openSnack(this.lendString(lendData));
     }
 
     openSnack(value){
