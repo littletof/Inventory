@@ -65,6 +65,8 @@ export class DevicesComponent implements OnInit {
 
 
     openDeviceInfoDialog(data) {
+        DeviceInfoDialogComponent.openDialog(this.dialog, data, infoData => this.handleInfoReturn(infoData));
+        /*
         let dialogref = this.dialog.open(DeviceInfoDialogComponent, {
             data,
             width: '50%'
@@ -81,7 +83,16 @@ export class DevicesComponent implements OnInit {
                 }
             }
 
-        });
+        });*/
+    }
+    handleInfoReturn(infoData){
+        if (infoData.edit) {
+            this.openDeviceEditDialog(infoData.device);
+        }else if(infoData.lend){
+            this.openLendDeviceDialog(infoData.device);
+        }else if(infoData.request){
+            this.openRequestDeviceDialog(infoData.device);
+        }
     }
 
     openLendDeviceDialog(data){

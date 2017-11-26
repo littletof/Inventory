@@ -35,18 +35,28 @@ export class DeviceInfoDialogComponent implements OnInit {
   }
 
   editDevice(device){
-    this.dialogRef.close({device: device, edit:true});
+    this.closeDialog({device: device, edit:true});
   }
 
   lendDevice(device){
-    this.dialogRef.close({device: device, lend:true});
+    this.closeDialog({device: device, lend:true});
   }
   requestDevice(device){
-      this.dialogRef.close({device: device, request:true});
+      this.closeDialog({device: device, request:true});
+  }
+
+  static openDialog(dialog, data, callback){
+      let cdata ={...data, cb: callback};
+
+      dialog.open(DeviceInfoDialogComponent, {
+          data: cdata,
+          width: '50%'
+      });
   }
 
   closeDialog(ret = null){
-    this.dialogRef.close(ret);
+      ret && this.data.cb && this.data.cb(ret);
+      this.dialogRef.close();
   }
 
 }

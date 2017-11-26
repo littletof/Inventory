@@ -54,22 +54,6 @@ export class LendDeviceDialogComponent implements OnInit {
     this.loadUsers();
   }
 
-  /*
-
-   const sub = this.userCollection.snapshotChanges().map(actions =>{
-      return actions.map(a => {
-        const data = a.payload.doc.data() as User;
-        const id = a.payload.doc.id;
-        return { id, ...data };
-      });
-    }).take(1).subscribe((users) => {
-      this.users = users
-    });
-   */
-
-
-
-
     ngOnInit() {
         this.filteredOptions = this.myControl.valueChanges
             .startWith('')
@@ -124,7 +108,6 @@ export class LendDeviceDialogComponent implements OnInit {
 
     onSubmit(f: NgForm) {
        if(f.valid && this.isValid()){
-            console.log('here');
 
            this.userID = this.borrower.uid;
 
