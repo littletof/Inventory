@@ -48,15 +48,13 @@ export class DevicesComponent implements OnInit {
 
 
   requestDevice(data){
-      DeviceRequestDialogComponent.open(this.dialog, data, data => this.onRequest(data));
+      DeviceRequestDialogComponent.openDialog(this.dialog, data, (reqdata)=>this.onRequest(reqdata));
   }
 
   onRequest(data){
-      if(data!=null) {
-          this.db.requestDevice(data).then(() => {
-              this.openSnack(this.requestString(data));
-          });
-      }
+      this.db.requestDevice(data).then(() => {
+          this.openSnack(this.requestString(data));
+      });
   }
 
 

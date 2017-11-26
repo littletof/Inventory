@@ -71,20 +71,19 @@ export class DeviceRequestDialogComponent implements OnInit {
         return this.amountValidation();
     }
 
-  static open( dialog: MatDialog, data = null, callback){
-      let dialogref = dialog.open(DeviceRequestDialogComponent, {
-          data,
-          width: '50%'
-      });
-      dialogref.afterClosed().subscribe(value => {
-        callback && callback(value);
-      });
-  }
+    static openDialog(dialog, data, callback){
+        let cdata ={...data, cb: callback};
 
+        dialog.open(DeviceRequestDialogComponent, {
+            data: cdata,
+            width: '50%'
+        });
+    }
 
-  closeDialog(ret = null){
-      this.dialogRef.close(ret);
-  }
+    closeDialog(ret = null){
+        ret && this.data.cb && this.data.cb(ret);
+        this.dialogRef.close();
+    }
 
   ngOnInit() {
   }
