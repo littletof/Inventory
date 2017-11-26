@@ -146,7 +146,6 @@ export class DevicesComponent implements OnInit {
     }
 
     remove(tag: any): void {
-
         let index = this.filterChips.indexOf(tag);
 
         if (index >= 0) {

@@ -8,8 +8,7 @@
       {{tag}}
       <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
     </mat-chip>
-    <input  #searchInput="searchInput"
-            placeholder=""
+    <input  placeholder=""
            [matChipInputFor]="chipList"
            [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
            [matChipInputAddOnBlur]="addOnBlur"
@@ -18,6 +17,8 @@
   </mat-chip-list>
   <span matSuffix><mat-icon>search</mat-icon></span>
 </mat-form-field>
+
+<chip-search-input [befele]="3"></chip-search-input>
 
 
 <span class="new-device-btn">
