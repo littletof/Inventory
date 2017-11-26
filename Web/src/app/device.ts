@@ -20,4 +20,16 @@ export class Device {
     let js = snap.payload.val();
     return {key: snap.payload.key, ...js};
   }
+
+  static stringInTags(device_tags: {}, search): boolean{
+
+
+      for(let propName in device_tags){
+
+          let tag = propName.toUpperCase();
+
+          if(tag.indexOf(search.toUpperCase())!= -1) return true;
+      }
+      return false;
+  }
 }

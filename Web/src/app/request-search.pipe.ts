@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import {Device} from "./device";
 
 @Pipe({
   name: 'requestSearch',
@@ -6,16 +7,29 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class LendingSearchPipe implements PipeTransform {
 
-  transform(items: any[], filter: string): any {
-        if(filter == null) return items;
+  transform(items: any[], filterS: string): any {
+        if(filterS == null) return items;
 
-        filter = filter.toLowerCase();
+        let filter = filterS.toLowerCase().split(" ");
 
         return items && items.filter(item => {
             if(item.user.name && item.device.name) {
-                if (item.user.name.toLowerCase().indexOf(filter) != -1 || item.device.name.toLowerCase().indexOf(filter) != -1) {
-                    return true;
+
+
+
+                for(let i in filter) {
+                    let fil = filter[i];
+
+                    if (item.user.name.toLowerCase().indexOf(fil) != -1
+                        || item.device.name.toLowerCase().indexOf(fil) != -1
+                        || Device.stringInTags(item.device.tags, fil)) {}
+                    else{
+                        return false;
+                    }
                 }
+                return true;
+
+
             }
 
 
