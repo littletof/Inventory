@@ -50,7 +50,7 @@ export class DeviceRequestDialogComponent implements OnInit {
       return new RequestEntry(uid, this.data.key, this.numberOfDevices, this.comment, new Date());
     }
 
-    private amountValidation(): boolean{
+    amountValidation(): boolean{
         this.myControl.markAsTouched();
 
         if(this.numberOfDevices >=1){

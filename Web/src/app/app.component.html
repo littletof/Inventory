@@ -15,22 +15,23 @@
 
 
   <nav>
-    <button mat-button color="primary" routerLink="/login" *ngIf="!this.auth.isLoggedIn()"
-            routerLinkActive="mat-raised-button"><span i18n="nav login button|Login button on the navigation list@@navLoginButton">Login</span></button>
-    <button mat-button color="primary" routerLink="/register" *ngIf="!this.auth.isLoggedIn()"
-            routerLinkActive="mat-raised-button" ><span i18n="nav register button|Register button on the navigation list@@navRegisterButton">Register</span></button>
+      <button mat-button color="primary" routerLink="/login" *ngIf="!this.auth.isLoggedIn()"
+              routerLinkActive="mat-raised-button"><span i18n="nav login button|Login button on the navigation list@@navLoginButton">Login</span></button>
+      <button mat-button color="primary" routerLink="/register" *ngIf="!this.auth.isLoggedIn()"
+              routerLinkActive="mat-raised-button" ><span i18n="nav register button|Register button on the navigation list@@navRegisterButton">Register</span></button>
 
 
-    <button mat-button color="primary" routerLink="/home"  *ngIf="this.auth.accessFeature(this.auth.anyone)"
-            routerLinkActive="mat-raised-button" ><span i18n="nav home button|Home button on the navigation list@@navHomeButton">Home</span></button>
-   <button mat-button color="primary" routerLink="/lendings" *ngIf="this.auth.accessFeature(this.auth.authed)"
-            routerLinkActive="mat-raised-button" ><span i18n="nav lendings button|Lendings button on the navigation list@@navLendingsButton">Lendings</span></button>
+      <button mat-button color="primary" routerLink="/home"  *ngIf="this.auth.accessFeature(this.auth.anyone)"
+              routerLinkActive="mat-raised-button" ><span i18n="nav home button|Home button on the navigation list@@navHomeButton">Home</span></button>
+     <button mat-button color="primary" routerLink="/lendings" *ngIf="this.auth.accessFeature(this.auth.authed)"
+              routerLinkActive="mat-raised-button" ><span i18n="nav lendings button|Lendings button on the navigation list@@navLendingsButton">Lendings</span></button>
+     <button mat-button color="primary" routerLink="/requests" *ngIf="this.auth.accessFeature(this.auth.authed)"
+             routerLinkActive="mat-raised-button" ><span i18n="nav devices button|Devices button on the navigation list@@navDevicesButton">Requests</span></button>
+
     <button mat-button color="primary" routerLink="/users" *ngIf="this.auth.accessFeature(this.auth.admini)"
             routerLinkActive="mat-raised-button" ><span i18n="nav users button|Users button on the navigation list@@navUsersButton">Users</span></button>
     <button mat-button color="primary" routerLink="/devices" *ngIf="this.auth.accessFeature(this.auth.anyone)"
             routerLinkActive="mat-raised-button" ><span i18n="nav devices button|Devices button on the navigation list@@navDevicesButton">Devices</span></button>
-    <button mat-button color="primary" routerLink="/requests" *ngIf="this.auth.accessFeature(this.auth.authed)"
-            routerLinkActive="mat-raised-button" ><span i18n="nav devices button|Devices button on the navigation list@@navDevicesButton">Requests</span></button>
 
   </nav>
   <mat-divider></mat-divider>
