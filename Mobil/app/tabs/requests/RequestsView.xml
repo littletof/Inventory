@@ -1,12 +1,12 @@
 <Page loaded="onLoaded">
         <ListView items="{{ requests }}" id="requests" itemTap="onTap">
             <ListView.itemTemplate>
-                <GridLayout columns="auto,*" rows="auto">
-                    <StackLayout col="0">
-                        <Label text="{{ device_name }}" class="name" textWrap="true" style.fontSize="20"/>
-                        <Label text="{{ user }}" class="name" textWrap="true" style.fontSize="18"/>
-                        <Label text="{{ quantity }}" class="name" textWrap="true" style.fontSize="18"/>
-                        <Label text="{{ comment }}" textWrap="true" style.fontSize="18"/>
+                <GridLayout columns="700" rows="auto" >
+                    <StackLayout col="0" orientation="vertical">
+                        <Label text="{{ device_name }}" class="name" height="30" style.white-space="normal"  width="100%" style.fontSize="20"/>
+                        <Label text="{{ user }}" class="name" height="30" style.white-space="normal" width="100%" style.fontSize="18"/>
+                        <Label text="{{ quantity }}" class="name" height="30" style.white-space="normal" width="100%" style.fontSize="18"/>
+                        <Label text="{{ comment }}" height="30" style.white-space="normal" width="100%" style.fontSize="18"/>
                     </StackLayout>
                 </GridLayout>             
             </ListView.itemTemplate>
