@@ -65,30 +65,10 @@ exports.getData = function(deviceID){
         }
     );
 	
-	request.startDate = new Date();
-	request.endDate = new Date();
-	request.startDate_dd = request.startDate.getDate();
-	request.startDate_mm = request.startDate.getMonth()+1;
-	request.startDate_yyyy = request.startDate.getFullYear();
-	request.endDate_dd = request.endDate.getDate();
-	request.endDate_mm = request.endDate.getMonth()+1;
-	request.endDate_yyyy = request.endDate.getFullYear();
 	return request;
 }
 
 exports.addNewRequest = function(pageData){
-	var date = new Date();
-	var dd = date.getDate();
-	var mm = date.getMonth()+1;
-	var yyyy = date.getFullYear();
-	if(dd<10) {
-		dd = '0'+dd;
-	} 
-	if(mm<10) {
-		mm = '0'+mm;
-	}
-	
-	let requestDate = mm + '/' + dd + '/' + yyyy;
 	
 	
     firebase.getCurrentUser().then(
@@ -107,7 +87,7 @@ exports.addNewRequest = function(pageData){
 				'comment': pageData.comment,
 				'device_id': pageData.deviceID,
 				'device_quantity': pageData.quantity_requested,
-				'request_date': requestDate.valueOf(),
+				'request_date': new Date().getTime(),
 				'user_id': user.uid
 			});
 			
