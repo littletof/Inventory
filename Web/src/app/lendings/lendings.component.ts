@@ -29,12 +29,16 @@ export class UserLendingsComponent implements OnInit {
 
 
 
-    this.lendingsSet.push(  this.mapIt(this.db.getLendingsOfUser(this.auth.getUserData().uid))  );
+    this.lendingsSet.push( this.getLendingsSet(this.mapIt(this.db.getLendingsOfUser(this.auth.getUserData().uid)), "My lendings")  );
     if(this.auth.accessFeature(this.auth.admini)){
-        this.lendingsSet.push(  this.mapIt(this.db.getLendings())  );
+        this.lendingsSet.push( this.getLendingsSet(this.mapIt(this.db.getLendings()) , "All lendings") );
     }
 
 
+  }
+
+  getLendingsSet(set, title){
+      return {title: title, set: set};
   }
 
   mapIt(set): any{
