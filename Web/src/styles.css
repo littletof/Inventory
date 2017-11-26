@@ -53,6 +53,10 @@ body{
   display: block;
 }
 
+.stated-list-item{
+  padding-left: 40px;
+}
+
 .list-item{
   position: relative;
 }

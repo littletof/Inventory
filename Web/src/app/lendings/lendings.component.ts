@@ -16,6 +16,8 @@ import {LendReturnDialogComponent} from "../lend-return-dialog/lend-return-dialo
 export class UserLendingsComponent implements OnInit {
 
 
+
+  lendingsSet:any[] = [];
   lendings: AngularFireList<LendEntry>;
 
   today: Date;
@@ -26,25 +28,31 @@ export class UserLendingsComponent implements OnInit {
 
 
 
-    this.lendings = this.db.getLendingsOfUser(this.auth.getUserData().uid)
-        .map(changes => {
-            return changes.map(c => {
-                let ret = {lend: LendEntry.fromDB_Snapshot(c), device: {}, state: {}};
-
-                //kölcsönzés eszközének keresése
-                this.db.getDevice(ret.lend.device_id).subscribe(devices => {
-                    ret.device = devices.payload.val();
-                });
-
-                ret.state = this.getLendState(this.today, ret.lend.end_date);
+    this.lendingsSet.push(  this.mapIt(this.db.getLendingsOfUser(this.auth.getUserData().uid))  );
+    if(this.auth.accessFeature(this.auth.admini)){
+        this.lendingsSet.push(  this.mapIt(this.db.getLendings())  );
+    }
 
 
-                 //console.log(ret);
-                return ret;
-            });
-        }
-    );
+  }
 
+  mapIt(set): any{
+      return set.map(changes => {
+          return changes.map(c => {
+              let ret = {lend: LendEntry.fromDB_Snapshot(c), device: {}, state: {}};
+
+              //kölcsönzés eszközének keresése
+              this.db.getDevice(ret.lend.device_id).subscribe(devices => {
+                  ret.device = devices.payload.val();
+              });
+
+              ret.state = this.getLendState(this.today, ret.lend.end_date);
+
+
+              //console.log(ret);
+              return ret;
+          });
+      });
   }
 
   openLendDetailDialog(data) {

@@ -161,6 +161,12 @@ export class FirebaseDatabaseService implements DatabaseService{
       return reff.snapshotChanges();
   }
 
+  getLendings(): any{
+      let reff = this.db.list<LendEntry>("lendings/present_lendings/");
+
+      return reff.snapshotChanges();
+  }
+
 
   requestDevice(requestData: RequestEntry): any{
       let devref =this.db.database.ref('devices/'+requestData.device_id);
