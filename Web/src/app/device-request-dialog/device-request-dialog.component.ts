@@ -50,19 +50,25 @@ export class DeviceRequestDialogComponent implements OnInit {
       return new RequestEntry(uid, this.data.key, this.numberOfDevices, this.comment, new Date());
     }
 
-    private isValid(): boolean{
+    private amountValidation(): boolean{
+        this.myControl.markAsTouched();
+
         if(this.numberOfDevices >=1){
-          if(this.numberOfDevices <= this.data.quantity_available){
-              return true;
-          }else{
-              this.myControl.setErrors({'tooMany': true});
-          }
+            if(this.numberOfDevices <= this.data.quantity_available){
+                return true;
+            }else{
+                this.myControl.setErrors({'tooMany': true});
+            }
 
         }else{
-            this.myControl.setErrors({'tooMany': true});
+            this.myControl.setErrors({'tooLow': true});
         }
 
         return false;
+    }
+
+    private isValid(): boolean{
+        return this.amountValidation();
     }
 
   static open( dialog: MatDialog, data = null, callback){
