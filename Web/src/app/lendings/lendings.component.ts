@@ -19,7 +19,7 @@ export class UserLendingsComponent implements OnInit {
 
   lendingsSet:any[] = [];
 
-  filter: string;
+  filter: string[];
 
   today: Date;
 
@@ -59,6 +59,10 @@ export class UserLendingsComponent implements OnInit {
           });
       });
   }
+
+    setSearch(tags){
+      this.filter = tags;
+    }
 
   openLendDetailDialog(data) {
       let dialogref = this.dialog.open(LendDetailDialogComponent, {

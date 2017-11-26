@@ -7,10 +7,10 @@ import {Device} from "./device";
 })
 export class LendingSearchPipe implements PipeTransform {
 
-  transform(items: any[], filterS: string): any {
-        if(filterS == null) return items;
+  transform(items: any[], filter: string[]): any {
+        if(filter == null) return items;
 
-        let filter = filterS.toLowerCase().split(" ");
+
 
         return items && items.filter(item => {
             if(item.user.name && item.device.name) {
@@ -18,7 +18,7 @@ export class LendingSearchPipe implements PipeTransform {
 
 
                 for(let i in filter) {
-                    let fil = filter[i];
+                    let fil = filter[i].toLowerCase();
 
                     if (item.user.name.toLowerCase().indexOf(fil) != -1
                         || item.device.name.toLowerCase().indexOf(fil) != -1

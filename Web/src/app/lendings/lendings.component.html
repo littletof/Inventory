@@ -1,11 +1,6 @@
 <h1 class="inline">Lendings</h1><span class="spacer"> </span>
 
-<form class="inline search-input">
-    <mat-form-field>
-        <input matInput value="" [(ngModel)]="filter" name="filter">
-        <span matSuffix><mat-icon>search</mat-icon></span>
-    </mat-form-field>
-</form>
+<chip-search-input (searchTags)="setSearch($event)"></chip-search-input>
 
 <mat-divider></mat-divider>
 
