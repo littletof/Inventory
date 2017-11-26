@@ -42,4 +42,5 @@
 	<string name="Search">Keresés</string>
 	<string name="PickImage">Kép hozzáadása</string>
 	<string name="User">Felhasználó</string>
+	<string name="MyRequests">Igényléseim</string>
 </resources>

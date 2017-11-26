@@ -1,6 +1,7 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="page"
   xmlns:devices="/tabs/devices"
   xmlns:mylendings="/tabs/mylendings"
+  xmlns:myrequests="/tabs/myrequests"
   xmlns:users="/tabs/users"
   xmlns:lendings="/tabs/lendings"
   xmlns:statistics="/tabs/statistics">
@@ -48,8 +49,14 @@
           <TabViewItem.view>
              <mylendings:MyLendingsView/>
           </TabViewItem.view>
-        </TabViewItem>  
-
+        </TabViewItem> 
+		
+        <TabViewItem title="{{L('MyRequests')}}">
+          <TabViewItem.view>
+             <myrequests:MyRequestsView/>
+          </TabViewItem.view>
+        </TabViewItem> 
+		
         <TabViewItem title="{{L('Users')}}">
           <TabViewItem.view>
              <users:UsersView/>
