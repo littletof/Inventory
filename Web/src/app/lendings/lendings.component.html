@@ -15,7 +15,7 @@
 <mat-tab-group >
     <mat-tab *ngFor="let lendings of lendingsSet" label="Tab 1">
       <mat-list>
-        <mat-list-item *ngFor="let lending of lendings | async | requestSearch:filter;" (click)="openLendDetailDialog(lending)" class="list-item stated-list-item">
+        <mat-list-item *ngFor="let lending of lendings | async | requestSearch:filter | lendOrder;" (click)="openLendDetailDialog(lending)" class="list-item stated-list-item">
 
 
             <h4 matLine>{{lending.device.name}}</h4>

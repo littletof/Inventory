@@ -49,6 +49,7 @@ import { LendReturnDialogComponent } from './lend-return-dialog/lend-return-dial
 import { DeviceRequestDialogComponent } from './device-request-dialog/device-request-dialog.component';
 import { RequestsComponent } from './requests/requests.component';
 import { LendingSearchPipe } from './request-search.pipe';
+import { LendOrderPipe } from './lend-order.pipe';
 
 
 
@@ -71,7 +72,8 @@ import { LendingSearchPipe } from './request-search.pipe';
     LendReturnDialogComponent,
     DeviceRequestDialogComponent,
     RequestsComponent,
-    LendingSearchPipe
+    LendingSearchPipe,
+    LendOrderPipe
   ],
   entryComponents: [
       DeviceInfoDialogComponent,
