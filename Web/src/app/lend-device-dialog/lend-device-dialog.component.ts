@@ -30,7 +30,7 @@ export class LendDeviceDialogComponent implements OnInit {
   numberOfDevices: number = defNumOfDevices;
   comment: string = "";
 
-  borrower: any = {};
+  borrower: any = null;
 
     options =[];
 
@@ -81,7 +81,12 @@ export class LendDeviceDialogComponent implements OnInit {
     //NamePicker filter
     filter(name: string): any[] {
         return this.options.filter(option =>
-            option.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+            option.name.toLowerCase().indexOf(name.toLowerCase()) != -1);
+    }
+
+    equalsF(name: string): any[] {
+        console.log(name);
+        return this.options.filter(option =>  name && option.name.toLowerCase() === name.toLowerCase());
     }
 
     displayFn(user: any): string {
@@ -117,17 +122,35 @@ export class LendDeviceDialogComponent implements OnInit {
   }
 
     onSubmit(f: NgForm) {
-                //console.log(f.value);  // { first: '', last: '' }
-                //console.log(f.valid);  // false
-               if(f.valid && this.isValid()){
-                    this.closeDialog(true);
-                }
-           }
+       if(f.valid && this.isValid()){
+            console.log('here');
+
+           this.userID = this.borrower.uid;
+
+            this.closeDialog(true);
+       }
+    }
+
+    isBorrowerValid():boolean{
+        if(this.borrower && this.borrower.uid){
+            return true;
+        }else{
+            let pos = this.equalsF(this.borrower);
+            if(pos.length != 0){
+                this.borrower = pos[0];
+                return true;
+            }else{
+                this.myControl.setErrors({noSuchUser: true});
+                return false;
+            }
+        }
+    }
 
     private isValid(): boolean{
       //console.log(this.endDate.getTime()-this.startDate.getTime());
-      if(this.endDate.getTime()-this.startDate.getTime() > 0 && this.numberOfDevices >=1 && this.numberOfDevices <= this.data.quantity_available){
-          //console.log(this.borrower);
+      if(this.endDate.getTime()-this.startDate.getTime() > 0
+          && this.numberOfDevices >=1 && this.numberOfDevices <= this.data.quantity_available
+            && this.isBorrowerValid()){
           return true;
       }
 

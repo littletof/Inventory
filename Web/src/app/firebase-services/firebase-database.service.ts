@@ -146,7 +146,7 @@ export class FirebaseDatabaseService implements DatabaseService{
           //Increase number
           deviceRef.transaction(data => {
              let newValue = Math.min(data.quantity_available+shouldSave.device_quantity, data.quantity_total);
-             console.log("min value of ", data.quantity_available+shouldSave.device_quantity," ",data.quantity_total);
+             //console.log("min value of ", data.quantity_available+shouldSave.device_quantity," ",data.quantity_total);
 
              deviceRef.child('quantity_available').set(newValue);
           });

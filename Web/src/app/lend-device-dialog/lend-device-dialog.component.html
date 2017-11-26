@@ -10,12 +10,18 @@
 
 
       <mat-form-field >
-        <input type="text" placeholder="Borrower" aria-label="Number" matInput [formControl]="myControl" [(ngModel)]="borrower" [matAutocomplete]="auto" name="borrower">
+        <input type="text" placeholder="Borrower" aria-label="Number" matInput
+               [formControl]="myControl" [(ngModel)]="borrower"
+               [matAutocomplete]="auto" name="borrower" required>
+
         <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
           <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
             {{ option.name }}
           </mat-option>
         </mat-autocomplete>
+
+
+        <mat-error *ngIf="myControl.hasError('noSuchUser')">There isn't a user with this name</mat-error>
       </mat-form-field>
       <br>
 
