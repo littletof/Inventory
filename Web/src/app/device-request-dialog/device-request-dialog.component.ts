@@ -71,7 +71,7 @@ export class DeviceRequestDialogComponent implements OnInit {
           width: '50%'
       });
       dialogref.afterClosed().subscribe(value => {
-        callback(value);
+        callback && callback(value);
       });
   }
 

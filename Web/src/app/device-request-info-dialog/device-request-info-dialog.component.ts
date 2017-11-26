@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
 import {DatabaseService} from "../backend-services/database.service";
 
 @Component({
@@ -19,6 +19,16 @@ export class DeviceRequestInfoDialogComponent implements OnInit {
         }
 
 
+    }
+
+    static open( dialog: MatDialog, data = null, callback){
+        let dialogref = dialog.open(DeviceRequestInfoDialogComponent, {
+            data,
+            width: '50%'
+        });
+        dialogref.afterClosed().subscribe(value => {
+            callback && callback(value);
+        });
     }
 
     closeDialog(ret = null){

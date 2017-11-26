@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {DatabaseService} from "../backend-services/database.service";
 import {AuthService} from "../backend-services/auth.service";
 import {RequestEntry} from "../request-entry";
+import {DeviceRequestInfoDialogComponent} from "../device-request-info-dialog/device-request-info-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-requests',
@@ -13,7 +15,7 @@ export class RequestsComponent implements OnInit {
   requestSets: any[] = [];
   filter: string;
 
-  constructor(public db: DatabaseService, public auth: AuthService) {
+  constructor(public db: DatabaseService, public auth: AuthService,public dialog: MatDialog) {
 
 
     this.requestSets.push(this.getRequestSet(this.mapIt(this.db.getUserRequests(this.auth.getUserData().uid)), "My requests"));
@@ -26,9 +28,15 @@ export class RequestsComponent implements OnInit {
 
   }
 
+  openDetails(request){
+    DeviceRequestInfoDialogComponent.open(this.dialog, request, null);
+  }
+
+
+
   private getRequestSet(set, title): any{
       return {requests: set, title: title};
-    }
+  }
 
   private mapIt(set): any{
       return set.map(changes => {
