@@ -15,8 +15,18 @@ export class LendDetailDialogComponent implements OnInit {
   }
 
 
-  closeDialog(ret = null){
-      this.dialogRef.close(ret);
-  }
+    static openDialog(dialog, data, callback){
+        let cdata ={...data, cb: callback};
+
+        dialog.open(LendDetailDialogComponent, {
+            data: cdata,
+            width: '50%'
+        });
+    }
+
+    closeDialog(ret = null){
+        ret && this.data.cb && this.data.cb(ret);
+        this.dialogRef.close();
+    }
 
 }
