@@ -79,6 +79,7 @@ export class DevicesComponent implements OnInit {
         dialogref.afterClosed().subscribe(value => {
             if(value!=null) {
                 if (value.edit) {
+
                     this.openDeviceEditDialog(value.device);
                 }else if(value.lend){
                     this.openLendDeviceDialog(value);

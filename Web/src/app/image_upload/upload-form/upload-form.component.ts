@@ -29,7 +29,6 @@ export class UploadFormComponent {
     }
 
     clear(){
-        //this.selectedFiles = null;
         this.fileName = null;
 
         this.hasFile.next(false);
@@ -49,8 +48,7 @@ export class UploadFormComponent {
 
     private getExtention():string{
         let fname = this.selectedFiles.item(0).name;
-        console.log(fname.substring(fname.lastIndexOf("."), fname.length));
-        return ".png";
+        return fname.substring(fname.lastIndexOf("."), fname.length);
     }
 
 }
