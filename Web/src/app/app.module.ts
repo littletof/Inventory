@@ -50,6 +50,7 @@ import { DeviceRequestDialogComponent } from './device-request-dialog/device-req
 import { RequestsComponent } from './requests/requests.component';
 import { LendingSearchPipe } from './request-search.pipe';
 import { LendOrderPipe } from './lend-order.pipe';
+import { DeviceRequestInfoDialogComponent } from './device-request-info-dialog/device-request-info-dialog.component';
 
 
 
@@ -73,15 +74,19 @@ import { LendOrderPipe } from './lend-order.pipe';
     DeviceRequestDialogComponent,
     RequestsComponent,
     LendingSearchPipe,
-    LendOrderPipe
+    LendOrderPipe,
+    DeviceRequestInfoDialogComponent
   ],
   entryComponents: [
       DeviceInfoDialogComponent,
       DeviceEditDialogComponent,
+
       LendDeviceDialogComponent,
       LendDetailDialogComponent,
       LendReturnDialogComponent,
-      DeviceRequestDialogComponent
+
+      DeviceRequestDialogComponent,
+      DeviceRequestInfoDialogComponent
   ],
   imports: [
     BrowserModule,
