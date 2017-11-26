@@ -21,7 +21,7 @@
                 <span class="lineItem" *ngIf="this.auth.accessFeature(this.auth.admini)"><b>Borrower:</b> {{lending.user.name}}</span>
             </p>
             <button mat-raised-button color="accent" (click)="openLendDetailDialog(lending)">Details</button>
-            <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)">Return</button>
+            <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)" *ngIf="this.auth.accessFeature(this.auth.admini)">Return</button>
 
 
           <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->

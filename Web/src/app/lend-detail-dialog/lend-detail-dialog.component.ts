@@ -1,5 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {AuthService} from "../backend-services/auth.service";
 
 @Component({
   selector: 'app-lend-detail-dialog',
@@ -9,7 +10,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 export class LendDetailDialogComponent implements OnInit {
 
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendDetailDialogComponent>) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendDetailDialogComponent>, public auth: AuthService) { }
 
   ngOnInit() {
   }
