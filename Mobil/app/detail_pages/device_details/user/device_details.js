@@ -11,7 +11,7 @@ exports.onBackButtonTap = function(args){
 exports.onBorrowButtonTapped = function(args){
     const bindingContext = page.navigationContext;
     topmost().navigate({
-        moduleName: "detail_pages/new_borrow/new_borrow",
+        moduleName: "detail_pages/new_request/new_request",
         context: bindingContext,
         animated: true,
         transition: {

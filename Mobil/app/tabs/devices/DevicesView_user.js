@@ -86,11 +86,11 @@ exports.onFLTTap=function(args){
 }
 
 
-exports.onBorrow=function(args){
+exports.onRequest=function(args){
     console.log(args.object.device);
     const bindingContext = args.object.bindingContext;
     topmost().navigate({
-        moduleName: "detail_pages/new_borrow/new_borrow",
+        moduleName: "detail_pages/new_request/new_request",
         context: bindingContext,
         animated: true,
         transition: {
