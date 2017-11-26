@@ -9,8 +9,11 @@
         <input matInput type="text" required placeholder="Name" [(ngModel)]="device_name" name="device_name">
     </mat-form-field>
 
-       <!-- <upload-form #upload></upload-form>-->
-    <br>
+
+    <upload-form [imageName]="time" (hasFile)="hasFile($event)"#imageUpload></upload-form>
+
+
+        <br>
     <mat-form-field class="quantity">
         <input matInput type="number" required placeholder="Quantity" [(ngModel)]="device_quantity" name="device_quantity" min="1">
         <span matSuffix>pcs.</span>

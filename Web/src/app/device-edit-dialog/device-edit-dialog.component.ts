@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatChipInputEvent, MatDialogRef} from "@angular/material";
 import { SPACE} from "@angular/cdk/keycodes";
 import {Device} from "../device";
@@ -28,9 +28,16 @@ export class DeviceEditDialogComponent implements OnInit {
 
     borrowed_Q: number = 0;
 
-    upload;
+    time: string;
+
+    @ViewChild('imageUpload') imageUpload;
+    hasImageToUpload:boolean = false;
+    deleteImage:boolean;
+
 
     constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceEditDialogComponent>, public db: DatabaseService) {
+        this.time = new Date().getTime().toString();
+
 
         if(data){
             this.loadDevice(data);
@@ -73,10 +80,11 @@ export class DeviceEditDialogComponent implements OnInit {
     }
 
     addDevice(f: NgForm){
-
         if(f.valid && this.isValid()) {
 
             let device = this.prepareDevice();
+
+            this.handleImage(device);
 
 
             if(this.editing){
@@ -87,9 +95,32 @@ export class DeviceEditDialogComponent implements OnInit {
                 this.db.addDevice(device);
             }
 
+
+
+
+
+
             this.closeDialog(device);
         }
     }
+
+    hasFile(event){
+        this.hasImageToUpload = event;
+    }
+
+    handleImage(device:Device){
+        if(this.deleteImage){
+           device.image = "";
+           return;
+        }
+
+        if(this.hasImageToUpload){
+            device.image = this.time;
+
+            this.imageUpload.uploadSingle();
+        }
+    }
+
 
     prepareDevice() : Device {
         this.device_tags = {};

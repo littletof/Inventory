@@ -19,7 +19,7 @@ export class UploadService {
 
     pushUpload(upload: Upload) {
         let storageRef = firebase.storage().ref();
-        let uploadTask = storageRef.child(`${this.basePath}/${upload.file.name}`).put(upload.file);
+        let uploadTask = storageRef.child(`${this.basePath}/${upload.name}`).put(upload.file);
         uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
             (snapshot) =>  {
                 // upload in progress
@@ -32,7 +32,7 @@ export class UploadService {
             () => {
                 // upload success
                 upload.url = uploadTask.snapshot.downloadURL
-                upload.name = upload.file.name
+                //upload.name = upload.file.name
                 this.saveFileData(upload)
             }
         );

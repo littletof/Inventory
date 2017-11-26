@@ -1,21 +1,24 @@
-<div *ngIf="currentUpload">
-  <div class="progress">
-    <div class="progress-bar progress-bar-animated" [ngStyle]="{ 'width': currentUpload?.progress + '%' }"></div>
-  </div>
-  Progress: {{currentUpload?.name}} | {{currentUpload?.progress}}% Complete
-</div>
+
+
+<button mat-raised-button color="accent" (click)="fileInput.click()">Choose image</button>
+<label>{{fileName}}</label>
+<mat-icon color="warn" *ngIf="fileName" (click)="clear()">remove_circle</mat-icon>
+
+
+
 <label>
-  <input type="file" (change)="detectFiles($event)">
+  <input type="file" (change)="detectFiles($event)" #fileInput hidden>
 </label>
 
+
+
+
+<!--
 <button
         [disabled]="!selectedFiles"
         (click)="uploadSingle()">
   Upload Single
 </button>
-
-
-<!--
 <label>
   <input type="file" (change)="detectFiles($event)" multiple>
 </label>
