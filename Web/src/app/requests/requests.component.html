@@ -23,7 +23,7 @@
 
 
   <mat-list class="matList">
-      <mat-list-item *ngFor="let request of requestSet.requests | async | requestSearch:filter; let device of request.device |async; let user of request.user |async;" class="list-item stated-list-item">
+      <mat-list-item *ngFor="let request of requestSet.requests | async | requestSearch:filter;" class="list-item stated-list-item">
         <h4 matLine class="inline">
           <span >{{request.device.name}}</span>
         </h4>

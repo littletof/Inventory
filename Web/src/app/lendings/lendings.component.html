@@ -1,5 +1,12 @@
 <h1 class="inline">Lendings</h1><span class="spacer"> </span>
 
+<form class="inline search-input">
+    <mat-form-field>
+        <input matInput value="" [(ngModel)]="filter" name="filter">
+        <span matSuffix><mat-icon>search</mat-icon></span>
+    </mat-form-field>
+</form>
+
 <mat-divider></mat-divider>
 
 
@@ -8,11 +15,16 @@
 <mat-tab-group >
     <mat-tab *ngFor="let lendings of lendingsSet" label="Tab 1">
       <mat-list>
-        <mat-list-item *ngFor="let lending of lendings | async; let device of lending.device |async" (click)="openLendDetailDialog(lending)" class="list-item stated-list-item">
+        <mat-list-item *ngFor="let lending of lendings | async | requestSearch:filter;" (click)="openLendDetailDialog(lending)" class="list-item stated-list-item">
 
 
             <h4 matLine>{{lending.device.name}}</h4>
-            <p matLine class="demo-2"> <b>Start date:</b> {{lending.lend.start_date.toLocaleDateString()}}  <b>End date:</b> {{lending.lend.end_date.toLocaleDateString()}} <b>Number of devices:</b> {{lending.lend.device_quantity}}</p>
+            <p matLine>
+                <span class="lineItem"><b>Start date:</b> {{lending.lend.start_date.toLocaleDateString()}}</span>
+                <span class="lineItem"><b>End date:</b> {{lending.lend.end_date.toLocaleDateString()}}</span>
+                <span class="lineItem"><b>Number of devices:</b> {{lending.lend.device_quantity}}</span>
+                <span class="lineItem" *ngIf="this.auth.accessFeature(this.auth.admini)"><b>Borrower:</b> {{lending.user.name}}</span>
+            </p>
             <button mat-raised-button color="accent" (click)="openLendDetailDialog(lending)">Details</button>
             <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)">Return</button>
 

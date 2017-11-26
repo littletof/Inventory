@@ -18,7 +18,8 @@ export class UserLendingsComponent implements OnInit {
 
 
   lendingsSet:any[] = [];
-  lendings: AngularFireList<LendEntry>;
+
+  filter: string;
 
   today: Date;
 
@@ -39,11 +40,15 @@ export class UserLendingsComponent implements OnInit {
   mapIt(set): any{
       return set.map(changes => {
           return changes.map(c => {
-              let ret = {lend: LendEntry.fromDB_Snapshot(c), device: {}, state: {}};
+              let ret = {lend: LendEntry.fromDB_Snapshot(c), device: {}, user: {}, state: {}};
 
               //kölcsönzés eszközének keresése
               this.db.getDevice(ret.lend.device_id).subscribe(devices => {
                   ret.device = devices.payload.val();
+              });
+
+              this.db.getUser(ret.lend.user_id).snapshotChanges().subscribe(users => {
+                  ret.user = users.payload.val();
               });
 
               ret.state = this.getLendState(this.today, ret.lend.end_date);

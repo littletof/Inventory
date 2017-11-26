@@ -8,6 +8,14 @@
     margin-bottom: 0px;
 }
 
+.search-input{
+    margin-left: 2em;
+}
+
+.lineItem{
+    margin-right: 2em;
+}
+
 button{
     margin-left: 10px;
 }
