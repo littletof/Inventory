@@ -13,7 +13,7 @@ import {MatDialog} from "@angular/material/dialog";
 export class RequestsComponent implements OnInit {
 
   requestSets: any[] = [];
-  filter: string;
+  filter: string[];
 
   constructor(public db: DatabaseService, public auth: AuthService,public dialog: MatDialog) {
 
@@ -27,6 +27,10 @@ export class RequestsComponent implements OnInit {
 
 
   }
+
+    setSearch(tags){
+      this.filter = tags;
+    }
 
   openDetails(request){
     DeviceRequestInfoDialogComponent.open(this.dialog, request, null);
