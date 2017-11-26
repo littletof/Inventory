@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs/Observable";
 import {AuthService} from "../backend-services/auth.service";
 import {DatabaseService} from "../backend-services/database.service";
 import {MatChipInputEvent, MatDialog, MatSnackBar} from "@angular/material";

@@ -1,4 +1,11 @@
-<h1 class="inline">Requests</h1><span class="spacer"> </span>
+<h1 class="inline">Requests</h1>
+
+<form class="inline">
+  <mat-form-field>
+    <input matInput value="" [(ngModel)]="filter" name="filter">
+    <span matSuffix><mat-icon>search</mat-icon></span>
+  </mat-form-field>
+</form>
 
 <mat-divider></mat-divider>
 
@@ -16,7 +23,7 @@
 
 
   <mat-list class="matList">
-      <mat-list-item *ngFor="let request of requestSet.requests | async; let device of request.device |async; let user of request.user |async;" class="list-item">
+      <mat-list-item *ngFor="let request of requestSet.requests | async | lendingSearch:filter; let device of request.device |async; let user of request.user |async;" class="list-item">
         <h4 matLine class="inline">
           <span >{{request.device.name}}</span>
         </h4>

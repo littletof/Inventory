@@ -11,6 +11,7 @@ import {RequestEntry} from "../request-entry";
 export class RequestsComponent implements OnInit {
 
   requestSets: any[] = [];
+  filter: string;
 
   constructor(public db: DatabaseService, public auth: AuthService) {
 
