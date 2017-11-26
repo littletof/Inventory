@@ -6,3 +6,6 @@
     max-height: 300px;
     overflow-y: auto;
 }
+.search-input{
+    margin-left: 2em;
+}
