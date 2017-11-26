@@ -19,7 +19,7 @@ import {
     MatCardModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatSnackBarModule,
     MatChipsModule, MatAutocompleteModule
 } from '@angular/material';
-import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule} from '@angular/material';
+import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatExpansionModule} from '@angular/material';
 
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {AngularFireAuthModule} from "angularfire2/auth";
@@ -48,6 +48,7 @@ import {UploadService} from "./image_upload/shared/upload.service";
 import { LendReturnDialogComponent } from './lend-return-dialog/lend-return-dialog.component';
 import { DeviceRequestDialogComponent } from './device-request-dialog/device-request-dialog.component';
 import { RequestsComponent } from './requests/requests.component';
+import { LendingSearchPipe } from './lending-search.pipe';
 
 
 
@@ -69,7 +70,8 @@ import { RequestsComponent } from './requests/requests.component';
     UploadFormComponent,
     LendReturnDialogComponent,
     DeviceRequestDialogComponent,
-    RequestsComponent
+    RequestsComponent,
+    LendingSearchPipe
   ],
   entryComponents: [
       DeviceInfoDialogComponent,
@@ -107,6 +109,7 @@ import { RequestsComponent } from './requests/requests.component';
     MatSnackBarModule,
     MatChipsModule,
     MatAutocompleteModule,
+    MatExpansionModule,
 
     QRCodeModule
   ],

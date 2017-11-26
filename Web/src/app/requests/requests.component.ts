@@ -10,41 +10,46 @@ import {RequestEntry} from "../request-entry";
 })
 export class RequestsComponent implements OnInit {
 
-  requests;
+  requestSets: any[] = [];
 
   constructor(public db: DatabaseService, public auth: AuthService) {
 
-    let list;
 
-    if(this.auth.hasRole('admin')){
-        list = this.db.getRequests();
-    }else{
-        list = this.db.getUserRequests(this.auth.getUserData().uid);
+    this.requestSets.push(this.getRequestSet(this.mapIt(this.db.getUserRequests(this.auth.getUserData().uid)), "My requests"));
+
+    if(this.auth.accessFeature(this.auth.admini)){
+
+        this.requestSets.push(this.getRequestSet(this.mapIt(this.db.getRequests()),"All requests"));
     }
 
 
-    this.requests = list
-        .map(changes => {
-            return changes.map(c => {
-                let ret = {request: RequestEntry.fromDB_Snapshot(c), device: {}, user: {}, state: {}};
+  }
+
+  private getRequestSet(set, title): any{
+      return {requests: set, title: title};
+    }
+
+  private mapIt(set): any{
+      return set.map(changes => {
+          return changes.map(c => {
+              let ret = {request: RequestEntry.fromDB_Snapshot(c), device: {}, user: {}, state: {}};
 
 
-                //igénylés eszközének keresése
-                this.db.getDevice(ret.request.device_id).subscribe(devices => {
-                    ret.device = devices.payload.val();
-                });
+              //igénylés eszközének keresése
+              this.db.getDevice(ret.request.device_id).subscribe(devices => {
+                  ret.device = devices.payload.val();
+              });
 
-                this.db.getUser(ret.request.user_id).snapshotChanges().subscribe(users => {
-                    ret.user = users.payload.val();
-                });
+              this.db.getUser(ret.request.user_id).snapshotChanges().subscribe(users => {
+                  ret.user = users.payload.val();
+              });
 
-                ret.state = this.getRequestState(new Date(), ret.request.request_date);
+              ret.state = this.getRequestState(new Date(), ret.request.request_date);
 
-                //console.log(ret);
-                return ret;
-            });
-        });
-
+              //console.log(ret);
+              return ret;
+          });
+      });
   }
 
   ngOnInit() {

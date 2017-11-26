@@ -3,30 +3,41 @@
 <mat-divider></mat-divider>
 
 
+<mat-expansion-panel *ngFor="let requestSet of requestSets">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      {{requestSet.title}}
+    </mat-panel-title>
+    <mat-panel-description>
 
-<mat-list>
-    <mat-list-item *ngFor="let request of requests | async; let device of request.device |async; let user of request.user |async;" class="list-item">
-      <h4 matLine class="inline">
-        <span >{{request.device.name}}</span>
-      </h4>
-      <p matLine class="demo-2">
-        <span class="lineItem"><b>Request date:</b> {{request.request.request_date.toLocaleDateString()}}</span>
-        <span class="lineItem"><b>Number of devices:</b> {{request.request.device_quantity}}</span>
-        <span class="lineItem"><b>User:</b> {{request.user.name}}</span>
-      </p>
-      <!-- <button mat-raised-button color="accent" (click)="openLendDetailDialog(lending)">Details</button>
-      <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)">Return</button> -->
-
-      <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->
+    </mat-panel-description>
+  </mat-expansion-panel-header>
 
 
-      <mat-icon color="primary" *ngIf="(request.state==1)" class="state-icon">schedule</mat-icon>
-      <mat-icon color="warn" *ngIf="(request.state==2)" class="state-icon">error</mat-icon>
 
-    </mat-list-item>
+  <mat-list class="matList">
+      <mat-list-item *ngFor="let request of requestSet.requests | async; let device of request.device |async; let user of request.user |async;" class="list-item">
+        <h4 matLine class="inline">
+          <span >{{request.device.name}}</span>
+        </h4>
+        <p matLine class="demo-2">
+          <span class="lineItem"><b>Request date:</b> {{request.request.request_date.toLocaleDateString()}}</span>
+          <span class="lineItem"><b>Number of devices:</b> {{request.request.device_quantity}}</span>
+          <span class="lineItem"><b>User:</b> {{request.user.name}}</span>
+        </p>
+        <!-- <button mat-raised-button color="accent" (click)="openLendDetailDialog(lending)">Details</button>
+        <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)">Return</button> -->
+
+        <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->
 
 
-</mat-list>
+        <mat-icon color="primary" *ngIf="(request.state==1)" class="state-icon">schedule</mat-icon>
+        <mat-icon color="warn" *ngIf="(request.state==2)" class="state-icon">error</mat-icon>
+
+      </mat-list-item>
+  </mat-list>
+
+</mat-expansion-panel>
 
 
 <!--
