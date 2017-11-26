@@ -27,8 +27,12 @@
           <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->
 
 
-          <mat-icon color="primary" *ngIf="(lending.state==1)" class="state-icon">schedule</mat-icon>
-          <mat-icon color="warn" *ngIf="(lending.state==2)" class="state-icon">error</mat-icon>
+          <mat-icon color="primary" *ngIf="(lending.state==1)" class="state-icon"
+                    matTooltip="Less than a day to return device" matTooltipPosition="right"
+                    >schedule</mat-icon>
+          <mat-icon color="warn" *ngIf="(lending.state==2)" class="state-icon"
+                    matTooltip="Lending is over, should have returned device by now" matTooltipPosition="right"
+                    >error</mat-icon>
 
         </mat-list-item>
       </mat-list>
