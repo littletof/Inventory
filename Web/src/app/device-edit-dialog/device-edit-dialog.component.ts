@@ -68,9 +68,7 @@ export class DeviceEditDialogComponent implements OnInit {
 
     }
 
-    closeDialog(ret = null){
-        this.dialogRef.close(ret);
-    }
+
 
     isValid(): boolean{
         if(this.device_quantity>0 && this.device_name.trim() != ""){
@@ -128,6 +126,23 @@ export class DeviceEditDialogComponent implements OnInit {
             this.device_tags[t.name] = true;
         });
         return new Device(this.device_name, this.device_quantity, this.device_description, this.device_tags, this.device_image);
+    }
+
+
+
+
+    static openDialog(dialog, data, callback){
+        let cdata ={...data, cb: callback};
+
+        dialog.open(DeviceEditDialogComponent, {
+            data: cdata,
+            width: '50%'
+        });
+    }
+
+    closeDialog(ret = null){
+        ret && this.data.cb && this.data.cb(ret);
+        this.dialogRef.close();
     }
 
 

@@ -50,7 +50,6 @@ export class DevicesComponent implements OnInit {
   requestDevice(data){
       DeviceRequestDialogComponent.openDialog(this.dialog, data, (reqdata)=>this.onRequest(reqdata));
   }
-
   onRequest(data){
       this.db.requestDevice(data).then(() => {
           this.openSnack(this.requestString(data));
@@ -58,14 +57,10 @@ export class DevicesComponent implements OnInit {
   }
 
 
-    openDeviceEditDialog(data = null){
-        let dialogref = this.dialog.open(DeviceEditDialogComponent, {
-            data,
-            width: '50%'
-        });
-        dialogref.afterClosed().subscribe(value => {
 
-        });
+
+    openDeviceEditDialog(data = null){
+        DeviceEditDialogComponent.openDialog(this.dialog, data, null);
     }
 
 
