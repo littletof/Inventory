@@ -8,6 +8,10 @@ body{
   margin: 0px;
 }
 
+.inline{
+  display: inline-block;
+}
+
 .center {
   margin-left: auto;
   margin-right: auto;
@@ -37,4 +41,8 @@ body{
 
 .dedent{
   padding-right: 1em;
+}
+
+.list-item:hover{
+  background: #eee;
 }

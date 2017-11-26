@@ -163,7 +163,7 @@ export class FirebaseDatabaseService implements DatabaseService{
 
 
   requestDevice(requestData: RequestEntry): any{
-      let devref =this.db.database.ref('devices/'+requestData.device_uid);
+      let devref =this.db.database.ref('devices/'+requestData.device_id);
 
       return devref.transaction(data => {
 
@@ -178,6 +178,18 @@ export class FirebaseDatabaseService implements DatabaseService{
           }
 
       });
+  }
+
+  getUserRequests(userKey): any{
+      let reff = this.db.list<RequestEntry>("requests", ref => ref.orderByChild('user_id').equalTo(userKey));
+
+      return reff.snapshotChanges();
+  }
+
+  getRequests(): any{
+      let reff = this.db.list<RequestEntry>("requests");
+
+      return reff.snapshotChanges();
   }
 
   getLending(lendkey){

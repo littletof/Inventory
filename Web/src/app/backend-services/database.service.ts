@@ -34,6 +34,8 @@ export abstract class DatabaseService {
   abstract returnLendDevice(lendData);
 
   abstract requestDevice(requestData): any;
+  abstract getUserRequests(userKey): any;
+  abstract getRequests(): any;
 
   abstract getLending(key);
   abstract getLendingsOfUser(userkey): any;
