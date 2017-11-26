@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'lendingSearch',
+  name: 'requestSearch',
   pure: false
 })
 export class LendingSearchPipe implements PipeTransform {

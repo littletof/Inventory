@@ -48,7 +48,7 @@ import {UploadService} from "./image_upload/shared/upload.service";
 import { LendReturnDialogComponent } from './lend-return-dialog/lend-return-dialog.component';
 import { DeviceRequestDialogComponent } from './device-request-dialog/device-request-dialog.component';
 import { RequestsComponent } from './requests/requests.component';
-import { LendingSearchPipe } from './lending-search.pipe';
+import { LendingSearchPipe } from './request-search.pipe';
 
 
 
