@@ -43,4 +43,5 @@
 	<string name="PickImage">Pick an Image</string>
 	<string name="User">User</string>
 	<string name="MyRequests">My Requests</string>
+	<string name="MyRequests">Request</string>
 </resources>
