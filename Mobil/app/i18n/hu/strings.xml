@@ -44,4 +44,5 @@
 	<string name="User">Felhasználó</string>
 	<string name="MyRequests">Igényléseim</string>
 	<string name="Request">Igénylem</string>
+	<string name="Requests">Igénylések</string>
 </resources>
