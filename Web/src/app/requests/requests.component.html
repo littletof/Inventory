@@ -24,8 +24,13 @@
             <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->
 
 
-            <mat-icon color="primary" *ngIf="(request.state==1)" class="state-icon">schedule</mat-icon>
-            <mat-icon color="warn" *ngIf="(request.state==2)" class="state-icon">error</mat-icon>
+            <mat-icon color="primary" *ngIf="(request.state==1)" class="state-icon"
+                      matTooltip="You have less than 10 hours to get your stuff"
+                      matTooltipPosition="right">schedule</mat-icon>
+
+            <mat-icon color="warn" *ngIf="(request.state==2)" class="state-icon"
+                      matTooltip="You have less than 5 hours to get your stuff"
+                      matTooltipPosition="right">error</mat-icon>
 
           </mat-list-item>
       </mat-list>

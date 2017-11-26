@@ -73,14 +73,19 @@ export class RequestsComponent implements OnInit {
   private getRequestState(today, enddate){
       let dif = this.calculateDateDiff(today, enddate);
 
-      if(dif > 0.5) return 2;
+
+      if(dif< 0.6) return 0;
+      if(dif< 0.8) return 1;
+      return 2;
+
+     /* if(dif > 0.5) return 2;
       if(dif <= 0.5 && dif >=0) return 1;
-      return 0;
+      return 0;*/
   }
 
   private calculateDateDiff(date1, date2): number{
 
-      var timeDiff = date2.getTime() - date1.getTime();
+      var timeDiff = date1.getTime() - date2.getTime();
       var diffDays = timeDiff / (1000 * 3600 * 24);
 
       return diffDays;

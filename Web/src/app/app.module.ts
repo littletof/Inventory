@@ -17,7 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     MatToolbarModule, MatIconModule, MatTableModule, MatListModule, MatInputModule,
     MatCardModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatSnackBarModule,
-    MatChipsModule, MatAutocompleteModule
+    MatChipsModule, MatAutocompleteModule, MatTooltipModule
 } from '@angular/material';
 import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatExpansionModule, MatTabsModule} from '@angular/material';
 
@@ -120,6 +120,7 @@ import { ChipSearchInputComponent } from './chip-search-input/chip-search-input.
     MatAutocompleteModule,
     MatExpansionModule,
     MatTabsModule,
+    MatTooltipModule,
 
     QRCodeModule
   ],
