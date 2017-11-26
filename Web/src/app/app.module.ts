@@ -49,7 +49,7 @@ import { LendReturnDialogComponent } from './lend-return-dialog/lend-return-dial
 import { DeviceRequestDialogComponent } from './device-request-dialog/device-request-dialog.component';
 import { RequestsComponent } from './requests/requests.component';
 import { LendingSearchPipe } from './request-search.pipe';
-import { LendOrderPipe } from './lend-order.pipe';
+import { LendOrderPipe } from './state-order.pipe';
 import { DeviceRequestInfoDialogComponent } from './device-request-info-dialog/device-request-info-dialog.component';
 import { ChipSearchInputComponent } from './chip-search-input/chip-search-input.component';
 
