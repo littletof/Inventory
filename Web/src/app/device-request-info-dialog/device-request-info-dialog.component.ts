@@ -21,18 +21,18 @@ export class DeviceRequestInfoDialogComponent implements OnInit {
 
     }
 
-    static open( dialog: MatDialog, data = null, callback){
-        let dialogref = dialog.open(DeviceRequestInfoDialogComponent, {
-            data,
+    static openDialog(dialog, data, callback){
+        let cdata ={...data, cb: callback};
+
+        dialog.open(DeviceRequestInfoDialogComponent, {
+            data: cdata,
             width: '50%'
-        });
-        dialogref.afterClosed().subscribe(value => {
-            callback && callback(value);
         });
     }
 
     closeDialog(ret = null){
-        this.dialogRef.close(ret);
+        ret && this.data.cb && this.data.cb(ret);
+        this.dialogRef.close();
     }
 
     ngOnInit() {
