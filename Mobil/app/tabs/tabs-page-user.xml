@@ -1,6 +1,7 @@
 <Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo" class="page"
   xmlns:devices="/tabs/devices"
-  xmlns:mylendings="/tabs/mylendings">
+  xmlns:mylendings="/tabs/mylendings"
+  xmlns:myrequests="/tabs/myrequests">
 
     <Page.actionBar>
         <ActionBar class="action-bar">
@@ -44,6 +45,12 @@
              <mylendings:MyLendingsView/>
           </TabViewItem.view>
         </TabViewItem>  
+		
+        <TabViewItem title="{{L('MyRequests')}}">
+          <TabViewItem.view>
+             <myrequests:MyRequestsView/>
+          </TabViewItem.view>
+        </TabViewItem> 
 
       </TabView.items>
     </TabView> 

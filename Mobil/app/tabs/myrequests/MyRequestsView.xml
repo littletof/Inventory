@@ -1,0 +1,17 @@
+<Page loaded="onLoaded" xmlns:nativescript-fresco="nativescript-fresco">
+    <ListView id="requestList" items="{{ requestList }}" itemTap="onDetails">
+            <ListView.itemTemplate>
+                <GridLayout columns="auto,*" rows="100" >
+                    <nativescript-fresco:FrescoDrawee device="{{ id, id }}"  imageUri="{{ image }}" verticalAlignment="stretch" width="100"/>
+                    <StackLayout orientation="vertical" col="1" >
+                        <Label class="name" text="{{ deviceName, deviceName }}"  />
+                        <Label text="{{ request_date, request_date }}"  />
+                        <StackLayout orientation="horizontal">
+                            <Label text="{{L('Quantity')}}" marginRight="2%"/>
+                            <Label text="{{ quantity, quantity }}"/>                                                
+                        </StackLayout>
+                    </StackLayout>
+                </GridLayout>
+            </ListView.itemTemplate>
+    </ListView>
+</Page>
