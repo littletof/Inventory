@@ -9,8 +9,17 @@ exports.onNavBtnTap = function(args){
 }
 
 exports.closeBorrow = function(){
-	borrowDetailsViewModel.closeBorrow();
-	topmost().goBack();
+    const bindingContext = page.navigationContext;
+    topmost().navigate({
+        moduleName: "detail_pages/close_borrow/close_borrow",
+        context: bindingContext,
+        animated: true,
+        transition: {
+            name: "slideTop",
+            duration: 200,
+            curve: "ease"
+        }
+    });
 }
 
 exports.onNavigatingTo = function(args) {

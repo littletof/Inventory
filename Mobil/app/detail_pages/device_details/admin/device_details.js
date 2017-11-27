@@ -24,8 +24,13 @@ exports.onEditBtnTap = function(args){
 
 
 exports.onDelBtnTap = function(){
-	deviceDetailViewModel.deleteData(page.navigationContext.id);
-    topmost().goBack();
+	var dialogs = require("ui/dialogs");
+	dialogs.confirm("Biztos törölni akarja ezt az eszközt?").then(function (result) {
+		if(result){
+			deviceDetailViewModel.deleteData(page.navigationContext.id);
+			topmost().goBack();
+		}
+	});
 }
 
 exports.onBorrowButtonTapped = function(args){

@@ -2,62 +2,143 @@
 
 <h2 mat-card-title class="dialog-title">Lending: {{data.name}}</h2>
 <mat-divider></mat-divider>
-<h4>Lending details: </h4>
+
 
 <div class="row">
   <mat-dialog-content class="flex">
-    <form #lendForm="ngForm">
 
 
-      <mat-form-field >
-        <input type="text" placeholder="Borrower" aria-label="Number" matInput
-               [formControl]="myControl" [(ngModel)]="borrower"
-               [matAutocomplete]="auto" name="borrower" required>
-
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-            {{ option.name }}
-          </mat-option>
-        </mat-autocomplete>
 
 
-        <mat-error *ngIf="myControl.hasError('noSuchUser')">There isn't a user with this name</mat-error>
-      </mat-form-field>
-      <br>
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+      <mat-step [stepControl]="firstFormGroup" completed="false">
+        <form #lendForm="ngForm" >
+          <ng-template matStepLabel>Fill out lend details</ng-template>
 
 
-      <mat-form-field style="width: 43%">
-        <input matInput [matDatepicker]="startdate" placeholder="Start date" disabled [(ngModel)]="startDate" name="startDate">
-        <!--<mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>-->
-        <mat-datepicker #startdate></mat-datepicker>
-      </mat-form-field>
 
-      -
+          <h4>Lending details: </h4>
 
-      <mat-form-field style="width: 48%">
-        <input matInput [matDatepicker]="enddate" placeholder="Choose the end date" [(ngModel)]="endDate" name="endDate" [min]="minDate" required>
-        <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
-        <mat-datepicker #enddate></mat-datepicker>
-      </mat-form-field>
+            <mat-form-field >
+              <input type="text" placeholder="Borrower" aria-label="Number" matInput
+                     [formControl]="myControl" [(ngModel)]="borrower"
+                     [matAutocomplete]="auto" name="borrower" required
+                      (keyup)="isFirstValid()">
+
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{ option.name }}
+                </mat-option>
+              </mat-autocomplete>
 
 
-      <mat-form-field>
-        <input matInput type="number" placeholder="Number of devices" [(ngModel)]="numberOfDevices" name="numberOfDevices" required  max="{{data.quantity_available}}" min="1">
-      </mat-form-field>
+              <mat-error *ngIf="myControl.hasError('noSuchUser')">There isn't a user with this name</mat-error>
+            </mat-form-field>
+            <br>
 
-      <mat-form-field style="width: 100%">
-        <textarea matInput placeholder="Comment" [(ngModel)]="comment" name="comment" rows="5"></textarea>
 
-      </mat-form-field>
+            <mat-form-field style="width: 43%">
+              <input matInput [matDatepicker]="startdate"
+                     placeholder="Start date" disabled
+                     [(ngModel)]="startDate" name="startDate"
+                     >
+              <!--<mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>-->
+              <mat-datepicker #startdate></mat-datepicker>
+            </mat-form-field>
 
-    </form>
+            -
+
+            <mat-form-field style="width: 48%">
+              <input matInput [matDatepicker]="enddate"
+                     placeholder="Choose the end date"
+                     [(ngModel)]="endDate" name="endDate"
+                     [min]="minDate" required
+                     >
+              <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+              <mat-datepicker #enddate></mat-datepicker>
+            </mat-form-field>
+
+
+            <mat-form-field>
+              <input matInput type="number" placeholder="Number of devices"
+                     [(ngModel)]="numberOfDevices" name="numberOfDevices"
+                     required max="{{data.quantity_available}}" min="1"
+                     (keyup)="isFirstValid()" [formControl]="amountControl">
+
+              <mat-error *ngIf="amountControl.hasError('tooMany')">Number must be at maximum {{data.quantity_available}}</mat-error>
+              <mat-error *ngIf="amountControl.hasError('tooLow')">Number must be at least 1</mat-error>
+            </mat-form-field>
+
+            <mat-form-field style="width: 100%">
+              <textarea matInput placeholder="Comment" [(ngModel)]="comment"
+                        name="comment" rows="5"
+                        ></textarea>
+
+            </mat-form-field>
+
+
+        </form>
+      </mat-step>
+
+
+      <mat-step [stepControl]="secondFormGroup">
+        <form #sform="ngForm">
+          <ng-template matStepLabel>Select IMEIs</ng-template>
+
+
+          <span *ngFor="let imei of IMEIStoSelectFrom" style="position: relative">
+            <mat-checkbox [(ngModel)]="imei.selected"  (ngModelChange)="imeiSelectChange(0,true)"
+                          name="cb-{{imei.imei}}"
+                          [disabled]="!imei.selected && getSelectedIMEIs().length >= numberOfDevices"
+                          class="onitem">Use</mat-checkbox>
+              <mat-expansion-panel class="inline">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+
+
+
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    {{imei.imei}}
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
+
+                <p *ngFor="let comment of imei.comments"> {{comment}} </p>
+
+              </mat-expansion-panel>
+          </span>
+
+
+
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="secondFormGroup">
+        <form>
+          <ng-template matStepLabel>Select IMEIs</ng-template>
+
+
+
+
+        </form>
+      </mat-step>
+    </mat-horizontal-stepper>
+
+
+
+
+
+
   </mat-dialog-content>
 </div>
 
 
 <mat-dialog-actions>
-  <button mat-raised-button (click)="closeDialog()" color="warn" >Cancel</button>
+  <button mat-button (click)="closeDialog()" color="warn" >Cancel</button>
+
+  <button mat-raised-button (click)="stepback(stepper)" [disabled]="stepper.selectedIndex === 0">Back</button>
+  <button mat-raised-button (click)="step(stepper)" *ngIf="stepper.selectedIndex != 2">Next</button>
   <!-- Can optionally provide a result for the closing dialog. -->
   <!--<button mat-button [mat-dialog-close]="true">Yes</button>-->
-  <button mat-raised-button (click)="onSubmit(lendForm)" color="accent" [disabled]="data.quantity_available<=0">Lend</button>
+  <button mat-raised-button (click)="onSubmit(lendForm)" color="accent" [disabled]="data.quantity_available<=0" *ngIf="stepper.selectedIndex === 2">Lend</button>
 </mat-dialog-actions>
