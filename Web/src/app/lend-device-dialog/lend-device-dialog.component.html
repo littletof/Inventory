@@ -85,7 +85,7 @@
         <form #sform="ngForm">
           <ng-template matStepLabel>Select IMEIs</ng-template>
 
-
+          <div>{{getSelectedIMEIs().length}}/{{numberOfDevices}}</div>
           <span *ngFor="let imei of IMEIStoSelectFrom" style="position: relative">
             <mat-checkbox [(ngModel)]="imei.selected"  (ngModelChange)="imeiSelectChange(0,true)"
                           name="cb-{{imei.imei}}"
@@ -99,7 +99,7 @@
 
                   </mat-panel-title>
                   <mat-panel-description>
-                    {{imei.imei}}
+                    IMEI: {{imei.imei}}
                   </mat-panel-description>
                 </mat-expansion-panel-header>
 
@@ -115,7 +115,14 @@
 
       <mat-step [stepControl]="secondFormGroup">
         <form>
-          <ng-template matStepLabel>Select IMEIs</ng-template>
+          <ng-template matStepLabel>Checkout</ng-template>
+
+
+          <h4>{{borrower&&borrower.name}}</h4>
+          <h4>{{data.name}}</h4>
+          <b>{{numberOfDevices}}</b>
+          <div>IMEI S:</div>
+          <div *ngFor="let i of getSelectedIMEIs()">{{i}}</div>
 
 
 
