@@ -86,24 +86,27 @@
           <ng-template matStepLabel>Select IMEIs</ng-template>
 
 
-          <span>{{getSelectedIMEIs().length}}/{{numberOfDevices}}</span>
-          <mat-expansion-panel *ngFor="let imei of IMEIStoSelectFrom">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
+          <span *ngFor="let imei of IMEIStoSelectFrom" style="position: relative">
+            <mat-checkbox [(ngModel)]="imei.selected"  (ngModelChange)="imeiSelectChange(0,true)"
+                          name="cb-{{imei.imei}}"
+                          [disabled]="!imei.selected && getSelectedIMEIs().length >= numberOfDevices"
+                          class="onitem">Use</mat-checkbox>
+              <mat-expansion-panel class="inline">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
 
-                <mat-checkbox [(ngModel)]="imei.selected"  (ngModelChange)="imeiSelectChange(0,true)"
-                              name="cb-{{imei.imei}}"
-                              [disabled]="!imei.selected && getSelectedIMEIs().length >= numberOfDevices">Use</mat-checkbox>
 
-              </mat-panel-title>
-              <mat-panel-description>
-                {{imei.imei}}
-              </mat-panel-description>
-            </mat-expansion-panel-header>
 
-            <p *ngFor="let comment of imei.comments"> {{comment}} </p>
+                  </mat-panel-title>
+                  <mat-panel-description>
+                    {{imei.imei}}
+                  </mat-panel-description>
+                </mat-expansion-panel-header>
 
-          </mat-expansion-panel>
+                <p *ngFor="let comment of imei.comments"> {{comment}} </p>
+
+              </mat-expansion-panel>
+          </span>
 
 
 
@@ -111,19 +114,10 @@
       </mat-step>
 
       <mat-step [stepControl]="secondFormGroup">
-        <form [formGroup]="secondFormGroup">
+        <form>
           <ng-template matStepLabel>Select IMEIs</ng-template>
 
 
-          <mat-form-field>
-            <input matInput placeholder="Address" formControlName="secondCtrl" required>
-          </mat-form-field>
-
-
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </div>
 
 
         </form>
