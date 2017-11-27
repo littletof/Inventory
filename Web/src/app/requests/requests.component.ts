@@ -34,7 +34,7 @@ export class RequestsComponent implements OnInit {
     }
 
   openDetails(request){
-    DeviceRequestInfoDialogComponent.openDialog(this.dialog, request, null);
+    //DeviceRequestInfoDialogComponent.openDialog(this.dialog, request, null);
   }
 
   lendRequest(request){

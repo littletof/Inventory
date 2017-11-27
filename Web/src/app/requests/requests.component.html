@@ -9,7 +9,7 @@
   <mat-tab-group >
     <mat-tab *ngFor="let requestSet of requestSets" label="{{requestSet.title}}">
       <mat-list class="matList">
-          <mat-list-item *ngFor="let request of requestSet.requests | async | requestSearch:filter | stateOrder;" (click)="openDetails(request)" class="list-item stated-list-item">
+          <mat-list-item *ngFor="let request of requestSet.requests | async | requestSearch:filter | stateOrder;" (click)="lendRequest(request)" class="list-item stated-list-item">
             <h4 matLine class="inline">
               <span >{{request.device.name}}</span>
             </h4>
@@ -18,7 +18,7 @@
               <span class="lineItem"><b>Number of devices:</b> {{request.request.device_quantity}}</span>
               <span class="lineItem"><b>User:</b> {{request.user.name}}</span>
             </p>
-            <button mat-raised-button color="accent" (click)="openDetails(request)">Details</button>
+            <!--<button mat-raised-button color="accent" (click)="openDetails(request)">Details</button>-->
             <button mat-raised-button color="accent" (click)="lendRequest(request)" *ngIf="this.auth.accessFeature(this.auth.admini)">Lend</button>
             <!-- <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)">Return</button> -->
 
