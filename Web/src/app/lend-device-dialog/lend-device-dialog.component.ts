@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
+import {MAT_DIALOG_DATA, MatDialogRef, MatStepper} from "@angular/material";
 import {AuthService} from "../backend-services/auth.service";
 import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
@@ -83,8 +83,10 @@ export class LendDeviceDialogComponent implements OnInit {
         this.firstFormGroup.setErrors({'not good': true});
 
         this.secondFormGroup = this._formBuilder.group({
-            secondCtrl: ['', Validators.required]
+            secondCtrl: ['']
         });
+
+
 
 
     }
@@ -95,7 +97,17 @@ export class LendDeviceDialogComponent implements OnInit {
 
 
 
+    step(stepper: MatStepper){
+      if(stepper.selectedIndex==0){
+          this.isFirstValid();
+      }
 
+      stepper.next();
+    }
+
+    stepback(stepper: MatStepper){
+        stepper.previous();
+    }
 
 
 
@@ -178,7 +190,7 @@ export class LendDeviceDialogComponent implements OnInit {
 
 
     onSubmit(f: NgForm) {
-        if(f.valid && this.isValid()){
+        if(f.valid && this.isAllValid()){
 
             this.userID = this.borrower.uid;
 
@@ -229,7 +241,7 @@ export class LendDeviceDialogComponent implements OnInit {
         return false;
     }
 
-    private isValid(): boolean{
+    private isFirstValid(): boolean{
         this.firstFormGroup.setErrors(null);
         //this.firstFormGroup.setErrors({'not good': false});
         //console.log(this.endDate.getTime()-this.startDate.getTime());
@@ -240,6 +252,10 @@ export class LendDeviceDialogComponent implements OnInit {
         }
         this.firstFormGroup.setErrors({bad:true});
         return false;
+    }
+
+    isAllValid(){
+        return this.isFirstValid();
     }
 
 

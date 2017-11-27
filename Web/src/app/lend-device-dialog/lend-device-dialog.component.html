@@ -10,7 +10,7 @@
 
 
 
-    <mat-horizontal-stepper [linear]="isLinear">
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
       <mat-step [stepControl]="firstFormGroup" completed="false">
         <form #lendForm="ngForm" >
           <ng-template matStepLabel>Fill out lend details</ng-template>
@@ -23,7 +23,7 @@
               <input type="text" placeholder="Borrower" aria-label="Number" matInput
                      [formControl]="myControl" [(ngModel)]="borrower"
                      [matAutocomplete]="auto" name="borrower" required
-                      (keyup)="isValid()">
+                      (keyup)="isFirstValid()">
 
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -62,8 +62,8 @@
             <mat-form-field>
               <input matInput type="number" placeholder="Number of devices"
                      [(ngModel)]="numberOfDevices" name="numberOfDevices"
-                     required  max="{{data.quantity_available}}" min="1"
-                     (keyup)="isValid()" [formControl]="amountControl">
+                     required max="{{data.quantity_available}}" min="1"
+                     (keyup)="isFirstValid()" [formControl]="amountControl">
 
               <mat-error *ngIf="amountControl.hasError('tooMany')">Number must be at maximum {{data.quantity_available}}</mat-error>
               <mat-error *ngIf="amountControl.hasError('tooLow')">Number must be at least 1</mat-error>
@@ -77,18 +77,20 @@
             </mat-form-field>
 
 
-
-
-
-
-
-          <div>
-
-            <button mat-button matStepperNext (click)="isValid()">Next</button>
-          </div>
         </form>
       </mat-step>
 
+
+      <mat-step [stepControl]="secondFormGroup">
+        <form #sform="ngForm">
+          <ng-template matStepLabel>Select IMEIs</ng-template>
+
+
+
+
+
+        </form>
+      </mat-step>
 
       <mat-step [stepControl]="secondFormGroup">
         <form [formGroup]="secondFormGroup">
@@ -121,7 +123,10 @@
 
 <mat-dialog-actions>
   <button mat-button (click)="closeDialog()" color="warn" >Cancel</button>
+
+  <button mat-raised-button (click)="stepback(stepper)" [disabled]="stepper.selectedIndex === 0">Back</button>
+  <button mat-raised-button (click)="step(stepper)" *ngIf="stepper.selectedIndex != 2">Next</button>
   <!-- Can optionally provide a result for the closing dialog. -->
   <!--<button mat-button [mat-dialog-close]="true">Yes</button>-->
-  <button mat-raised-button (click)="onSubmit(lendForm)" color="accent" [disabled]="data.quantity_available<=0">Lend</button>
+  <button mat-raised-button (click)="onSubmit(lendForm)" color="accent" [disabled]="data.quantity_available<=0" *ngIf="stepper.selectedIndex === 2">Lend</button>
 </mat-dialog-actions>
