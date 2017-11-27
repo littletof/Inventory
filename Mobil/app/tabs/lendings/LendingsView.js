@@ -27,6 +27,7 @@ exports.onTap = function (args) {
 	topmost().navigate({
 		moduleName: "detail_pages/borrow_details/admin/borrow_details",
 		context: tappedBorrow,
+		backstackVisible: false,
 		animated: true,
 		transition: {
 			name: "slide",
