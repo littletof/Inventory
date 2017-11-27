@@ -25,8 +25,8 @@ exports.onTap = function (args) {
     var index = args.index;
     const tappedRequest = args.view.bindingContext;
 	topmost().navigate({
-		moduleName: "detail_pages/user_details/admin/user_details",
-		context: tappedUser,
+		moduleName: "detail_pages/request_handling/RequestHandleView",
+		context: tappedRequest,
 		animated: true,
 		transition: {
 			name: "slide",

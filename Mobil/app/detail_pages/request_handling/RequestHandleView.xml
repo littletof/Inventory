@@ -1,0 +1,50 @@
+<Page class="page" navigatingTo="onNavigatingTo">
+    <Page.actionBar>
+         <ActionBar class="action-bar">
+		    <Label text="{{ deviceName }}" class="action-bar-title" />
+            <NavigationButton text="ios back" android.systemIcon = "ic_menu_back" tap="onBackButtonTap"/>
+         </ActionBar>
+    </Page.actionBar>
+<StackLayout orientation="vertical">
+<StackLayout orientation="horizontal">
+<StackLayout orientation="vertical" width="50%">
+    <Label text="{{L('AvailableIMEIs')}}" class="name" style.font-weight="bold"/>
+    
+    <StackLayout height="250">
+        <ListView id="imeiList" items="{{ imeiList }}" >
+            <ListView.itemTemplate>
+                <GridLayout columns="900" rows="auto" >
+                    <StackLayout col="0" onTap="itemTap" class="{{ className }}">
+                        <Label text="{{ imei }}" class="name"/>
+                        <Label text="{{ comment }}" textWrap="true" />
+                    </StackLayout>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+        </StackLayout>
+  
+</StackLayout>
+    <StackLayout orientation="vertical" width="50%">
+    <Label text="{{L('SelectedIMEIs')}}" class="name" style.font-weight="bold"/>  
+    <ListView id="selectedImeiList" items="{{ selectedImeiList }}">
+            <ListView.itemTemplate>
+                <GridLayout columns="900" rows="auto">
+                    <StackLayout col="0" >
+                        <Label text="{{ imei }}" class="name" />
+                        <Label text="{{ comment }}" />
+                    </StackLayout>
+                </GridLayout>
+            </ListView.itemTemplate>
+    </ListView> 
+    </StackLayout>
+</StackLayout>
+    <StackLayout orientation="vertical">
+    <DatePicker year="{{ endDate_yyyy }}" month="{{ endDate_mm }}" day="{{ endDate_dd }}" minDate="{{ startDate }}"></DatePicker>
+    <StackLayout orientation="horizontal">
+        <Button text="{{L('Delete')}}" onTap="deleteRequest"/>
+        <Button text="{{L('Lend')}}" onTap="lend"/>
+    </StackLayout>
+    </StackLayout>
+
+</StackLayout>
+</Page>
