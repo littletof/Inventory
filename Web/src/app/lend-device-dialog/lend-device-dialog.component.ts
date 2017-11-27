@@ -200,16 +200,28 @@ export class LendDeviceDialogComponent implements OnInit {
 
             this.userID = this.borrower.uid;
 
+            let imeis = this.castImeiArray(this.getSelectedIMEIs());
+
             let retVal = {
                 user_id: this.userID, device_id: this.deviceID,
                 start_date: this.startDate, end_date: this.endDate, device_quantity: this.numberOfDevices, comment: this.comment,
 
-                device_name: this.data.name
+                device_name: this.data.name, imei: imeis
             };
 
 
-            this.closeDialog(retVal);
+
+
+           this.closeDialog(retVal);
         }
+    }
+
+    castImeiArray(array):any{
+        let imeis = {};
+        for(let a in array){
+            imeis[array[a]] = true;
+        }
+        return imeis;
     }
 
     isBorrowerValid():boolean{
@@ -275,8 +287,8 @@ export class LendDeviceDialogComponent implements OnInit {
         return true;
     }
 
-    isAllValid(){
-        return this.isFirstValid();
+    isAllValid(): boolean{
+        return this.isFirstValid()&&this.isSecondValid();
     }
 
 

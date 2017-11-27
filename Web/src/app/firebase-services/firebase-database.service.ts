@@ -93,24 +93,31 @@ export class FirebaseDatabaseService implements DatabaseService{
           start_date: lendData.start_date.getTime(),
           end_date: lendData.end_date.getTime(),
           device_quantity: lendData.device_quantity,
-          comment: lendData.comment
-
+          comment: lendData.comment,
+          imei: lendData.imei
       };
 
         let devref =this.db.database.ref('devices/'+lendEntry.device_id);
 
+
+
         devref.transaction(data => {
-            /*Available quantity decreasing*/
+            //Available quantity decreasing
             if(data.quantity_available - lendEntry.device_quantity >= 0) {
                 devref.update({quantity_available: data.quantity_available - lendEntry.device_quantity});
 
 
-                /*add new lend entry*/
+                for(let i in lendData.imei) {
+                    devref.child('imei').child(i).child('available').set(false);
+                }
+
+
+                //add new lend entry
                 this.db.list('lendings/present_lendings').push(lendEntry)
                     .then(value => {
                         //this.db.list('users/'+ lendData.user_id + '/present_lendings').push(value.key);
 
-                        /*add lend to user*/
+                        //add lend to user
                         this.db.object('users/'+ lendData.user_id + '/present_lendings/'+value.key).set(true);
 
 
