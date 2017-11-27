@@ -214,14 +214,10 @@ exports.pushClose=function(devices){
 				'user_id': borrow.user_id,
 				'imei': tmp
 			});
+
 			let sum = +borrow.device_quantity_available + +borrow.device_quantity;
-			if(sum>borrow.device_quantity_total){
-				firebase.setValue('devices/'+borrow.device_id+'/quantity_available',
-					borrow.device_quantity_total);
-			}else{
-				firebase.setValue('devices/'+borrow.device_id+'/quantity_available',
-				sum);
-			}
+			firebase.setValue('devices/'+borrow.device_id+'/quantity_available',sum);
+
 			firebase.remove('/lendings/present_lendings/'+borrow.borrowID);
 			topmost().goBack();
 		}

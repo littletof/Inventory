@@ -45,4 +45,5 @@
 	<string name="MyRequests">Igényléseim</string>
 	<string name="Request">Igénylem</string>
 	<string name="Requests">Igénylések</string>
+	<string name="RequestDetails">Igénylés Részletek</string>
 </resources>
