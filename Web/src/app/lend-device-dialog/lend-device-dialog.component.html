@@ -119,10 +119,18 @@
 
 
           <h4>{{borrower&&borrower.name}}</h4>
-          <h4>{{data.name}}</h4>
-          <b>{{numberOfDevices}}</b>
-          <div>IMEI S:</div>
+          <h4>{{numberOfDevices}} x {{data.name}}</h4>
+          <h4 class="inline">From: </h4><span class="indent">{{startDate.toLocaleDateString()}}</span>
+          <h4 class="inline">To: </h4><span class="indent">{{endDate.toLocaleDateString()}}</span>
+          <h4>Device IMEIs:</h4>
           <div *ngFor="let i of getSelectedIMEIs()">{{i}}</div>
+          <br>
+          <mat-form-field style="width: 100%">
+              <textarea matInput placeholder="Comment" [(ngModel)]="comment"
+                        name="comment" rows="5"
+              ></textarea>
+
+          </mat-form-field>
 
 
 
