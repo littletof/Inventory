@@ -155,7 +155,16 @@ export class LendDeviceDialogComponent implements OnInit {
 
         for(let imei in IMEIS){
             if(IMEIS[imei].available){
-                goodIMEIs.push({comments: IMEIS[imei].comments, imei: imei, selected: false});
+
+                let comments = [];
+                for(let c in IMEIS[imei].comments){
+                    comments.push(IMEIS[imei].comments[c].stuff);
+                }
+
+                goodIMEIs.push({comments: comments, imei: imei, selected: false});
+
+
+
             }
         }
 //        console.log(goodIMEIs);
