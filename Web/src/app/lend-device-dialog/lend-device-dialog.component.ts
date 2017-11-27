@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {AuthService} from "../backend-services/auth.service";
-import {FormControl, NgForm} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, NgForm, Validators} from "@angular/forms";
 import {Observable} from "rxjs/Observable";
 import {DatabaseService} from "../backend-services/database.service";
 
@@ -38,7 +38,14 @@ export class LendDeviceDialogComponent implements OnInit {
 
     myControl: FormControl = new FormControl();
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendDeviceDialogComponent>, public auth: AuthService, public db: DatabaseService) {
+  IMEIStoSelectFrom:any[] = [];
+
+
+  isLinear = true;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendDeviceDialogComponent>,private _formBuilder: FormBuilder, public auth: AuthService, public db: DatabaseService) {
     this.userID = this.auth.getUserData().uid;//LENDER change to Borrower.uid
     this.deviceID = this.data.key;
 
@@ -50,35 +57,81 @@ export class LendDeviceDialogComponent implements OnInit {
     this.minDate = new Date(this.startDate);
     this.minDate.setDate(this.minDate.getDate()+1);
 
+    //console.log(data);
+
+    this.IMEIStoSelectFrom = this.getAvailableIMEIs(this.data.imei);
+
 
     this.loadUsers();
   }
 
     ngOnInit() {
+
         this.filteredOptions = this.myControl.valueChanges
             .startWith('')
             .map(user => user && typeof user === 'object' ? user.name : user)
-            .map(name => name ? this.filter(name) : this.options.slice());
+            .map(name => name ? this.filterS(name) : this.options.slice());
+
+
+        this.firstFormGroup = this._formBuilder.group({
+            firstCtrl: ['']
+        });
+
+        this.firstFormGroup.setErrors({'not good': true});
+
+        this.secondFormGroup = this._formBuilder.group({
+            secondCtrl: ['', Validators.required]
+        });
+
+
     }
 
 
-    //NamePicker filter
-    filter(name: string): any[] {
-        return this.options.filter(option =>
-            option.name.toLowerCase().indexOf(name.toLowerCase()) != -1);
+
+
+
+
+
+
+
+
+
+    //--------------- IMEI stuff
+
+    getAvailableIMEIs(IMEIS: any[]): any[]{
+
+        let goodIMEIs:any[] = [];
+
+        for(let imei in IMEIS){
+            if(IMEIS[imei].available){
+                goodIMEIs.push({comments: IMEIS[imei].comments, imei: imei, selected: false});
+            }
+        }
+//        console.log(goodIMEIs);
+
+
+        return goodIMEIs;
     }
 
-    equalsF(name: string): any[] {
-        console.log(name);
-        return this.options.filter(option =>  name && option.name.toLowerCase() === name.toLowerCase());
+    imeiSelectChange(index, newValue){
+        this.IMEIStoSelectFrom[index].available = newValue;
     }
 
-    displayFn(user: any): string {
-        return user ? user.name : user;
+    getSelectedIMEIs(): any[]{
+        let imeis = [];
+        for(let imei of this.IMEIStoSelectFrom){
+            imei.selected && imeis.push(imei.imei);
+        }
+        return imeis;
     }
 
 
-    loadUsers(){
+
+
+
+    //----------- NamePicker
+
+    loadUsers(){//loads users that can borrow
         this.db.getUsers().map(users => {
             return users.map(user => {
                 return {name: user.payload.val().name, uid: user.key};
@@ -90,6 +143,21 @@ export class LendDeviceDialogComponent implements OnInit {
         //import 'rxjs/add/operator/first';
     }
 
+    displayFn(user: any): string {//displaying name in list
+        return user ? user.name : user;
+    }
+
+    filterS(name: string): any[] {
+        return this.options.filter(option =>
+            option.name.toLowerCase().indexOf(name.toLowerCase()) != -1);
+    }
+
+    equalsF(name: string): any[] {
+        console.log(name);
+        return this.options.filter(option =>  name && option.name.toLowerCase() === name.toLowerCase());
+    }
+
+    //-------- DIALOG STUFF
 
     static openDialog(dialog, data, callback){
         let cdata ={...data, cb: callback};
@@ -107,20 +175,20 @@ export class LendDeviceDialogComponent implements OnInit {
 
 
     onSubmit(f: NgForm) {
-       if(f.valid && this.isValid()){
+        if(f.valid && this.isValid()){
 
-           this.userID = this.borrower.uid;
+            this.userID = this.borrower.uid;
 
-           let retVal = {
-               user_id: this.userID, device_id: this.deviceID,
-               start_date: this.startDate, end_date: this.endDate, device_quantity: this.numberOfDevices, comment: this.comment,
+            let retVal = {
+                user_id: this.userID, device_id: this.deviceID,
+                start_date: this.startDate, end_date: this.endDate, device_quantity: this.numberOfDevices, comment: this.comment,
 
-               device_name: this.data.name
-           };
+                device_name: this.data.name
+            };
 
 
-           this.closeDialog(retVal);
-       }
+            this.closeDialog(retVal);
+        }
     }
 
     isBorrowerValid():boolean{
@@ -139,13 +207,18 @@ export class LendDeviceDialogComponent implements OnInit {
     }
 
     private isValid(): boolean{
-      //console.log(this.endDate.getTime()-this.startDate.getTime());
-      if(this.endDate.getTime()-this.startDate.getTime() > 0
-          && this.numberOfDevices >=1 && this.numberOfDevices <= this.data.quantity_available
+        this.firstFormGroup.setErrors(null);
+        //this.firstFormGroup.setErrors({'not good': false});
+        //console.log(this.endDate.getTime()-this.startDate.getTime());
+        if(this.endDate.getTime()-this.startDate.getTime() > 0
+            && this.numberOfDevices >=1 && this.numberOfDevices <= this.data.quantity_available
             && this.isBorrowerValid()){
-          return true;
-      }
+            return true;
+        }
 
-      return false;
+        return false;
     }
+
+
+
 }
