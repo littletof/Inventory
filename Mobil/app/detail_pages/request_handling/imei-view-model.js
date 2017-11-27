@@ -82,7 +82,9 @@ function IMEIViewModel(items) {
 
               for(var i=0; i<pageData.selectedImeiList.length; i++){
 				tmp.push({
-					'imei':pageData.selectedImeiList.getItem(i).imei,
+                    imei:pageData.selectedImeiList.getItem(i).imei,
+                    available:pageData.selectedImeiList.getItem(i).imei,
+                    comment:pageData.selectedImeiList.getItem(i).comment
 				});
 				
 				firebase.setValue('devices/'+pageData.navigationRequest.device_id+'/imei/'+pageData.selectedImeiList.getItem(i).imei+'/available',false);
@@ -93,11 +95,19 @@ function IMEIViewModel(items) {
             'device_quantity': pageData.navigationRequest.quantity,
             'end_date': endDate.valueOf(),
             'start_date': start.valueOf(),
-            'user_id': user.uid,
-            'imei':tmp
-        });
+            'user_id': pageData.navigationRequest.user_id
+        }).then(function(result){
+            for(var i=0;i<tmp.length;i++){
+            firebase.setValue(
+                '/lendings/present_lendings/'+result.key+'/imei/'+tmp[i].imei,{
+                    available:false,
+                    comments:tmp[i].comment
+                }
+                );
+            }
+    
+        })
         
-
         viewModel.deleteRequest(pageData);
     });
     }

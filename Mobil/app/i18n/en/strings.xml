@@ -49,5 +49,7 @@
 	<string name="Lend">Lend</string>
 	<string name="AvailableIMEIs">Available IMEIs</string>
 	<string name="SelectedIMEIs">Selected IMEIs</string>
-	
+	<string name="RequestDetails">Request Details</string>
+	<string name="NotEnoughDevices">Too Few Devices</string>
+	<string name="NotEnoughChosenMessage">Please pick the same amount of devices the user requested</string>	
 </resources>

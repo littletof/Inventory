@@ -26,6 +26,7 @@
 </StackLayout>
     <StackLayout orientation="vertical" width="50%">
     <Label text="{{L('SelectedIMEIs')}}" class="name" style.font-weight="bold"/>  
+    <StackLayout height="250">
     <ListView id="selectedImeiList" items="{{ selectedImeiList }}">
             <ListView.itemTemplate>
                 <GridLayout columns="900" rows="auto">
@@ -36,6 +37,8 @@
                 </GridLayout>
             </ListView.itemTemplate>
     </ListView> 
+    </StackLayout>
+    
     </StackLayout>
 </StackLayout>
     <StackLayout orientation="vertical">
