@@ -266,7 +266,7 @@ export class LendDeviceDialogComponent implements OnInit {
         return false;
     }
 
-    private isFirstValid(): boolean{
+    isFirstValid(): boolean{
         this.firstFormGroup.setErrors(null);
         //this.firstFormGroup.setErrors({'not good': false});
         //console.log(this.endDate.getTime()-this.startDate.getTime());
@@ -279,7 +279,7 @@ export class LendDeviceDialogComponent implements OnInit {
         return false;
     }
 
-    private isSecondValid(): boolean{
+    isSecondValid(): boolean{
         this.secondFormGroup.setErrors(null);
         if(this.getSelectedIMEIs().length != this.numberOfDevices){
             this.secondFormGroup.setErrors({imeiNumberWrong: true});
