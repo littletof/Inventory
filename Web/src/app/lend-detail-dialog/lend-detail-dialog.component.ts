@@ -9,8 +9,14 @@ import {AuthService} from "../backend-services/auth.service";
 })
 export class LendDetailDialogComponent implements OnInit {
 
+    imeis =[];
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendDetailDialogComponent>, public auth: AuthService) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendDetailDialogComponent>, public auth: AuthService) {
+      console.log(data);
+      for(let i in data.lend.imei){
+          this.imeis.push(i);
+      }
+  }
 
   ngOnInit() {
   }

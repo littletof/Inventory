@@ -5,3 +5,8 @@
 .inline{
     display: inline-block;
 }
+
+.date{
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
