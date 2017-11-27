@@ -4,7 +4,7 @@
                 <GridLayout columns="700" rows="auto" >
                     <StackLayout col="0" orientation="vertical">
                         <Label text="{{ device_name }}" class="name" height="30" style.white-space="normal"  width="100%" style.fontSize="20"/>
-                        <Label text="{{ user }}" class="name" height="30" style.white-space="normal" width="100%" style.fontSize="18"/>
+                        <Label text="{{ user_name }}" class="name" height="30" style.white-space="normal" width="100%" style.fontSize="18"/>
                         <Label text="{{ quantity }}" class="name" height="30" style.white-space="normal" width="100%" style.fontSize="18"/>
                         <Label text="{{ comment }}" height="30" style.white-space="normal" width="100%" style.fontSize="18"/>
                     </StackLayout>
