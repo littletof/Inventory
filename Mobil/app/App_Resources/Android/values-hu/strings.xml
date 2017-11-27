@@ -50,4 +50,6 @@
 	<string name="AvailableIMEIs">Elérhető IMEIk</string>
 	<string name="SelectedIMEIs">Kiválasztott IMEIk</string>
 	<string name="RequestDetails">Igénylés Részletek</string>
+	<string name="NotEnoughDevices">Kevés elem</string>
+	<string name="NotEnoughChosenMessage">Kérjük az igénynek megfelelő számú eszközt válasszon ki</string>	
 </resources>

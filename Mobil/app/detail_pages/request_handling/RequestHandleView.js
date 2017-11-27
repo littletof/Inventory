@@ -34,6 +34,7 @@ var pageData = new observableModule.fromObject({
 exports.onNavigatingTo = function(args) {
     page = args.object;
     
+    
     imeiList.empty();
     imeiList.load(page.navigationContext);
     selectedNum=0;
