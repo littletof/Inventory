@@ -44,7 +44,7 @@ export class LendDeviceDialogComponent implements OnInit {
   IMEIStoSelectFrom:any[] = [];
 
 
-  isLinear = true;
+  isLinear = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
@@ -129,7 +129,9 @@ export class LendDeviceDialogComponent implements OnInit {
     }
 
     imeiSelectChange(index, newValue){
-        this.IMEIStoSelectFrom[index].available = newValue;
+
+        //this.IMEIStoSelectFrom[index].available = newValue;
+        console.log(this.getSelectedIMEIs());
     }
 
     getSelectedIMEIs(): any[]{

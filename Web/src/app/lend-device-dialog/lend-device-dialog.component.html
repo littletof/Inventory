@@ -87,6 +87,22 @@
 
 
 
+          <mat-expansion-panel *ngFor="let imei of IMEIStoSelectFrom">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+
+                <mat-checkbox [(ngModel)]="imei.selected"  (ngModelChange)="imeiSelectChange(0,true)" name="cb-{{imei.imei}}">Use</mat-checkbox>
+
+              </mat-panel-title>
+              <mat-panel-description>
+                {{imei.imei}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <p *ngFor="let comment of imei.comments"> {{comment}} </p>
+
+          </mat-expansion-panel>
+
 
 
         </form>
