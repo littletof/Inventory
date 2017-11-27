@@ -68,6 +68,7 @@
               <mat-error *ngIf="amountControl.hasError('tooMany')">Number must be at maximum {{data.quantity_available}}</mat-error>
               <mat-error *ngIf="amountControl.hasError('tooLow')">Number must be at least 1</mat-error>
             </mat-form-field>
+            <span class="indent">/ {{data.quantity_available}}</span>
 
             <mat-form-field style="width: 100%">
               <textarea matInput placeholder="Comment" [(ngModel)]="comment"
