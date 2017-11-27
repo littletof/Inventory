@@ -34,8 +34,11 @@ function RequestsViewModel(items) {
                             viewModel.push({
                                 device_name: device.value[uid].name,
                                 quantity:result.value.device_quantity,
-                                user:user.value[userid].name,
-                                comment:result.value.comment
+                                user_name:user.value[userid].name,
+                                user_id:userid,
+                                comment:result.value.comment,
+                                num_available:device.value[uid].quantity_available,
+                                request_id:result.value.id
                             });
                             
                         

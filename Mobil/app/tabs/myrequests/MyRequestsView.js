@@ -24,8 +24,8 @@ function onLoaded(args) {
 exports.onDetails=function(args){
     console.log(args.object.device);
     const tappedBorrow = args.view.bindingContext;
-	/*topmost().navigate({
-		moduleName: "detail_pages/borrow_details/user/borrow_details",
+	topmost().navigate({
+		moduleName: "detail_pages/request_details/user/request_details",
 		context: tappedBorrow,
 		animated: true,
 		transition: {
@@ -33,7 +33,7 @@ exports.onDetails=function(args){
 			duration: 200,
 			curve: "ease"
 		}
-	});*/
+	});
 }
 
 exports.onLoaded = onLoaded;

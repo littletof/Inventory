@@ -11,7 +11,13 @@ exports.onNavBtnTap = function(args){
 }
 
 exports.onDelBtnTap = function(args){
-	userDetailViewModel.deleteData(user.userID);
+	var dialogs = require("ui/dialogs");
+	dialogs.confirm("Biztos törölni akarja ezt a user-t?").then(function (result) {
+		if(result){
+			userDetailViewModel.deleteData(user.userID);
+			topmost.goBack();
+		}
+	});
 }
 
 exports.showBorrows = function(){

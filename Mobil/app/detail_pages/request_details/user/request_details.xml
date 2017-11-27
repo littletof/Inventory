@@ -1,0 +1,22 @@
+<Page class="page" navigatingTo="onNavigatingTo" xmlns:nativescript-fresco="nativescript-fresco">
+	<ActionBar class="action-bar">
+		<Label text="{{L('RequestDetails')}}" class="action-bar-title" />
+	  <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" tap="onNavBtnTap"/>
+             <ActionBar.actionItems>
+                <ActionItem ios.systemIcon="16" android.systemIcon = "ic_menu_delete" tap="onDelBtnTap"/>
+            </ActionBar.actionItems>
+	</ActionBar>
+	<ScrollView>
+		<GridLayout columns="*" rows="auto,auto,auto,auto,auto,auto,auto,auto,auto">
+			<nativescript-fresco:FrescoDrawee class="image" col="0" row="0" imageUri="{{ image }}"/>
+			<Label id="itemNameLabel" class="imageText" col="0" row="1" text="{{device_name}}"/>
+
+			<StackLayout col="0" row="2" orientation="horizontal">
+				<Label class="property" text="{{L('Quantity')}}"/>
+				<Label id="deviceQuantityLabel" class="shortProperty" text="{{ device_quantity }}"/>
+			</StackLayout>
+			<Label class="property" col="0" row="7" text="{{L('Comment')}}"/>
+			<Label id="commentLabel" class="longText" col="0" row="8" text="{{ comment }}"/>
+    	</GridLayout>
+	</ScrollView>
+</Page>

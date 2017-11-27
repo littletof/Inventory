@@ -1,0 +1,20 @@
+<Page class="page" navigatingTo="onNavigatingTo" xmlns:nativescript-fresco="nativescript-fresco">
+	<ActionBar class="action-bar">
+		<Label text="{{L('CloseBorrow')}}" class="action-bar-title" />
+		<ActionBar.actionItems>
+			<ActionItem ios.systemIcon="1" android.systemIcon = "ic_menu_close_clear_cancel" tap="onCancelBtnTap"/>
+			<ActionItem ios.systemIcon="0" android.systemIcon = "ic_menu_save" tap="onDoneBtnTap"/>
+		</ActionBar.actionItems>
+	</ActionBar>
+	<ScrollView>
+		<Label text="{{L('Devices')}}"/>
+		<ListView id="imeiList" items="{{ devices }}" >
+			<ListView.itemTemplate>
+				<GridLayout columns="*" rows="auto,auto" >
+					<Label id="imeiText" text=" {{ imei }} " col="0"/>
+					<TextField id="commentText" text="{{ comment }}" col="0" row="2" tap="onCommentTapped"/>
+				</GridLayout>
+			</ListView.itemTemplate>
+		</ListView>
+	</ScrollView>
+</Page>
