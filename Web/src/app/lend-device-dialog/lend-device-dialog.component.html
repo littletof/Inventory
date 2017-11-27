@@ -63,7 +63,7 @@
               <input matInput type="number" placeholder="Number of devices"
                      [(ngModel)]="numberOfDevices" name="numberOfDevices"
                      required max="{{data.quantity_available}}" min="1"
-                     (keyup)="isFirstValid()" [formControl]="amountControl">
+                     (keyup)="amountChange()" [formControl]="amountControl">
 
               <mat-error *ngIf="amountControl.hasError('tooMany')">Number must be at maximum {{data.quantity_available}}</mat-error>
               <mat-error *ngIf="amountControl.hasError('tooLow')">Number must be at least 1</mat-error>
@@ -85,7 +85,7 @@
         <form #sform="ngForm">
           <ng-template matStepLabel>Select IMEIs</ng-template>
 
-
+          <div>{{getSelectedIMEIs().length}}/{{numberOfDevices}}</div>
           <span *ngFor="let imei of IMEIStoSelectFrom" style="position: relative">
             <mat-checkbox [(ngModel)]="imei.selected"  (ngModelChange)="imeiSelectChange(0,true)"
                           name="cb-{{imei.imei}}"
@@ -99,7 +99,7 @@
 
                   </mat-panel-title>
                   <mat-panel-description>
-                    {{imei.imei}}
+                    IMEI: {{imei.imei}}
                   </mat-panel-description>
                 </mat-expansion-panel-header>
 
@@ -115,7 +115,22 @@
 
       <mat-step [stepControl]="secondFormGroup">
         <form>
-          <ng-template matStepLabel>Select IMEIs</ng-template>
+          <ng-template matStepLabel>Checkout</ng-template>
+
+
+          <h4>{{borrower&&borrower.name}}</h4>
+          <h4>{{numberOfDevices}} x {{data.name}}</h4>
+          <h4 class="inline">From: </h4><span class="indent">{{startDate.toLocaleDateString()}}</span>
+          <h4 class="inline">To: </h4><span class="indent">{{endDate.toLocaleDateString()}}</span>
+          <h4>Device IMEIs:</h4>
+          <div *ngFor="let i of getSelectedIMEIs()">{{i}}</div>
+          <br>
+          <mat-form-field style="width: 100%">
+              <textarea matInput placeholder="Comment" [(ngModel)]="comment"
+                        name="comment" rows="5"
+              ></textarea>
+
+          </mat-form-field>
 
 
 
