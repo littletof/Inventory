@@ -63,7 +63,7 @@
               <input matInput type="number" placeholder="Number of devices"
                      [(ngModel)]="numberOfDevices" name="numberOfDevices"
                      required max="{{data.quantity_available}}" min="1"
-                     (keyup)="isFirstValid()" [formControl]="amountControl">
+                     (keyup)="amountChange()" [formControl]="amountControl">
 
               <mat-error *ngIf="amountControl.hasError('tooMany')">Number must be at maximum {{data.quantity_available}}</mat-error>
               <mat-error *ngIf="amountControl.hasError('tooLow')">Number must be at least 1</mat-error>

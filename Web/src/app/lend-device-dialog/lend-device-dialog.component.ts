@@ -44,7 +44,7 @@ export class LendDeviceDialogComponent implements OnInit {
   IMEIStoSelectFrom:any[] = [];
 
 
-  isLinear = false;
+  isLinear = true;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
@@ -86,6 +86,8 @@ export class LendDeviceDialogComponent implements OnInit {
             secondCtrl: ['']
         });
 
+        this.secondFormGroup.setErrors({init: true});
+
 
 
 
@@ -98,8 +100,13 @@ export class LendDeviceDialogComponent implements OnInit {
 
 
     step(stepper: MatStepper){
-      if(stepper.selectedIndex==0){
-          this.isFirstValid();
+      switch(stepper.selectedIndex){
+          case 0:
+              this.isFirstValid();
+              break;
+          case 1:
+              this.isSecondValid();
+              break;
       }
 
       stepper.next();
@@ -224,6 +231,11 @@ export class LendDeviceDialogComponent implements OnInit {
         }
     }
 
+    amountChange(){
+        this.isFirstValid();
+        this.secondFormGroup.setErrors({changed:true});
+    }
+
     isAmountValid(): boolean{
         this.amountControl.markAsTouched();
 
@@ -254,6 +266,15 @@ export class LendDeviceDialogComponent implements OnInit {
         }
         this.firstFormGroup.setErrors({bad:true});
         return false;
+    }
+
+    private isSecondValid(): boolean{
+        this.secondFormGroup.setErrors(null);
+        if(this.getSelectedIMEIs().length != this.numberOfDevices){
+            this.secondFormGroup.setErrors({imeiNumberWrong: true});
+            return false;
+        }
+        return true;
     }
 
     isAllValid(){
