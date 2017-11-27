@@ -38,7 +38,9 @@ export class RequestsComponent implements OnInit {
   }
 
   lendRequest(request){
-      LendDeviceDialogComponent.openDialog(this.dialog, request, (data) => this.onRequest(data));
+      if(this.auth.accessFeature(this.auth.admini)) {
+          LendDeviceDialogComponent.openDialog(this.dialog, request, (data) => this.onRequest(data));
+      }
   }
 
   onRequest(data){
