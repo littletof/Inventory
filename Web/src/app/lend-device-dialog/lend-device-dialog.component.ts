@@ -185,7 +185,8 @@ export class LendDeviceDialogComponent implements OnInit {
 
         dialog.open(LendDeviceDialogComponent, {
             data: cdata,
-            width: '50%'
+            width: '50%',
+            height: '700px'
         });
     }
 
