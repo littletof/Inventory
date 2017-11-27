@@ -48,9 +48,19 @@ export class LendDeviceDialogComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
 
+    device_data;
+    request:boolean = false;
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendDeviceDialogComponent>,private _formBuilder: FormBuilder, public auth: AuthService, public db: DatabaseService) {
-    this.userID = this.auth.getUserData().uid;//LENDER change to Borrower.uid
-    this.deviceID = this.data.key;
+
+
+      this.loadUsers();
+      this.handleEditOrNew(data);
+
+
+
+      this.userID = this.auth.getUserData().uid;//LENDER change to Borrower.uid
+    this.deviceID = this.device_data.key;
 
 
     this.startDate = new Date();
@@ -62,10 +72,27 @@ export class LendDeviceDialogComponent implements OnInit {
 
     //console.log(data);
 
-    this.IMEIStoSelectFrom = this.getAvailableIMEIs(this.data.imei);
+    this.IMEIStoSelectFrom = this.getAvailableIMEIs(this.device_data.imei);
 
 
-    this.loadUsers();
+
+  }
+
+  handleEditOrNew(data){
+      if(data.request){
+          this.request = true;
+          this.device_data = data.device;
+
+
+          let u = data.user;
+          this.borrower = {uid: data.request.user_id, name: u.name};
+
+          this.numberOfDevices = data.request.device_quantity;
+
+      }else{
+          this.request = false;
+          this.device_data = data;
+      }
   }
 
     ngOnInit() {
@@ -191,7 +218,7 @@ export class LendDeviceDialogComponent implements OnInit {
     }
 
     closeDialog(ret = null){
-        ret && this.data.cb && this.data.cb(ret);
+        ret && this.device_data.cb && this.device_data.cb(ret);
         this.dialogRef.close();
     }
 
@@ -207,7 +234,7 @@ export class LendDeviceDialogComponent implements OnInit {
                 user_id: this.userID, device_id: this.deviceID,
                 start_date: this.startDate, end_date: this.endDate, device_quantity: this.numberOfDevices, comment: this.comment,
 
-                device_name: this.data.name, imei: imeis
+                device_name: this.device_data.name, imei: imeis
             };
 
 
@@ -251,7 +278,7 @@ export class LendDeviceDialogComponent implements OnInit {
         this.amountControl.markAsTouched();
 
         if(this.numberOfDevices >=1){
-            if(this.numberOfDevices <= this.data.quantity_available){
+            if(this.numberOfDevices <= this.device_data.quantity_available){
                 return true;
             }else{
                 this.amountControl.setErrors({'tooMany': true});

@@ -1,6 +1,6 @@
 
 
-<h2 mat-card-title class="dialog-title">Lending: {{data.name}}</h2>
+<h2 mat-card-title class="dialog-title">Lending: {{device_data.name}}</h2>
 <mat-divider></mat-divider>
 
 
@@ -23,7 +23,8 @@
               <input type="text" placeholder="Borrower" aria-label="Number" matInput
                      [formControl]="myControl" [(ngModel)]="borrower"
                      [matAutocomplete]="auto" name="borrower" required
-                      (keyup)="isFirstValid()">
+                      (keyup)="isFirstValid()"
+                     [readonly]="!!request">
 
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -62,13 +63,14 @@
             <mat-form-field>
               <input matInput type="number" placeholder="Number of devices"
                      [(ngModel)]="numberOfDevices" name="numberOfDevices"
-                     required max="{{data.quantity_available}}" min="1"
-                     (keyup)="amountChange()" [formControl]="amountControl">
+                     required max="{{device_data.quantity_available}}" min="1"
+                     (keyup)="amountChange()" [formControl]="amountControl"
+                      [readonly]="!!request">
 
-              <mat-error *ngIf="amountControl.hasError('tooMany')">Number must be at maximum {{data.quantity_available}}</mat-error>
+              <mat-error *ngIf="amountControl.hasError('tooMany')">Number must be at maximum {{device_data.quantity_available}}</mat-error>
               <mat-error *ngIf="amountControl.hasError('tooLow')">Number must be at least 1</mat-error>
             </mat-form-field>
-            <span class="indent">/ {{data.quantity_available}}</span>
+            <span class="indent" *ngIf="!request">/ {{device_data.quantity_available}}</span>
 
             <mat-form-field style="width: 100%">
               <textarea matInput placeholder="Comment" [(ngModel)]="comment"
@@ -123,7 +125,7 @@
 
 
           <h4>{{borrower&&borrower.name}}</h4>
-          <h4>{{numberOfDevices}} x {{data.name}}</h4>
+          <h4>{{numberOfDevices}} x {{device_data.name}}</h4>
           <h4 class="inline">From: </h4><span class="indent">{{startDate.toLocaleDateString()}}</span>
           <h4 class="inline">To: </h4><span class="indent">{{endDate.toLocaleDateString()}}</span>
           <h4>Device IMEIs:</h4>
@@ -159,5 +161,5 @@
   <button mat-raised-button (click)="step(stepper)" *ngIf="stepper.selectedIndex != 2">Next</button>
   <!-- Can optionally provide a result for the closing dialog. -->
   <!--<button mat-button [mat-dialog-close]="true">Yes</button>-->
-  <button mat-raised-button (click)="onSubmit(lendForm)" color="accent" [disabled]="data.quantity_available<=0" *ngIf="stepper.selectedIndex === 2">Lend</button>
+  <button mat-raised-button (click)="onSubmit(lendForm)" color="accent" [disabled]="device_data.quantity_available<=0 && request" *ngIf="stepper.selectedIndex === 2">Lend</button>
 </mat-dialog-actions>

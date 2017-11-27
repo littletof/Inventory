@@ -4,6 +4,7 @@ import {AuthService} from "../backend-services/auth.service";
 import {RequestEntry} from "../request-entry";
 import {DeviceRequestInfoDialogComponent} from "../device-request-info-dialog/device-request-info-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {LendDeviceDialogComponent} from "../lend-device-dialog/lend-device-dialog.component";
 
 @Component({
   selector: 'app-requests',
@@ -34,6 +35,10 @@ export class RequestsComponent implements OnInit {
 
   openDetails(request){
     DeviceRequestInfoDialogComponent.openDialog(this.dialog, request, null);
+  }
+
+  lendRequest(request){
+      LendDeviceDialogComponent.openDialog(this.dialog, request, null);
   }
 
 
