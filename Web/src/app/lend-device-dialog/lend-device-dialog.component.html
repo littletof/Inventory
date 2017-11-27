@@ -22,7 +22,8 @@
             <mat-form-field >
               <input type="text" placeholder="Borrower" aria-label="Number" matInput
                      [formControl]="myControl" [(ngModel)]="borrower"
-                     [matAutocomplete]="auto" name="borrower" required>
+                     [matAutocomplete]="auto" name="borrower" required
+                      (keyup)="isValid()">
 
               <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
@@ -62,7 +63,10 @@
               <input matInput type="number" placeholder="Number of devices"
                      [(ngModel)]="numberOfDevices" name="numberOfDevices"
                      required  max="{{data.quantity_available}}" min="1"
-                     >
+                     (keyup)="isValid()" [formControl]="amountControl">
+
+              <mat-error *ngIf="amountControl.hasError('tooMany')">Number must be at maximum {{data.quantity_available}}</mat-error>
+              <mat-error *ngIf="amountControl.hasError('tooLow')">Number must be at least 1</mat-error>
             </mat-form-field>
 
             <mat-form-field style="width: 100%">

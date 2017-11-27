@@ -38,6 +38,9 @@ export class LendDeviceDialogComponent implements OnInit {
 
     myControl: FormControl = new FormControl();
 
+
+  amountControl:  FormControl = new FormControl();
+
   IMEIStoSelectFrom:any[] = [];
 
 
@@ -201,9 +204,29 @@ export class LendDeviceDialogComponent implements OnInit {
                 return true;
             }else{
                 this.myControl.setErrors({noSuchUser: true});
+                this.firstFormGroup.setErrors({bad:true});
                 return false;
             }
         }
+    }
+
+    isAmountValid(): boolean{
+        this.amountControl.markAsTouched();
+
+        if(this.numberOfDevices >=1){
+            if(this.numberOfDevices <= this.data.quantity_available){
+                return true;
+            }else{
+                this.amountControl.setErrors({'tooMany': true});
+                this.firstFormGroup.setErrors({bad:true});
+            }
+
+        }else{
+            this.amountControl.setErrors({'tooLow': true});
+            this.firstFormGroup.setErrors({bad:true});
+        }
+
+        return false;
     }
 
     private isValid(): boolean{
@@ -211,11 +234,11 @@ export class LendDeviceDialogComponent implements OnInit {
         //this.firstFormGroup.setErrors({'not good': false});
         //console.log(this.endDate.getTime()-this.startDate.getTime());
         if(this.endDate.getTime()-this.startDate.getTime() > 0
-            && this.numberOfDevices >=1 && this.numberOfDevices <= this.data.quantity_available
+            && this.isAmountValid()
             && this.isBorrowerValid()){
             return true;
         }
-
+        this.firstFormGroup.setErrors({bad:true});
         return false;
     }
 
