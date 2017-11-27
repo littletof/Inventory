@@ -23,10 +23,16 @@ export class DeviceEditDialogComponent implements OnInit {
 
     default_device_quantity = 1;
 
+    imei: {};
+
+
     device_key = null;
     editing = false;
 
+
+
     borrowed_Q: number = 0;
+
 
     time: string;
 
@@ -65,6 +71,8 @@ export class DeviceEditDialogComponent implements OnInit {
         for(let t in device.tags){
             this.tags.push({ name: t.trim() });
         }
+
+        this.imei = device.imei;
 
     }
 
@@ -125,7 +133,8 @@ export class DeviceEditDialogComponent implements OnInit {
         this.tags.forEach(t => {
             this.device_tags[t.name] = true;
         });
-        return new Device(this.device_name, this.device_quantity, this.device_description, this.device_tags, this.device_image);
+        //TODO to be able to add imeis
+        return new Device(this.device_name, this.device_quantity, this.device_description, this.device_tags, this.device_image,this.imei);
     }
 
 

@@ -6,14 +6,16 @@ export class Device {
   quantity_total: number;
   tags = {};
   image : string;
+  imei: {};
 
-  constructor(_name: string, _qt: number, _desc: string, _tags: {}, _img: string){
+  constructor(_name: string, _qt: number, _desc: string, _tags: {}, _img: string, _imei: {}){
     this.name = _name;
     this.quantity_available = _qt;
     this.quantity_total = _qt;
     this.description = _desc;
     this.tags = _tags;
     this.image = _img;
+    this.imei = _imei;
   }
 
   static fromJSON(snap): any{
