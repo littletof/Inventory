@@ -50,17 +50,17 @@ export class LendDeviceDialogComponent implements OnInit {
 
     device_data;
     request:boolean = false;
+    allData;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendDeviceDialogComponent>,private _formBuilder: FormBuilder, public auth: AuthService, public db: DatabaseService) {
 
-
+      this.allData = data;
       this.loadUsers();
       this.handleEditOrNew(data);
 
 
-
-      this.userID = this.auth.getUserData().uid;//LENDER change to Borrower.uid
-    this.deviceID = this.device_data.key;
+    //this.userID = this.auth.getUserData().uid;//LENDER change to Borrower.uid
+    if(!this.request) this.deviceID = this.device_data.key;
 
 
     this.startDate = new Date();
@@ -82,6 +82,8 @@ export class LendDeviceDialogComponent implements OnInit {
       if(data.request){
           this.request = true;
           this.device_data = data.device;
+
+          this.deviceID = data.request.device_id;
 
 
           let u = data.user;
@@ -218,7 +220,7 @@ export class LendDeviceDialogComponent implements OnInit {
     }
 
     closeDialog(ret = null){
-        ret && this.device_data.cb && this.device_data.cb(ret);
+        ret && this.allData.cb && this.allData.cb(ret);
         this.dialogRef.close();
     }
 
@@ -237,10 +239,15 @@ export class LendDeviceDialogComponent implements OnInit {
                 device_name: this.device_data.name, imei: imeis
             };
 
+            if(!this.request){
+                this.closeDialog(retVal);
+                console.log("sima");
+            }else{
+                let all = {input: this.allData, retVal: retVal};
+                console.log("requ ", all);
+                this.closeDialog(all);
+            }
 
-
-
-           this.closeDialog(retVal);
         }
     }
 
@@ -278,7 +285,7 @@ export class LendDeviceDialogComponent implements OnInit {
         this.amountControl.markAsTouched();
 
         if(this.numberOfDevices >=1){
-            if(this.numberOfDevices <= this.device_data.quantity_available){
+            if(this.numberOfDevices <= this.device_data.quantity_available || this.request){
                 return true;
             }else{
                 this.amountControl.setErrors({'tooMany': true});

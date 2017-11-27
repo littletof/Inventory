@@ -38,7 +38,14 @@ export class RequestsComponent implements OnInit {
   }
 
   lendRequest(request){
-      LendDeviceDialogComponent.openDialog(this.dialog, request, null);
+      LendDeviceDialogComponent.openDialog(this.dialog, request, (data) => this.onRequest(data));
+  }
+
+  onRequest(data){
+      console.log("req");
+      this.db.lendDevice(data.retVal, true);
+      this.db.deleteRequest(data.input.request.key);
+
   }
 
 

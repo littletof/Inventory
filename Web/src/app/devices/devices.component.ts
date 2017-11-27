@@ -99,7 +99,7 @@ export class DevicesComponent implements OnInit {
         LendDeviceDialogComponent.openDialog(this.dialog, data, (lendData)=>this.lendDevice(lendData));
     }
     lendDevice(lendData){
-        this.db.lendDevice(lendData);
+        this.db.lendDevice(lendData, false);
         this.openSnack(this.lendString(lendData));
     }
 

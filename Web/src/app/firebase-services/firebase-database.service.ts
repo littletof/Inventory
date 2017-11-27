@@ -86,7 +86,7 @@ export class FirebaseDatabaseService implements DatabaseService{
 
   //-- LENDING
 
-  lendDevice(lendData){
+  lendDevice(lendData, isRequest){
       let lendEntry = {
           user_id: lendData.user_id,
           device_id: lendData.device_id,
@@ -99,12 +99,14 @@ export class FirebaseDatabaseService implements DatabaseService{
 
         let devref =this.db.database.ref('devices/'+lendEntry.device_id);
 
-
+        console.log('IM in firebase');
 
         devref.transaction(data => {
             //Available quantity decreasing
-            if(data.quantity_available - lendEntry.device_quantity >= 0) {
-                devref.update({quantity_available: data.quantity_available - lendEntry.device_quantity});
+            if(data.quantity_available - lendEntry.device_quantity >= 0 || isRequest) {
+                if(!isRequest) {
+                    devref.update({quantity_available: data.quantity_available - lendEntry.device_quantity});
+                }
 
 
                 for(let i in lendData.imei) {
@@ -126,6 +128,10 @@ export class FirebaseDatabaseService implements DatabaseService{
 
             }
         });
+  }
+
+  deleteRequest(requestID){
+    this.db.object('requests/' + requestID).set({});
   }
 
   returnLendDevice(lendData){

@@ -30,8 +30,9 @@ export abstract class DatabaseService {
 
 
   /**/
-  abstract lendDevice(lendData);
+  abstract lendDevice(lendData, isRequest);
   abstract returnLendDevice(lendData);
+  abstract deleteRequest(requestID);
 
   abstract requestDevice(requestData): any;
   abstract getUserRequests(userKey): any;
