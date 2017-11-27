@@ -43,5 +43,11 @@
 	<string name="PickImage">Pick an Image</string>
 	<string name="User">User</string>
 	<string name="MyRequests">My Requests</string>
+	<string name="Request">Request</string>
 	<string name="Requests">Requests</string>
+	<string name="Delete">Delete Request</string>
+	<string name="Lend">Lend</string>
+	<string name="AvailableIMEIs">Available IMEIs</string>
+	<string name="SelectedIMEIs">Selected IMEIs</string>
+	
 </resources>
