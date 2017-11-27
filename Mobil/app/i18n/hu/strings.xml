@@ -45,4 +45,8 @@
 	<string name="MyRequests">Igényléseim</string>
 	<string name="Request">Igénylem</string>
 	<string name="Requests">Igénylések</string>
+	<string name="Delete">Igény törlése</string>
+	<string name="Lend">Kölcsönzés</string>
+	<string name="AvailableIMEIs">Elérhető IMEIk</string>
+	<string name="SelectedIMEIs">Kiválasztott IMEIk</string>
 </resources>
