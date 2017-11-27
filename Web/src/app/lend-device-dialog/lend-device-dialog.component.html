@@ -85,9 +85,12 @@
         <form #sform="ngForm">
           <ng-template matStepLabel>Select IMEIs</ng-template>
 
-          <div>{{getSelectedIMEIs().length}}/{{numberOfDevices}}</div>
+
+            <div *ngIf="!secondFormGroup.hasError('imeiNumberWrong')">{{getSelectedIMEIs().length}}/{{numberOfDevices}}</div>
+            <mat-error *ngIf="secondFormGroup.hasError('imeiNumberWrong')" class="inline">{{getSelectedIMEIs().length}}/{{numberOfDevices}}</mat-error>
+            <mat-error *ngIf="secondFormGroup.hasError('imeiNumberWrong')" class="inline indet">Selected number of imeis isn't right</mat-error>
           <span *ngFor="let imei of IMEIStoSelectFrom" style="position: relative">
-            <mat-checkbox [(ngModel)]="imei.selected"  (ngModelChange)="imeiSelectChange(0,true)"
+            <mat-checkbox [(ngModel)]="imei.selected"  (ngModelChange)="imeiSelectChange()"
                           name="cb-{{imei.imei}}"
                           [disabled]="!imei.selected && getSelectedIMEIs().length >= numberOfDevices"
                           class="onitem">Use</mat-checkbox>

@@ -135,10 +135,8 @@ export class LendDeviceDialogComponent implements OnInit {
         return goodIMEIs;
     }
 
-    imeiSelectChange(index, newValue){
-
-        //this.IMEIStoSelectFrom[index].available = newValue;
-        console.log(this.getSelectedIMEIs());
+    imeiSelectChange(){
+        this.isSecondValid();
     }
 
     getSelectedIMEIs(): any[]{
@@ -177,7 +175,6 @@ export class LendDeviceDialogComponent implements OnInit {
     }
 
     equalsF(name: string): any[] {
-        console.log(name);
         return this.options.filter(option =>  name && option.name.toLowerCase() === name.toLowerCase());
     }
 
@@ -233,6 +230,7 @@ export class LendDeviceDialogComponent implements OnInit {
 
     amountChange(){
         this.isFirstValid();
+        this.isSecondValid();
         this.secondFormGroup.setErrors({changed:true});
     }
 
