@@ -53,8 +53,7 @@ function MyLendingsViewModel(items) {
                             remoteFullPath: device.value[uid].image+'.png'
                           }).then(
                               function (url) {
-								
-								if(device.value[uid].name.toLowerCase().indexOf(searchStr) > -1){    
+								if(device.value[uid].name.toLowerCase().indexOf(searchStr) > -1){
 									viewModel.push({
 										id: itemID,
 										deviceName:device.value[uid].name,
