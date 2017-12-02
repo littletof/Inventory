@@ -1,8 +1,12 @@
 <Page loaded="onLoaded">
+	<StackLayout orientation="vertical">
+		<StackLayout orientation="horizontal">
+			<TextView  id="searchTV" text="{{ tagsStr }}" width="75%"/>
+			<Button  id="searchBtn" text="{{L('Search')}}" tap="onSearch" />
+		</StackLayout>
         <ListView items="{{ users }}" id="users" itemTap="onTap">
             <ListView.itemTemplate>
                 <GridLayout columns="auto, *" rows="auto">
-                    <!--<Image src="res://logo" stretch="none"  width="72" height="72"/>-->
                     <StackLayout col="1">
                         <Label text="{{ name }}" class="name" style.fontSize="20"/>
                         <Label text="{{ email }}" style.fontSize="14"/>
@@ -10,6 +14,7 @@
                 </GridLayout>             
             </ListView.itemTemplate>
         </ListView>
+	</StackLayout>
 </Page>
 
 

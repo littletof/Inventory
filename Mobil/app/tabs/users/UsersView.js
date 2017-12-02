@@ -13,12 +13,17 @@ var pageData = new observableModule.fromObject({
     users: users
 });
 
+exports.onSearch = function(args){
+	users.empty();
+    users.load(page.getViewById("searchTV").text);
+}
+
 exports.onLoaded = function(args) {
     page = args.object;
     page.bindingContext = pageData;
 
     users.empty();
-    users.load();
+    users.load(page.getViewById("searchTV").text);
 };
 
 exports.onTap = function (args) {

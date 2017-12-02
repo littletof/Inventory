@@ -17,18 +17,39 @@ function Users(items) {
     
     viewModel.indexOf = indexOf;
     
-    viewModel.load = function() {
+    viewModel.load = function(searchStr) {
+		
+		searchStr = searchStr.toLowerCase();
+		let search = searchStr.split(" ");
+		
         var onChildEvent = function(result) {
             var matches = [];
             
             if (result.type === "ChildAdded") {
                 if (result.value.UID === config.uid) {
-                    viewModel.push({
-                        name: result.value.name,
-                        email: result.value.email_address,
-                        role: result.value.role,
-                        id: result.key
-                    });
+					if(searchStr == ""){					
+						viewModel.push({
+							name: result.value.name,
+							email: result.value.email_address,
+							role: result.value.role,
+							id: result.key
+						});
+					}else{
+						let found = false;
+						for(var i = 0; i<search.length; i++){
+							if(result.value.name.toLowerCase().indexOf(search[i]) > -1){
+								found = true;
+							}
+						}
+						if(found){					
+							viewModel.push({
+								name: result.value.name,
+								email: result.value.email_address,
+								role: result.value.role,
+								id: result.key
+							});
+						}
+					}
                 }
             } else if (result.type === "ChildRemoved") {
                 matches.push(result);
