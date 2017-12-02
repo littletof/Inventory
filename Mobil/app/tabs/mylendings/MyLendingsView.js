@@ -5,20 +5,24 @@ const topmost = require("ui/frame").topmost;
 
 var lendingList = new MyLendingsViewModel([]);
 
+var page;
 
 var pageData = new observableModule.fromObject({
     lendingList:lendingList
 });
 
+exports.onSearch = function(args){
+	lendingList.empty();
+    lendingList.load(page.getViewById("searchTV").text);
+}
+
 function onLoaded(args) {
+    page = args.object;
+    page.bindingContext = pageData;
     
 
-    const component = args.object;
-    component.bindingContext = pageData;
-    
-
-    lendingList.empty();
-    lendingList.load();
+	lendingList.empty();
+    lendingList.load(page.getViewById("searchTV").text);
 }
 
 exports.onDetails=function(args){

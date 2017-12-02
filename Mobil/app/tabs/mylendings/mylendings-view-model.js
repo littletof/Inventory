@@ -6,10 +6,11 @@ var ObservableArray = require("data/observable-array").ObservableArray;
 function MyLendingsViewModel(items) {
     var viewModel= new ObservableArray();
     
-    viewModel.load = function() {
+    viewModel.load = function(searchStr) {
 
 
         var currentUserId;
+		searchStr = searchStr.toLowerCase();
 
         firebase.getCurrentUser().then(
             function (result) {
@@ -52,14 +53,16 @@ function MyLendingsViewModel(items) {
                             remoteFullPath: device.value[uid].image+'.png'
                           }).then(
                               function (url) {
-    
-                                viewModel.push({
-							        id: itemID,
-                                    deviceName:device.value[uid].name,
-                                    interval:month0+"."+date0+" "+hour0+":"+min0+" - "+month1+"."+date1+" "+hour1+":"+min1,
-                                    quantity:item.device_quantity,
-                                    image:url
-                                });
+								
+								if(device.value[uid].name.toLowerCase().indexOf(searchStr) > -1){    
+									viewModel.push({
+										id: itemID,
+										deviceName:device.value[uid].name,
+										interval:month0+"."+date0+" "+hour0+":"+min0+" - "+month1+"."+date1+" "+hour1+":"+min1,
+										quantity:item.device_quantity,
+										image:url
+									});
+								}
                             },
                             function (error) {
                                 console.log("Error: " + error);
