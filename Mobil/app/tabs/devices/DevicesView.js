@@ -31,9 +31,8 @@ function loadData(){
 function onLoaded(args) {
     component = args.object;
     component.bindingContext = pageData;
-	component.getViewById("searchTV").text = "";
     deviceList.empty();
-    deviceList.load("");
+    deviceList.load(component.getViewById("searchTV").text);
 }
 
 exports.onDetails=function(args){

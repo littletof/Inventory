@@ -17,7 +17,10 @@ function RequestsViewModel(items) {
     
     viewModel.indexOf = indexOf;
     
-    viewModel.load = function() {
+    viewModel.load = function(searchStr) {
+		
+		searchStr = searchStr.toLowerCase();
+		
         var onChildEvent = function(result) {
             var matches = [];
             
@@ -29,21 +32,29 @@ function RequestsViewModel(items) {
                         var findUserName = function(user) {
                             for(let userid in user.value){
                             if(userid == result.value.user_id){
-                  
-                    
-                            viewModel.push({
-                                device_name: device.value[uid].name,
-                                device_id:uid,
-                                quantity:result.value.device_quantity,
-                                user_name:user.value[userid].name,
-                                user_id:userid,
-                                comment:result.value.comment,
-                                num_available:device.value[uid].quantity_available,
-                                request_id:result.key
-                            });
-                            
-                        
-                    
+								if(searchStr == ""){
+									viewModel.push({
+										device_name: device.value[uid].name,
+										device_id:uid,
+										quantity:result.value.device_quantity,
+										user_name:user.value[userid].name,
+										user_id:userid,
+										comment:result.value.comment,
+										num_available:device.value[uid].quantity_available,
+										request_id:result.key
+									});
+								}else if (device.value[uid].name.toLowerCase().indexOf(searchStr) > -1 || user.value[userid].name.toLowerCase().indexOf(searchStr) > -1){
+									viewModel.push({
+										device_name: device.value[uid].name,
+										device_id:uid,
+										quantity:result.value.device_quantity,
+										user_name:user.value[userid].name,
+										user_id:userid,
+										comment:result.value.comment,
+										num_available:device.value[uid].quantity_available,
+										request_id:result.key
+									});
+								}
                 }
                 }
                 }

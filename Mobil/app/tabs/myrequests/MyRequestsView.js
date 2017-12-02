@@ -4,21 +4,23 @@ var ObservableArray = require("data/observable-array").ObservableArray;
 const topmost = require("ui/frame").topmost;
 
 var requestList = new MyRequestsViewModel([]);
-
+var page;
 
 var pageData = new observableModule.fromObject({
     requestList:requestList
 });
 
-function onLoaded(args) {
-    
+exports.onSearch = function(args){
+	requestList.empty();
+    requestList.load(page.getViewById("searchTV").text);
+}
 
-    const component = args.object;
-    component.bindingContext = pageData;
-    
+exports.onLoaded = function onLoaded(args) {
+    page = args.object;
+    page.bindingContext = pageData;
 
     requestList.empty();
-    requestList.load();
+    requestList.load(page.getViewById("searchTV").text);
 }
 
 exports.onDetails=function(args){
@@ -36,5 +38,4 @@ exports.onDetails=function(args){
 	});
 }
 
-exports.onLoaded = onLoaded;
 

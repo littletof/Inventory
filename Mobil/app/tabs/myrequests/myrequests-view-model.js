@@ -6,10 +6,11 @@ var ObservableArray = require("data/observable-array").ObservableArray;
 function MyRequestsViewModel(items) {
     var viewModel= new ObservableArray();
     
-    viewModel.load = function() {
+    viewModel.load = function(searchStr) {
 
 
         var currentUserId;
+		searchStr = searchStr.toLowerCase();
 
         firebase.getCurrentUser().then(
             function (result) {
@@ -47,13 +48,15 @@ function MyRequestsViewModel(items) {
                             remoteFullPath: JSON.stringify(device.value[uid].image)+'.png'
                           }).then(
                               function (url) {
-                                viewModel.push({
-							        id: itemID,
-                                    deviceName:device.value[uid].name,
-                                    request_date:month0+"."+date0+" "+hour0+":"+min0,
-                                    quantity:item.device_quantity,
-                                    image:url
-                                });
+								if(device.value[uid].name.toLowerCase().indexOf(searchStr) > -1){
+									viewModel.push({
+										id: itemID,
+										deviceName:device.value[uid].name,
+										request_date:month0+"."+date0+" "+hour0+":"+min0,
+										quantity:item.device_quantity,
+										image:url
+									});
+								}
                             },
                             function (error) {
                                 console.log("Error: " + error);
