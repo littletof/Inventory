@@ -9,7 +9,7 @@
 </span>
 <mat-divider></mat-divider>
 
-<div *ngIf="devices | async | deviceTagsFilter:filter as result">
+<div class="pagination" *ngIf="devices | async | deviceTagsFilter:filter as result">
   <mat-paginator [length]=result.length
                  [pageSize]=paginateData.pageSize
                  [pageIndex]=paginateData.pageIndex

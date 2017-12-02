@@ -9,6 +9,7 @@ import {Device} from "../device";
 import {DeviceEditDialogComponent} from "../device-edit-dialog/device-edit-dialog.component";
 import {SPACE} from "@angular/cdk/keycodes";
 import {DeviceRequestDialogComponent} from "../device-request-dialog/device-request-dialog.component";
+import {PaginatePipe} from "../paginate.pipe";
 
 @Component({
   selector: 'app-devices',
@@ -41,7 +42,7 @@ export class DevicesComponent implements OnInit {
   }
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  paginateOptions = [5,10,25,50,100];
+  paginateOptions: any = PaginatePipe.paginateOptions;
   paginateData: any = {pageIndex: 0, pageSize: this.paginateOptions[0], length: 0};
   onPage(event){
       this.paginateData = event;
@@ -50,14 +51,16 @@ export class DevicesComponent implements OnInit {
       }
   }
 
-  ngOnInit() { }
-
-
   setSearch(tags){
       this.filter = tags;
       this.paginator.previousPage();
       this.paginator.nextPage();
   }
+
+  ngOnInit() { }
+
+
+
 
 
   openRequestDeviceDialog(data){
