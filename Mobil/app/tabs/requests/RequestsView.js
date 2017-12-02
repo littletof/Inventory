@@ -13,13 +13,18 @@ var pageData = new observableModule.fromObject({
     requests:requests
 });
 
-exports.onLoaded = function(args) {
+exports.onSearch = function(args){
+	requests.empty();
+    requests.load(page.getViewById("searchTV").text);
+}
+
+exports.onLoaded = function onLoaded(args) {
     page = args.object;
     page.bindingContext = pageData;
 
     requests.empty();
-    requests.load();
-};
+    requests.load(page.getViewById("searchTV").text);
+}
 
 exports.onTap = function (args) {
     var index = args.index;

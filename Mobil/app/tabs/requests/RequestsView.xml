@@ -1,4 +1,9 @@
 <Page loaded="onLoaded">
+	<StackLayout orientation="vertical">
+		<StackLayout orientation="horizontal">
+			<TextView  id="searchTV" text="{{ tagsStr }}" width="75%"/>
+			<Button  id="searchBtn" text="{{L('Search')}}" tap="onSearch" />
+		</StackLayout>
         <ListView items="{{ requests }}" id="requests" itemTap="onTap">
             <ListView.itemTemplate>
                 <GridLayout columns="700" rows="auto" >
@@ -11,6 +16,7 @@
                 </GridLayout>             
             </ListView.itemTemplate>
         </ListView>
+	</StackLayout>
 </Page>
 
 
