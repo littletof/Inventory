@@ -16,10 +16,10 @@ import {RequestEntry} from "../request-entry";
 @Injectable()
 export class FirebaseDatabaseService implements DatabaseService{
 
-  users: any[] = [];
+  //users: any[] = [];
 
 
-  devices: any[] = [];
+  //devices: any[] = [];
 
 
     access_db = null;

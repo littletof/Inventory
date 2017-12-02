@@ -17,7 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
     MatToolbarModule, MatIconModule, MatTableModule, MatListModule, MatInputModule,
     MatCardModule, MatDialogModule, MatDatepickerModule, MatNativeDateModule, MAT_DATE_LOCALE, MatSnackBarModule,
-    MatChipsModule, MatAutocompleteModule, MatTooltipModule, MatStepperModule, MatCheckboxModule
+    MatChipsModule, MatAutocompleteModule, MatTooltipModule, MatStepperModule, MatCheckboxModule, MatPaginatorModule
 } from '@angular/material';
 import { MatProgressSpinnerModule, MatButtonModule, MatFormFieldModule, MatExpansionModule, MatTabsModule} from '@angular/material';
 
@@ -52,6 +52,7 @@ import { LendingSearchPipe } from './request-search.pipe';
 import { LendOrderPipe } from './state-order.pipe';
 import { DeviceRequestInfoDialogComponent } from './device-request-info-dialog/device-request-info-dialog.component';
 import { ChipSearchInputComponent } from './chip-search-input/chip-search-input.component';
+import { PaginatePipe } from './paginate.pipe';
 
 
 
@@ -77,7 +78,8 @@ import { ChipSearchInputComponent } from './chip-search-input/chip-search-input.
     LendingSearchPipe,
     LendOrderPipe,
     DeviceRequestInfoDialogComponent,
-    ChipSearchInputComponent
+    ChipSearchInputComponent,
+    PaginatePipe
   ],
   entryComponents: [
       DeviceInfoDialogComponent,
@@ -123,6 +125,7 @@ import { ChipSearchInputComponent } from './chip-search-input/chip-search-input.
     MatTooltipModule,
     MatStepperModule,
     MatCheckboxModule,
+    MatPaginatorModule,
 
     QRCodeModule
   ],

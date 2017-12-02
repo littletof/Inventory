@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from "../backend-services/auth.service";
 import {DatabaseService} from "../backend-services/database.service";
-import {MatChipInputEvent, MatDialog, MatSnackBar} from "@angular/material";
+import {MatChipInputEvent, MatDialog, MatPaginator, MatSnackBar} from "@angular/material";
 import {DeviceInfoDialogComponent} from "../device-info-dialog/device-info-dialog.component";
 import {LendDeviceDialogComponent} from "../lend-device-dialog/lend-device-dialog.component";
 import {AngularFireList} from "angularfire2/database";
@@ -18,9 +18,12 @@ import {DeviceRequestDialogComponent} from "../device-request-dialog/device-requ
 export class DevicesComponent implements OnInit {
   //devices: any[];
 
+
   devices: AngularFireList<Device>;
 
   filter: any[];
+
+
 
   constructor(public db: DatabaseService, public auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
@@ -31,12 +34,20 @@ export class DevicesComponent implements OnInit {
                   return Device.fromJSON(c);
               });
           });
-
-          //console.log(this.devices);
       }else {
           console.log('Not logged in');
       }
 
+  }
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  paginateOptions = [5,10,25,50,100];
+  paginateData: any = {pageIndex: 0, pageSize: this.paginateOptions[0], length: 0};
+  onPage(event){
+      this.paginateData = event;
+      if(this.paginateData.pageIndex*this.paginateData.pageSize > this.paginateData.length){
+          this.paginateData.pageIndex = Math.max(Math.floor(this.paginateData.length/this.paginateData.pageSize)-1,0);
+      }
   }
 
   ngOnInit() { }
@@ -44,6 +55,8 @@ export class DevicesComponent implements OnInit {
 
   setSearch(tags){
       this.filter = tags;
+      this.paginator.previousPage();
+      this.paginator.nextPage();
   }
 
 
@@ -66,24 +79,6 @@ export class DevicesComponent implements OnInit {
 
     openDeviceInfoDialog(data) {
         DeviceInfoDialogComponent.openDialog(this.dialog, data, infoData => this.handleInfoReturn(infoData));
-        /*
-        let dialogref = this.dialog.open(DeviceInfoDialogComponent, {
-            data,
-            width: '50%'
-        });
-        dialogref.afterClosed().subscribe(value => {
-            if(value!=null) {
-                if (value.edit) {
-
-                    this.openDeviceEditDialog(value.device);
-                }else if(value.lend){
-                    this.openLendDeviceDialog(value);
-                }else if(value.request){
-                    this.openRequestDeviceDialog(data);
-                }
-            }
-
-        });*/
     }
     handleInfoReturn(infoData){
         if (infoData.edit) {

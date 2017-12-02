@@ -9,20 +9,42 @@
 </span>
 <mat-divider></mat-divider>
 
-<mat-list class="matList">
-  <mat-list-item *ngFor="let device of devices | async | deviceTagsFilter:filter" class="list-item" (click)="openDeviceInfoDialog(device)">
-    <mat-icon matListIcon>devices_other</mat-icon>
-    <h4 matLine><a color="accent" class="link" (click)="openDeviceInfoDialog(device)">{{device.name}}</a></h4>
-    <!--<span><button mat-raised-button color="primary" (click)="openDialog(device)">Open</button></span>-->
+<div *ngIf="devices | async | deviceTagsFilter:filter as result">
+  <mat-paginator [length]=result.length
+                 [pageSize]=paginateData.pageSize
+                 [pageIndex]=paginateData.pageIndex
+                 [pageSizeOptions]=paginateOptions
+                  (page)="onPage($event)"
+                  #paginator>
+  </mat-paginator>
 
-    <span><button mat-raised-button color="accent" (click)="openLendDeviceDialog(device)" [disabled]="device.quantity_available<=0" *ngIf="this.auth.accessFeature(this.auth.admini)">Lend</button></span>
+  <mat-list class="matList">
+    <mat-list-item *ngFor="let device of result | paginate:paginateData" class="list-item" (click)="openDeviceInfoDialog(device)">
+      <mat-icon matListIcon>devices_other</mat-icon>
+      <h4 matLine><a color="accent" class="link" (click)="openDeviceInfoDialog(device)">{{device.name}}</a></h4>
+      <!--<span><button mat-raised-button color="primary" (click)="openDialog(device)">Open</button></span>-->
+
+      <span><button mat-raised-button color="accent" (click)="openLendDeviceDialog(device)" [disabled]="device.quantity_available<=0" *ngIf="this.auth.accessFeature(this.auth.admini)">Lend</button></span>
       <button mat-raised-button color="accent" (click)="openRequestDeviceDialog(device)" [disabled]="device.quantity_available<=0" *ngIf="this.auth.accessFeature(this.auth.authed)">Request</button>
 
 
-    <!--<span><button mat-button color="warn" (click)="removeDevice(device.key)" disabled>Remove</button></span>-->
+      <!--<span><button mat-button color="warn" (click)="removeDevice(device.key)" disabled>Remove</button></span>-->
 
-  </mat-list-item>
-</mat-list>
+    </mat-list-item>
+  </mat-list>
+
+
+  <mat-paginator [length]=result.length
+                 [pageSize]=paginateData.pageSize
+                 [pageIndex]=paginateData.pageIndex
+                 [pageSizeOptions]=paginateOptions
+                 (page)="onPage($event)">
+  </mat-paginator>
+</div>
+
+
+
+
 
 
 
