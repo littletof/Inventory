@@ -161,5 +161,5 @@
   <button mat-raised-button (click)="step(stepper)" *ngIf="stepper.selectedIndex != 2">Next</button>
   <!-- Can optionally provide a result for the closing dialog. -->
   <!--<button mat-button [mat-dialog-close]="true">Yes</button>-->
-  <button mat-raised-button (click)="onSubmit(lendForm)" color="accent" [disabled]="device_data.quantity_available<=0 && request" *ngIf="stepper.selectedIndex === 2">Lend</button>
+  <button mat-raised-button (click)="onSubmit(lendForm)" color="accent" [disabled]="device_data.quantity_available<=0 && !request" *ngIf="stepper.selectedIndex === 2">Lend</button>
 </mat-dialog-actions>
