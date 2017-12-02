@@ -18,7 +18,10 @@ function Lendings(items) {
     
     viewModel.indexOf = indexOf;
     
-    viewModel.load = function() {
+    viewModel.load = function(searchStr) {
+		
+		searchStr = searchStr.toLowerCase();
+		
         var onChildEvent = function(result) {
             var matches = [];
             var borrowing =result.value;
@@ -42,13 +45,69 @@ function Lendings(items) {
                                     remoteFullPath: device.value[uid].image+'.png'
                                   }).then(
                                       function (url) {
-                                        viewModel.push({
-                                            id: borrowID,
-                                            deviceName:device.value[uid].name,
-                                            interval:month0+"."+date0+" - "+month1+"."+date1,
-                                            quantity:borrowing.device_quantity,
-                                            image:url
-                                        });
+											if(searchStr == ""){
+												viewModel.push({
+													id: borrowID,
+													deviceName:device.value[uid].name,
+													interval:month0+"."+date0+" - "+month1+"."+date1,
+													quantity:borrowing.device_quantity,
+													image:url
+												});
+											}else if (device.value[uid].name.toLowerCase().indexOf(searchStr) > -1){
+												viewModel.push({
+													id: borrowID,
+													deviceName:device.value[uid].name,
+													interval:month0+"."+date0+" - "+month1+"."+date1,
+													quantity:borrowing.device_quantity,
+													image:url
+												});
+											}else{
+												const path = "/users/"+borrowing.user_id;
+												const onValueEvent = result => {
+												  console.log("Query result: " + JSON.stringify(result));
+												  if (result.error) {
+													alert({
+													  title: "Listener error",
+													  message: result.error,
+													  okButtonText: "Darn!!"
+													});
+												  } else {
+													  if(result.value.name.toLowerCase().indexOf(searchStr) > -1){
+														viewModel.push({
+															id: borrowID,
+															deviceName:device.value[uid].name,
+															interval:month0+"."+date0+" - "+month1+"."+date1,
+															quantity:borrowing.device_quantity,
+															image:url
+														});														  
+													  }
+												  }
+												};
+												firebase.query(
+													onValueEvent,
+													path,
+													{
+													  singleEvent: true,
+													  orderBy: {
+														type: firebase.QueryOrderByType.KEY
+													  }
+													}
+												).then(
+													result => {
+													  console.log("This 'result' should be available since singleEvent is true: " + JSON.stringify(result));
+													  console.log("firebase.doQueryUsers done; added a listener");
+													},
+													errorMessage => {
+													  alert({
+														title: "Query error",
+														message: errorMessage,
+														okButtonText: "OK, pity!"
+													  });
+													}
+												);
+											}
+										  
+
                                     },
                                       function (error) {
                                         console.log("Error: " + error);

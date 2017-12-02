@@ -1,4 +1,9 @@
 <Page loaded="onLoaded" xmlns:nativescript-fresco="nativescript-fresco">
+	<StackLayout orientation="vertical">
+		<StackLayout orientation="horizontal">
+			<TextView  id="searchTV" text="{{ tagsStr }}" width="75%"/>
+			<Button  id="searchBtn" text="{{L('Search')}}" tap="onSearch" />
+		</StackLayout>
         <ListView items="{{ lendings }}" id="lendings" itemTap="onTap">
             <ListView.itemTemplate>
                 <GridLayout columns="auto, *" rows="auto">
@@ -14,6 +19,7 @@
                 </GridLayout>             
             </ListView.itemTemplate>
         </ListView>
+	</StackLayout>
 </Page>
 
 
