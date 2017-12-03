@@ -132,6 +132,23 @@ export class FirebaseDatabaseService implements DatabaseService{
     this.db.object('requests/' + requestID).set({});
   }
 
+  cancelRequest(requestData){
+
+      let request = requestData.request;
+
+      let deviceRef = this.db.database.ref('devices').child(request.device_id);
+      deviceRef.transaction(data => {
+          let newValue = Math.min(data.quantity_available+request.device_quantity, data.quantity_total);
+          //console.log("min value of ", data.quantity_available+shouldSave.device_quantity," ",data.quantity_total);
+
+          deviceRef.child('quantity_available').set(newValue);
+
+          this.deleteRequest(request.key);
+      });
+
+
+  }
+
   returnLendDevice(lendData){
       let lendKey = lendData.lend.key;
       let shouldSave = LendEntry.getJSON(lendData.lend);

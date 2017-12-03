@@ -57,6 +57,11 @@ export class RequestsComponent implements OnInit {
       }
   }
 
+  cancelRequest(request, event){
+      event.stopPropagation();
+      this.db.cancelRequest(request);
+  }
+
   onRequest(data){
       console.log("req");
       this.db.lendDevice(data.retVal, true);
