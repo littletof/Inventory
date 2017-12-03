@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FirebaseDatabaseService} from "../firebase-services/firebase-database.service"
 import {Observable} from "rxjs/Observable";
 
@@ -7,6 +7,8 @@ import {AuthService} from "../backend-services/auth.service";
 import {DatabaseService} from "../backend-services/database.service";
 import {AngularFireList} from "angularfire2/database";
 import {User} from "../user";
+import {PaginatePipe} from "../paginate.pipe";
+import {MatPaginator} from "@angular/material";
 
 
 @Component({
@@ -34,4 +36,14 @@ export class UsersComponent implements OnInit {
     }
 
   }
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    paginateOptions: any = PaginatePipe.paginateOptions;
+    paginateData: any = {pageIndex: 0, pageSize: this.paginateOptions[1], length: 0};
+    onPage(event){
+        this.paginateData = event;
+        if(this.paginateData.pageIndex*this.paginateData.pageSize > this.paginateData.length){
+            this.paginateData.pageIndex = Math.max(Math.floor(this.paginateData.length/this.paginateData.pageSize)-1,0);
+        }
+    }
 }

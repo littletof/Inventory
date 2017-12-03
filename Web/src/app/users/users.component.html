@@ -2,13 +2,24 @@
 
 <mat-divider></mat-divider>
 
-<mat-list>
-  <mat-list-item *ngFor="let user of users | async | nameOrder">
-    <mat-icon matListIcon *ngIf="user.name=='Szalay Kristóf';else notme" matTooltip="Admin">rowing</mat-icon><!-- accessibility rowing -->
-    <ng-template #notme><mat-icon matListIcon *ngIf="user.role=='admin'" matTooltip="Admin">account_box</mat-icon></ng-template>
-    <mat-icon matListIcon *ngIf="user.role!='admin'" matTooltip="Plain Old User">person</mat-icon>
-    <h4 matLine>{{user.name}}</h4>
-    <p matLine class="demo-2"> {{user.email_address}}</p>
 
-  </mat-list-item>
-</mat-list>
+<div class="pagination" *ngIf="users | async as result">
+  <mat-paginator [length]=result.length
+                 [pageSize]=paginateData.pageSize
+                 [pageIndex]=paginateData.pageIndex
+                 [pageSizeOptions]=paginateOptions
+                 (page)="onPage($event)"
+                 #paginator>
+  </mat-paginator>
+
+    <mat-list>
+      <mat-list-item *ngFor="let user of result | nameOrder | paginate:paginateData">
+        <mat-icon matListIcon *ngIf="user.name=='Szalay Kristóf';else notme" matTooltip="Admin">rowing</mat-icon><!-- accessibility rowing -->
+        <ng-template #notme><mat-icon matListIcon *ngIf="user.role=='admin'" matTooltip="Admin">account_box</mat-icon></ng-template>
+        <mat-icon matListIcon *ngIf="user.role!='admin'" matTooltip="Plain Old User">person</mat-icon>
+        <h4 matLine>{{user.name}}</h4>
+        <p matLine class="demo-2"> {{user.email_address}}</p>
+
+      </mat-list-item>
+    </mat-list>
+</div>
