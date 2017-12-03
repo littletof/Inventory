@@ -13,13 +13,15 @@
         <h5 class="inline indent date">Start date:</h5>  {{data.lend.start_date.toLocaleDateString()}} <br>
         <h5 class="inline indent date">End date:</h5> {{data.lend.end_date.toLocaleDateString()}}
 
-        <h5>Device IMEIs:</h5>
-        <div *ngFor="let i of imeis" class="indent">{{i}}</div>
+
       </td>
 
       <td style="width: 50%; vertical-align: top">
         <h5>Comment:</h5>
         <p class="indent">{{data.lend.comment}}</p>
+
+        <h5>Device IMEIs:</h5>
+        <div *ngFor="let i of imeis" class="indent">{{i}}</div>
       </td>
     </tr>
   </table>
