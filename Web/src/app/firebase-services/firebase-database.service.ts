@@ -139,6 +139,8 @@ export class FirebaseDatabaseService implements DatabaseService{
       let shouldSave = LendEntry.getJSON(lendData.lend);
       delete shouldSave.key;
 
+      let imeiData = lendData.return.imeis;
+
       let lendingRef = this.db.database.ref('lendings');
       let userRef = this.db.database.ref('users').child(lendData.lend.user_id);
       let deviceRef = this.db.database.ref('devices').child(lendData.lend.device_id);
@@ -162,6 +164,13 @@ export class FirebaseDatabaseService implements DatabaseService{
              //console.log("min value of ", data.quantity_available+shouldSave.device_quantity," ",data.quantity_total);
 
              deviceRef.child('quantity_available').set(newValue);
+
+             imeiData.forEach((imei) => {
+                 let imeiRef = deviceRef.child('imei').child(imei.imei);
+                 imeiRef.child('available').set(true);
+                 imeiRef.child('comments').push(imei.comment);
+             });
+
           });
 
 
