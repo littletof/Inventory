@@ -43,7 +43,7 @@ export class DevicesComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   paginateOptions: any = PaginatePipe.paginateOptions;
-  paginateData: any = {pageIndex: 0, pageSize: this.paginateOptions[0], length: 0};
+  paginateData: any = {pageIndex: 0, pageSize: this.paginateOptions[1], length: 0};
   onPage(event){
       this.paginateData = event;
       if(this.paginateData.pageIndex*this.paginateData.pageSize > this.paginateData.length){
