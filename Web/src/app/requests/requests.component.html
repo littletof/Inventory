@@ -7,34 +7,52 @@
 
 
   <mat-tab-group >
-    <mat-tab *ngFor="let requestSet of requestSets" label="{{requestSet.title}}">
-      <mat-list class="matList">
-          <mat-list-item *ngFor="let request of requestSet.requests | async | requestSearch:filter | stateOrder;" (click)="lendRequest(request)" class="list-item stated-list-item">
-            <h4 matLine class="inline">
-              <span >{{request.device.name}}</span>
-            </h4>
-            <p matLine class="demo-2">
-              <span class="lineItem"><b>Request date:</b> {{request.request.request_date.toLocaleDateString()}}</span>
-              <span class="lineItem"><b>Number of devices:</b> {{request.request.device_quantity}}</span>
-              <span class="lineItem"><b>User:</b> {{request.user.name}}</span>
-            </p>
-            <!--<button mat-raised-button color="accent" (click)="openDetails(request)">Details</button>-->
-            <button mat-raised-button color="accent" (click)="lendRequest(request)" *ngIf="this.auth.accessFeature(this.auth.admini)">Lend</button>
-            <!-- <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)">Return</button> -->
-
-            <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->
+    <mat-tab *ngFor="let requestSet of requestSets; let i = index;" label="{{requestSet.title}}">
 
 
-            <mat-icon color="primary" *ngIf="(request.state==1)" class="state-icon"
-                      matTooltip="You have less than 10 hours to get your stuff"
-                      matTooltipPosition="right">schedule</mat-icon>
+      <div class="pagination" *ngIf="requestSet.requests | async | requestSearch:filter | stateOrder as result">
+        <mat-paginator [length]=result.length
+                       [pageSize]=paginateData[i].pageSize
+                       [pageIndex]=paginateData[i].pageIndex
+                       [pageSizeOptions]=paginateOptions
+                       (page)="onPage($event, i)"
+                       #paginator>
+        </mat-paginator>
 
-            <mat-icon color="warn" *ngIf="(request.state==2)" class="state-icon"
-                      matTooltip="You have less than 5 hours to get your stuff"
-                      matTooltipPosition="right">error</mat-icon>
+          <mat-list class="matList">
+              <mat-list-item *ngFor="let request of result | paginate:paginateData[i]" (click)="lendRequest(request)" class="list-item stated-list-item">
+                <h4 matLine class="inline">
+                  <span >{{request.device.name}}</span>
+                </h4>
+                <p matLine class="demo-2">
+                  <span class="lineItem"><b>Request date:</b> {{request.request.request_date.toLocaleDateString()}}</span>
+                  <span class="lineItem"><b>Number of devices:</b> {{request.request.device_quantity}}</span>
+                  <span class="lineItem"><b>User:</b> {{request.user.name}}</span>
+                </p>
+                <!--<button mat-raised-button color="accent" (click)="openDetails(request)">Details</button>-->
+                <button mat-raised-button color="accent" (click)="lendRequest(request)" *ngIf="this.auth.accessFeature(this.auth.admini)">Lend</button>
+                <!-- <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)">Return</button> -->
 
-          </mat-list-item>
-      </mat-list>
+                <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->
+
+
+                <mat-icon color="primary" *ngIf="(request.state==1)" class="state-icon"
+                          matTooltip="You have less than 10 hours to get your stuff"
+                          matTooltipPosition="right">schedule</mat-icon>
+
+                <mat-icon color="warn" *ngIf="(request.state==2)" class="state-icon"
+                          matTooltip="You have less than 5 hours to get your stuff"
+                          matTooltipPosition="right">error</mat-icon>
+
+              </mat-list-item>
+          </mat-list>
+        <mat-paginator [length]=result.length
+                       [pageSize]=paginateData[i].pageSize
+                       [pageIndex]=paginateData[i].pageIndex
+                       [pageSizeOptions]=paginateOptions
+                       (page)="onPage($event, i)">
+        </mat-paginator>
+      </div>
     </mat-tab>
   </mat-tab-group>
 
