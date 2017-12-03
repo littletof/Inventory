@@ -25,6 +25,7 @@ exports.requestButtonTapped = function(args){
         });
 	}else{
 		newRequestViewModel.addNewRequest(pageData);
+		//topmost().navigate({moduleName: "tabs/tabs-page-user", clearHistory:true});    
 		topmost().goBack();
 	}
 }

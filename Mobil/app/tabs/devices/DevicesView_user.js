@@ -24,9 +24,7 @@ exports.onSearch = function(args){
     deviceList.load(component.getViewById("searchTV").text);
 }
 
-function loadData(){
-	
-}
+
 
 function onLoaded(args) {
     component = args.object;

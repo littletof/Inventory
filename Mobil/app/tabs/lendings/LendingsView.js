@@ -7,7 +7,7 @@ const topmost = frameModule.topmost;
 var page;
 
 var LendingsViewModel = require("./lendings-view-model");
-var lendings = new LendingsViewModel([]);
+var lendings;
 
 var pageData = new observableModule.fromObject({
     lendings: lendings
@@ -21,7 +21,8 @@ exports.onSearch = function(args){
 exports.onLoaded = function onLoaded(args) {
     page = args.object;
     page.bindingContext = pageData;
-
+	lendings= new LendingsViewModel([]);
+	pageData.lendings=lendings;
     lendings.empty();
     lendings.load(page.getViewById("searchTV").text);
 }
