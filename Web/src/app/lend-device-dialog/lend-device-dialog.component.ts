@@ -252,10 +252,8 @@ export class LendDeviceDialogComponent implements OnInit {
 
             if(!this.request){
                 this.closeDialog(retVal);
-                console.log("sima");
             }else{
                 let all = {input: this.allData, retVal: retVal};
-                console.log("requ ", all);
                 this.closeDialog(all);
             }
 

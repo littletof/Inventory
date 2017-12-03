@@ -111,7 +111,7 @@
                 <span *ngIf="imei.comments.length!=0; else noComment">
                   <p *ngFor="let comment of imei.comments"> {{comment}} </p>
                 </span>
-                <template #noComment><p>There are no comments</p></template>
+                <ng-template #noComment><p>There are no comments</p></ng-template>
 
               </mat-expansion-panel>
           </span>

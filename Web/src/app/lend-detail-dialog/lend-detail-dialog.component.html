@@ -17,9 +17,10 @@
       </td>
 
       <td style="width: 50%; vertical-align: top">
-        <h5>Comment:</h5>
-        <p class="indent">{{data.lend.comment}}</p>
-
+        <span *ngIf="data.lend.comment">
+          <h5>Comment:</h5>
+          <p class="indent">{{data.lend.comment}}</p>
+        </span>
         <h5>Device IMEIs:</h5>
         <div *ngFor="let i of imeis" class="indent">{{i}}</div>
       </td>
