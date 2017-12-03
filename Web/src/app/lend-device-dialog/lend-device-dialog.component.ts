@@ -161,6 +161,8 @@ export class LendDeviceDialogComponent implements OnInit {
                     comments.push(IMEIS[imei].comments[c]);
                 }
 
+                comments = comments.reverse();
+
                 goodIMEIs.push({comments: comments, imei: imei, selected: false});
 
 
