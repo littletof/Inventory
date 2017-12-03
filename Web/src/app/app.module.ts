@@ -53,6 +53,7 @@ import { LendOrderPipe } from './state-order.pipe';
 import { DeviceRequestInfoDialogComponent } from './device-request-info-dialog/device-request-info-dialog.component';
 import { ChipSearchInputComponent } from './chip-search-input/chip-search-input.component';
 import { PaginatePipe } from './paginate.pipe';
+import { NameOrderPipe } from './name-order.pipe';
 
 
 
@@ -79,7 +80,8 @@ import { PaginatePipe } from './paginate.pipe';
     LendOrderPipe,
     DeviceRequestInfoDialogComponent,
     ChipSearchInputComponent,
-    PaginatePipe
+    PaginatePipe,
+    NameOrderPipe
   ],
   entryComponents: [
       DeviceInfoDialogComponent,
