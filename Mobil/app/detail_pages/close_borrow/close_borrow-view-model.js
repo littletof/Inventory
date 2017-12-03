@@ -201,7 +201,7 @@ exports.pushClose=function(devices){
 					'comment':devices.getItem(i).comment
 				});
 				if(devices.getItem(i).comment != ""){
-					firebase.push('devices/'+borrow.device_id+'/imei/'+devices.getItem(i).imei+'/comments',{'stuff': devices.getItem(i).comment});
+					firebase.push('devices/'+borrow.device_id+'/imei/'+devices.getItem(i).imei+'/comments',devices.getItem(i).comment);
 				}
 				firebase.setValue('devices/'+borrow.device_id+'/imei/'+devices.getItem(i).imei+'/available',true);
 			}
