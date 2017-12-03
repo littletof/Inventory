@@ -19,6 +19,8 @@
                            #paginator>
             </mat-paginator>
 
+            <span *ngIf="result.length==0" class="indent">No lendings to show...</span>
+
                   <mat-list>
                     <mat-list-item *ngFor="let lending of result | paginate:paginateData[i]" (click)="openLendDetailDialog(lending)" class="list-item stated-list-item">
 

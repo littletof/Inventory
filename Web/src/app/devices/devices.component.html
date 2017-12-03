@@ -18,6 +18,8 @@
                   #paginator>
   </mat-paginator>
 
+  <span *ngIf="result.length==0" class="indent">No devices to show...</span>
+
   <mat-list class="matList">
     <mat-list-item *ngFor="let device of result | paginate:paginateData" class="list-item" (click)="openDeviceInfoDialog(device)">
       <mat-icon matListIcon>devices_other</mat-icon>

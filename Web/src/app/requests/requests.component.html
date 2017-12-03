@@ -19,6 +19,9 @@
                        #paginator>
         </mat-paginator>
 
+
+        <span *ngIf="result.length==0" class="indent">No requests to show...</span>
+
           <mat-list class="matList">
               <mat-list-item *ngFor="let request of result | paginate:paginateData[i]" (click)="lendRequest(request)" class="list-item stated-list-item">
                 <h4 matLine class="inline">
