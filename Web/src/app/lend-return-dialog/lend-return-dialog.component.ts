@@ -23,7 +23,16 @@ export class LendReturnDialogComponent implements OnInit {
       let imeisLend:any[] = [];
 
       for(let i in imeis){
-          imeisLend.push({imei: i, comment: undefined});
+
+          let prevComments = [];
+          for(let c in data.device.imei[i].comments){
+              prevComments.push(data.device.imei[i].comments[c]);
+          }
+
+          prevComments = prevComments.reverse();
+
+          imeisLend.push({imei: i, comment: undefined, prev_comments: prevComments});
+
       }
       data.return = {};
       data.return.imeis = imeisLend;

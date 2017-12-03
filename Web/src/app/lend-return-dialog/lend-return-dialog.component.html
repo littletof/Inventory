@@ -39,6 +39,10 @@
 
           </mat-form-field>
 
+          <p *ngFor="let comment of imei.prev_comments;">
+              {{comment}}
+          </p>
+
       </mat-expansion-panel>
   </span>
 </mat-dialog-content>

@@ -99,8 +99,6 @@ export class FirebaseDatabaseService implements DatabaseService{
 
         let devref =this.db.database.ref('devices/'+lendEntry.device_id);
 
-        console.log('IM in firebase');
-
         devref.transaction(data => {
             //Available quantity decreasing
             if(data.quantity_available - lendEntry.device_quantity >= 0 || isRequest) {
