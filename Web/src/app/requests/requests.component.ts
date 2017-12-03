@@ -5,7 +5,7 @@ import {RequestEntry} from "../request-entry";
 import {DeviceRequestInfoDialogComponent} from "../device-request-info-dialog/device-request-info-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {LendDeviceDialogComponent} from "../lend-device-dialog/lend-device-dialog.component";
-import {MatPaginator} from "@angular/material";
+import {MatPaginator, MatSnackBar} from "@angular/material";
 import {PaginatePipe} from "../paginate.pipe";
 
 @Component({
@@ -18,7 +18,7 @@ export class RequestsComponent implements OnInit {
   requestSets: any[] = [];
   filter: string[];
 
-  constructor(public db: DatabaseService, public auth: AuthService,public dialog: MatDialog) {
+  constructor(public db: DatabaseService, public auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
 
     this.requestSets.push(this.getRequestSet(this.mapIt(this.db.getUserRequests(this.auth.getUserData().uid)), "My requests"));
@@ -60,7 +60,14 @@ export class RequestsComponent implements OnInit {
   cancelRequest(request, event){
       event.stopPropagation();
       this.db.cancelRequest(request);
+      this.openSnack("Request by " + request.user.name +" for "+request.request.device_quantity+" x "+ request.device.name+ " was deleted.")
   }
+
+    openSnack(value){
+        this.snackBar.open(value , null, {
+            duration: 6000
+        });
+    }
 
   onRequest(data){
       console.log("req");

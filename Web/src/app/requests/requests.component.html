@@ -31,6 +31,8 @@
                   <span class="lineItem"><b>Request date:</b> {{request.request.request_date.toLocaleDateString()}}</span>
                   <span class="lineItem"><b>Number of devices:</b> {{request.request.device_quantity}}</span>
                   <span class="lineItem"><b>User:</b> {{request.user.name}}</span>
+
+                  <mat-icon *ngIf="request.request.comment" color="primary" matTooltip="{{request.request.comment}}" style="font-size: 18px; position: absolute;">comment</mat-icon>
                 </p>
                 <!--<button mat-raised-button color="accent" (click)="openDetails(request)">Details</button>-->
                 <button mat-raised-button color="accent" (click)="cancelRequest(request, $event)" *ngIf="this.auth.accessFeature(this.auth.authed)">Delete</button>
