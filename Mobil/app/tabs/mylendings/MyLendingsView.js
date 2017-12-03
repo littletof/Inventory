@@ -3,7 +3,7 @@ var observableModule = require("data/observable")
 var ObservableArray = require("data/observable-array").ObservableArray;
 const topmost = require("ui/frame").topmost;
 
-var lendingList = new MyLendingsViewModel([]);
+var lendingList;
 
 var page;
 
@@ -19,7 +19,8 @@ exports.onSearch = function(args){
 function onLoaded(args) {
     page = args.object;
     page.bindingContext = pageData;
-    
+	lendingList = new MyLendingsViewModel([]);
+	pageData.lendingList=lendingList;
 
 	lendingList.empty();
     lendingList.load(page.getViewById("searchTV").text);

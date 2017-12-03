@@ -6,7 +6,7 @@ const topmost = frameModule.topmost;
 var firebase = require("nativescript-plugin-firebase");
 var BarcodeScanner = require("nativescript-barcodescanner").BarcodeScanner;
 
-var deviceList = new DevicesViewModel([]);
+var deviceList;
 
 var component;
 var barcodeScanner = new BarcodeScanner();
@@ -31,6 +31,8 @@ function loadData(){
 function onLoaded(args) {
     component = args.object;
     component.bindingContext = pageData;
+    deviceList = new DevicesViewModel([]);
+    pageData.deviceList=deviceList;
     deviceList.empty();
     deviceList.load(component.getViewById("searchTV").text);
 }

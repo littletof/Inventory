@@ -7,7 +7,7 @@ const topmost = frameModule.topmost;
 var page;
 
 var UsersViewModel = require("./users-view-model");
-var users = new UsersViewModel([]);
+var users;
 
 var pageData = new observableModule.fromObject({
     users: users
@@ -21,7 +21,8 @@ exports.onSearch = function(args){
 exports.onLoaded = function(args) {
     page = args.object;
     page.bindingContext = pageData;
-
+	users = new UsersViewModel([]);
+	pageData.users=users;
     users.empty();
     users.load(page.getViewById("searchTV").text);
 };

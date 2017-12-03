@@ -7,7 +7,7 @@ const topmost = frameModule.topmost;
 var page;
 
 var RequestsViewModel = require("./request-view-model");
-var requests = new RequestsViewModel([]);
+var requests;
 
 var pageData = new observableModule.fromObject({
     requests:requests
@@ -21,7 +21,8 @@ exports.onSearch = function(args){
 exports.onLoaded = function onLoaded(args) {
     page = args.object;
     page.bindingContext = pageData;
-
+	requests = new RequestsViewModel([]);
+	pageData.requests=requests;
     requests.empty();
     requests.load(page.getViewById("searchTV").text);
 }
