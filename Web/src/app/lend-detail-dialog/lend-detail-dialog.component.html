@@ -1,18 +1,31 @@
 <h2 mat-card-title class="dialog-title">Lend details</h2>
 <mat-dialog-content style="padding-bottom: 2em;">
+
   <h4>{{data.user.name}}</h4>
-  <h5>Devices:</h5>
-  <p class="indent"> {{data.lend.device_quantity}} x {{data.device.name}}</p>
-  <h5>Date:</h5>
+  <table style="width: 100%">
+    <tr>
+      <td style="width: 50%">
 
-    <h5 class="inline indent date">Start date:</h5>  {{data.lend.start_date.toLocaleDateString()}} <br>
-    <h5 class="inline indent date">End date:</h5> {{data.lend.end_date.toLocaleDateString()}}
+        <h5>Devices:</h5>
+        <p class="indent"> {{data.lend.device_quantity}} x {{data.device.name}}</p>
+        <h5>Date:</h5>
 
-  <h5>Device IMEIs:</h5>
-  <div *ngFor="let i of imeis" class="indent">{{i}}</div>
+        <h5 class="inline indent date">Start date:</h5>  {{data.lend.start_date.toLocaleDateString()}} <br>
+        <h5 class="inline indent date">End date:</h5> {{data.lend.end_date.toLocaleDateString()}}
+
+        <h5>Device IMEIs:</h5>
+        <div *ngFor="let i of imeis" class="indent">{{i}}</div>
+      </td>
+
+      <td style="width: 50%; vertical-align: top">
+        <h5>Comment:</h5>
+        <p class="indent">{{data.lend.comment}}</p>
+      </td>
+    </tr>
+  </table>
+
   <br>
-  <h5>Comment:</h5>
-  <p class="indent">{{data.lend.comment}}</p>
+
 
 
 </mat-dialog-content>
