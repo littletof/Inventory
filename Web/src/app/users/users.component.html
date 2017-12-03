@@ -4,26 +4,11 @@
 
 <mat-list>
   <mat-list-item *ngFor="let user of users | async | nameOrder">
-    <mat-icon matListIcon>account_box</mat-icon>
+    <mat-icon matListIcon *ngIf="user.name=='Szalay Kristóf';else notme" matTooltip="Admin">rowing</mat-icon><!-- accessibility rowing -->
+    <ng-template #notme><mat-icon matListIcon *ngIf="user.role=='admin'" matTooltip="Admin">account_box</mat-icon></ng-template>
+    <mat-icon matListIcon *ngIf="user.role!='admin'" matTooltip="Plain Old User">person</mat-icon>
     <h4 matLine>{{user.name}}</h4>
     <p matLine class="demo-2"> {{user.email_address}}</p>
-    <span><!--<button mat-button color="warn" (click)="removeUser(user.id)">Remove</button>--></span>
 
   </mat-list-item>
 </mat-list>
-
-
-<!--
-<button mat-raised-button color="primary" (click)='addNew()'>Add</button>
-
-
-<mat-table #table [dataSource]="users">
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-    <mat-cell *matCellDef="let user"> {{user.id}} </mat-cell>
-  </ng-container>
-
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let user; columns: displayedColumns;"></mat-row>
-</mat-table>
--->
