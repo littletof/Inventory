@@ -1,6 +1,52 @@
-<p>
-  lend-return-dialog works!
-</p>
+<h2 mat-card-title class="dialog-title">Return lending</h2>
+<mat-dialog-content style="padding-bottom: 2em;">
 
-<button (click)="closeDialog()">close</button>
-<button (click)="closeDialog(data)">return</button>
+  <h3 class="indent">{{data.lend.device_quantity}} x {{data.device.name}}</h3>
+  <table style="width: 100%">
+    <tr>
+      <td style="width:50%">
+        <h5 class="indent inline smallHpadding">Borrower:</h5><h4 class="inline indent smallHpadding">{{data.user.name}}</h4>
+        <br>
+        <h5 class="indent inline smallHpadding">From: </h5><span class="indent">{{data.lend.start_date.toLocaleDateString()}}</span>
+        <h5 class="indent inline smallHpadding">To: </h5><span class="indent">{{data.lend.end_date.toLocaleDateString()}}</span>
+      </td>
+      <td style="width:50%" class="comment" *ngIf="data.lend.comment">
+        <span class="indent comment">
+          <h5 class="inline smallHpadding">Comment: </h5>
+          <p class="indent"><span class="indent">{{data.lend.comment}}</span></p>
+        </span>
+      </td>
+    </tr>
+  </table>
+
+  <br>
+
+
+  <span *ngFor="let imei of imeisLend" style="position: relative" >
+      <mat-expansion-panel class="inline">
+        <mat-expansion-panel-header>
+          <mat-panel-title><mat-icon *ngIf="imei.comment" matTooltip="There is a comment for this device" color="primary">comment</mat-icon><mat-icon *ngIf="!imei.comment"></mat-icon></mat-panel-title>
+          <mat-panel-description>IMEI: {{imei.imei}}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <!--<span *ngIf="imei.comments.length!=0; else noComment">
+          <p *ngFor="let comment of imei.comments"> {{comment}} </p>
+        </span>
+        <template #noComment><p>There are no comments</p></template>-->
+         <mat-form-field style="width: 100%">
+              <textarea matInput placeholder="Comment" [(ngModel)]="imei.comment"
+                        name="comment" rows="5"
+              ></textarea>
+
+          </mat-form-field>
+
+      </mat-expansion-panel>
+  </span>
+</mat-dialog-content>
+
+
+
+
+
+
+<button mat-button (click)="closeDialog()">Close</button>
+<button mat-raised-button color="accent"(click)="closeDialog(data)">Return</button>

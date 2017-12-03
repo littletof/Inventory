@@ -1,0 +1,8 @@
+.smallHpadding{
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+
+td.comment{
+    background-color: #fcfcfc;
+}
