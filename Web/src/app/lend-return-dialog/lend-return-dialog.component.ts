@@ -11,22 +11,22 @@ import 'rxjs/add/operator/take'
 })
 export class LendReturnDialogComponent implements OnInit {
 
-    imeisLend: any[] = [];
+
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendReturnDialogComponent>, public db: DatabaseService) {
-
-    console.log(data);
-
     this.extractImeis(data);
   }
 
   extractImeis(data){
       let imeis = data.lend.imei;
 
+      let imeisLend:any[] = [];
+
       for(let i in imeis){
-          this.imeisLend.push({imei: i, comment: undefined});
+          imeisLend.push({imei: i, comment: undefined});
       }
-      console.log(this.imeisLend);
+      data.return = {};
+      data.return.imeis = imeisLend;
   }
 
   static openDialog(dialog, data, callback){

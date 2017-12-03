@@ -22,7 +22,7 @@
   <br>
 
 
-  <span *ngFor="let imei of imeisLend" style="position: relative" >
+  <span *ngFor="let imei of data.return.imeis" style="position: relative" >
       <mat-expansion-panel class="inline">
         <mat-expansion-panel-header>
           <mat-panel-title><mat-icon *ngIf="imei.comment" matTooltip="There is a comment for this device" color="primary">comment</mat-icon><mat-icon *ngIf="!imei.comment"></mat-icon></mat-panel-title>
