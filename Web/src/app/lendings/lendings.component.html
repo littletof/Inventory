@@ -8,34 +8,52 @@
 
 
 <mat-tab-group >
-    <mat-tab *ngFor="let lendings of lendingsSet" label="{{lendings.title}}">
-      <mat-list>
-        <mat-list-item *ngFor="let lending of lendings.set | async | requestSearch:filter | stateOrder;" (click)="openLendDetailDialog(lending)" class="list-item stated-list-item">
+    <mat-tab *ngFor="let lendings of lendingsSet; let i = index;" label="{{lendings.title}}">
+
+        <div class="pagination" *ngIf="lendings.set | async | requestSearch:filter | stateOrder as result">
+            <mat-paginator [length]=result.length
+                           [pageSize]=paginateData[i].pageSize
+                           [pageIndex]=paginateData[i].pageIndex
+                           [pageSizeOptions]=paginateOptions
+                           (page)="onPage($event, i)"
+                           #paginator>
+            </mat-paginator>
+
+                  <mat-list>
+                    <mat-list-item *ngFor="let lending of result | paginate:paginateData[i]" (click)="openLendDetailDialog(lending)" class="list-item stated-list-item">
 
 
-            <h4 matLine>{{lending.device.name}}</h4>
-            <p matLine>
-                <span class="lineItem"><b>Start date:</b> {{lending.lend.start_date.toLocaleDateString()}}</span>
-                <span class="lineItem"><b>End date:</b> {{lending.lend.end_date.toLocaleDateString()}}</span>
-                <span class="lineItem"><b>Number of devices:</b> {{lending.lend.device_quantity}}</span>
-                <span class="lineItem" *ngIf="this.auth.accessFeature(this.auth.admini)"><b>Borrower:</b> {{lending.user.name}}</span>
-            </p>
-            <button mat-raised-button color="accent" (click)="openLendDetailDialog(lending)">Details</button>
-            <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)" *ngIf="this.auth.accessFeature(this.auth.admini)">Return</button>
+                        <h4 matLine>{{lending.device.name}}</h4>
+                        <p matLine>
+                            <span class="lineItem"><b>Start date:</b> {{lending.lend.start_date.toLocaleDateString()}}</span>
+                            <span class="lineItem"><b>End date:</b> {{lending.lend.end_date.toLocaleDateString()}}</span>
+                            <span class="lineItem"><b>Number of devices:</b> {{lending.lend.device_quantity}}</span>
+                            <span class="lineItem" *ngIf="this.auth.accessFeature(this.auth.admini)"><b>Borrower:</b> {{lending.user.name}}</span>
+                        </p>
+                        <button mat-raised-button color="accent" (click)="openLendDetailDialog(lending)">Details</button>
+                        <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)" *ngIf="this.auth.accessFeature(this.auth.admini)">Return</button>
 
 
-          <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->
+                      <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->
 
 
-          <mat-icon color="primary" *ngIf="(lending.state==1)" class="state-icon"
-                    matTooltip="Less than a day to return device" matTooltipPosition="right"
-                    >schedule</mat-icon>
-          <mat-icon color="warn" *ngIf="(lending.state==2)" class="state-icon"
-                    matTooltip="Lending is over, should have returned device by now" matTooltipPosition="right"
-                    >error</mat-icon>
+                      <mat-icon color="primary" *ngIf="(lending.state==1)" class="state-icon"
+                                matTooltip="Less than a day to return device" matTooltipPosition="right"
+                                >schedule</mat-icon>
+                      <mat-icon color="warn" *ngIf="(lending.state==2)" class="state-icon"
+                                matTooltip="Lending is over, should have returned device by now" matTooltipPosition="right"
+                                >error</mat-icon>
 
-        </mat-list-item>
-      </mat-list>
+                    </mat-list-item>
+                  </mat-list>
+
+            <mat-paginator [length]=result.length
+                           [pageSize]=paginateData[i].pageSize
+                           [pageIndex]=paginateData[i].pageIndex
+                           [pageSizeOptions]=paginateOptions
+                           (page)="onPage($event, i)">
+            </mat-paginator>
+        </div>
     </mat-tab>
 </mat-tab-group>
 

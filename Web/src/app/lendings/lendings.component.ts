@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {LendEntry} from "../lend-entry";
 import {DatabaseService} from "../backend-services/database.service";
 import {AuthService} from "../backend-services/auth.service";
-import { MatDialog} from "@angular/material";
+import {MatDialog, MatPaginator} from "@angular/material";
 import {LendDetailDialogComponent} from "../lend-detail-dialog/lend-detail-dialog.component";
 import {LendReturnDialogComponent} from "../lend-return-dialog/lend-return-dialog.component";
+import {PaginatePipe} from "../paginate.pipe";
 
 
 
@@ -65,8 +66,20 @@ export class UserLendingsComponent implements OnInit {
       });
   }
 
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    paginateOptions: any = PaginatePipe.paginateOptions;
+    paginateData: any[] = [null,null].map(()=>{return {pageIndex: 0, pageSize: this.paginateOptions[0], length: 0}});
+    onPage(event, index){
+        this.paginateData[index] = event;
+        if(this.paginateData[index].pageIndex*this.paginateData[index].pageSize > this.paginateData[index].length){
+            this.paginateData[index].pageIndex = Math.max(Math.floor(this.paginateData[index].length/this.paginateData[index].pageSize)-1,0);
+        }
+    }
+
     setSearch(tags){
-      this.filter = tags;
+        this.filter = tags;
+        this.paginator.previousPage();
+        this.paginator.nextPage();
     }
 
   openLendDetailDialog(data) {
