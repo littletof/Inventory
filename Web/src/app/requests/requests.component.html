@@ -4,8 +4,6 @@
 
 <mat-divider></mat-divider>
 
-
-
   <mat-tab-group >
     <mat-tab *ngFor="let requestSet of requestSets; let i = index;" label="{{requestSet.title}}">
 
@@ -34,12 +32,10 @@
 
                   <mat-icon *ngIf="request.request.comment" color="primary" matTooltip="{{request.request.comment}}" style="font-size: 18px; position: absolute;">comment</mat-icon>
                 </p>
-                <!--<button mat-raised-button color="accent" (click)="openDetails(request)">Details</button>-->
+
                 <button mat-raised-button color="accent" (click)="cancelRequest(request, $event)" *ngIf="this.auth.accessFeature(this.auth.authed)">Delete</button>
                 <button mat-raised-button color="accent" (click)="lendRequest(request)" *ngIf="this.auth.accessFeature(this.auth.admini)">Lend</button>
-                <!-- <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)">Return</button> -->
 
-                <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->
 
 
                 <mat-icon color="primary" *ngIf="(request.state==1)" class="state-icon"
@@ -61,26 +57,3 @@
       </div>
     </mat-tab>
   </mat-tab-group>
-
-
-<!--
-<mat-list-item *ngFor="let request of requests | async; let device of request.device |async; let user of request.user |async;" class="list-item">
-  <h4 matLine class="inline">
-    <span class="userName">{{request.user.name}}</span>
-  </h4>
-  <p matLine class="demo-2">
-    <span class="lineItem"><b>Request date:</b> {{request.request.request_date.toLocaleDateString()}}</span>
-    <span class="lineItem"><b>Number of devices:</b> {{request.request.device_quantity}}</span>
-    <span class="lineItem"><b>Device: </b>{{request.device.name}}</span>
-  </p>
-
-
-
-  <mat-icon color="primary" *ngIf="(request.state==1)" class="state-icon">schedule</mat-icon>
-  <mat-icon color="warn" *ngIf="(request.state==2)" class="state-icon">error</mat-icon>
-
-</mat-list-item>
-
-
-<mat-divider></mat-divider>
--->

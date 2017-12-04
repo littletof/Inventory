@@ -19,7 +19,7 @@ export class RequestsComponent implements OnInit {
 
   constructor(public db: DatabaseService, public auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
-
+//Setup tabbed view
     this.requestSets.push(this.getRequestSet(this.mapIt(this.db.getUserRequests(this.auth.getUserData().uid)), "My requests"));
 
     if(this.auth.accessFeature(this.auth.admini)){
@@ -46,9 +46,6 @@ export class RequestsComponent implements OnInit {
         this.paginator.nextPage();
     }
 
-  openDetails(request){
-    //DeviceRequestInfoDialogComponent.openDialog(this.dialog, request, null);
-  }
 
   lendRequest(request){
       if(this.auth.accessFeature(this.auth.admini)) {
@@ -69,7 +66,6 @@ export class RequestsComponent implements OnInit {
     }
 
   onRequest(data){
-      console.log("req");
       this.db.lendDevice(data.retVal, true);
       this.db.deleteRequest(data.input.request.key);
 
@@ -81,6 +77,7 @@ export class RequestsComponent implements OnInit {
       return {requests: set, title: title};
   }
 
+  //Requesthez tartozó eszköz és user közös jsonba töltése
   private mapIt(set): any{
       return set.map(changes => {
           return changes.map(c => {
@@ -116,10 +113,6 @@ export class RequestsComponent implements OnInit {
       if(dif< 0.6) return 0;
       if(dif< 0.8) return 1;
       return 2;
-
-     /* if(dif > 0.5) return 2;
-      if(dif <= 0.5 && dif >=0) return 1;
-      return 0;*/
   }
 
   private calculateDateDiff(date1, date2): number{
