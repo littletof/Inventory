@@ -21,18 +21,8 @@ export class DeviceRequestDialogComponent implements OnInit {
 
     myControl: FormControl = new FormControl();
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<DeviceRequestDialogComponent>, public db: DatabaseService, public auth: AuthService) {
-
-
-
-    if(data){
-
-    }else {
-
-    }
-
-
-  }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+              public dialogRef: MatDialogRef<DeviceRequestDialogComponent>, public db: DatabaseService, public auth: AuthService) {  }
 
 
 
