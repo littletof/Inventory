@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {DatabaseService} from "../backend-services/database.service";
 import {AuthService} from "../backend-services/auth.service";
 import {RequestEntry} from "../request-entry";
-import {DeviceRequestInfoDialogComponent} from "../device-request-info-dialog/device-request-info-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {LendDeviceDialogComponent} from "../lend-device-dialog/lend-device-dialog.component";
 import {MatPaginator, MatSnackBar} from "@angular/material";

@@ -50,7 +50,6 @@ import { DeviceRequestDialogComponent } from './device-request-dialog/device-req
 import { RequestsComponent } from './requests/requests.component';
 import { LendingSearchPipe } from './request-search.pipe';
 import { LendOrderPipe } from './state-order.pipe';
-import { DeviceRequestInfoDialogComponent } from './device-request-info-dialog/device-request-info-dialog.component';
 import { ChipSearchInputComponent } from './chip-search-input/chip-search-input.component';
 import { PaginatePipe } from './paginate.pipe';
 import { NameOrderPipe } from './name-order.pipe';
@@ -78,7 +77,6 @@ import { NameOrderPipe } from './name-order.pipe';
     RequestsComponent,
     LendingSearchPipe,
     LendOrderPipe,
-    DeviceRequestInfoDialogComponent,
     ChipSearchInputComponent,
     PaginatePipe,
     NameOrderPipe
@@ -91,8 +89,7 @@ import { NameOrderPipe } from './name-order.pipe';
       LendDetailDialogComponent,
       LendReturnDialogComponent,
 
-      DeviceRequestDialogComponent,
-      DeviceRequestInfoDialogComponent
+      DeviceRequestDialogComponent
   ],
   imports: [
     BrowserModule,
