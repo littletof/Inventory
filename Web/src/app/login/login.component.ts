@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {}
 
+  //Home or redirect to previous page
   onLogin(router){
     let url = null;
     if(this.auth.redirectUrl=='/login' || this.auth.redirectUrl==undefined){
@@ -31,7 +32,6 @@ export class LoginComponent implements OnInit {
     this.auth.redirectUrl=null;
 
     router.navigate([url]);
-      //this.auth.redirectIfLoggedIn();
   }
 
   login(){
