@@ -36,7 +36,6 @@ export class DeviceTagsFilterPipe implements PipeTransform {
 
                 //console.log('check ', searchTag, ' in ', item.name, ' result:  ', item.name.indexOf(searchTag));
 
-                /*tags.indexOf(searchTag) != -1*/
                 if (Device.stringInTags(item.tags, searchTag) || item.name.toUpperCase().indexOf(searchTag) != -1) {}
                 else{
                     return false;

@@ -14,8 +14,6 @@ export class PaginatePipe implements PipeTransform {
     }
     let endIndex = startIndex + paginateData.pageSize;
 
-    //console.log('start ',startIndex);
-    //console.log(paginateData);
 
 
     return items.slice(startIndex, endIndex);

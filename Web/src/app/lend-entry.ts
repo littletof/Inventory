@@ -16,14 +16,6 @@ export class LendEntry {
         this.comment = comment;
     }
 
-    /*static from(user_id:string, device_id:string, start_date:string, end_date:string, device_quantity:number, comment:string): LendEntry{
-        return new LendEntry(user_id, device_id,new Date(start_date),  new Date(end_date), device_quantity, comment);
-    }*/
-
-    /*static fromJSON(js): LendEntry{
-        return new LendEntry(js.user_id, js.device_id,new Date(js.start_date),  new Date(js.end_date), js.device_quantity, js.comment);
-    }*/
-
     static fromDB_Snapshot(snap){
         let js = snap.payload.val();
         return {...js, key: snap.payload.key, start_date: new Date(js.start_date), end_date: new Date(js.end_date)};
