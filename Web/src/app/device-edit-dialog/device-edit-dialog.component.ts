@@ -4,7 +4,6 @@ import { SPACE} from "@angular/cdk/keycodes";
 import {Device} from "../device";
 import {DatabaseService} from "../backend-services/database.service";
 import {NgForm} from "@angular/forms";
-import {UploadFormComponent} from "../image_upload/upload-form/upload-form.component";
 
 @Component({
   selector: 'app-device-edit-dialog',
