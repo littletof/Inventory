@@ -41,9 +41,8 @@
             <mat-form-field style="width: 43%">
               <input matInput [matDatepicker]="startdate"
                      placeholder="Start date" disabled
-                     [(ngModel)]="startDate" name="startDate"
-                     >
-              <!--<mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>-->
+                     [(ngModel)]="startDate" name="startDate">
+
               <mat-datepicker #startdate></mat-datepicker>
             </mat-form-field>
 
@@ -149,9 +148,6 @@
 
 
 
-
-
-
   </mat-dialog-content>
 </div>
 
@@ -161,7 +157,5 @@
 
   <button mat-raised-button (click)="stepback(stepper)" [disabled]="stepper.selectedIndex === 0">Back</button>
   <button mat-raised-button (click)="step(stepper)" *ngIf="stepper.selectedIndex != 2">Next</button>
-  <!-- Can optionally provide a result for the closing dialog. -->
-  <!--<button mat-button [mat-dialog-close]="true">Yes</button>-->
   <button mat-raised-button (click)="onSubmit(lendForm)" color="accent" [disabled]="device_data.quantity_available<=0 && !request" *ngIf="stepper.selectedIndex === 2">Lend</button>
 </mat-dialog-actions>

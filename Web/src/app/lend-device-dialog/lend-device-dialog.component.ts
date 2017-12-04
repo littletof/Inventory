@@ -58,8 +58,6 @@ export class LendDeviceDialogComponent implements OnInit {
       this.loadUsers();
       this.handleEditOrNew(data);
 
-
-    //this.userID = this.auth.getUserData().uid;//LENDER change to Borrower.uid
     if(!this.request) this.deviceID = this.device_data.key;
 
 
@@ -70,7 +68,6 @@ export class LendDeviceDialogComponent implements OnInit {
     this.minDate = new Date(this.startDate);
     this.minDate.setDate(this.minDate.getDate()+1);
 
-    //console.log(data);
 
     this.IMEIStoSelectFrom = this.getAvailableIMEIs(this.device_data.imei);
 
@@ -78,6 +75,7 @@ export class LendDeviceDialogComponent implements OnInit {
 
   }
 
+  //Loads data, if its a request
   handleEditOrNew(data){
       if(data.request){
           this.request = true;
@@ -98,7 +96,7 @@ export class LendDeviceDialogComponent implements OnInit {
   }
 
     ngOnInit() {
-
+        //Filter and formControl setup
         this.filteredOptions = this.myControl.valueChanges
             .startWith('')
             .map(user => user && typeof user === 'object' ? user.name : user)
@@ -147,7 +145,7 @@ export class LendDeviceDialogComponent implements OnInit {
 
 
 
-    //--------------- IMEI stuff
+//--------------- IMEI stuff
 
     getAvailableIMEIs(IMEIS: any[]): any[]{
 
@@ -165,12 +163,8 @@ export class LendDeviceDialogComponent implements OnInit {
 
                 goodIMEIs.push({comments: comments, imei: imei, selected: false});
 
-
-
             }
         }
-//        console.log(goodIMEIs);
-
 
         return goodIMEIs;
     }
@@ -187,7 +181,13 @@ export class LendDeviceDialogComponent implements OnInit {
         return imeis;
     }
 
-
+    castImeiArray(array):any{
+        let imeis = {};
+        for(let a in array){
+            imeis[array[a]] = true;
+        }
+        return imeis;
+    }
 
 
 
@@ -260,13 +260,7 @@ export class LendDeviceDialogComponent implements OnInit {
         }
     }
 
-    castImeiArray(array):any{
-        let imeis = {};
-        for(let a in array){
-            imeis[array[a]] = true;
-        }
-        return imeis;
-    }
+
 
     isBorrowerValid():boolean{
         if(this.borrower && this.borrower.uid){
