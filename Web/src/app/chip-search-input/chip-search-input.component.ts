@@ -23,6 +23,7 @@ export class ChipSearchInputComponent implements OnInit {
   ngOnInit() {
   }
 
+  //event elsütése a jelenlegi tagekkel és aktuális bevitellel
   update(any){
     let fields = [];
     if(this.filterChips) {
