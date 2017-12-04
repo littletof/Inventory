@@ -28,10 +28,7 @@
           <mat-panel-title><mat-icon *ngIf="imei.comment" matTooltip="There is a comment for this device" color="primary">comment</mat-icon><mat-icon *ngIf="!imei.comment"></mat-icon></mat-panel-title>
           <mat-panel-description>IMEI: {{imei.imei}}</mat-panel-description>
         </mat-expansion-panel-header>
-        <!--<span *ngIf="imei.comments.length!=0; else noComment">
-          <p *ngFor="let comment of imei.comments"> {{comment}} </p>
-        </span>
-        <template #noComment><p>There are no comments</p></template>-->
+
          <mat-form-field style="width: 100%">
               <textarea matInput placeholder="Comment" [(ngModel)]="imei.comment"
                         name="comment" rows="5"
@@ -50,7 +47,7 @@
 
 
 
-
-
-<button mat-button (click)="closeDialog()">Close</button>
-<button mat-raised-button color="accent"(click)="closeDialog(data)">Return</button>
+<mat-dialog-actions>
+    <button mat-button (click)="closeDialog()">Close</button>
+    <button mat-raised-button color="accent"(click)="closeDialog(data)">Return</button>
+</mat-dialog-actions>

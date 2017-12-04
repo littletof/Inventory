@@ -11,8 +11,6 @@ import 'rxjs/add/operator/take'
 })
 export class LendReturnDialogComponent implements OnInit {
 
-
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, public dialogRef: MatDialogRef<LendReturnDialogComponent>, public db: DatabaseService) {
     this.extractImeis(data);
   }
