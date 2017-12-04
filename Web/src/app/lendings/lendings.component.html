@@ -5,8 +5,6 @@
 <mat-divider></mat-divider>
 
 
-
-
 <mat-tab-group >
     <mat-tab *ngFor="let lendings of lendingsSet; let i = index;" label="{{lendings.title}}">
 
@@ -36,8 +34,6 @@
                         <button mat-raised-button color="accent" (click)="openLendReturnDialog(lending)" *ngIf="this.auth.accessFeature(this.auth.admini)">Return</button>
 
 
-                      <!--<button mat-raised-button color="accent" (click)="returnItem()">Return</button>-->
-
 
                       <mat-icon color="primary" *ngIf="(lending.state==1)" class="state-icon"
                                 matTooltip="Less than a day to return device" matTooltipPosition="right"
@@ -58,13 +54,3 @@
         </div>
     </mat-tab>
 </mat-tab-group>
-
-<!-- .toLocaleDateString()
-<mat-list>
-  <mat-list-item *ngFor="let user of users; let i = index">
-    <mat-icon matListIcon>account_box</mat-icon>
-    <h4 matLine>{{user.name}} {{user.key}}</h4>
-    <p matLine class="demo-2"> {{user.email_address}} {{user.present_lendings}}</p>
-
-  </mat-list-item>
-</mat-list>-->

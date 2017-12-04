@@ -43,6 +43,7 @@ export class UserLendingsComponent implements OnInit {
       return {title: title, set: set};
   }
 
+  //egy adott kölcsönzéshez tartozó user és device betöltése egy közös jsonba
   mapIt(set): any{
       return set.map(changes => {
           return changes.map(c => {
@@ -60,7 +61,6 @@ export class UserLendingsComponent implements OnInit {
               ret.state = this.getLendState(this.today, ret.lend.end_date);
 
 
-              //console.log(ret);
               return ret;
           });
       });
