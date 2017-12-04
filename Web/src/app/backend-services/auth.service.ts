@@ -17,7 +17,6 @@ export abstract class AuthService {
   abstract logOut(onLogout): void;
   abstract registerUser(email: string, password: string, user: User, onRegister, onError);
 
-  abstract check();
 
   abstract getUserData();
   abstract hasRole(roles):boolean;

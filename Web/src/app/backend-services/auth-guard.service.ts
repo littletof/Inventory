@@ -14,21 +14,17 @@ export class AuthGuardService implements CanActivate{
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
     let url: string = state.url;
 
-    //console.log(url + ': Checking is LoggedIN: ', this.auth.isLoggedIn());
-
+    //ha már be van jelentkezve és login/register pagen lenne, redirect home
     if(this.auth.isLoggedIn()){
 
         if(url == "/login" || url == "/register"){
-            //console.log("shouldnt");
             this.router.navigate(['home']);
         }
-
 
       return true;
     }else{
 
-
-
+      //ha nincs bejelentkezve, elmenti az url-t amit meg akartunk látogatni, és redirect login/register
       if(url != '/login' && url != '/register'){
           this.auth.redirectUrl = url;
           this.router.navigate(['login']);
@@ -36,8 +32,6 @@ export class AuthGuardService implements CanActivate{
       }else{
 
       }
-
-      //console.log('hy');
 
       return true;
     }
