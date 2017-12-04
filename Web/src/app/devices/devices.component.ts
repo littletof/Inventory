@@ -17,14 +17,10 @@ import {PaginatePipe} from "../paginate.pipe";
   styleUrls: ['./devices.component.css']
 })
 export class DevicesComponent implements OnInit {
-  //devices: any[];
-
 
   devices: AngularFireList<Device>;
 
   filter: any[];
-
-
 
   constructor(public db: DatabaseService, public auth: AuthService,public dialog: MatDialog, public snackBar: MatSnackBar) {
 
@@ -58,9 +54,6 @@ export class DevicesComponent implements OnInit {
   }
 
   ngOnInit() { }
-
-
-
 
 
   openRequestDeviceDialog(data){
