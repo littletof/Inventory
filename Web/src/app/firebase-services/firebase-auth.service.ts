@@ -5,17 +5,12 @@ import { AuthService} from "../backend-services/auth.service";
 import {Observable} from "rxjs/Observable";
 import * as firebase from "firebase";
 import {DatabaseService} from "../backend-services/database.service";
-import {Router} from "@angular/router";
 
 
 
 
 @Injectable()
 export class FirebaseAuthService implements AuthService {
-
-
-
-
 
     redirectUrl: string;
     user: Observable<firebase.User>;
@@ -28,7 +23,7 @@ export class FirebaseAuthService implements AuthService {
     admini = ['admin'];
 
 
-  constructor(public afAuth: AngularFireAuth, public db: DatabaseService, public router: Router) {
+  constructor(public afAuth: AngularFireAuth, public db: DatabaseService) {
       this.user = afAuth.authState;
 
       this.usersub = this.user.subscribe((user)=>{
@@ -72,13 +67,6 @@ export class FirebaseAuthService implements AuthService {
       return JSON.parse(localStorage.getItem("userData"));
   }
 
-  check(){
-      console.log('check');
-      //this.afAuth.authState.
-      this.afAuth.authState.map(value => {
-          console.log(value.getIdToken(true));
-      });
-  }
 
 
     isLoggedIn(): boolean {
@@ -114,8 +102,6 @@ export class FirebaseAuthService implements AuthService {
 
 
     loginWithEmail(email, password, onLogin, onError){
-
-      //console.log(this.redirectUrl);
 
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
           .then((res)=>{

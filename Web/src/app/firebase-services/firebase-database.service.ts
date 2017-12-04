@@ -16,19 +16,11 @@ import {RequestEntry} from "../request-entry";
 @Injectable()
 export class FirebaseDatabaseService implements DatabaseService{
 
-  //users: any[] = [];
-
-
-  //devices: any[] = [];
-
-
-    access_db = null;
+  access_db = null;
 
   constructor(private db: AngularFireDatabase) {
       this.access_db = db;
   }
-
-  tryDev(){}
 
 
 // -- USERS --
@@ -61,12 +53,6 @@ export class FirebaseDatabaseService implements DatabaseService{
       //return this.devices;
   }
 
-  getDevicesWithTag(tag): any{
-      return this.db.list<Device>('devices', (query) => {
-          return query.orderByChild('tags').equalTo(tag);
-      }).snapshotChanges();
-  }
-
 
   addDevice(device): any{
         this.db.list('devices').push(device);
@@ -83,6 +69,16 @@ export class FirebaseDatabaseService implements DatabaseService{
   removeDevice(key): void {
       this.db.object('devices/' + key).remove();
   }
+
+
+
+    getImage(img, callback): any{
+        firebase.storage().ref('images/'+img + '.png').getDownloadURL().then((val)=> {
+            callback(val);
+        });
+    }
+
+  // -- DEVICES END --
 
   //-- LENDING
 
@@ -119,14 +115,84 @@ export class FirebaseDatabaseService implements DatabaseService{
 
                         //add lend to user
                         this.db.object('users/'+ lendData.user_id + '/present_lendings/'+value.key).set(true);
-
-
                     });
-
-
             }
         });
   }
+
+    returnLendDevice(lendData){
+        let lendKey = lendData.lend.key;
+        let shouldSave = LendEntry.getJSON(lendData.lend);
+        delete shouldSave.key;
+
+        let imeiData = lendData.return.imeis;
+
+        let lendingRef = this.db.database.ref('lendings');
+        let userRef = this.db.database.ref('users').child(lendData.lend.user_id);
+        let deviceRef = this.db.database.ref('devices').child(lendData.lend.device_id);
+
+
+
+        lendingRef.transaction(data => {
+            //Remove from present
+            lendingRef.child('present_lendings').child(lendKey).set({});
+            userRef.child('present_lendings').child(lendKey).set({});
+
+            //Move to past
+            lendingRef.child('past_lendings').child(lendKey).set(shouldSave);
+            userRef.child('past_lendings').child(lendKey).set(true);
+
+            //Increase number
+            deviceRef.transaction(data => {
+                let newValue = Math.min(data.quantity_available+shouldSave.device_quantity, data.quantity_total);
+                //console.log("min value of ", data.quantity_available+shouldSave.device_quantity," ",data.quantity_total);
+
+                deviceRef.child('quantity_available').set(newValue);
+
+                imeiData.forEach((imei) => {
+                    let imeiRef = deviceRef.child('imei').child(imei.imei);
+                    imeiRef.child('available').set(true);
+                    imeiRef.child('comments').push(imei.comment);
+                });
+
+            });
+
+
+        });
+    }
+
+    getLendingsOfUser(userkey): any{
+        let reff = this.db.list<LendEntry>("lendings/present_lendings/", ref => ref.orderByChild('user_id').equalTo(userkey));
+
+        return reff.snapshotChanges();
+    }
+
+    getLendings(): any{
+        let reff = this.db.list<LendEntry>("lendings/present_lendings/");
+
+        return reff.snapshotChanges();
+    }
+// -- LENDINGS END --
+
+// -- REQUESTS --
+
+    requestDevice(requestData: RequestEntry): any{
+        let devref =this.db.database.ref('devices/'+requestData.device_id);
+
+        return devref.transaction(data => {
+
+            if(data.quantity_available - requestData.device_quantity >= 0) {
+                devref.update({quantity_available: data.quantity_available - requestData.device_quantity});
+
+
+                this.db.list("requests").push(requestData.toDBJSON());
+
+            }else{
+                throw new Error('Trying to request more than available');
+            }
+
+        });
+    }
 
   deleteRequest(requestID){
     this.db.object('requests/' + requestID).set({});
@@ -139,7 +205,6 @@ export class FirebaseDatabaseService implements DatabaseService{
       let deviceRef = this.db.database.ref('devices').child(request.device_id);
       deviceRef.transaction(data => {
           let newValue = Math.min(data.quantity_available+request.device_quantity, data.quantity_total);
-          //console.log("min value of ", data.quantity_available+shouldSave.device_quantity," ",data.quantity_total);
 
           deviceRef.child('quantity_available').set(newValue);
 
@@ -147,80 +212,6 @@ export class FirebaseDatabaseService implements DatabaseService{
       });
 
 
-  }
-
-  returnLendDevice(lendData){
-      let lendKey = lendData.lend.key;
-      let shouldSave = LendEntry.getJSON(lendData.lend);
-      delete shouldSave.key;
-
-      let imeiData = lendData.return.imeis;
-
-      let lendingRef = this.db.database.ref('lendings');
-      let userRef = this.db.database.ref('users').child(lendData.lend.user_id);
-      let deviceRef = this.db.database.ref('devices').child(lendData.lend.device_id);
-
-      //lendingRef.child('present_lendings').child(lendData.lend.key)
-
-
-
-      lendingRef.transaction(data => {
-          //Remove from present
-          lendingRef.child('present_lendings').child(lendKey).set({});
-          userRef.child('present_lendings').child(lendKey).set({});
-
-          //Move to past
-          lendingRef.child('past_lendings').child(lendKey).set(shouldSave);
-          userRef.child('past_lendings').child(lendKey).set(true);
-
-          //Increase number
-          deviceRef.transaction(data => {
-             let newValue = Math.min(data.quantity_available+shouldSave.device_quantity, data.quantity_total);
-             //console.log("min value of ", data.quantity_available+shouldSave.device_quantity," ",data.quantity_total);
-
-             deviceRef.child('quantity_available').set(newValue);
-
-             imeiData.forEach((imei) => {
-                 let imeiRef = deviceRef.child('imei').child(imei.imei);
-                 imeiRef.child('available').set(true);
-                 imeiRef.child('comments').push(imei.comment);
-             });
-
-          });
-
-
-      });
-  }
-
-  getLendingsOfUser(userkey): any{
-      let reff = this.db.list<LendEntry>("lendings/present_lendings/", ref => ref.orderByChild('user_id').equalTo(userkey));
-
-      return reff.snapshotChanges();
-  }
-
-  getLendings(): any{
-      let reff = this.db.list<LendEntry>("lendings/present_lendings/");
-
-      return reff.snapshotChanges();
-  }
-
-
-  requestDevice(requestData: RequestEntry): any{
-      let devref =this.db.database.ref('devices/'+requestData.device_id);
-
-      return devref.transaction(data => {
-
-          if(data.quantity_available - requestData.device_quantity >= 0) {
-              devref.update({quantity_available: data.quantity_available - requestData.device_quantity});
-
-
-              this.db.list("requests").push(requestData.toDBJSON());
-
-          }else{
-              throw new Error('Trying to request more than available');
-          }
-
-      });
   }
 
   getUserRequests(userKey): any{
@@ -235,20 +226,9 @@ export class FirebaseDatabaseService implements DatabaseService{
       return reff.snapshotChanges();
   }
 
-  getLending(lendkey){
-
-  }
+// -- REQUESTS END --
 
 
-
-  // -- DEVICES END --
-
-
-  getImage(img, callback): any{
-      firebase.storage().ref('images/'+img + '.png').getDownloadURL().then((val)=> {
-          callback(val);
-      });
-  }
 
 
   //Util
