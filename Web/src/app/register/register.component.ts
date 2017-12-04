@@ -18,9 +18,7 @@ export class RegisterComponent implements OnInit {
 
     errorText:string;
 
-  constructor(public auth: AuthService, public db: DatabaseService, public router: Router) {
-      //this.auth.redirectIfLoggedIn()
-  }
+  constructor(public auth: AuthService, public db: DatabaseService, public router: Router) { }
 
   ngOnInit() {
   }
