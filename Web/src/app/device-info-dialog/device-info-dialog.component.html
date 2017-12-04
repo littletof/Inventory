@@ -14,7 +14,6 @@
 
 <h4 class="inline">Device quantity:</h4>
   <img class="device-img"[src]=img_src>
- <!-- <span><qr-code class="indent" [value]=qrCode [size]="80" ></qr-code></span>-->
   <span class="indent filler">
     <table>
       <tr>
@@ -50,8 +49,6 @@
 
 <mat-dialog-actions>
   <button mat-button (click)="closeDialog()">Close</button>
-  <!-- Can optionally provide a result for the closing dialog. -->
-  <!--<button mat-button [mat-dialog-close]="true">Yes</button>-->
   <button mat-raised-button (click)="lendDevice(data)" color="accent" [disabled]="data.quantity_available<=0" *ngIf="this.auth.accessFeature(this.auth.admini)">Lend</button>
   <button mat-raised-button (click)="requestDevice(data)" color="accent" [disabled]="data.quantity_available<=0" *ngIf="this.auth.accessFeature(this.auth.admini)">Request</button>
   <button mat-raised-button (click)="editDevice(data)" color="accent" *ngIf="this.auth.accessFeature(this.auth.admini)">Edit</button>

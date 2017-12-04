@@ -24,7 +24,7 @@ export class DeviceInfoDialogComponent implements OnInit {
     this.qrCode = data.key;
 
     if(data.image && data.image!="placeholder") {
-        this.db.getImage(data.image, (val) => { // || "placeholder"
+        this.db.getImage(data.image, (val) => {
             this.img_src = val;
         });
     }
