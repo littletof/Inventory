@@ -25,7 +25,7 @@
                     <span matSuffix>pcs.</span>
                 </mat-form-field>-->
 
-                <span><h4 class="inline">Quantity</h4>: {{imeiToBE.length}} pcs.</span>
+                <span *ngIf="!editing"><h4 class="inline">Quantity</h4>: {{imeiToBE.length}} pcs.</span>
 
                 <br>
 

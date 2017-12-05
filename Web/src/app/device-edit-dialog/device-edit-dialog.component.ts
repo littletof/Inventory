@@ -50,12 +50,14 @@ export class DeviceEditDialogComponent implements OnInit {
         this.time = new Date().getTime().toString();
 
 
-        if(data){
+        if(data.key){
             this.loadDevice(data);
             this.editing = true;
         }else {
             this.device_quantity = 1;//this.default_device_quantity;
             this.imeiToBE = [{value:null}]
+            this.editing = false;
+            this.device_image = null;
         }
 
 
@@ -115,10 +117,11 @@ export class DeviceEditDialogComponent implements OnInit {
     }
 
     canRemove(index):boolean{
-
+        //console.log("in", this.editing);
         if(this.editing && this.imei[this.imeiToBE[index].value]){
             return this.imei[this.imeiToBE[index].value].available;
         }
+        //console.log("afteer");
         return true;
     }
 
@@ -241,6 +244,7 @@ export class DeviceEditDialogComponent implements OnInit {
 
 
         }else{
+            this.imei={};
             for(let i in this.imeiToBE){
                 let newIMEI = this.imeiToBE[i].value;
                 this.imei[newIMEI] = {available:true};
