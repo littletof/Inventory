@@ -4,49 +4,79 @@
 
 
 <mat-dialog-content>
-    <form #addDeviceForm="ngForm">
-    <mat-form-field class="devicename">
-        <input matInput type="text" required placeholder="Name" [(ngModel)]="device_name" name="device_name">
-    </mat-form-field>
+
+    <mat-horizontal-stepper [linear]="isLinear" #stepper>
+        <mat-step [stepControl]="firstFormGroup" completed="false">
+            <form #addDeviceForm="ngForm" >
+                <ng-template matStepLabel>Fill out lend details</ng-template>
+
+                <mat-form-field class="devicename">
+                    <input matInput type="text" required placeholder="Name" [(ngModel)]="device_name" name="device_name">
+                    <mat-error *ngIf="firstFormGroup.hasError('nameempty')" class="inline">Name can't be empty</mat-error>
+                </mat-form-field>
 
 
-    <upload-form [imageName]="time" (hasFile)="hasFile($event)"#imageUpload></upload-form>
+                <upload-form [imageName]="time" (hasFile)="hasFile($event)"#imageUpload></upload-form>
 
 
-        <br>
-    <mat-form-field class="quantity">
-        <input matInput type="number" required placeholder="Quantity" [(ngModel)]="device_quantity" name="device_quantity" min="1">
-        <span matSuffix>pcs.</span>
-    </mat-form-field>
+                    <br>
+                <!--<mat-form-field class="quantity">
+                    <input matInput type="number" required placeholder="Quantity" [(ngModel)]="device_quantity" name="device_quantity" min="1">
+                    <span matSuffix>pcs.</span>
+                </mat-form-field>-->
+
+                <span><h4 class="inline">Quantity</h4>: {{imeiToBE.length}} pcs.</span>
+
+                <br>
+
+                <mat-form-field style="width: 100%">
+                    <textarea matInput placeholder="Description" rows="5" [(ngModel)]="device_description" name="description"></textarea>
+
+                </mat-form-field>
+
+                <br>
 
 
-    <br>
+                <mat-form-field class="tag-chip">
+                    <mat-chip-list #chipList>
+                        <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
+                                  [removable]="removable" (remove)="remove(tag)" color="accent">
+                            {{tag.name}}
+                            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                        </mat-chip>
+                        <input placeholder="Tags"
+                               [matChipInputFor]="chipList"
+                               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                               [matChipInputAddOnBlur]="addOnBlur"
+                               (matChipInputTokenEnd)="add($event)"
+                                name="tags"/>
+                    </mat-chip-list>
+                </mat-form-field>
 
-    <mat-form-field style="width: 100%">
-        <textarea matInput placeholder="Description" rows="5" [(ngModel)]="device_description" name="description"></textarea>
+                </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup" completed="false">
+            <form #imeiForm="ngForm">
+                <ng-template matStepLabel>Register devices</ng-template>
 
-    </mat-form-field>
-
-    <br>
 
 
-    <mat-form-field class="tag-chip">
-        <mat-chip-list #chipList>
-            <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
-                      [removable]="removable" (remove)="remove(tag)" color="accent">
-                {{tag.name}}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-            </mat-chip>
-            <input placeholder="Tags"
-                   [matChipInputFor]="chipList"
-                   [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                   [matChipInputAddOnBlur]="addOnBlur"
-                   (matChipInputTokenEnd)="add($event)"
-                    name="tags"/>
-        </mat-chip-list>
-    </mat-form-field>
+                <button mat-raised-button color="accent" (click)="addIMEI()"><mat-icon>add_circle</mat-icon> Add IMEI</button>
 
-    </form>
+                <span style="display:block; margin-top: 10px;">
+                    <span *ngFor="let a of imeiToBE; let i = index;">
+                        <mat-form-field>
+                            <input matInput type="text" placeholder="IMEI {{i+1}}" [(ngModel)]="imeiToBE[i].value" name="imei{{i}}" required>
+                        </mat-form-field>
+                        <button mat-raised-button color="warn" (click)="removeIMEI(i)" *ngIf="imeiToBE.length!=1 && canRemove(i)">Remove</button>
+                        <br>
+                    </span>
+                </span>
+
+            </form>
+        </mat-step>
+
+    </mat-horizontal-stepper>
 
 
 
@@ -57,5 +87,9 @@
 
 <mat-dialog-actions>
   <button mat-button (click)="closeDialog()">Cancel</button>
-  <button mat-raised-button (click)="addDevice(addDeviceForm)" color="accent"><span *ngIf="data">Save</span><span *ngIf="!data">Add</span></button>
+
+    <button mat-raised-button (click)="stepback(stepper)" [disabled]="stepper.selectedIndex === 0">Back</button>
+    <button mat-raised-button (click)="step(stepper)" *ngIf="stepper.selectedIndex != 1">Next</button>
+
+  <button mat-raised-button (click)="addDevice(addDeviceForm)" color="accent" *ngIf="stepper.selectedIndex == 1"><span *ngIf="data">Save</span><span *ngIf="!data">Add</span></button>
 </mat-dialog-actions>
